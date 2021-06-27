@@ -1,0 +1,4 @@
+Tests\ForgotPasswordTest.class
+Tests\ShowAllFormsTest.class
+Tests\LoginTest.class
+Tests\BaseTest.class
