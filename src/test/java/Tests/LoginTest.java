@@ -2,11 +2,14 @@ package Tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import pageObject.LoginPage;
 
 public class LoginTest extends BaseTest {
 
+	@Severity(SeverityLevel.NORMAL)
 	@Test (description = "test incorrect login info")
 	public void loginFailure() throws InterruptedException {
 		LoginPage signin = new LoginPage(driver);
@@ -17,6 +20,8 @@ public class LoginTest extends BaseTest {
 		Assert.assertEquals(actual, expected);	
 	}
 
+	@Feature("correct login feature")
+	@Severity(SeverityLevel.CRITICAL)
 	@Test(description = "Test correct login info")
 	public void loginSucces() throws InterruptedException {
 		LoginPage signin = new LoginPage(driver);
