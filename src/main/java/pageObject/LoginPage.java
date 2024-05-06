@@ -10,6 +10,7 @@ public class LoginPage extends BasePage {
 	WebElement forgotPasswordLink;
 	@FindBy(css="#body_Username")
 	WebElement userName;
+	// Ben
 	@FindBy(css="#body_Password")
 	WebElement password;
 	@FindBy(css="#body_SubmitButton")
