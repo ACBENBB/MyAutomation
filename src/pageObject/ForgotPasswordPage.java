@@ -24,7 +24,7 @@ public class ForgotPasswordPage extends BasePage {
 		fillText(userName, user);
 		click(submit);
 	}
-	
+
 	public String getMessage() {
 		return message.getText();
 	}

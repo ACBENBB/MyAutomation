@@ -6,7 +6,7 @@ import pageObject.LoginPage;
 import pageObject.SearchAllPage;
 import pageObject.ViewMyFormsPage;
 
-public class ShowAllFormsTest extends BaseTest{
+public class ShowAllFormsTest extends Tests.BaseTest {
 
 	@Test(description = "Search all forms")
 	public void searchAllForms() throws InterruptedException {

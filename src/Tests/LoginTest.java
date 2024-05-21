@@ -7,7 +7,7 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import pageObject.LoginPage;
 
-public class LoginTest extends BaseTest {
+public class LoginTest extends Tests.BaseTest {
 
 	@Severity(SeverityLevel.NORMAL)
 	@Test (description = "test incorrect login info")
