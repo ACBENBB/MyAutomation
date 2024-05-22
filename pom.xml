@@ -37,7 +37,7 @@
                     <dependency>
                         <groupId>org.apache.maven.surefire</groupId>
                         <artifactId>surefire-testng</artifactId>
-                        <version>${mavenPluginsVersion}</version>
+                        <version>3.1.0</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -45,14 +45,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>${mavenPluginsVersion}</version>
+                <version>3.1.0</version>
                 <dependencies>
                     <!-- We need this dependency - otherwise surefire assumes we are using JUnit and doesn't find any
                     test to run -->
                     <dependency>
                         <groupId>org.apache.maven.surefire</groupId>
                         <artifactId>surefire-testng</artifactId>
-                        <version>${mavenPluginsVersion}</version>
+                        <version>3.1.0</version>
                     </dependency>
                 </dependencies>
                 <executions>
@@ -190,14 +190,14 @@
                 </exclusion>
                 <!-- used old version of 1.18.12 - we need a newer version -->
                 <exclusion>
-                    <!-- Java library that helps reduce boilerplate code in Java classes -->
+                    <!-- Main.Java library that helps reduce boilerplate code in Main.Java classes -->
                     <groupId>org.projectlombok</groupId>
                     <artifactId>lombok</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
         <dependency>
-            <!--  Google Gson (Gson) library for Java, which is used for converting Java objects to JSON (JavaScript Object Notation) and vice versa -->
+            <!--  Google Gson (Gson) library for Main.Java, which is used for converting Main.Java objects to JSON (JavaScript Object Notation) and vice versa -->
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.10.1</version>
@@ -296,6 +296,11 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>2.0.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.14.3</version>
         </dependency>
 
     </dependencies>
