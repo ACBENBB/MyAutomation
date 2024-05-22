@@ -1,7 +1,0 @@
-pageObject\FormPage.class
-pageObject\SearchAllPage.class
-pageObject\ViewMyFormsPage.class
-pageObject\ForgotPasswordPage.class
-pageObject\BasePage.class
-pageObject\Accounts.class
-pageObject\LoginPage.class

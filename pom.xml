@@ -13,6 +13,8 @@
         <suiteXmlFile/> <!-- adding this empty variable to get rid of the "can't resolve symbol" error -->
         <suiteFileFullPath>./target/classes/suites/${suiteXmlFile}</suiteFileFullPath>
         <mavenPluginsVersion>3.1.0</mavenPluginsVersion>
+    <!--    <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1/8</maven.compiler.target>-->
     </properties>
 
     <build>
@@ -30,7 +32,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${mavenPluginsVersion}</version>
+                <version>3.1.0</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
                 <dependencies>
                     <!-- We need this dependency - otherwise surefire assumes we are using JUnit and doesn't find any
                     test to run -->
@@ -87,7 +94,6 @@
         </plugins>
     </build>
 
-
     <dependencies>
         <!-- added in the dependencies' section to allow using the latest versions -->
         <dependency>
@@ -118,6 +124,12 @@
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>exec-maven-plugin</artifactId>
             <version>${mavenPluginsVersion}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>2.14.0</version>
         </dependency>
 
         <!-- selenium 4 and dependencies -->
