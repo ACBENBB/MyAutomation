@@ -44,12 +44,6 @@ public abstract class BaseTest {
         driver.manage().window().maximize();
     }
 
-    public void setTable(String tableId){
-       String tableXpath = "//table[@id='"+tableId+"']";
-       WebElement table = driver.findElement(By.xpath(tableXpath));
-       this.table = table;
-    }
-
     @AfterMethod
     public void afterMethod(ITestResult result) {
         if (result.getStatus() == ITestResult.FAILURE) {
@@ -74,7 +68,6 @@ public abstract class BaseTest {
     public void clearCache() {
         driver.get("edge://settings/clearBrowserData");
         driver.findElement(By.cssSelector("#clear-now")).click();
-
     }
 
     public void takeScreenShotFailure(ITestResult result) {

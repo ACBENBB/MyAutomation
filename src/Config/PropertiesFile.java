@@ -33,6 +33,9 @@ public class PropertiesFile {
 
     public static String getUrl(String taskNumber) {
         String url = null;
+        if (taskNumber == null){
+            return prop.getProperty("A-url");
+        }
         try {
             InputStream input = Files.newInputStream(Paths.get(configPath));
             //  InputStream input = new FileInputStream(configPath);
