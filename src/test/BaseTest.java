@@ -1,6 +1,6 @@
-package Tests;
+package test;
 
-import Config.PropertiesFile;
+import config.PropertiesFile;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;

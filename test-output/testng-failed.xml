@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [MyAutomation Suite]" guice-stage="DEVELOPMENT">
-  <test thread-count="5" name="MyAutomation tests(failed)">
+  <test thread-count="5" name="MyAutomation test(failed)">
     <classes>
-      <class name="Tests.True_Test">
+      <class name="test.False_Test">
+        <methods>
+          <include name="afterMethod"/>
+          <include name="setup"/>
+          <include name="First_False_Test"/>
+          <include name="quitDriver"/>
+          <include name="Forth_False_Test"/>
+        </methods>
+      </class> <!-- test.False_Test -->
+      <class name="test.True_Test">
         <methods>
           <include name="afterMethod"/>
           <include name="setup"/>
           <include name="quitDriver"/>
           <include name="Forth_True_Test"/>
         </methods>
-      </class> <!-- Tests.True_Test -->
-      <class name="Tests.False_Test">
-        <methods>
-          <include name="First_False_Test"/>
-          <include name="afterMethod"/>
-          <include name="setup"/>
-          <include name="quitDriver"/>
-          <include name="Forth_False_Test"/>
-        </methods>
-      </class> <!-- Tests.False_Test -->
+      </class> <!-- test.True_Test -->
     </classes>
-  </test> <!-- MyAutomation tests(failed) -->
+  </test> <!-- MyAutomation test(failed) -->
 </suite> <!-- Failed suite [MyAutomation Suite] -->

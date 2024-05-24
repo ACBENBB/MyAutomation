@@ -1,6 +1,6 @@
-package Config;
+package config;
 
-import Tests.BaseTest;
+import test.BaseTest;
 
 import java.io.InputStream;
 import java.nio.file.Files;

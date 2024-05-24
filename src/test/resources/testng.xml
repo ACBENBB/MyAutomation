@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="MyAutomation Suite">
-    <test verbose="1" name="MyAutomation tests">
+    <test verbose="1" name="MyAutomation test">
         <classes>
-            <class name="Tests.False_Test"/>
-            <class name="Tests.True_Test"/>
+            <class name="test.False_Test"/>
+            <class name="test.True_Test"/>
         </classes>
     </test>
 </suite>

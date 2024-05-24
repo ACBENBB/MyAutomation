@@ -18,6 +18,7 @@
     </properties>
 
     <build>
+        <testOutputDirectory>target/test-classes</testOutputDirectory>
         <plugins>  <!-- Maven plugins -->
             <plugin> <!-- Configures the Java version compatibility for the source code and compiled bytecode -->
                 <groupId>org.apache.maven.plugins</groupId>
@@ -34,13 +35,14 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
+                    <testSourceDirectory>src/test</testSourceDirectory>
                     <suiteXmlFiles> <!-- Specifies the TestNG XML file that contains the configuration for the test suite -->
-                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
 
-            <plugin>  <!-- Enables TestNG support for running integration tests -->
+            <plugin>  <!-- Enables TestNG support for running integration test -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>3.1.0</version>
@@ -54,14 +56,14 @@
                     </dependency>
                 </dependencies>
                 <executions>
-                    <execution> <!-- Defines the goals to be executed for integration tests -->
+                    <execution> <!-- Defines the goals to be executed for integration test -->
                         <goals>
                             <goal>integration-test</goal>
                             <goal>verify</goal>
                         </goals>
                     </execution>
                 </executions>
-                <configuration> <!-- Specifies the TestNG XML file for integration tests and sets the suite thread pool size -->
+                <configuration> <!-- Specifies the TestNG XML file for integration test and sets the suite thread pool size -->
                     <properties>
                         <property>
                             <name>suitethreadpoolsize</name>
@@ -202,7 +204,7 @@
             <version>0.10.2</version>
         </dependency>
 
-        <!-- used for updating google sheets holding lists of tests to skip -->
+        <!-- used for updating google sheets holding lists of test to skip -->
         <dependency>
             <groupId>com.google.apis</groupId>
             <artifactId>google-api-services-sheets</artifactId>
@@ -240,7 +242,7 @@
             <version>2.4.10</version>
         </dependency>
 
-        <!-- used for security tests - to parse swagger.json to find out endpoints to test -->
+        <!-- used for security test - to parse swagger.json to find out endpoints to test -->
         <dependency>
             <groupId>io.swagger.parser.v3</groupId>
             <artifactId>swagger-parser</artifactId>
