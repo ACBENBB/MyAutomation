@@ -1,4 +1,4 @@
-package test;
+package config;
 
 import config.PropertiesFile;
 import org.apache.commons.io.FileUtils;
@@ -9,14 +9,13 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 
-
 import java.io.File;
 import java.io.IOException;
 
 public abstract class BaseTest {
     public static String driverPath;
     public static String driverName;
-    public static String url;
+    public static String url = "www";
 
     public static String tableId;
 

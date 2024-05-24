@@ -1,9 +1,10 @@
-package test;
+package test.java;
 
+import config.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class False_Test extends BaseTest{
+public class False_Test extends BaseTest {
     @Override
     public String getTaskNumber() {
         return "B";

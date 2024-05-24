@@ -6,7 +6,7 @@
     <groups>
     </groups>
     <test started-at="2024-05-24T18:47:12Z" name="MyAutomation test" finished-at="2024-05-24T18:47:57Z" duration-ms="44194">
-      <class name="test.False_Test">
+      <class name="test.java.False_Test">
         <test-method is-config="true" signature="setup()[pri:0, instance:test.False_Test@28f3b248]" started-at="2024-05-24T18:47:12Z" name="setup" finished-at="2024-05-24T18:47:19Z" duration-ms="7027" status="PASS">
           <reporter-output>
           </reporter-output>
@@ -17,12 +17,12 @@
               <![CDATA[expected [true] but found [false]]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: expected [true] but found [false]
+                <![CDATA[java.lang.AssertionError: expected [true] but found [false]
 at org.testng.Assert.fail(Assert.java:96)
 at org.testng.Assert.failNotEquals(Assert.java:776)
 at org.testng.Assert.assertTrue(Assert.java:44)
 at org.testng.Assert.assertTrue(Assert.java:54)
-at test.False_Test.First_False_Test(False_Test.java:14)
+at test.java.False_Test.First_False_Test(False_Test.java:14)
 at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
@@ -68,12 +68,12 @@ at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)
               <![CDATA[expected [true] but found [false]]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: expected [true] but found [false]
+                <![CDATA[java.lang.AssertionError: expected [true] but found [false]
 at org.testng.Assert.fail(Assert.java:96)
 at org.testng.Assert.failNotEquals(Assert.java:776)
 at org.testng.Assert.assertTrue(Assert.java:44)
 at org.testng.Assert.assertTrue(Assert.java:54)
-at test.False_Test.Forth_False_Test(False_Test.java:32)
+at test.java.False_Test.Forth_False_Test(False_Test.java:32)
 at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
@@ -147,8 +147,8 @@ at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- quitDriver -->
-      </class> <!-- test.False_Test -->
-      <class name="test.True_Test">
+      </class> <!-- test.java.False_Test -->
+      <class name="test.java.True_Test">
         <test-method is-config="true" signature="setup()[pri:0, instance:test.True_Test@1b1426f4]" started-at="2024-05-24T18:47:21Z" name="setup" finished-at="2024-05-24T18:47:56Z" duration-ms="35461" status="PASS">
           <reporter-output>
           </reporter-output>
@@ -174,12 +174,12 @@ at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)
               <![CDATA[expected [true] but found [false]]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: expected [true] but found [false]
+                <![CDATA[java.lang.AssertionError: expected [true] but found [false]
 at org.testng.Assert.fail(Assert.java:96)
 at org.testng.Assert.failNotEquals(Assert.java:776)
 at org.testng.Assert.assertTrue(Assert.java:44)
 at org.testng.Assert.assertTrue(Assert.java:54)
-at test.True_Test.Forth_True_Test(True_Test.java:33)
+at test.java.True_Test.Forth_True_Test(True_Test.java:33)
 at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
@@ -253,7 +253,7 @@ at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- quitDriver -->
-      </class> <!-- test.True_Test -->
+      </class> <!-- test.java.True_Test -->
     </test> <!-- MyAutomation test -->
   </suite> <!-- MyAutomation Suite -->
 </testng-results>

@@ -1,11 +1,10 @@
 package config;
 
-import test.BaseTest;
-
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Properties;
+
 
 public class PropertiesFile {
 
@@ -26,6 +25,9 @@ public class PropertiesFile {
             BaseTest.driverPath = prop.getProperty("driverPath");
             BaseTest.driverName = prop.getProperty("driverName");
             BaseTest.url = getUrl(taskNumber);
+      /*      String driverPath = "chrome driver";
+            String driverName = "../chromedriver.exe";
+            String url = getUrl(taskNumber);*/
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -3,7 +3,7 @@
 <suite name="Failed suite [MyAutomation Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="MyAutomation test(failed)">
     <classes>
-      <class name="test.False_Test">
+      <class name="test.java.False_Test">
         <methods>
           <include name="afterMethod"/>
           <include name="setup"/>
@@ -11,15 +11,15 @@
           <include name="quitDriver"/>
           <include name="Forth_False_Test"/>
         </methods>
-      </class> <!-- test.False_Test -->
-      <class name="test.True_Test">
+      </class> <!-- test.java.False_Test -->
+      <class name="test.java.True_Test">
         <methods>
           <include name="afterMethod"/>
           <include name="setup"/>
           <include name="quitDriver"/>
           <include name="Forth_True_Test"/>
         </methods>
-      </class> <!-- test.True_Test -->
+      </class> <!-- test.java.True_Test -->
     </classes>
   </test> <!-- MyAutomation test(failed) -->
 </suite> <!-- Failed suite [MyAutomation Suite] -->

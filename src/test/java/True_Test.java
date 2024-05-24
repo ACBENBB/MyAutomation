@@ -1,13 +1,14 @@
-package test;
+package test.java;
 
+import config.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class True_Test extends BaseTest{
+public class True_Test extends BaseTest {
 
     @Override
     public String getTaskNumber() {
-        return "A";
+        return null;
     }
 
     @Test(description = "verify table cell text")
@@ -33,4 +34,5 @@ public class True_Test extends BaseTest{
         Assert.assertTrue(false);
         System.out.println("I'm the 4th and not working!");
     }
+
 }

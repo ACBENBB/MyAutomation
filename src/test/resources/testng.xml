@@ -3,8 +3,8 @@
 <suite name="MyAutomation Suite">
     <test verbose="1" name="MyAutomation test">
         <classes>
-            <class name="test.False_Test"/>
-            <class name="test.True_Test"/>
+            <class name="test.java.False_Test"/>
+            <class name="test.java.True_Test"/>
         </classes>
     </test>
 </suite>
