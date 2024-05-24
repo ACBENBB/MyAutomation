@@ -13,13 +13,13 @@
         <suiteXmlFile/> <!-- adding this empty variable to get rid of the "can't resolve symbol" error -->
         <suiteFileFullPath>./target/classes/suites/${suiteXmlFile}</suiteFileFullPath>
         <mavenPluginsVersion>3.1.0</mavenPluginsVersion>
-    <!--    <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1/8</maven.compiler.target>-->
+        <!--    <maven.compiler.source>1.8</maven.compiler.source>
+            <maven.compiler.target>1/8</maven.compiler.target>-->
     </properties>
 
     <build>
         <plugins>  <!-- Maven plugins -->
-            <plugin>
+            <plugin> <!-- Configures the Java version compatibility for the source code and compiled bytecode -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
@@ -34,22 +34,13 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
-                    <suiteXmlFiles>
+                    <suiteXmlFiles> <!-- Specifies the TestNG XML file that contains the configuration for the test suite -->
                         <suiteXmlFile>testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
-                <dependencies>
-                    <!-- We need this dependency - otherwise surefire assumes we are using JUnit and doesn't find any
-                    test to run -->
-                    <dependency>
-                        <groupId>org.apache.maven.surefire</groupId>
-                        <artifactId>surefire-testng</artifactId>
-                        <version>3.1.0</version>
-                    </dependency>
-                </dependencies>
             </plugin>
 
-            <plugin>
+            <plugin>  <!-- Enables TestNG support for running integration tests -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>3.1.0</version>
@@ -63,17 +54,14 @@
                     </dependency>
                 </dependencies>
                 <executions>
-                    <execution>
+                    <execution> <!-- Defines the goals to be executed for integration tests -->
                         <goals>
                             <goal>integration-test</goal>
                             <goal>verify</goal>
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>${suiteFileFullPath}</suiteXmlFile>
-                    </suiteXmlFiles>
+                <configuration> <!-- Specifies the TestNG XML file for integration tests and sets the suite thread pool size -->
                     <properties>
                         <property>
                             <name>suitethreadpoolsize</name>
@@ -82,8 +70,7 @@
                     </properties>
                 </configuration>
             </plugin>
-
-            <plugin>
+            <plugin> <!-- Configures the execution of external programs and sets cleanupDaemonThreads to false -->
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>${mavenPluginsVersion}</version>
@@ -94,38 +81,7 @@
         </plugins>
     </build>
 
-    <dependencies>
-        <!-- added in the dependencies' section to allow using the latest versions -->
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.11.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
-        <dependency>
-            <!--  Maven plugin used for running unit tests as part of the build process -->
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>${mavenPluginsVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-failsafe-plugin</artifactId>
-            <version>${mavenPluginsVersion}</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.maven.surefire/surefire-testng -->
-        <dependency>
-            <groupId>org.apache.maven.surefire</groupId>
-            <artifactId>surefire-testng</artifactId>
-            <version>${mavenPluginsVersion}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>exec-maven-plugin</artifactId>
-            <version>${mavenPluginsVersion}</version>
-        </dependency>
-
+    <dependencies> <!-- allure reports -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
@@ -142,12 +98,6 @@
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
             <version>9.0.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.7.1</version>
         </dependency>
 
         <!-- used to allow reading emails -->

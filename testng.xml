@@ -3,8 +3,8 @@
 <suite name="MyAutomation Suite">
     <test verbose="1" name="MyAutomation tests">
         <classes>
-            <class name="Tests.True_Test"/>
             <class name="Tests.False_Test"/>
+            <class name="Tests.True_Test"/>
         </classes>
     </test>
 </suite>
