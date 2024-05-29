@@ -1,6 +1,5 @@
-package test.java;
+package tests;
 
-import config.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

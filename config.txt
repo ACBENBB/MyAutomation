@@ -2,3 +2,4 @@ driverName=chrome driver
 driverPath=../chromedriver.exe
 A-url=https://www.w3schools.com/html/html_tables.asp
 B-url=http://demo.guru99.com/
+C-url=https://jqueryui.com/datepicker/

@@ -1,5 +1,8 @@
 package config;
 
+import tests.BaseTest;
+
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -19,15 +22,12 @@ public class PropertiesFile {
     // method that read properties and get data
     public static void readPropertiesFile(String taskNumber) {
         try {
-            InputStream input = Files.newInputStream(Paths.get(configPath));
-            //   InputStream input = new FileInputStream(configPath);
+           // InputStream input = Files.newInputStream(Paths.get(configPath));
+             InputStream input = new FileInputStream(configPath);
             prop.load(input);
             BaseTest.driverPath = prop.getProperty("driverPath");
             BaseTest.driverName = prop.getProperty("driverName");
             BaseTest.url = getUrl(taskNumber);
-      /*      String driverPath = "chrome driver";
-            String driverName = "../chromedriver.exe";
-            String url = getUrl(taskNumber);*/
         } catch (Exception e) {
             e.printStackTrace();
         }
