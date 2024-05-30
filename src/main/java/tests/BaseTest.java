@@ -1,6 +1,6 @@
 package tests;
 
-import config.PropertiesFile;
+import infra.config.PropertiesFile;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
