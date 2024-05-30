@@ -1,4 +1,4 @@
-package tests;
+package tests.abstractClass;
 
 import infra.config.PropertiesFile;
 import org.apache.commons.io.FileUtils;

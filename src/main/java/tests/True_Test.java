@@ -2,12 +2,13 @@ package tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import tests.abstractClass.AbstractScripts;
 
-public class True_Test extends BaseTest {
+public class True_Test extends AbstractScripts {
 
     @Override
     public String getTaskNumber() {
-        return null;
+        return "B";
     }
 
     @Test(description = "verify table cell text")

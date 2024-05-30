@@ -3,11 +3,12 @@ package tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import tests.abstractClass.AbstractScripts;
 
-public class False_Test extends BaseTest {
-    @Override
+public class False_Test extends AbstractScripts {
+
     public String getTaskNumber() {
-        return "B";
+        return "A";
     }
 
     @Test(description = "click on upper menu with one string")
