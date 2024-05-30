@@ -1,5 +1,6 @@
 package pageObjects;
 
+import infra.webdriver.ExtendedBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,6 +10,8 @@ public class DemoGuru99 extends BasePage {
 
     @FindBy(xpath = "//div[@id='navbar-brand-centered']")
     WebElement upperMenu;
+
+    private static final ExtendedBy updateControlBookButton = new ExtendedBy("Update Control Book button", By.xpath("//span[@data-id='control-book-update-form-button']"));
 
     String headerPattern = "//div[@id='navbar-brand-centered']//a[contains(text(),'%s')]";
 

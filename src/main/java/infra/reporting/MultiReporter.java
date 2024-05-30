@@ -18,9 +18,11 @@ public class MultiReporter {
     }
 
     public static void info(String reportMessage) {
-        for (IReporter current : reporters) {
             logger.info(reportMessage);
-        }
+    }
+
+    public static Logger getLogger(Class<?> clazz) {
+        return LoggerFactory.getLogger(clazz);
     }
 
 }
