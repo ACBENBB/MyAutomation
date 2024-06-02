@@ -14,6 +14,7 @@ import org.testng.annotations.BeforeClass;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
 
 public abstract class BaseTest {
     public static String driverPath;
@@ -22,6 +23,8 @@ public abstract class BaseTest {
     WebDriver driver;
 
     public abstract String getTaskNumber();
+
+    protected static final ThreadLocal<Method> currentTestMethod = new ThreadLocal<>();
 
     String taskNumber = getTaskNumber();
 
@@ -70,6 +73,13 @@ public abstract class BaseTest {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static String getCurrentTestName() {
+        if (currentTestMethod.get() == null) {
+            return "Test name not set yet";
+        }
+        return currentTestMethod.get().getName();
     }
 
 }
