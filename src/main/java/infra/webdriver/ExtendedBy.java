@@ -23,6 +23,7 @@ public class ExtendedBy {
         ExtendedBy.driver = driver;
     }
 
+    // constructors with default timeout
     public ExtendedBy(String description, By by) {
         this.description = description;
         this.by = by;
@@ -30,25 +31,11 @@ public class ExtendedBy {
         waitForVisibility();
     }
 
-    public ExtendedBy(String description, By by, int timeOutSeconds) {
-        this.description = description;
-        this.by = by;
-        this.secureField = false;
-        waitForVisibility(timeOutSeconds);
-    }
-
     public ExtendedBy(String description, By by, boolean secureField) {
         this.description = description;
         this.by = by;
         this.secureField = secureField;
         waitForVisibility();
-    }
-
-    public ExtendedBy(String description, By by, boolean secureField, int timeOutSeconds) {
-        this.description = description;
-        this.by = by;
-        this.secureField = secureField;
-        waitForVisibility(timeOutSeconds);
     }
 
     private void waitForVisibility(int timeOutSeconds) {
@@ -71,6 +58,21 @@ public class ExtendedBy {
 
     public boolean isSecureField() {
         return secureField;
+    }
+
+    // constructors with custom timeout
+    public ExtendedBy(String description, By by, int timeOutSeconds) {
+        this.description = description;
+        this.by = by;
+        this.secureField = false;
+        waitForVisibility(timeOutSeconds);
+    }
+
+    public ExtendedBy(String description, By by, boolean secureField, int timeOutSeconds) {
+        this.description = description;
+        this.by = by;
+        this.secureField = secureField;
+        waitForVisibility(timeOutSeconds);
     }
 
 }
