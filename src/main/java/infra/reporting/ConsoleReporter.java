@@ -1,6 +1,4 @@
-package io.securitize.infra.reporting;
-
-import infra.reporting.IReporter;
+package infra.reporting;
 import infra.webdriver.Browser;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.testng.ITestResult;
@@ -13,7 +11,6 @@ import java.util.Map;
 
 /**
  * Reports all test data to console
- *
  * As the console is static, no need to bother about running parallel tests or calling the logging logic from
  * different parts of the code
  */
