@@ -1,11 +1,14 @@
 package infra.webdriver;
 
+import infra.config.MainConfig;
+import infra.config.MainConfigProperty;
 import infra.utils.RandomGenerator;
 import infra.utils.RegexWrapper;
 import infra.enums.ExecuteBy;
 import infra.exceptions.StringIsNotAsExpectedException;
 import dev.failsafe.Failsafe;
 import dev.failsafe.RetryPolicy;
+import infra.utils.VideoRecorder;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.openqa.selenium.*;
@@ -24,10 +27,10 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static infra.reporting.MultiReporter.errorAndStop;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static infra.reporting.MultiReporter.*;
 
 public class Browser {
 
@@ -302,6 +305,28 @@ public class Browser {
         element.sendKeys(keys);
         logger.info("sent!");
     }
+
+    public void quit() {
+        info("Quitting browser...");
+        driver.get().quit();
+
+        // stop video recording if needed
+        String browserType = MainConfig.getProperty(MainConfigProperty.browserType);
+        if (browserType.equalsIgnoreCase("chrome")) {
+            if (MainConfig.getBooleanProperty(MainConfigProperty.videoRecording)) {
+                info("Stopping local screen recording...");
+                try {
+                    VideoRecorder.stopRecord();
+                } catch (Exception e) {
+                    warning("VideoRecorder.stopRecord failed! Details: " + e, false);
+                }
+            }
+        } else {
+            info("No need to stop video recording as this is not a local browser run");
+        }
+    }
+
+
 
     private void typeTextElement(WebElement element, String description, String text, boolean isSecureField) {
         String textToShow;

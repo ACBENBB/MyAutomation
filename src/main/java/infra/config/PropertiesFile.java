@@ -1,6 +1,6 @@
 package infra.config;
 
-import tests.abstractClass.BaseTest;
+import tests.abstractClass.AbstractBaseTest;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -25,9 +25,9 @@ public class PropertiesFile {
            // InputStream input = Files.newInputStream(Paths.get(configPath));
              InputStream input = new FileInputStream(configPath);
             prop.load(input);
-            BaseTest.driverPath = prop.getProperty("driverPath");
-            BaseTest.driverName = prop.getProperty("driverName");
-            BaseTest.url = getUrl(taskNumber);
+            AbstractBaseTest.driverPath = prop.getProperty("driverPath");
+            AbstractBaseTest.driverName = prop.getProperty("driverName");
+            AbstractBaseTest.url = getUrl(taskNumber);
         } catch (Exception e) {
             e.printStackTrace();
         }

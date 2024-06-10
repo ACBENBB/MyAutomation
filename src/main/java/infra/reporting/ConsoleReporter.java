@@ -2,7 +2,7 @@ package infra.reporting;
 import infra.webdriver.Browser;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.testng.ITestResult;
-import tests.abstractClass.BaseTest;
+import tests.abstractClass.AbstractBaseTest;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -22,7 +22,7 @@ public class ConsoleReporter implements IReporter {
 
     private String generalLog(String message, boolean printMessage) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
-        String currentTestName = BaseTest.getCurrentTestName();
+        String currentTestName = AbstractBaseTest.getCurrentTestName();
         if ((currentTestName.equalsIgnoreCase("Test name not set yet")) && (!Thread.currentThread().getName().startsWith("Thread"))) {
             currentTestName = Thread.currentThread().getName();
         }

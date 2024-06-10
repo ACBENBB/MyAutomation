@@ -16,17 +16,17 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
-public abstract class BaseTest {
+public abstract class AbstractBaseTest {
     public static String driverPath;
     public static String driverName;
     public static String url;
     WebDriver driver;
 
-    public abstract String getTaskNumber();
+    public abstract String getWebsiteName();
 
     protected static final ThreadLocal<Method> currentTestMethod = new ThreadLocal<>();
 
-    String taskNumber = getTaskNumber();
+    String taskNumber = getWebsiteName();
 
     @BeforeClass
     public void setup() {
