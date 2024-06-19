@@ -1,11 +1,10 @@
-package tests.Sport5.abstractClass;
+package tests.abstractClass;
 
 import org.testng.Assert;
 import pageObjects.Sport5_MainPage;
 import tests.Sport5.testData.TestData;
-import tests.abstractClass.AbstractUiTest;
 
-public abstract class AbstractClassSport5 extends AbstractUiTest {
+public abstract class AbstractClassSport5 extends AbstractBaseTest {
 
 
     public enum TestScenario {

@@ -1,3 +1,4 @@
+/*
 package tests.abstractClass;
 
 import dev.failsafe.Failsafe;
@@ -29,7 +30,7 @@ import java.util.function.Function;
 
 import static infra.reporting.MultiReporter.*;
 
-public class AbstractUiTest extends AbstractTest{
+public class AbstractUiTest {
 
     protected ThreadLocal<Browser> browser = new ThreadLocal<>();
 
@@ -124,10 +125,12 @@ public class AbstractUiTest extends AbstractTest{
         return getBrowser().executeScript("return " + jsPathToDownloadedFile + ".querySelector(\"a\").href");
     }
 
-    /**
+    */
+/**
      * Idea of the method below is from the above method. There are small differences.
      * ToDo merge the methods
-     */
+     *//*
+
     public String getChromeLastDownloadedFileUrl(int expectedDownloadsCount, int timeoutSeconds) {
         String jsPathToDownloadedList = "document.getElementsByTagName('downloads-manager')[0].shadowRoot.children['mainContainer'].children['downloadsList']";
         String jsPathToDownloadedFile = jsPathToDownloadedList + ".querySelector('downloads-item').shadowRoot";
@@ -197,3 +200,4 @@ public class AbstractUiTest extends AbstractTest{
         return null;
     }
 }
+*/

@@ -16,12 +16,12 @@ public class MultiReporter {
     private static final ThreadLocal<Boolean> isShowMessageInBrowser = new ThreadLocal<>();
     private static final ThreadLocal<String> browserConsoleErrors = new ThreadLocal<>();
 
-    static {
+/*    static {
         reporters.add(new ConsoleReporter());
         reporters.add(new ExtentReporter());
         reporters.add(new LogToFileReporter());
         reporters.add(new ReportPortalReporter());
-    }
+    }*/
 
     public static void initializeSuite(String details) {    // Initializes the test suite with the given details
         for (IReporter current : reporters) {

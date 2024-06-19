@@ -20,9 +20,12 @@ public class AbstractTest implements IHookable {
 
     protected static final ThreadLocal<Method> currentTestMethod = new ThreadLocal<>();
 
+    // This method initializes the suite before any tests are run.
+    // Sets the thread count for the suite if specified in environment variables.
+    // Logs the maximum number of threads to be used and the total number of tests.
     @BeforeSuite(alwaysRun = true)
     protected void initSuite(ITestContext testContext) {
-        initializeSuite( testContext.getSuite().getName() + " => " + testContext.getName());
+        initializeSuite(testContext.getSuite().getName() + " => " + testContext.getName());
 
         String threadCountToSet = System.getenv("threadCount");
         if (threadCountToSet != null) {
@@ -31,10 +34,11 @@ public class AbstractTest implements IHookable {
             testContext.getSuite().getXmlSuite().setThreadCount(threadCountAsInt);
         }
         info("Max threads to be used: " + getMaxThreadCount(testContext));
-        info("On total of " + testContext.getSuite().getAllMethods().size()  + " tests (ignoring data driven)");
+        info("On total of " + testContext.getSuite().getAllMethods().size() + " tests (ignoring data driven)");
     }
 
-
+    // This method prepares the test method before it runs.
+    // Sets the current test method, logs the method name, description, and domain.
     @BeforeMethod(alwaysRun = true)
     public void beforeMethod(final ITestContext testContext, Method method, Object[] parameters) throws Exception {
         currentTestMethod.set(method);
@@ -60,6 +64,9 @@ public class AbstractTest implements IHookable {
         startTest(methodName, testDescription, currentTestDomain);
     }
 
+    // This method cleans up after the test method has run.
+    // Handles skipped tests and logs the reason if available.
+    // Ends the test and removes the current test method.
     @AfterMethod(alwaysRun = true)
     public void afterMethod(ITestContext context, ITestResult result) {
         // if test ended due to skip in its before method
@@ -79,12 +86,12 @@ public class AbstractTest implements IHookable {
         currentTestMethod.remove();
     }
 
-
-
+    // This method returns the current test method.
     public static Method getCurrentTestMethod() {
         return currentTestMethod.get();
     }
 
+    // This method returns the name of the current test method.
     public static String getCurrentTestName() {
         if (currentTestMethod.get() == null) {
             return "Test name not set yet";
@@ -92,6 +99,7 @@ public class AbstractTest implements IHookable {
         return currentTestMethod.get().getName();
     }
 
+    // This method calculates the maximum thread count for the suite based on the XML configuration.
     private int getMaxThreadCount(ITestContext context) {
         int suiteThreadCount = context.getSuite().getXmlSuite().getThreadCount();
         // if suite runs internal 'test' tags in parallel the total sum of threads might be higher than
@@ -110,7 +118,7 @@ public class AbstractTest implements IHookable {
             int result = 0;
             Collections.sort(testsThreadCountList);
             Collections.reverse(testsThreadCountList);
-            for (int i = 0; i < suiteThreadCount && i < suiteTests.size() ; i++) {
+            for (int i = 0; i < suiteThreadCount && i < suiteTests.size(); i++) {
                 result += testsThreadCountList.get(i);
             }
             return result;
@@ -119,6 +127,7 @@ public class AbstractTest implements IHookable {
         }
     }
 
+    // This method returns the fully qualified name of the current test method.
     public static String getTestFullyQualifiedName() {
         if (currentTestMethod.get() == null) {
             errorAndStop("Can't extract test full name", false);
@@ -128,23 +137,7 @@ public class AbstractTest implements IHookable {
         return testMethodClass + "." + testMethodName;
     }
 
-    public static boolean isUiTest() {
-        StackTraceElement[] currentStackFrame = Thread.currentThread().getStackTrace();
-        return Arrays.stream(currentStackFrame).anyMatch(x -> {
-            try {
-                return AbstractUiTest.class.isAssignableFrom(Class.forName(x.getClassName()));
-            } catch (ClassNotFoundException e) {
-                // we don't care if any error happened here
-                return false;
-            }
-        });
-    }
-
-    /**
-     * Used to fail a test if marked as error (fails at the end)
-     * @param callBack test method to invoke
-     * @param result result of test method - which might change if non-fatal error occur
-     */
+    // This method runs the test method and sets the test result status based on whether an error occurred.
     @Override
     public void run(IHookCallBack callBack, ITestResult result) {
         callBack.runTestMethod(result);
@@ -153,5 +146,4 @@ public class AbstractTest implements IHookable {
             result.setThrowable(MultiReporter.getErrorException());
         }
     }
-
 }

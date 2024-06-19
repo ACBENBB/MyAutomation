@@ -1,6 +1,6 @@
 package tests.Sport5.testData;
 
-import tests.Sport5.abstractClass.AbstractClassSport5;
+import tests.abstractClass.AbstractClassSport5;
 
 public class TestData {
 

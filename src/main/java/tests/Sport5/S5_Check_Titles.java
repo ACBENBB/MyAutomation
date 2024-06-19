@@ -2,7 +2,7 @@ package tests.Sport5;
 
 
 import org.testng.annotations.Test;
-import tests.Sport5.abstractClass.AbstractClassSport5;
+import tests.abstractClass.AbstractClassSport5;
 import tests.Sport5.testData.TestData;
 
 import static infra.reporting.MultiReporter.endTestLevel;
