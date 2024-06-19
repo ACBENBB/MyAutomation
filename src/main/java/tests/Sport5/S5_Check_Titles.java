@@ -22,8 +22,10 @@ public class S5_Check_Titles extends AbstractClassSport5 {
         TestData td = createTestDataObject(testScenario);
         endTestLevel();
 
-
+        startTestLevel("Define Test Scenario and Create Test Data Object");
         verifyPageTitle("אתר ערוץ הספורט");
+        endTestLevel();
+
     }
 
 }
