@@ -1,14 +1,13 @@
 package tests.Sport5.testData;
 
-import tests.abstractClass.AbstractClassSport5;
+import tests.abstractClass.AbstractScripts;
 
 public class TestData {
 
     public String sport5Title;
 
-    public TestData(AbstractClassSport5.TestScenario testScenario) {
-        this.sport5Title = "fdsa";
-
+    public TestData(AbstractScripts.TestScenario testScenario) {
+        this.sport5Title = "אתר ערוץ הספורט";
     }
 
 }

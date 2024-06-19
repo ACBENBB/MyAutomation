@@ -1,5 +1,12 @@
-driverName=chrome driver
-driverPath=../chromedriver.exe
-A-url=https://www.w3schools.com/html/html_tables.asp
-sport5-url= https://www.sport5.co.il/
+# Configuration file for the automation project
 
+# Driver configuration
+driverName = chrome driver
+driverPath = ../chromedriver.exe
+
+# URLs for testing
+# Note:
+# 1. Add URLs for different websites in the following pattern: websiteName-url = www.example.com
+# 2. Ensure that the websiteName is properly set in the test class
+
+sport5-url = https://www.sport5.co.il/

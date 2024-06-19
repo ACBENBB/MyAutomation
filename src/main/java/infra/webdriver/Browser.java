@@ -38,7 +38,6 @@ public class Browser {
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     private final ThreadLocal<WebDriverWait> webDriverWait = new ThreadLocal<>();
     private final ThreadLocal<JavascriptExecutor> javascriptExecutor = new ThreadLocal<>();
-
     private static final int SLEEP_IN_MILLIS_AFTER_ACTION_FAIL = 1000;
     private static final int MAX_ACTION_ATTEMPTS = 3;
     private static final int MAX_STALE_ELEMENT_RETRIES = 5;
@@ -201,7 +200,7 @@ public class Browser {
 
     public WebElement scrollWaitClick(ExtendedBy by) {
         scrollToBottomOfElement(by);
-        waitForElementVisibility(by);
+       // waitForElementVisibility(by);
         return click(by, ExecuteBy.WEBDRIVER, true);
     }
 

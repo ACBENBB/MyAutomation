@@ -4,7 +4,7 @@ import org.testng.Assert;
 import pageObjects.Sport5_MainPage;
 import tests.Sport5.testData.TestData;
 
-public abstract class AbstractClassSport5 extends AbstractBaseTest {
+public abstract class AbstractScripts extends AbstractBaseTest {
 
 
     public enum TestScenario {
@@ -21,7 +21,7 @@ public abstract class AbstractClassSport5 extends AbstractBaseTest {
         }
     }
 
-    public TestData createTestDataObject(AbstractClassSport5.TestScenario testScenario) {
+    public TestData createTestDataObject(AbstractScripts.TestScenario testScenario) {
         return new TestData(testScenario);
     }
 

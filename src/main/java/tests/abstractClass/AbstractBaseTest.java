@@ -1,6 +1,7 @@
 package tests.abstractClass;
 
 import infra.config.PropertiesFile;
+import infra.exceptions.BrowserInitializationException;
 import infra.webdriver.Browser;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
@@ -22,7 +23,7 @@ import java.util.Set;
 
 import static infra.reporting.MultiReporter.*;
 
-public abstract class AbstractBaseTest {
+public abstract class AbstractBaseTest{
     public static String driverPath;
     public static String driverName;
     public static String url;
@@ -30,20 +31,18 @@ public abstract class AbstractBaseTest {
 
     protected ThreadLocal<Browser> browser = new ThreadLocal<>();
 
-
     public abstract String getWebsiteName();
-
-    protected Browser getBrowser() {
-        return browser.get();
-    }
 
     protected static final ThreadLocal<Method> currentTestMethod = new ThreadLocal<>();
 
-    String taskNumber = getWebsiteName();
+    String webSiteName = getWebsiteName();
 
     private final ThreadLocal<Method> savedMethod = new ThreadLocal<>();
     private final ThreadLocal<Object[]> savedParameters = new ThreadLocal<>();
 
+    protected Browser getBrowser() {
+        return browser.get();
+    }
     @BeforeMethod(alwaysRun = true)
     public void beforeMethod(final ITestContext testContext, Method method, Object[] parameters) throws Exception {
         savedMethod.set(method);
@@ -74,14 +73,15 @@ public abstract class AbstractBaseTest {
             driver = new ChromeDriver();
             driver.navigate().to(url);
             driver.manage().window().maximize();
+            browser.set(new Browser(driver));
         } catch (Exception e) {
-            errorAndStop("An error occur trying to open browser. Details: " + e, false);
+            throw new BrowserInitializationException("An error occurred trying to open browser. Details: " + e.getMessage(), e);
         }
     }
 
     @BeforeClass
     public void setup() {
-        PropertiesFile.readPropertiesFile(taskNumber);
+        PropertiesFile.readPropertiesFile(webSiteName);
         System.setProperty(driverName, driverPath);
         openBrowser();
     }

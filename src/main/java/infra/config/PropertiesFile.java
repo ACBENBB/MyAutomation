@@ -1,5 +1,7 @@
 package infra.config;
 
+import infra.exceptions.InvalidURLException;
+import infra.reporting.MultiReporter;
 import tests.abstractClass.AbstractBaseTest;
 
 import java.io.FileInputStream;
@@ -14,37 +16,42 @@ public class PropertiesFile {
 
     static Properties prop = new Properties();
     static String projectPath = System.getProperty("user.dir");
-    static String configPath = projectPath + "\\config.txt"; // path to config file
-
-    public static void main(String[] args) {
-    }
+    static String configPath = projectPath + "\\config.txt";
 
     // method that read properties and get data
-    public static void readPropertiesFile(String taskNumber) {
+    public static void readPropertiesFile(String websiteName) {
         try {
-           // InputStream input = Files.newInputStream(Paths.get(configPath));
-             InputStream input = new FileInputStream(configPath);
+            InputStream input = new FileInputStream(configPath);
             prop.load(input);
-            AbstractBaseTest.driverPath = prop.getProperty("driverPath");
-            AbstractBaseTest.driverName = prop.getProperty("driverName");
-            AbstractBaseTest.url = getUrl(taskNumber);
         } catch (Exception e) {
-            e.printStackTrace();
+            MultiReporter.error("An error occur trying to load config file: " + e);
         }
+        AbstractBaseTest.driverPath = prop.getProperty("driverPath");
+        AbstractBaseTest.driverName = prop.getProperty("driverName");
+        AbstractBaseTest.url = getUrl(websiteName);
     }
 
-    public static String getUrl(String taskNumber) {
-        String url = null;
-        if (taskNumber == null){
-            return prop.getProperty("A-url");
+    public static String setUrl(String websiteName) {
+        String url;
+        if (websiteName == null) {
+            url = prop.getProperty("url");
+        } else {
+            url = prop.getProperty(websiteName + "-url");
         }
+        return url;
+    }
+
+    public static String getUrl(String websiteName) {
+        String url = null;
         try {
             InputStream input = Files.newInputStream(Paths.get(configPath));
-            //  InputStream input = new FileInputStream(configPath);
             prop.load(input);
-            url = prop.getProperty(taskNumber + "-url");
+            url = setUrl(websiteName);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        if (url == null || url.isEmpty()) {
+            throw new InvalidURLException();
         }
         return url;
     }
