@@ -4,6 +4,9 @@
 driverName = chrome driver
 driverPath = ../chromedriver.exe
 
+# Video recording configuration
+maxLocalOldVideosToKeep = 10
+
 # URLs for testing
 # Note:
 # 1. Add URLs for different websites in the following pattern: websiteName-url = www.example.com

@@ -7,7 +7,6 @@ import static infra.reporting.MultiReporter.trace;
 
 public class VisualTestingDummy extends AbstractVisualTesting {
 
-
     public VisualTestingDummy(Browser browser) {
         super(browser);
         trace("Initiating dummy visual testing");

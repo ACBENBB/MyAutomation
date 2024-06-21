@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 import static infra.reporting.MultiReporter.*;
 
-public class AbstractTest implements IHookable {
+public class AbstractTestSuite implements IHookable {
 
     protected static final ThreadLocal<Method> currentTestMethod = new ThreadLocal<>();
 

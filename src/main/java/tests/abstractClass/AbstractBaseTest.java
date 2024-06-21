@@ -2,6 +2,7 @@ package tests.abstractClass;
 
 import infra.config.PropertiesFile;
 import infra.exceptions.BrowserInitializationException;
+import infra.utils.VideoRecorder;
 import infra.webdriver.Browser;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
@@ -16,6 +17,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -26,7 +28,9 @@ import static infra.reporting.MultiReporter.*;
 public abstract class AbstractBaseTest{
     public static String driverPath;
     public static String driverName;
+
     public static String url;
+    public static String videoFileName;
     WebDriver driver;
 
     protected ThreadLocal<Browser> browser = new ThreadLocal<>();
@@ -80,10 +84,11 @@ public abstract class AbstractBaseTest{
     }
 
     @BeforeClass
-    public void setup() {
+    public void setup() throws IOException, AWTException {
         PropertiesFile.readPropertiesFile(webSiteName);
         System.setProperty(driverName, driverPath);
         openBrowser();
+        videoFileName = VideoRecorder.start();
     }
 
     @AfterMethod

@@ -2,6 +2,7 @@ package infra.config;
 
 import infra.exceptions.InvalidURLException;
 import infra.reporting.MultiReporter;
+import infra.utils.VideoRecorder;
 import tests.abstractClass.AbstractBaseTest;
 
 import java.io.FileInputStream;
@@ -29,6 +30,7 @@ public class PropertiesFile {
         AbstractBaseTest.driverPath = prop.getProperty("driverPath");
         AbstractBaseTest.driverName = prop.getProperty("driverName");
         AbstractBaseTest.url = getUrl(websiteName);
+        VideoRecorder.maxLocalOldVideosToKeep = Integer.parseInt(prop.getProperty("maxLocalOldVideosToKeep"));
     }
 
     public static String setUrl(String websiteName) {

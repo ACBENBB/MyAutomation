@@ -13,6 +13,11 @@ public class RandomGenerator {
         return rand.nextInt((max - min) + 1) + min;
     }
 
+    public static int randInt() {
+        Random rand = new Random();
+        return rand.nextInt();
+    }
+
     public static String randomString(int numOfChars, int...randIntMaxType) {
         int actualRandIntMaxType = (randIntMaxType.length == 0) ? 2 : randIntMaxType[0];
         StringBuilder randomString = new StringBuilder();

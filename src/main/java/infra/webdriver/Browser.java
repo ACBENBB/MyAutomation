@@ -1064,10 +1064,6 @@ public class Browser {
         select.selectByIndex(index);
     }
 
-    public int getRandomNumber(int min, int max) {
-        int randomNum = (int) (Math.random() * (max - min + 1) + min);
-        return randomNum;
-    }
 
     public void mouseHold(WebElement el) {
         Actions actions = new Actions(driver.get());

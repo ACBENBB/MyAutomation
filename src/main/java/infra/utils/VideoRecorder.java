@@ -1,4 +1,3 @@
-/*
 package infra.utils;
 
 import org.monte.media.Format;
@@ -23,6 +22,7 @@ import static org.monte.media.VideoFormatKeys.QualityKey;
 public class VideoRecorder {
     private static ScreenRecorder screenRecorder = null;
 
+    public static int maxLocalOldVideosToKeep;
 
     public static String start() throws IOException, AWTException {
         File folder = new File("./videos");
@@ -38,7 +38,6 @@ public class VideoRecorder {
         // delete old videos if needed
         File[] oldVideoFiles = folder.listFiles();
 
-        int maxLocalOldVideosToKeep = MainConfig.getIntProperty(MainConfigProperty.maxLocalOldVideosToKeep);
         if (oldVideoFiles != null && oldVideoFiles.length > maxLocalOldVideosToKeep) {
             // sort files by order
             Arrays.sort(oldVideoFiles, Comparator.comparingLong(File::lastModified));
@@ -51,7 +50,6 @@ public class VideoRecorder {
                 }
             }
         }
-
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int width = screenSize.width;
@@ -89,4 +87,3 @@ public class VideoRecorder {
         return screenRecorder.getCreatedMovieFiles().get(0).getPath();
     }
 }
-*/
