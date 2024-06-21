@@ -3,7 +3,7 @@ package tests.Sport5;
 
 import org.testng.annotations.Test;
 import tests.abstractClass.AbstractScripts;
-import tests.Sport5.testData.TestData;
+import tests.testData.TestData;
 
 import static infra.reporting.MultiReporter.endTestLevel;
 import static infra.reporting.MultiReporter.startTestLevel;

@@ -79,9 +79,9 @@
 /target/surefire-reports/failed.png
 /target/classes/tests/False_Test.class
 /allure-results/fcfa2b68-3d20-4b84-ab8c-104aaeb11e71-container.json
-/ScreenShots/First_False_Test.jpg
-/ScreenShots/Forth_False_Test.jpg
-/ScreenShots/Forth_True_Test.jpg
+/screenshots/First_False_Test.jpg
+/screenshots/Forth_False_Test.jpg
+/screenshots/Forth_True_Test.jpg
 /target/surefire-reports/old/MyAutomation Suite/groups.html
 /test-output/old/MyAutomation Suite/groups.html
 /target/surefire-reports/old/MyAutomation Suite/index.html

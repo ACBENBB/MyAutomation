@@ -122,7 +122,7 @@ public abstract class AbstractBaseTest{
             TakesScreenshot ss = (TakesScreenshot) driver;
             File srcFile = ss.getScreenshotAs(OutputType.FILE);
             try {
-                FileUtils.copyFile(srcFile, new File("./ScreenShots/" + result.getName() + ".jpg"));
+                FileUtils.copyFile(srcFile, new File("./screenshots/" + result.getName() + ".jpg"));
             } catch (IOException e) {
                 e.printStackTrace();
             }

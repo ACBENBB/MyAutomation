@@ -1,8 +1,8 @@
 package tests.abstractClass;
 
 import org.testng.Assert;
-import pageObjects.Sport5_MainPage;
-import tests.Sport5.testData.TestData;
+import pageObjects.Sport5.Sport5_MainPage;
+import tests.testData.TestData;
 
 public abstract class AbstractScripts extends AbstractBaseTest {
 
