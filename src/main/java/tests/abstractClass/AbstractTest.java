@@ -1,15 +1,11 @@
 package tests.abstractClass;
 
-import infra.config.MainConfig;
 import infra.reporting.MultiReporter;
 import infra.utils.RegexWrapper;
-import net.minidev.json.JSONArray;
-import org.jetbrains.annotations.NotNull;
 import org.testng.*;
 import org.testng.annotations.*;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
-
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.stream.Collectors;

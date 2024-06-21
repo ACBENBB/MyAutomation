@@ -20,7 +20,6 @@ public class MultiReporter {
         reporters.add(new ConsoleReporter());
         reporters.add(new ExtentReporter());
         reporters.add(new LogToFileReporter());
-        reporters.add(new ReportPortalReporter());
     }*/
 
     public static void initializeSuite(String details) {    // Initializes the test suite with the given details

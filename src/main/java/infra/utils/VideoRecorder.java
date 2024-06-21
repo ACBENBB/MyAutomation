@@ -1,7 +1,6 @@
+/*
 package infra.utils;
 
-import infra.config.MainConfig;
-import infra.config.MainConfigProperty;
 import org.monte.media.Format;
 import org.monte.media.FormatKeys;
 import org.monte.media.math.Rational;
@@ -90,3 +89,4 @@ public class VideoRecorder {
         return screenRecorder.getCreatedMovieFiles().get(0).getPath();
     }
 }
+*/

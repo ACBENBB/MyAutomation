@@ -1,14 +1,11 @@
 package infra.webdriver;
 
-import infra.config.MainConfig;
-import infra.config.MainConfigProperty;
 import infra.utils.RandomGenerator;
 import infra.utils.RegexWrapper;
 import infra.enums.ExecuteBy;
 import infra.exceptions.StringIsNotAsExpectedException;
 import dev.failsafe.Failsafe;
 import dev.failsafe.RetryPolicy;
-import infra.utils.VideoRecorder;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.openqa.selenium.*;
@@ -22,6 +19,8 @@ import org.openqa.selenium.support.ui.*;
 import org.testng.util.Strings;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.*;
 import java.util.function.Function;
@@ -48,6 +47,7 @@ public class Browser {
             "security - Error with Feature-Policy header: Unrecognized"
     );
 
+
     public Browser(WebDriver providedDriver) {
         // proper cleanup of previous content if needed
         driver.remove();
@@ -68,10 +68,21 @@ public class Browser {
         driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(timeoutInSeconds));
     }
 
+    // call this method with your element and a color you like (red, green, orange, blue etc...)
+    protected void highlightElement(ExtendedBy by, String color) {
+        //keep the old style to change it back
+        WebElement element = findElement(by);
+        String originalStyle = element.getAttribute("style");
+        String newStyle = "border: 4px solid " + color + ";" + originalStyle;
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        // Change the style
+        js.executeScript("var tmpArguments = arguments;setTimeout(function () {tmpArguments[0].setAttribute('style','" + newStyle + "');},0);", element);
+    }
+
     public void clearAllCookies() {
         driver.get().manage().deleteAllCookies();
     }
-
 
     public WebElement findElement(ExtendedBy extendedBy) {
         return driver.get().findElement(extendedBy.getBy());
@@ -102,10 +113,6 @@ public class Browser {
     public List<WebElement> findElementsInElement(ExtendedBy parent, ExtendedBy child) {
         WebElement parentElement = driver.get().findElement(parent.getBy());
         return parentElement.findElements(child.getBy());
-    }
-
-    public WebElement click(ExtendedBy by) {
-        return click(by, ExecuteBy.WEBDRIVER, true);
     }
 
     public List<WebElement> findElementsQuick(ExtendedBy extendedBy) {
@@ -200,7 +207,6 @@ public class Browser {
 
     public WebElement scrollWaitClick(ExtendedBy by) {
         scrollToBottomOfElement(by);
-       // waitForElementVisibility(by);
         return click(by, ExecuteBy.WEBDRIVER, true);
     }
 
@@ -208,24 +214,9 @@ public class Browser {
         return driver.get().findElements(extendedBy.getBy());
     }
 
-    public void click(WebElement element, String description, boolean forceElementOnTop) {
-        click(element, description, ExecuteBy.WEBDRIVER, forceElementOnTop);
-    }
-
-    public void click(WebElement element, String description) {
-        click(element, description, ExecuteBy.WEBDRIVER, true);
-    }
-
-    public void click(ExtendedBy by, boolean forceElementOnTop) {
-        click(by, ExecuteBy.WEBDRIVER, forceElementOnTop);
-    }
-
-    public void clickWithJs(WebElement webElement) {
-        javascriptExecutor.get().executeScript("arguments[0].click();", webElement);
-    }
-
     public WebElement click(ExtendedBy by, ExecuteBy executeBy, boolean forceElementOnTop) {
         WebElement webElement;
+        highlightElement(by,"yellow");
         try {
             webElement = webDriverWait.get().until(ExpectedConditions.elementToBeClickable(by.getBy()));
             click(webElement, by.getDescription(), executeBy, forceElementOnTop);
@@ -240,11 +231,32 @@ public class Browser {
         return webElement;
     }
 
+
+    public WebElement click(ExtendedBy by) {
+        return click(by, ExecuteBy.WEBDRIVER, true);
+    }
+
+    public void click(WebElement element, String description, boolean forceElementOnTop) {
+        click(element, description, ExecuteBy.WEBDRIVER, forceElementOnTop);
+    }
+
+    public void click(WebElement element, String description) {
+        click(element, description, ExecuteBy.WEBDRIVER, true);
+    }
+
+    public void click(ExtendedBy by, boolean forceElementOnTop) {
+        click(by, ExecuteBy.WEBDRIVER, forceElementOnTop);
+    }
+
+    public WebElement clickWithJs(ExtendedBy by) {
+        return click(by, ExecuteBy.JAVASCRIPT, true);
+    }
+
     public void click(WebElement webElement, String description, ExecuteBy executeBy, boolean forceElementOnTop) {
         for (int i = 1; i <= MAX_ACTION_ATTEMPTS; i++) {
 
             try {
-                logger.info("About to Click on element: " + description);
+                info("About to Click on element: " + description);
 
                 webDriverWait.get().until(ExpectedConditions.elementToBeClickable(webElement));
 
@@ -253,15 +265,15 @@ public class Browser {
 
                 if (executeBy == ExecuteBy.WEBDRIVER) {
                     webElement.click();
-                    logger.info("Clicked on element: " + description);
+                    info("Clicked on element: " + description);
                 } else if (executeBy == ExecuteBy.JAVASCRIPT) {
                     javascriptExecutor.get().executeScript("arguments[0].click();", webElement);
-                    logger.info("Clicked on element with JS: " + description);
+                    info("Clicked on element with JS: " + description);
                 }
                 break;
             } catch (Exception e) {
                 if (i < MAX_ACTION_ATTEMPTS) {
-                    logger.info("[WARNING]: Click on " + description + " failed due to (" + e + ") . Trying again in " + SLEEP_IN_MILLIS_AFTER_ACTION_FAIL + " " + MILLISECONDS_LITERAL);
+                    info("[WARNING]: Click on " + description + " failed due to (" + e + ") . Trying again in " + SLEEP_IN_MILLIS_AFTER_ACTION_FAIL + " " + MILLISECONDS_LITERAL);
                     sleep(SLEEP_IN_MILLIS_AFTER_ACTION_FAIL);
                 } else {
                     throw e;
@@ -272,6 +284,7 @@ public class Browser {
 
 
     public void typeTextElement(ExtendedBy extendedBy, String text) {
+        highlightElement(extendedBy, "orange");
         WebElement element = driver.get().findElement(extendedBy.getBy());
         boolean successful = false;
 
@@ -304,28 +317,6 @@ public class Browser {
         element.sendKeys(keys);
         logger.info("sent!");
     }
-
-    public void quit() {
-        info("Quitting browser...");
-        driver.get().quit();
-
-        // stop video recording if needed
-        String browserType = MainConfig.getProperty(MainConfigProperty.browserType);
-        if (browserType.equalsIgnoreCase("chrome")) {
-            if (MainConfig.getBooleanProperty(MainConfigProperty.videoRecording)) {
-                info("Stopping local screen recording...");
-                try {
-                    VideoRecorder.stopRecord();
-                } catch (Exception e) {
-                    warning("VideoRecorder.stopRecord failed! Details: " + e, false);
-                }
-            }
-        } else {
-            info("No need to stop video recording as this is not a local browser run");
-        }
-    }
-
-
 
     private void typeTextElement(WebElement element, String description, String text, boolean isSecureField) {
         String textToShow;
@@ -388,6 +379,12 @@ public class Browser {
         }
     }
 
+    public void clearTextInput(ExtendedBy extendedBy) {
+        WebElement element = findElement(extendedBy);
+        element.sendKeys(Keys.CONTROL + "a");
+        element.sendKeys(Keys.DELETE);
+    }
+
     public void typeTextElementCtrlA(ExtendedBy extendedBy, String text) {
         WebElement element = driver.get().findElement(extendedBy.getBy());
         if (System.getProperty("os.name") != null && System.getProperty("os.name").toLowerCase().contains("mac")) {
@@ -401,12 +398,6 @@ public class Browser {
     public void elementSendKeys(ExtendedBy extendedBy, Keys key, String keyboardLetter) {
         WebElement element = driver.get().findElement(extendedBy.getBy());
         element.sendKeys(key + keyboardLetter);
-    }
-
-    public void clearTextInput(ExtendedBy extendedBy) {
-        WebElement element = findElement(extendedBy);
-        element.sendKeys(Keys.CONTROL + "a");
-        element.sendKeys(Keys.DELETE);
     }
 
     public String getElementText(ExtendedBy extendedBy) {
@@ -435,10 +426,6 @@ public class Browser {
         Select select = new Select(driver.get().findElement(extendedBy.getBy()));
         select.selectByVisibleText(value);
         logger.info("selected value " + value + " in element: " + extendedBy.getDescription());
-    }
-
-    public String selectRandomValueInElement(ExtendedBy extendedBy) {
-        return selectRandomValueInElement(extendedBy, true);
     }
 
     public String selectRandomValueInElement(ExtendedBy extendedBy, boolean allowFirstValue) {
@@ -508,22 +495,21 @@ public class Browser {
         wait.until(ExpectedConditions.visibilityOfElementLocated(extendedBy.getBy()));
     }
 
+    public WebElement waitForElementVisibility(ExtendedBy extendedBy) {
+        logger.info("Waiting for '" + extendedBy.getDescription() + "' to be visible by: " + extendedBy.getBy());
+        return webDriverWait.get().until(ExpectedConditions.visibilityOfElementLocated(extendedBy.getBy()));
+    }
+
     public void waitForElementClickable(ExtendedBy extendedBy, int timeoutSeconds) {
         logger.info("Waiting for '" + extendedBy.getDescription() + "' to be clickable by: " + extendedBy.getBy() + " waiting up to " + timeoutSeconds + " seconds");
         var wait = new WebDriverWait(driver.get(), Duration.ofSeconds(timeoutSeconds));
         wait.until(ExpectedConditions.elementToBeClickable(extendedBy.getBy()));
     }
 
-    public WebElement waitForElementVisibility(ExtendedBy extendedBy) {
-        logger.info("Waiting for '" + extendedBy.getDescription() + "' to be visible by: " + extendedBy.getBy());
-        return webDriverWait.get().until(ExpectedConditions.visibilityOfElementLocated(extendedBy.getBy()));
-    }
-
     public void waitForElementCount(ExtendedBy extendedBy, int expectedCount) {
         logger.info("Waiting for '" + extendedBy.getDescription() + "' to be visible by: " + extendedBy.getBy());
         webDriverWait.get().until(ExpectedConditions.numberOfElementsToBe(extendedBy.getBy(), expectedCount));
     }
-
 
     public void waitForElementTextNotEmpty(ExtendedBy extendedBy) {
         logger.info("Waiting for '" + extendedBy.getDescription() + "' text to not be null. Finding it by: " + extendedBy.getBy());
@@ -564,7 +550,6 @@ public class Browser {
             }
         });
     }
-
 
     public void scrollToElement(WebElement element, boolean forceElementOnTop) {
         String scrollToElementScript =
@@ -620,16 +605,10 @@ public class Browser {
         javascriptExecutor.get().executeScript("arguments[0].scrollIntoView(false)", element);
     }
 
-    public void scrollIntoElement(ExtendedBy extendedBy) {
-        WebElement element = findElement(extendedBy);
-        javascriptExecutor.get().executeScript("arguments[0].scrollIntoView(true)", element);
-    }
-
     public void scrollDownToPageBottom() {
         //Scroll down till the bottom of the page
         javascriptExecutor.get().executeScript("window.scrollBy(0,document.body.scrollHeight)");
     }
-
 
     public void sleep(long milliseconds) {
         logger.info("Sleeping for " + milliseconds + " " + MILLISECONDS_LITERAL);
@@ -706,7 +685,6 @@ public class Browser {
             logger.warn("Can't get browser console errors when driver is not initialized", false);
             return null;
         }
-
         LogEntries logs = driver.get().manage().logs().get("browser");
         StringBuilder stringBuilder = new StringBuilder();
         for (LogEntry entry : logs) {
@@ -714,7 +692,6 @@ public class Browser {
                 stringBuilder.append(entry.getMessage()).append("<br><br>").append(System.lineSeparator());
             }
         }
-
         return stringBuilder.toString();
     }
 
@@ -820,7 +797,7 @@ public class Browser {
     public void switchToLatestWindow() {
         int maxAttempts = 5;
 
-        // try to switch to latest window up to 5 times (windows could be just closing)
+        // try to switch to the latest window up to 5 times (windows could be just closing)
         for (int i = 1; i <= maxAttempts; i++) {
             try {
                 logger.info("Switching to last (new) tab - attempt #" + i);
@@ -1077,11 +1054,122 @@ public class Browser {
         return element;
     }
 
+    public void setSelectText(WebElement el, String value) {
+        Select select = new Select(el);
+        select.selectByVisibleText(value);
+    }
+
+    public void setSelectIndex(WebElement el, int index) {
+        Select select = new Select(el);
+        select.selectByIndex(index);
+    }
+
+    public int getRandomNumber(int min, int max) {
+        int randomNum = (int) (Math.random() * (max - min + 1) + min);
+        return randomNum;
+    }
+
+    public void mouseHold(WebElement el) {
+        Actions actions = new Actions(driver.get());
+        actions.moveToElement(el).build().perform();
+    }
+
+
+    public void doubleClick(WebElement el) {
+        Actions actions = new Actions(driver.get());
+        actions.doubleClick(el).perform();
+    }
+
+    public void switchFrameByWebElement(WebElement frame) {
+        driver.get().switchTo().frame(frame);
+    }
+    public void switchFrameById(String frameId) {
+        WebElement frame = driver.get().findElement(By.id(frameId));
+        driver.get().switchTo().frame(frame);
+    }
+
+    public void switchFrameByXpath(String frameXpath) {
+        WebElement frame = driver.get().findElement(By.xpath(frameXpath));
+        driver.get().switchTo().frame(frame);
+    }
+    public void quitFrame() {
+        driver.get().switchTo().defaultContent();
+    }
+
+    public void accept() {
+        driver.get().switchTo().alert().accept();
+    }
+
+    public void dismiss() {
+        driver.get().switchTo().alert().dismiss();
+    }
+
+    public String getPopupText() {
+        String message = driver.get().switchTo().alert().getText();
+        return message;
+    }
+
+    public String getDate() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyy");
+        Date date = new Date();
+        String date1 = dateFormat.format(date);
+        return date1;
+    }
+
+    public String getTime() {
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        Date date = new Date();
+        String date1 = dateFormat.format(date);
+        return date1;
+    }
+
+
+    public List<String> convertListWebEtoString(List<WebElement> listWebE) {
+        ArrayList<String> listString = new ArrayList<String>();
+        for (int i = 0; i < listWebE.size(); i++) {
+            String user = listWebE.get(i).getText();
+            listString.add(user);
+        }
+        return listString;
+    }
+
+    public int getCurrentDay() {
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        int day = calendar.get(Calendar.DATE);
+        return day;
+    }
+
+    public String getExactTime() {
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyy");
+        Date date = new Date();
+        String date1 = dateFormat.format(date);
+        return date1;
+    }
+
+    public String getTitleChildWindow() {
+        String titleChild = null;
+        String parent = driver.get().getWindowHandle();
+        Set<String> allHandles = driver.get().getWindowHandles();
+        Iterator<String> allChilds = allHandles.iterator();
+        while (allChilds.hasNext()) {
+            String child_window = allChilds.next();
+            if (!parent.equals(child_window)) {
+                driver.get().switchTo().window(child_window);
+                titleChild = driver.get().switchTo().window(child_window).getTitle();
+                driver.get().close();
+                driver.get().switchTo().window(parent);
+                System.out.println(driver.get().getTitle());
+            }
+        }
+        return titleChild;
+    }
+
+
     public void pressTabKey(WebElement element) {
         element.sendKeys(Keys.TAB);
     }
 
-    public void waitForElementStalenes(WebElement element) {
+    public void waitForElementStaleness(WebElement element) {
         webDriverWait.get().until(ExpectedConditions.stalenessOf(element));
     }
 
