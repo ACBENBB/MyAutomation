@@ -43,7 +43,7 @@ public class VideoRecorder {
             Arrays.sort(oldVideoFiles, Comparator.comparingLong(File::lastModified));
 
             // keep just the last maxLocalOldVideosToKeep files
-            for (int i = 0; i < oldVideoFiles.length - maxLocalOldVideosToKeep ; i++) {
+            for (int i = 0; i < oldVideoFiles.length - maxLocalOldVideosToKeep; i++) {
                 info("Removing old video file: " + oldVideoFiles[i].getPath());
                 if (!oldVideoFiles[i].delete()) {
                     warning("Unable to delete old local video file: " + oldVideoFiles[i].getPath());

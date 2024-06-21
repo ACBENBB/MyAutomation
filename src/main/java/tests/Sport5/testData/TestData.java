@@ -7,7 +7,11 @@ public class TestData {
     public String sport5Title;
 
     public TestData(AbstractScripts.TestScenario testScenario) {
-        this.sport5Title = "אתר ערוץ הספורט";
+        switch (testScenario) {
+            case Sport5:
+                this.sport5Title = "אתר ערוץ הספורט";
+                break;
+        }
     }
 
 }
