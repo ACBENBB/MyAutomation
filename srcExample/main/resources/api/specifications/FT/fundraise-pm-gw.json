@@ -1,0 +1,1291 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/v1/opportunities": {
+      "get": {
+        "operationId": "OpportunitiesController_getOpportunities",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Opportunities",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetOpportunitiesDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/opportunities/{opportunityId}": {
+      "get": {
+        "operationId": "OpportunitiesController_getOpportunity",
+        "parameters": [
+          {
+            "name": "opportunityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Opportunity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOpportunityDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/opportunities/{opportunityId}/qualification": {
+      "get": {
+        "operationId": "OpportunitiesController_getQualificationQuestions",
+        "parameters": [
+          {
+            "name": "opportunityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get qualification questions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetQualificationQuestions"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "OpportunitiesController_submitQualification",
+        "parameters": [
+          {
+            "name": "opportunityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Submit qualification answers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetQualificationQuestions"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/opportunities/{opportunityId}/authorize-issuer": {
+      "post": {
+        "operationId": "OpportunitiesController_authorizeIssuer",
+        "parameters": [
+          {
+            "name": "opportunityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorizeIssuerDto"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Authorize issuer and obtain auth data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorizeIssuerDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/opportunities/{opportunityId}/social": {
+      "get": {
+        "operationId": "OpportunitiesController_getSocialData",
+        "parameters": [
+          {
+            "name": "opportunityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpportunitySocialDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/opportunities/{opportunityId}/test": {
+      "get": {
+        "operationId": "OpportunitiesController_getTest",
+        "parameters": [
+          {
+            "name": "opportunityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/connect/opportunities": {
+      "get": {
+        "operationId": "OpportunitiesController_getOpportunities",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Opportunities",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetOpportunitiesDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/connect/opportunities/{opportunityId}": {
+      "get": {
+        "operationId": "OpportunitiesController_getOpportunity",
+        "parameters": [
+          {
+            "name": "opportunityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Opportunity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOpportunityDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/connect/opportunities/{opportunityId}/qualification": {
+      "get": {
+        "operationId": "OpportunitiesController_getQualificationQuestions",
+        "parameters": [
+          {
+            "name": "opportunityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get qualification questions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetQualificationQuestions"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "OpportunitiesController_submitQualification",
+        "parameters": [
+          {
+            "name": "opportunityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Submit qualification answers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetQualificationQuestions"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/connect/opportunities/{opportunityId}/authorize-issuer": {
+      "post": {
+        "operationId": "OpportunitiesController_authorizeIssuer",
+        "parameters": [
+          {
+            "name": "opportunityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorizeIssuerDto"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Authorize issuer and obtain auth data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorizeIssuerDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/opportunities/{opportunityId}/investments": {
+      "post": {
+        "operationId": "InvestmentController_postOpportunity",
+        "parameters": [
+          {
+            "name": "opportunityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostOpportunityPayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Pledge Opportunity"
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/opportunities/{opportunityId}/investments/{investmentId}": {
+      "patch": {
+        "operationId": "InvestmentController_patchOpportunity",
+        "parameters": [
+          {
+            "name": "opportunityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "investmentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchOpportunityPayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update Opportunity Pledge"
+          }
+        }
+      }
+    },
+    "/v1/connect/opportunities/{opportunityId}/investments": {
+      "post": {
+        "operationId": "InvestmentController_postOpportunity",
+        "parameters": [
+          {
+            "name": "opportunityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostOpportunityPayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Pledge Opportunity"
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/connect/opportunities/{opportunityId}/investments/{investmentId}": {
+      "patch": {
+        "operationId": "InvestmentController_patchOpportunity",
+        "parameters": [
+          {
+            "name": "opportunityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "investmentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchOpportunityPayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update Opportunity Pledge"
+          }
+        }
+      }
+    },
+    "/v1/cash-account": {
+      "get": {
+        "operationId": "CashAccountController_getPermissions",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Cash Account permissions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCashAccountSummaryResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/connect/cash-account": {
+      "get": {
+        "operationId": "CashAccountController_getPermissions",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Cash Account permissions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCashAccountSummaryResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/v1/settings/accreditation": {
+      "get": {
+        "operationId": "SettingsController_getAccreditationSettings",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "Get accreditation settings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccreditationSettings"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/settings/issuers/{issuerId}": {
+      "get": {
+        "operationId": "SettingsController_getIssuerConfiguration",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get issuer settings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetIssuerSettingsDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/connect/settings/accreditation": {
+      "get": {
+        "operationId": "SettingsController_getAccreditationSettings",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "Get accreditation settings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccreditationSettings"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/connect/settings/issuers/{issuerId}": {
+      "get": {
+        "operationId": "SettingsController_getIssuerConfiguration",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get issuer settings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetIssuerSettingsDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/connect/translations/{language}/{system}": {
+      "get": {
+        "operationId": "ConnectTranslationController_getTranslation",
+        "parameters": [
+          {
+            "name": "language",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "system",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/translations/{language}/{system}": {
+      "get": {
+        "operationId": "PmTranslationController_getTranslation",
+        "parameters": [
+          {
+            "name": "language",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "system",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/investors/{id}/request-enhanced-verification": {
+      "post": {
+        "operationId": "InvestorsController_requestEnhancedVerification",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/connect/investors/{id}/request-enhanced-verification": {
+      "post": {
+        "operationId": "InvestorsController_requestEnhancedVerification",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "info": {
+    "title": "Primary Market Gateway",
+    "description": "API to interact with Primary Market Website",
+    "version": "1.0",
+    "contact": {
+
+    }
+  },
+  "tags": [
+
+  ],
+  "servers": [
+
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "GetOpportunitiesDto": {
+        "type": "object",
+        "properties": {
+
+        }
+      },
+      "GetOpportunityDetailsDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "issuerName": {
+            "type": "string"
+          },
+          "issuerIcon": {
+            "type": "string",
+            "nullable": true
+          },
+          "evergreenRound": {
+            "type": "boolean"
+          },
+          "tokenDecimals": {
+            "type": "number"
+          },
+          "tokenIcon": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "order": {
+            "type": "number"
+          },
+          "isTokenCalculatorVisible": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "subscriptionAgreementDocusignId": {
+            "type": "string",
+            "nullable": true
+          },
+          "tokenName": {
+            "type": "string",
+            "nullable": true
+          },
+          "tokenSymbol": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "contents": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "documents": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "isBrokerDealer": {
+            "type": "boolean"
+          },
+          "amountRaised": {
+            "type": "number"
+          },
+          "mainCurrency": {
+            "type": "string"
+          },
+          "totalInvestorsFunded": {
+            "type": "number"
+          },
+          "investorInvestmentDetails": {
+            "type": "object",
+            "nullable": true
+          },
+          "currencies": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "investmentStatus": {
+            "type": "string",
+            "enum": [
+              "none",
+              "requested",
+              "sent",
+              "signed",
+              "funded",
+              "confirmed",
+              "rejected",
+              "pre-signed",
+              "issued"
+            ]
+          },
+          "hideInvestmentProgress": {
+            "type": "boolean"
+          },
+          "jurisdictionBlocked": {
+            "type": "boolean"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "web3",
+              "standard"
+            ]
+          },
+          "depositOptions": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "shadow": {
+            "type": "boolean"
+          },
+          "contentsRequireKyc": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "enabled",
+          "tokenId",
+          "issuerId",
+          "issuerName",
+          "issuerIcon",
+          "evergreenRound",
+          "tokenDecimals",
+          "tokenIcon",
+          "title",
+          "content",
+          "image",
+          "order",
+          "isTokenCalculatorVisible",
+          "subscriptionAgreementDocusignId",
+          "tokenName",
+          "tokenSymbol",
+          "attributes",
+          "contents",
+          "documents",
+          "fields",
+          "isBrokerDealer",
+          "amountRaised",
+          "mainCurrency",
+          "totalInvestorsFunded",
+          "investorInvestmentDetails",
+          "currencies",
+          "investmentStatus",
+          "hideInvestmentProgress",
+          "jurisdictionBlocked",
+          "type",
+          "depositOptions",
+          "labels",
+          "shadow",
+          "contentsRequireKyc"
+        ]
+      },
+      "GetOpportunityValidationsDto": {
+        "type": "object",
+        "properties": {
+          "leiCodeRequired": {
+            "type": "boolean"
+          },
+          "userInvestmentPermission": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "required": true,
+                "type": "object"
+              },
+              "signerInvestorId": {
+                "required": false,
+                "type": "string"
+              }
+            }
+          },
+          "enhancedVerification": {
+            "type": "object"
+          },
+          "riskLevel": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "leiCodeRequired",
+          "userInvestmentPermission",
+          "riskLevel"
+        ]
+      },
+      "GetOpportunityDto": {
+        "type": "object",
+        "properties": {
+          "opportunity": {
+            "$ref": "#/components/schemas/GetOpportunityDetailsDto"
+          },
+          "validations": {
+            "$ref": "#/components/schemas/GetOpportunityValidationsDto"
+          }
+        },
+        "required": [
+          "opportunity",
+          "validations"
+        ]
+      },
+      "GetQualificationQuestions": {
+        "type": "object",
+        "properties": {
+          "questionnaire": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "questionnaire"
+        ]
+      },
+      "AuthorizeIssuerDto": {
+        "type": "object",
+        "properties": {
+          "issuerDashboardAuthorizationUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "issuerDashboardAuthorizationUrl"
+        ]
+      },
+      "OpportunitySocialDto": {
+        "type": "object",
+        "properties": {
+          "opportunity": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "required": true,
+                "type": "string"
+              },
+              "content": {
+                "required": true,
+                "type": "string"
+              },
+              "image": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "opportunity"
+        ]
+      },
+      "PostOpportunityPayloadDto": {
+        "type": "object",
+        "properties": {
+
+        }
+      },
+      "PatchOpportunityPayloadDto": {
+        "type": "object",
+        "properties": {
+
+        }
+      },
+      "GetCashAccountSummaryResponseDto": {
+        "type": "object",
+        "properties": {
+          "canUseCA": {
+            "type": "boolean"
+          },
+          "canCreateAccount": {
+            "type": "boolean"
+          },
+          "canCashDeposit": {
+            "type": "boolean"
+          },
+          "restrictions": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "accountStatus": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "canUseCA",
+          "canCreateAccount",
+          "canCashDeposit",
+          "restrictions",
+          "accountStatus"
+        ]
+      },
+      "GetAccreditationSettings": {
+        "type": "object",
+        "properties": {
+
+        }
+      },
+      "GetIssuerSettingsDto": {
+        "type": "object",
+        "properties": {
+
+        }
+      }
+    }
+  }
+}

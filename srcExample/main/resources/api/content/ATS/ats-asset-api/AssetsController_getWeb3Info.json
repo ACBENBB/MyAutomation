@@ -1,0 +1,10 @@
+{
+  "pathParams": {
+    "deploymentId": "#ATS_DEPLOYMENT_ID#"
+  },
+  "headers": {
+    "x-api-key": "#ATS_ASSET_API_KEY#"
+  },
+  "rc": {},
+  "sandbox": {}
+}

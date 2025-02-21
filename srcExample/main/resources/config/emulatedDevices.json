@@ -1,0 +1,34 @@
+{
+  "iPhone 14 Pro Max" : {
+    "width": 430,
+    "height": 932
+  },
+  "iPhone 14 Pro" : {
+    "width": 393,
+    "height": 852
+  },
+  "iPhone 14" : {
+    "width": 390,
+    "height": 844
+  },
+  "iPad 10th" : {
+    "width": 810,
+    "height": 1080
+  },
+  "Galaxy S23" : {
+    "width": 384,
+    "height": 824
+  },
+  "Galaxy S22 Ultra" : {
+    "width": 384,
+    "height": 824
+  },
+  "Galaxy S22" : {
+    "width": 360,
+    "height": 780
+  },
+  "Pixel 6 Pro" : {
+    "width": 412,
+    "height": 892
+  }
+}

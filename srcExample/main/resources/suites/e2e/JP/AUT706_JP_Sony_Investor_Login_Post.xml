@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT706_JP_Sony_Investor_Login_Post" verbose="1">
+    <test name="AUT706_JP_Sony_Investor_Login_Post">
+        <classes>
+            <class name="io.securitize.tests.jp.AUT706_JP_Sony_Investor_Login_Post" />
+        </classes>
+    </test>
+</suite>

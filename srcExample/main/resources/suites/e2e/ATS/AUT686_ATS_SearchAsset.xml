@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT686_ATS_SearchAsset" verbose="1">
+    <test name="AUT686_ATS_SearchAsset">
+        <classes>
+            <class name="io.securitize.tests.ats.sanity.AUT686_ATS_SearchAsset" />
+        </classes>
+    </test>
+</suite>

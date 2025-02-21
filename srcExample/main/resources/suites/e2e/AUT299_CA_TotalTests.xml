@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT299_CA_TotalTests" verbose="1" parallel="methods" thread-count="10" >
+    <test name="AUT299_CA_TotalTests">
+        <packages>
+            <package name="io.securitize.tests.ca" />
+        </packages>
+    </test>
+</suite>

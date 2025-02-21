@@ -1,0 +1,9 @@
+{
+  "skips": {
+    "entireTest": false,
+    "skipReason": "",
+    "statusCodeCheck": false,
+    "bodySchemaCheck": true,
+    "bodyContentCheck": true
+  }
+}

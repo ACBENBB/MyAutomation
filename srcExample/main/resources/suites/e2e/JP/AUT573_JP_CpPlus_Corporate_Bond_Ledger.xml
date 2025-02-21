@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT573_JP_CpPlus_Corporate_Bond_Ledger" verbose="1">
+    <test name="AUT573_JP_CpPlus_Corporate_Bond_Ledger">
+        <classes>
+            <class name="io.securitize.tests.jp.AUT573_JP_CpPlus_Corporate_Bond_Ledger" />
+        </classes>
+    </test>
+</suite>

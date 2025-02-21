@@ -1,0 +1,10 @@
+{
+  "queryParams": {
+    "daysAgo": "4"
+  },
+  "headers": {
+    "x-api-key": "#ATS_ORDER_API_KEY#"
+  },
+  "rc": {},
+  "sandbox": {}
+}

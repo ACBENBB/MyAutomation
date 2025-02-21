@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT704_JP_Sony_Investor_Login_New" verbose="1">
+    <test name="AUT704_JP_Sony_Investor_Login_New">
+        <classes>
+            <class name="io.securitize.tests.jp.AUT704_JP_Sony_Investor_Login_New" />
+        </classes>
+    </test>
+</suite>

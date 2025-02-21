@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT95_SID_Validate_Personal_Information" verbose="1">
+    <test name="AUT95_SID_Validate_Personal_Information">
+        <classes>
+            <class name="io.securitize.tests.securitizeId.AUT95_SID_Validate_Personal_Information"/>
+        </classes>
+    </test>
+</suite>

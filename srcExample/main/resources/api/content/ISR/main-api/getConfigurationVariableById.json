@@ -1,0 +1,16 @@
+{
+  "pathParams":
+  {
+    "issuerId": "#ISSUER_ID#",
+    "configurationId": "142851"
+  },
+  "skips": {
+    "bodySchemaCheck": true,
+    "bodyContentCheck": true
+  },
+  "sandbox": {
+    "pathParams": {
+      "configurationId": "209650"
+    }
+  }
+}

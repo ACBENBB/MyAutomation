@@ -1,0 +1,2308 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Payouts Api",
+    "description": "Endpoints for payouts application",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "PresignedUrlResponseDto": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "object"
+          },
+          "fileKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url",
+          "fields",
+          "fileKey"
+        ]
+      },
+      "DownloadUrlDto": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      },
+      "W9TaxFormDto": {
+        "type": "object",
+        "properties": {
+          "formType": {
+            "type": "string",
+            "enum": [
+              "W-9",
+              "W-8BEN",
+              "W-8BENE"
+            ]
+          },
+          "formInvestorName": {
+            "type": "string"
+          },
+          "businessName": {
+            "type": "string"
+          },
+          "address1": {
+            "type": "string"
+          },
+          "address2": {
+            "type": "string"
+          },
+          "addressAdditionalInfo": {
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "formClassification": {
+            "type": "string",
+            "enum": [
+              "SOLE",
+              "INDIVIDUAL",
+              "PARTNERSHIP",
+              "TRUST",
+              "LLC-C-CORPORATION",
+              "LLC-S-CORPORATION",
+              "LLC-PARTNERSHIP",
+              "S-CORPORATION",
+              "C-CORPORATION",
+              "SINGLE"
+            ]
+          },
+          "taxPayerIdType": {
+            "type": "string",
+            "enum": [
+              "SSN",
+              "EIN"
+            ]
+          },
+          "taxPayerIdNumber": {
+            "type": "string"
+          },
+          "exemptPayeeCodes": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "exemptFATCAReportingCodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "formType",
+          "formInvestorName",
+          "address1",
+          "postalCode",
+          "country",
+          "region",
+          "city",
+          "formClassification",
+          "taxPayerIdNumber"
+        ]
+      },
+      "W9TaxFormResponseDto": {
+        "type": "object",
+        "properties": {
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "formInvestorName": {
+            "type": "string"
+          },
+          "businessName": {
+            "type": "string"
+          },
+          "address1": {
+            "type": "string"
+          },
+          "address2": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string"
+          },
+          "formClassification": {
+            "enum": [
+              "SOLE",
+              "INDIVIDUAL",
+              "PARTNERSHIP",
+              "TRUST",
+              "LLC-C-CORPORATION",
+              "LLC-S-CORPORATION",
+              "LLC-PARTNERSHIP",
+              "S-CORPORATION",
+              "C-CORPORATION",
+              "SINGLE"
+            ],
+            "type": "string"
+          },
+          "taxPayerIdType": {
+            "enum": [
+              "SSN",
+              "EIN"
+            ],
+            "type": "string"
+          },
+          "taxPayerIdNumber": {
+            "type": "string"
+          },
+          "exemptPayeeCodes": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "exemptFATCAReportingCodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "updatedAt",
+          "id",
+          "formInvestorName",
+          "businessName",
+          "address1",
+          "address2",
+          "city",
+          "postalCode",
+          "country",
+          "region",
+          "formClassification",
+          "taxPayerIdType",
+          "taxPayerIdNumber",
+          "exemptPayeeCodes",
+          "exemptFATCAReportingCodes",
+          "createdAt"
+        ]
+      },
+      "W8benTaxFormDto": {
+        "type": "object",
+        "properties": {
+          "formType": {
+            "type": "string",
+            "enum": [
+              "W-9",
+              "W-8BEN",
+              "W-8BENE"
+            ]
+          },
+          "formInvestorName": {
+            "type": "string"
+          },
+          "businessName": {
+            "type": "string"
+          },
+          "address1": {
+            "type": "string"
+          },
+          "address2": {
+            "type": "string"
+          },
+          "addressAdditionalInfo": {
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "taxPayerIdType": {
+            "type": "string",
+            "enum": [
+              "SSN",
+              "FOREIGN"
+            ]
+          },
+          "taxPayerIdNumber": {
+            "type": "string"
+          },
+          "countryOfCitizenship": {
+            "type": "string"
+          },
+          "taxCountry": {
+            "type": "string"
+          },
+          "mailingAddress1": {
+            "type": "string"
+          },
+          "mailingAddress2": {
+            "type": "string"
+          },
+          "mailingAddressAdditionalInfo": {
+            "type": "string"
+          },
+          "mailingPostalCode": {
+            "type": "string"
+          },
+          "mailingCountry": {
+            "type": "string"
+          },
+          "mailingRegion": {
+            "type": "string"
+          },
+          "mailingCity": {
+            "type": "string"
+          },
+          "birthDay": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "formType",
+          "formInvestorName",
+          "address1",
+          "postalCode",
+          "country",
+          "region",
+          "city",
+          "countryOfCitizenship",
+          "birthDay"
+        ]
+      },
+      "W8benTaxFormResponseDto": {
+        "type": "object",
+        "properties": {
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "formInvestorName": {
+            "type": "string"
+          },
+          "countryOfCitizenship": {
+            "type": "string"
+          },
+          "address1": {
+            "type": "string"
+          },
+          "address2": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string"
+          },
+          "mailingAddress1": {
+            "type": "string"
+          },
+          "mailingAddress2": {
+            "type": "string"
+          },
+          "mailingCity": {
+            "type": "string"
+          },
+          "mailingPostalCode": {
+            "type": "string"
+          },
+          "mailingCountry": {
+            "type": "string"
+          },
+          "mailingRegion": {
+            "type": "string"
+          },
+          "taxPayerIdType": {
+            "enum": [
+              "SSN",
+              "FOREIGN"
+            ],
+            "type": "string"
+          },
+          "taxPayerIdNumber": {
+            "type": "string"
+          },
+          "taxCountry": {
+            "type": "string"
+          },
+          "birthDay": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "updatedAt",
+          "id",
+          "formInvestorName",
+          "countryOfCitizenship",
+          "address1",
+          "address2",
+          "city",
+          "postalCode",
+          "country",
+          "region",
+          "mailingAddress1",
+          "mailingAddress2",
+          "mailingCity",
+          "mailingPostalCode",
+          "mailingCountry",
+          "mailingRegion",
+          "taxPayerIdType",
+          "taxPayerIdNumber",
+          "taxCountry",
+          "birthDay",
+          "createdAt"
+        ]
+      },
+      "W8beneTaxFormDto": {
+        "type": "object",
+        "properties": {
+          "formType": {
+            "type": "string",
+            "enum": [
+              "W-9",
+              "W-8BEN",
+              "W-8BENE"
+            ]
+          },
+          "contentType": {
+            "type": "string"
+          },
+          "fileKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "formType",
+          "contentType",
+          "fileKey"
+        ]
+      },
+      "TaxFormResponseDto": {
+        "type": "object",
+        "properties": {
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "fileKey": {
+            "type": "string"
+          },
+          "contentType": {
+            "type": "string"
+          },
+          "w9": {
+            "$ref": "#/components/schemas/W9TaxFormResponseDto"
+          },
+          "w8ben": {
+            "$ref": "#/components/schemas/W8benTaxFormResponseDto"
+          },
+          "id": {
+            "type": "string"
+          },
+          "investorId": {
+            "type": "string"
+          },
+          "formType": {
+            "enum": [
+              "W-9",
+              "W-8BEN",
+              "W-8BENE"
+            ],
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "active",
+              "inactive",
+              "expired"
+            ],
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "deletedAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "updatedAt",
+          "fileKey",
+          "contentType",
+          "w9",
+          "w8ben",
+          "id",
+          "investorId",
+          "formType",
+          "status",
+          "createdAt",
+          "deletedAt"
+        ]
+      },
+      "TaxFormPaginationResponseDto": {
+        "type": "object",
+        "properties": {
+          "itemCount": {
+            "type": "number"
+          },
+          "totalItems": {
+            "type": "number"
+          },
+          "itemsPerPage": {
+            "type": "number"
+          },
+          "totalPages": {
+            "type": "number"
+          },
+          "currentPage": {
+            "type": "number"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TaxFormResponseDto"
+            }
+          }
+        },
+        "required": [
+          "itemCount",
+          "totalItems",
+          "itemsPerPage",
+          "totalPages",
+          "currentPage",
+          "data"
+        ]
+      },
+      "PaymentRailsRecipientAccountWebhookDto": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "string",
+            "enum": [
+              "recipientAccount"
+            ]
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "updated",
+              "deleted",
+              "created"
+            ]
+          },
+          "body": {
+            "type": "object",
+            "properties": {
+              "recipientAccount": {
+                "required": true,
+                "type": "object"
+              }
+            }
+          }
+        },
+        "required": [
+          "model",
+          "action",
+          "body"
+        ]
+      },
+      "CryptoPreferenceDto": {
+        "type": "object",
+        "properties": {
+          "walletId": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "USDC",
+              "ETH"
+            ]
+          }
+        },
+        "required": [
+          "walletId",
+          "currency"
+        ]
+      },
+      "CryptoPaymentPreferenceResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "crypto",
+              "bank-transfer",
+              "treasury"
+            ]
+          },
+          "walletId": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "walletAddress": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "walletId",
+          "currency",
+          "walletAddress"
+        ]
+      },
+      "PaymentPreferenceResponseDto": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "string"
+          },
+          "recipientId": {
+            "type": "string"
+          },
+          "recipientReferenceId": {
+            "type": "string"
+          },
+          "recipientAccountId": {
+            "type": "string"
+          },
+          "recipientFees": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "primary": {
+            "type": "boolean"
+          },
+          "status": {
+            "type": "string"
+          },
+          "disabledAt": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "walletId": {
+            "type": "string"
+          },
+          "walletAddress": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "accountNum": {
+            "type": "string"
+          },
+          "emailAddress": {
+            "type": "string"
+          },
+          "iban": {
+            "type": "string"
+          },
+          "accountHolderName": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "bankId": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "branchId": {
+            "type": "string"
+          },
+          "bankPostalCode": {
+            "type": "string"
+          },
+          "bankRegionCode": {
+            "type": "string"
+          },
+          "bankCity": {
+            "type": "string"
+          },
+          "bankAddress": {
+            "type": "string"
+          },
+          "bankTransferType": {
+            "type": "string"
+          },
+          "routeType": {
+            "type": "string"
+          },
+          "swiftBic": {
+            "type": "string"
+          },
+          "active": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "investorId",
+          "recipientId",
+          "recipientReferenceId",
+          "recipientAccountId",
+          "recipientFees",
+          "updatedAt",
+          "createdAt",
+          "primary",
+          "status",
+          "disabledAt",
+          "id",
+          "type",
+          "currency"
+        ]
+      },
+      "PayoutMethodPreferenceDto": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "crypto",
+              "bank-transfer",
+              "treasury"
+            ]
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "InvestorWalletDeleted": {
+        "type": "object",
+        "properties": {}
+      },
+      "PaymentHistoryEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "investorId": {
+            "type": "string"
+          },
+          "holding": {
+            "type": "string"
+          },
+          "netAmount": {
+            "type": "number"
+          },
+          "payoutType": {
+            "enum": [
+              "dividend",
+              "distribution",
+              "royalty"
+            ],
+            "type": "string"
+          },
+          "payoutMethod": {
+            "enum": [
+              "crypto",
+              "bank-transfer",
+              "treasury"
+            ],
+            "type": "string"
+          },
+          "currency": {
+            "enum": [
+              "USD",
+              "ETH",
+              "USDC"
+            ],
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "paid",
+              "not-paid",
+              "rejected"
+            ],
+            "type": "string"
+          },
+          "recordDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "payoutDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "payoutRate": {
+            "type": "number"
+          },
+          "withholdingRate": {
+            "type": "number"
+          },
+          "numberOfShares": {
+            "type": "number"
+          },
+          "grossAmount": {
+            "type": "number"
+          },
+          "totalTaxes": {
+            "type": "number"
+          },
+          "fees": {
+            "type": "number"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "distribution": {
+            "$ref": "#/components/schemas/DistributionEntity"
+          }
+        },
+        "required": [
+          "id",
+          "investorId",
+          "holding",
+          "netAmount",
+          "payoutType",
+          "payoutMethod",
+          "currency",
+          "status",
+          "recordDate",
+          "payoutDate",
+          "payoutRate",
+          "withholdingRate",
+          "numberOfShares",
+          "grossAmount",
+          "totalTaxes",
+          "fees",
+          "createdAt",
+          "updatedAt",
+          "distribution"
+        ]
+      },
+      "DistributionEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "operatorId": {
+            "type": "string"
+          },
+          "paymentHistories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PaymentHistoryEntity"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "issuerId",
+          "tokenId",
+          "operatorId",
+          "paymentHistories"
+        ]
+      },
+      "PaymentHistoryResponseDto": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "holding": {
+            "type": "string"
+          },
+          "netAmount": {
+            "type": "number"
+          },
+          "payoutType": {
+            "type": "string",
+            "enum": [
+              "dividend",
+              "distribution",
+              "royalty"
+            ]
+          },
+          "payoutMethod": {
+            "type": "string",
+            "enum": [
+              "crypto",
+              "bank-transfer",
+              "treasury"
+            ]
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "USD",
+              "ETH",
+              "USDC"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "paid",
+              "not-paid",
+              "rejected"
+            ]
+          },
+          "recordDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "payoutDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "payoutRate": {
+            "type": "number"
+          },
+          "withholdingRate": {
+            "type": "number"
+          },
+          "numberOfShares": {
+            "type": "number"
+          },
+          "grossAmount": {
+            "type": "number"
+          },
+          "totalTaxes": {
+            "type": "number"
+          },
+          "fees": {
+            "type": "number"
+          },
+          "distribution": {
+            "$ref": "#/components/schemas/DistributionEntity"
+          }
+        },
+        "required": [
+          "investorId",
+          "updatedAt",
+          "createdAt",
+          "id",
+          "holding",
+          "netAmount",
+          "payoutType",
+          "payoutMethod",
+          "currency",
+          "status",
+          "recordDate",
+          "payoutDate",
+          "payoutRate",
+          "withholdingRate",
+          "numberOfShares",
+          "grossAmount",
+          "totalTaxes",
+          "fees",
+          "distribution"
+        ]
+      },
+      "PaymentHistoryPaginationResponseDto": {
+        "type": "object",
+        "properties": {
+          "itemCount": {
+            "type": "number"
+          },
+          "totalItems": {
+            "type": "number"
+          },
+          "itemsPerPage": {
+            "type": "number"
+          },
+          "totalPages": {
+            "type": "number"
+          },
+          "currentPage": {
+            "type": "number"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PaymentHistoryResponseDto"
+            }
+          }
+        },
+        "required": [
+          "itemCount",
+          "totalItems",
+          "itemsPerPage",
+          "totalPages",
+          "currentPage",
+          "data"
+        ]
+      },
+      "DistributionDto": {
+        "type": "object",
+        "properties": {
+          "distributionId": {
+            "type": "number"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "fileKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "distributionId",
+          "issuerId",
+          "tokenId",
+          "fileKey"
+        ]
+      },
+      "TaxFormDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "W-9",
+              "W-8BEN",
+              "W-8BENE"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ]
+      },
+      "DistributionInvestorDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "tokens": {
+            "type": "number"
+          },
+          "tax-forms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TaxFormDto"
+            }
+          },
+          "payout-method": {
+            "type": "string",
+            "enum": [
+              "crypto",
+              "bank-transfer",
+              "treasury"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "email",
+          "tokens",
+          "tax-forms",
+          "payout-method"
+        ]
+      },
+      "DistributionInvestorsResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DistributionInvestorDto"
+            }
+          },
+          "totalItems": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "data",
+          "totalItems"
+        ]
+      },
+      "DistributionData": {
+        "type": "object",
+        "properties": {
+          "CPiD": {
+            "type": "number"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "referenceId": {
+            "type": "string"
+          },
+          "payoutAmount": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "coverFees": {
+            "type": "object"
+          },
+          "taxable": {
+            "type": "object"
+          },
+          "paymentReason": {
+            "type": "string",
+            "enum": [
+              "dividend",
+              "redemption",
+              "corporate-action",
+              "other"
+            ]
+          },
+          "usTaxActivity": {
+            "type": "object"
+          },
+          "totalNumberOfSecurities": {
+            "type": "number"
+          },
+          "countryResidence": {
+            "type": "string"
+          },
+          "countryTaxes": {
+            "type": "string"
+          },
+          "payoutMethod": {
+            "type": "string",
+            "enum": [
+              "crypto",
+              "bank-transfer",
+              "treasury"
+            ]
+          },
+          "walletAddress": {
+            "type": "string"
+          },
+          "submittedW8BEN": {
+            "type": "object"
+          },
+          "submittedW8BENE": {
+            "type": "object"
+          },
+          "submittedW9": {
+            "type": "object"
+          },
+          "taxWithholdingRate": {
+            "type": "number"
+          },
+          "taxWithholdingAmount": {
+            "type": "number"
+          },
+          "payoutRate": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "CPiD",
+          "fullName",
+          "email",
+          "referenceId",
+          "payoutAmount",
+          "currency",
+          "coverFees",
+          "taxable",
+          "paymentReason",
+          "usTaxActivity",
+          "totalNumberOfSecurities",
+          "countryResidence",
+          "countryTaxes",
+          "payoutMethod",
+          "walletAddress",
+          "submittedW8BEN",
+          "submittedW8BENE",
+          "submittedW9",
+          "taxWithholdingRate",
+          "taxWithholdingAmount",
+          "payoutRate"
+        ]
+      },
+      "DistributionDataResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DistributionData"
+            }
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "snapshotId": {
+            "type": "number"
+          },
+          "issuerName": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "tokenName": {
+            "type": "string"
+          },
+          "totalItems": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "data",
+          "issuerId",
+          "snapshotId",
+          "issuerName",
+          "tokenId",
+          "tokenName",
+          "totalItems"
+        ]
+      },
+      "DistributionDownloadResponseDto": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      }
+    }
+  },
+  "paths": {
+    "/v1/tax-forms/w8ben-e/{investorId}/upload": {
+      "get": {
+        "operationId": "TaxFormsController_getUploadUrl",
+        "parameters": [
+          {
+            "name": "contentType",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "application/pdf",
+                "image/png",
+                "image/jpg",
+                "image/jpeg",
+                "image/bmp"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PresignedUrlResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tax Forms"
+        ]
+      }
+    },
+    "/v1/tax-forms/w8ben-e": {
+      "get": {
+        "operationId": "TaxFormsController_getW8BENEForm",
+        "summary": "Return download url tax W8-BEN-E template",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DownloadUrlDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tax Forms"
+        ]
+      }
+    },
+    "/v1/tax-forms/w9/{investorId}": {
+      "post": {
+        "operationId": "TaxFormsController_addW9TaxForm",
+        "summary": "Creates W9 tax form for desired investor",
+        "parameters": [
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/W9TaxFormDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/W9TaxFormResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tax Forms"
+        ]
+      }
+    },
+    "/v1/tax-forms/w8ben/{investorId}": {
+      "post": {
+        "operationId": "TaxFormsController_addW8benTaxForm",
+        "summary": "Creates W8BEN tax form for desired investor",
+        "parameters": [
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/W8benTaxFormDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/W8benTaxFormResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tax Forms"
+        ]
+      }
+    },
+    "/v1/tax-forms/w8ben-e/{investorId}": {
+      "post": {
+        "operationId": "TaxFormsController_addW8beneTaxForm",
+        "summary": "Upload W8BEN-E tax form for desired investor",
+        "parameters": [
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/W8beneTaxFormDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaxFormResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tax Forms"
+        ]
+      }
+    },
+    "/v1/tax-forms/{investorId}": {
+      "get": {
+        "operationId": "TaxFormsController_getInvestorTaxForms",
+        "summary": "Return all tax form for desired investor",
+        "parameters": [
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "taxFormId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaxFormPaginationResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tax Forms"
+        ]
+      }
+    },
+    "/v1/tax-forms/{investorId}/latest": {
+      "get": {
+        "operationId": "TaxFormsController_getDownloadLatestInvestorTaxForm",
+        "summary": "Get last Investor Taxform",
+        "parameters": [
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DownloadUrlDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tax Forms"
+        ]
+      }
+    },
+    "/v1/tax-forms/{taxFormId}/download": {
+      "get": {
+        "operationId": "TaxFormsController_getTaxFormPresignedUrl",
+        "summary": "Return tax form presigned url",
+        "parameters": [
+          {
+            "name": "taxFormId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DownloadUrlDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tax Forms"
+        ]
+      }
+    },
+    "/v1/tax-forms/{investorId}/{taxFormId}": {
+      "get": {
+        "operationId": "TaxFormsController_getDownloadTaxFormLink",
+        "summary": "Return download url tax form",
+        "parameters": [
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "taxFormId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DownloadUrlDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tax Forms"
+        ]
+      }
+    },
+    "/v1/tax-forms/{taxFormId}": {
+      "delete": {
+        "operationId": "TaxFormsController_deleteTaxForm",
+        "summary": "Delete a tax form",
+        "parameters": [
+          {
+            "name": "taxFormId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Tax Forms"
+        ]
+      }
+    },
+    "/v1/payment-preferences/webhooks/payment-rails/recipients-account": {
+      "post": {
+        "operationId": "PaymentPreferencesController_recipientsAccountsUpdates",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentRailsRecipientAccountWebhookDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Payment Preferences"
+        ]
+      }
+    },
+    "/v1/payment-preferences/crypto/{investorId}": {
+      "post": {
+        "operationId": "PaymentPreferencesController_addCryptoPaymentPreference",
+        "parameters": [
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CryptoPreferenceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CryptoPaymentPreferenceResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Payment Preferences"
+        ]
+      }
+    },
+    "/v1/payment-preferences/{investorId}": {
+      "get": {
+        "operationId": "PaymentPreferencesController_getPaymentPreferences",
+        "parameters": [
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PaymentPreferenceResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Payment Preferences"
+        ]
+      },
+      "patch": {
+        "operationId": "PaymentPreferencesController_activatePaymentPreference",
+        "parameters": [
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PayoutMethodPreferenceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PaymentPreferenceResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Payment Preferences"
+        ]
+      }
+    },
+    "undefined": {
+      "undefined": {
+        "operationId": "PaymentHistoryController_getUndefined",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvestorWalletDeleted"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/payment-histories/{investorId}": {
+      "get": {
+        "operationId": "PaymentHistoryController_getPaymentHistory",
+        "summary": "Return payment history from a investor and token",
+        "deprecated": true,
+        "parameters": [
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentHistoryPaginationResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Payment Histories"
+        ]
+      }
+    },
+    "/v1/admin/distribution/{issuerId}/{tokenId}": {
+      "get": {
+        "operationId": "AdminController_getDistribution",
+        "summary": "Return new distribution from a snapshot",
+        "deprecated": true,
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "snapshot",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investors Snapshot"
+        ]
+      }
+    },
+    "/v1/admin/distribution/upload": {
+      "get": {
+        "operationId": "AdminController_getUploadUrl",
+        "summary": "Return upload url for payout history",
+        "deprecated": true,
+        "parameters": [
+          {
+            "name": "operator",
+            "required": true,
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PresignedUrlResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investors Snapshot"
+        ]
+      }
+    },
+    "/v1/admin/distribution": {
+      "post": {
+        "operationId": "AdminController_addDistribution",
+        "summary": "Adds distribution and payment histories",
+        "deprecated": true,
+        "parameters": [
+          {
+            "name": "operator",
+            "required": true,
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DistributionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DistributionEntity"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investors Snapshot"
+        ]
+      },
+      "put": {
+        "operationId": "AdminController_replaceDistribution",
+        "summary": "Put submit payment history csv uploaded file",
+        "deprecated": true,
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DistributionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DistributionEntity"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investors Snapshot"
+        ]
+      }
+    },
+    "/v1/admin/distribution/{distributionId}": {
+      "delete": {
+        "operationId": "AdminController_deleteDistribution",
+        "summary": "Delete distribution and his related payment history by id",
+        "deprecated": true,
+        "parameters": [
+          {
+            "name": "distributionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Investors Snapshot"
+        ]
+      }
+    },
+    "/v1/distribution/{issuerId}/{tokenId}/investors": {
+      "get": {
+        "operationId": "DistributionController_getDistributionInvestors",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "snapshot",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "default": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "default": 5,
+              "type": "number"
+            }
+          },
+          {
+            "name": "order-by",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "tokens",
+              "enum": [
+                "tokens"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "order-direction",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "desc",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DistributionInvestorsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Distribution"
+        ]
+      }
+    },
+    "/v1/distribution/{issuerId}/{tokenId}": {
+      "get": {
+        "operationId": "DistributionController_getDistributionData",
+        "summary": "Return distribution data by snapshot",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "snapshot",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "default": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "default": 5,
+              "type": "number"
+            }
+          },
+          {
+            "name": "order-by",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "tokens",
+              "enum": [
+                "tokens"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "order-direction",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "desc",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DistributionDataResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Distribution"
+        ]
+      }
+    },
+    "/v1/distribution/{issuerId}/{tokenId}/download": {
+      "get": {
+        "operationId": "DistributionController_getDistributionCsvPresignedUrl",
+        "summary": "Return distribution csv presigned url",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "snapshot",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "default": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "default": 5,
+              "type": "number"
+            }
+          },
+          {
+            "name": "order-by",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "tokens",
+              "enum": [
+                "tokens"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "order-direction",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "desc",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DistributionDownloadResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Distribution"
+        ]
+      }
+    }
+  }
+}

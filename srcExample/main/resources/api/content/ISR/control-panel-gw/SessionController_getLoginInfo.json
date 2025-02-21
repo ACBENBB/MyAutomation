@@ -1,0 +1,10 @@
+{
+  "queryParams": {
+    "email": "securitize_automation+apiTesting1@securitize.io"
+  },
+  "sandbox": {
+    "pathParams": {
+      "email": "securitize_automation+apiTesting1@securitize.io"
+    }
+  }
+}

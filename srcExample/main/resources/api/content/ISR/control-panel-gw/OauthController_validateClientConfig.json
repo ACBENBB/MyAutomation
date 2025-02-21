@@ -1,0 +1,12 @@
+{
+  "queryParams": {
+    "clientId": "4357533a-6811-2d95-a1c0-54f8677a05f1",
+    "redirectUrl": "https://cp-plus.rc.securitize.io"
+  },
+  "sandbox": {
+    "queryParams": {
+      "clientId": "3c679c64-4446-48b7-b926-99a69760ebba",
+      "redirectUrl": "https://cp-plus.sandbox.securitize.io"
+    }
+  }
+}

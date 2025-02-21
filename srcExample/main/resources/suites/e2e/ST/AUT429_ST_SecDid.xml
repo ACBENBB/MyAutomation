@@ -1,0 +1,7 @@
+<suite name="AUT429_ST_SecDid" verbose="1">
+    <test name="AUT429_ST_SecDid">
+        <classes>
+            <class name="io.securitize.tests.blockchain.AUT429_ST_SecDid" />
+        </classes>
+    </test>
+</suite>

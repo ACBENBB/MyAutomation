@@ -1,0 +1,7 @@
+<suite name="AUT290_SID_SumSub_Reject_Blocked" verbose="1">
+    <test name="AUT290_SID_SumSub_Reject_Blocked">
+        <classes>
+            <class name="io.securitize.tests.securitizeId.AUT290_SID_SumSub_Reject_Blocked"/>
+        </classes>
+    </test>
+</suite>

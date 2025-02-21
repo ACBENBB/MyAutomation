@@ -1,0 +1,9 @@
+{
+  "pathParams": {
+    "investorId": "#SID_INVESTOR_ID#",
+    "legalSignerId": "#SID_LEGAL_SIGNER_ID#"
+  },
+  "rc": {},
+  "sandbox": {},
+  "production": {}
+}

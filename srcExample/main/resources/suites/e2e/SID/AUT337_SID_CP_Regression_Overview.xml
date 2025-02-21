@@ -1,0 +1,7 @@
+<suite name="AUT337_SID_CP_Regression_Overview" verbose="1">
+    <test name="AUT337_SID_CP_Regression_Overview">
+        <classes>
+            <class name="io.securitize.tests.securitizeId.AUT337_SID_ControlPanel_Regression_Overview"/>
+        </classes>
+    </test>
+</suite>

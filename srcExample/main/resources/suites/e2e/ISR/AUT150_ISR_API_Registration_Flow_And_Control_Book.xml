@@ -1,0 +1,7 @@
+<suite name="AUT150_ISR_API_Registration_Flow_And_Control_Book" verbose="1">
+    <test name="AUT150_ISR_API_Registration_Flow_And_Control_Book">
+        <classes>
+            <class name="io.securitize.tests.apiTests.controlPanel.AUT150_ISR_API_Registration_Flow_And_Control_Flow" />
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,19 @@
+[
+// test skipped on sandbox only: 10 -(see elaboration in sandbox section)
+
+  {
+      "rc": [],
+      "sandbox": [
+                  "//AccountController_getAccountStatements",
+                  "//AccountController_getCreditCardsLimit",
+                  "//AccountController_getUserAccount",
+                  "//ConnectAccountController_getAccountStatements",
+                  "//ConnectAccountController_getCreditCardsLimit",
+                  "//ConnectAccountController_getUserAccount",
+                  "//ConnectTransactionsController_getAssetWithdrawalLimit",
+                  "//ConnectTransactionsController_getInstantSettlementLimit",
+                  "//ConnectTransferMethodsController_getFundTransferMethods",
+                  "//ConnectTransferMethodsController_getWireTransferInstructions",
+      ]
+    }
+]

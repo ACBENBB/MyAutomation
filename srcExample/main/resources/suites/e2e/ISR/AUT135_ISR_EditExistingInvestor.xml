@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT135_ISR_EditExistingInvestor" verbose="1">
+    <test name="AUT135_ISR_EditExistingInvestor">
+        <classes>
+            <class name="io.securitize.tests.controlPanel.AUT135_ISR_Edit_Existing_Investor_Validation" />
+        </classes>
+    </test>
+</suite>

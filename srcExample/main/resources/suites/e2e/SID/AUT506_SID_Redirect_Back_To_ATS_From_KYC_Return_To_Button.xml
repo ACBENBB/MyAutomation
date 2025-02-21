@@ -1,0 +1,7 @@
+<suite name="AUT506_SID_Redirect_Back_To_ATS_From_KYC_Return_To_Button" verbose="1">
+    <test name="AUT506_SID_Redirect_Back_To_ATS_From_KYC_Return_To_Button">
+        <classes>
+            <class name="io.securitize.tests.securitizeId.AUT506_SID_Redirect_Back_To_ATS_From_KYC_Return_To_Button" />
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,16 @@
+{
+  "pathParams": {
+    "clientId": "#ISSUER_ID#",
+    "signerId": "#SID_LEGAL_SIGNER_ID#",
+    "documentId": "#SID_LEGAL_SIGNER_DOCUMENT_ID#"
+  },
+  "headers": {
+    "access-token": "#SID_ACCESS_TOKEN#"
+  },
+  "skips": {
+    "bodySchemaCheck": true,
+    "skipReason": "Body schema was skipped due to lack of schema (model instead of schema)"
+  },
+  "rc": {},
+  "sandbox": {}
+}

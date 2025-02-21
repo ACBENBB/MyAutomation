@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT618_ISR_Lost_Shares" verbose="1">
+    <test name="AUT618_ISR_Lost_Shares">
+        <classes>
+            <class name="io.securitize.tests.controlPanel.AUT618_ISR_Lost_Shares" />
+        </classes>
+    </test>
+</suite>

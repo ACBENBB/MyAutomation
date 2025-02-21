@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT502_ATS_Cancel_Sell_Order" verbose="1">
+    <test name="AUT502_ATS_Cancel_Sell_Order">
+        <classes>
+            <class name="io.securitize.tests.ats.AUT502_ATS_Cancel_Sell_Order" />
+        </classes>
+    </test>
+</suite>

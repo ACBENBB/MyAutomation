@@ -1,0 +1,12 @@
+package io.securitize.infra.api.apicodegen.generated;
+
+import io.restassured.http.Method;
+import io.securitize.infra.api.apicodegen.AbstractApiTest;
+import io.securitize.infra.api.apicodegen.LoginAs;
+import org.testng.annotations.Test;
+
+public class #CLASS_NAME# extends AbstractApiTest {
+
+#TEST_METHODS#
+
+}

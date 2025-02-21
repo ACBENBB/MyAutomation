@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT672_FT_NIE_KYC_Status" verbose="1">
+    <test name="AUT672_FT_NIE_KYC_Status">
+        <classes>
+            <class name="io.securitize.tests.fundraise.AUT672_FT_NIE_KYC_Status" />
+        </classes>
+    </test>
+</suite>

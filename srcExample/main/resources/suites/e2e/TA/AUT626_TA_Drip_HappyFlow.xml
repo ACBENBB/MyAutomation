@@ -1,0 +1,7 @@
+<suite name="AUT626_TA_Drip_HappyFlow" verbose="1">
+    <test name="AUT626_TA_Drip_HappyFlow">
+        <classes>
+            <class name="io.securitize.tests.transferAgent.AUT626_TA_Drip_HappyFlow"/>
+        </classes>
+    </test>
+</suite>

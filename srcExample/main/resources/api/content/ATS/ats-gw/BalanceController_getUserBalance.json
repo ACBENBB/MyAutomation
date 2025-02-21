@@ -1,0 +1,10 @@
+{
+  "queryParams": {
+    "security": "#ATS_SECURITY#",
+    "include": "instant-settlement"
+  },
+  "headers": {
+    //"authorization": "#SID_AUTHORIZATION#"
+    //"cookie": "#SID_COOKIE#"
+  }
+}

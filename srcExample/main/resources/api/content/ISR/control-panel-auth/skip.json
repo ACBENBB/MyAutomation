@@ -1,0 +1,22 @@
+[
+
+  {
+    "rc": [
+      "AppController_root",
+      "AuthInfoController_findOne",
+      "AuthInfoController_find",
+      "CurrentOperatorController_getPublicKeyById",
+      "OauthController_validateClientConfig",
+      "OrganizationsController_updateOrganization"
+    ],
+    "sandbox": [
+      "AppController_root",
+      "AuthInfoController_findOne",
+      "AuthInfoController_find",
+      "CurrentOperatorController_getPublicKeyById",
+      "OauthController_validateClientConfig",
+      "OrganizationsController_updateOrganization"
+    ]
+  }
+]
+

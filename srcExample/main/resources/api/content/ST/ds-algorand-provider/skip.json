@@ -1,0 +1,29 @@
+[
+  {
+    "rc": [
+      "allowance",
+      "getRoleForWallet"
+    ],
+    "sandbox": [
+      "allowance",
+      "balanceOf",
+      "enabled",
+      "getActiveComplianceCounters",
+      "getActiveComplianceRules",
+      "getAddressLink",
+      "getAttribute",
+      "getCountryStatus",
+      "getEvents",
+      "getHolderByWallet",
+      "getHolder",
+      "getLocks",
+      "getRoleForWallet",
+      "getTBEOmnibusAddress",
+      "getTokenDescription",
+      "getTransactionInformation",
+      "getTransactions",
+      "investorBalance",
+      "totalSupply"
+    ]
+  }
+]

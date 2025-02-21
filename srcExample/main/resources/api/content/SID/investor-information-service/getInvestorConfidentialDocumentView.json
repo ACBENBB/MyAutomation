@@ -1,0 +1,9 @@
+{
+  "pathParams": {
+    "investorId": "#SID_INVESTOR_ID#",
+    "documentId": "#SID_CONFIDENTIAl_DOCUMENT_ID#"
+  },
+  "rc": {},
+  "sandbox": {},
+  "production": {}
+}

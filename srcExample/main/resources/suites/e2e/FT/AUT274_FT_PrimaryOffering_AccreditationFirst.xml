@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT274_FT_PrimaryOffering_AccreditationFirst" verbose="1">
+    <parameter name="investmentCurrency"  value="USD"/>
+    <test name="AUT274_FT_PrimaryOffering_AccreditationFirst">
+        <classes>
+            <class name="io.securitize.tests.fundraise.AUT274_FT_PrimaryOffering_AccreditationFirst" />
+        </classes>
+    </test>
+</suite>

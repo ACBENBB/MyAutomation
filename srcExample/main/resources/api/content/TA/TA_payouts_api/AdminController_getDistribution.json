@@ -1,0 +1,8 @@
+{
+  "pathParams": {
+    "issuerId": "#TA_ISSUER_ID#",
+    "tokenId": "#TA_TOKEN_ID#"
+  },
+  "rc": {},
+  "sandbox": {}
+}

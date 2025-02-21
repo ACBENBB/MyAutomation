@@ -1,0 +1,7 @@
+<suite name="AUT365_TA_Distributions_Dividend_Complete" verbose="1">
+    <test name="AUT365_TA_Distributions_Dividend_Complete">
+        <classes>
+            <class name="io.securitize.tests.transferAgent.AUT365_TA_Distribution_Dividend_Complete"/>
+        </classes>
+    </test>
+</suite>

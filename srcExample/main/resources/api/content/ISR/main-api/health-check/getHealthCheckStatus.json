@@ -1,0 +1,6 @@
+{
+  "skips": {
+    "bodySchemaCheck": true,
+    "skipReason": "Test was skipped due to known product issue - AUT1234"
+  }
+}

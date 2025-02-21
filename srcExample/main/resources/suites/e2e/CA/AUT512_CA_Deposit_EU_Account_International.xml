@@ -1,0 +1,7 @@
+<suite name="AUT512_CA_Deposit_EU_Account_International" verbose="1">
+    <test name="AUT512_CA_Deposit_EU_Account_International">
+        <classes>
+            <class name="io.securitize.tests.ca.AUT512_CA_Deposit_EU_Account_International" />
+        </classes>
+    </test>
+</suite>

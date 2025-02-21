@@ -1,0 +1,10 @@
+[
+// "getIpdata"
+// "getImportinformation"
+// "getTfaflowLiveness"
+// "getTfaflowAuthenticatePing"
+  {
+    "rc": [],
+    "sandbox": ["//getLogout"]
+  }
+]

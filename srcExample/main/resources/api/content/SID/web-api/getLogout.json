@@ -1,0 +1,22 @@
+{
+//   "headers": {
+//     "authorization": "#SID_AUTHORIZATION#",
+//     "cookie": "#SID_COOKIE#"
+//   },
+  "expectedResponse": {
+     "statusCode": 204
+    },
+  "skips": {
+    // "entireTest": true,
+    // "skipReason": "Test skipped since getLogout invalidates current authorization (cookie & token)"
+    "bodySchemaCheck": true,
+    "skipReason": "Body schema was skipped due to lack of schema (model instead of schema)"
+  },
+  "rc": {},
+  "sandbox": {
+    "skips": {
+       "entireTest": true,
+       "skipReason": "Test skipped since it returns on a large suite (AUT309_SID_TotalTests_API) status code 429 - Too Many Requests"
+    }
+  }
+}

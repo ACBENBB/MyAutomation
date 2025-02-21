@@ -1,0 +1,20 @@
+{
+  "rc": {
+    "headers": {
+      "x-api-key": "#CA_EXCHANGE_X_API_KEY#"
+    },
+    "queryParams": {
+      "from": "USD",
+      "to": "EUR"
+    }
+  },
+  "sandbox": {
+    "headers": {
+      "x-api-key": "#CA_EXCHANGE_X_API_KEY#"
+    },
+    "queryParams": {
+      "from": "USD",
+      "to": "EUR"
+    }
+  }
+}

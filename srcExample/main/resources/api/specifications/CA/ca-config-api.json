@@ -1,0 +1,346 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/v1/info": {
+      "get": {
+        "operationId": "ConfigController_getInfo",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get all info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetConfigDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Config"
+        ]
+      }
+    },
+    "/api/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "CA Config Api",
+    "description": "API to interact with CA Configuration",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "ForbiddenException": {
+        "type": "object",
+        "properties": {}
+      },
+      "DualBalanceConfig": {
+        "type": "object",
+        "properties": {
+          "countries": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "listType": {
+            "type": "object"
+          }
+        }
+      },
+      "Config": {
+        "type": "object",
+        "properties": {
+          "restrictedJurisdictions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "creditCardFeePercentage": {
+            "type": "string"
+          },
+          "withdrawWireTransferLocalFee": {
+            "type": "string"
+          },
+          "withdrawWireTransferInternationalFee": {
+            "type": "string"
+          },
+          "eurWithdrawWireTransferDomesticFee": {
+            "type": "string"
+          },
+          "eurWithdrawWireTransferInternationalFee": {
+            "type": "string"
+          },
+          "eurWireDomesticDepositFee": {
+            "type": "string"
+          },
+          "eurWireInternationalDepositFee": {
+            "type": "string"
+          },
+          "wireDomesticDepositFee": {
+            "type": "string"
+          },
+          "wireInternationalDepositFee": {
+            "type": "string"
+          },
+          "withdrawWireInternationalMinimumLimit": {
+            "type": "string"
+          },
+          "withdrawACHFee": {
+            "type": "string"
+          },
+          "depositACHFee": {
+            "type": "string"
+          },
+          "depositCCFee": {
+            "type": "string"
+          },
+          "availableCountries": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "dualBalance": {
+            "$ref": "#/components/schemas/DualBalanceConfig"
+          }
+        },
+        "required": [
+          "restrictedJurisdictions",
+          "creditCardFeePercentage",
+          "withdrawWireTransferLocalFee",
+          "withdrawWireTransferInternationalFee",
+          "eurWithdrawWireTransferDomesticFee",
+          "eurWithdrawWireTransferInternationalFee",
+          "eurWireDomesticDepositFee",
+          "eurWireInternationalDepositFee",
+          "wireDomesticDepositFee",
+          "wireInternationalDepositFee",
+          "withdrawWireInternationalMinimumLimit",
+          "withdrawACHFee",
+          "depositACHFee",
+          "depositCCFee"
+        ]
+      },
+      "GetConfigDto": {
+        "type": "object",
+        "properties": {
+          "featureFlags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "config": {
+            "$ref": "#/components/schemas/Config"
+          },
+          "cashAccountLockedStates": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "featureFlags",
+          "config",
+          "cashAccountLockedStates"
+        ]
+      }
+    }
+  }
+}

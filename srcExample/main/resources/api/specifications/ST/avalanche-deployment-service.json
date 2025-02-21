@@ -1,0 +1,2441 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Deployments management service API",
+    "version": "1.0.0"
+  },
+  "components": {},
+  "tags": [
+    {
+      "name": "Deployments"
+    },
+    {
+      "name": "Security"
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://dsav.rc.securitize.io/v1/"
+    }
+  ],
+  "paths": {
+    "/v1/access_tokens": {
+      "post": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "'accessToken': identifies the user 'secretAccessToken': proves the identity of the user",
+                  "type": "object",
+                  "properties": {
+                    "accessToken": {
+                      "type": "string"
+                    },
+                    "secretAccessToken": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "'accessToken': identifies the user 'secretAccessToken': proves the identity of the user"
+          }
+        },
+        "description": "Create an access token pair",
+        "tags": [
+          "Security"
+        ],
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "description": "A token to access this route",
+            "schema": {
+              "description": "A token to access this route",
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Deployment detail",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "tokenName": {
+                      "type": "string"
+                    },
+                    "tokenSymbol": {
+                      "type": "string"
+                    },
+                    "tokenDecimals": {
+                      "type": "integer"
+                    },
+                    "tokenAddress": {
+                      "type": "string"
+                    },
+                    "lastMinedBlockNumber": {
+                      "type": "integer"
+                    },
+                    "omnibusTBEAddress": {
+                      "type": "string"
+                    },
+                    "redemptionAddress": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "pending",
+                        "inProgress",
+                        "success",
+                        "failure"
+                      ]
+                    },
+                    "started": {
+                      "type": "integer"
+                    },
+                    "swapContractAddress": {
+                      "type": "string"
+                    },
+                    "swapId": {
+                      "type": "string"
+                    },
+                    "contracts": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "description": "Return a contract deployment",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "deploymentId": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "address": {
+                            "type": "string"
+                          },
+                          "abi": {
+                            "type": "string"
+                          },
+                          "bytecode": {
+                            "type": "string"
+                          },
+                          "deployedBlockNumber": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Deployment detail"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "description": "Retrieve deployment information",
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "getDeploymentInfo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The deployment id",
+            "schema": {
+              "type": "string",
+              "description": "The deployment id"
+            }
+          }
+        ]
+      },
+      "post": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Deploy Token response",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "pending",
+                        "inProgress",
+                        "success",
+                        "failure"
+                      ]
+                    },
+                    "multiSigWalletDeploymentId": {
+                      "type": "string"
+                    },
+                    "swapContractDeploymentId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Deploy Token response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "description": "Deploy an already existing deployment by id",
+        "tags": [
+          "Deployments"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tokenDescription": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "description": "The name the token"
+                      },
+                      "symbol": {
+                        "type": "string",
+                        "description": "The symbol of the token"
+                      },
+                      "decimals": {
+                        "type": "integer",
+                        "maximum": 255,
+                        "description": "The number of decimals in the token"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "standard",
+                          "partitioned"
+                        ],
+                        "description": "The type of the token to deploy"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "symbol",
+                      "decimals",
+                      "type"
+                    ]
+                  },
+                  "gasPrice": {
+                    "type": "string",
+                    "pattern": "^0$|[1-9][0-9]*$",
+                    "description": "The gas unit price to pay for each deployment/contract operation"
+                  },
+                  "complianceType": {
+                    "type": "string",
+                    "enum": [
+                      "regulated",
+                      "notRegulated",
+                      "whitelisted",
+                      "partitioned"
+                    ]
+                  },
+                  "lockManagerType": {
+                    "type": "string",
+                    "enum": [
+                      "wallet",
+                      "investor",
+                      "partitioned"
+                    ]
+                  },
+                  "owners": {
+                    "type": "object",
+                    "properties": {
+                      "tokenOwner": {
+                        "type": "string"
+                      },
+                      "walletRegistrarOwner": {
+                        "type": "string"
+                      },
+                      "omnibusTBEAddress": {
+                        "type": "string"
+                      },
+                      "redemptionAddress": {
+                        "type": "string"
+                      },
+                      "walletRegistrarOwnerType": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "tokenOwner",
+                      "walletRegistrarOwner"
+                    ]
+                  },
+                  "roles": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "address": {
+                          "type": "string"
+                        },
+                        "role": {
+                          "type": "string",
+                          "enum": [
+                            "none",
+                            "master",
+                            "issuer",
+                            "exchange",
+                            "transfer_agent"
+                          ]
+                        },
+                        "ownership": {
+                          "type": "string",
+                          "enum": [
+                            "single",
+                            "hsm"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "address",
+                        "role"
+                      ]
+                    }
+                  },
+                  "multisig": {
+                    "type": "object",
+                    "properties": {
+                      "owners": {
+                        "type": "array",
+                        "minItems": {
+                          "$data": "1/requiredConfirmations"
+                        },
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "The owners addresses of the multisig contract"
+                      },
+                      "requiredConfirmations": {
+                        "type": "integer",
+                        "minimum": 2,
+                        "description": "The amount of signers that are required to execute a multisig contract transaction"
+                      },
+                      "chainId": {
+                        "type": "string",
+                        "pattern": "^0$|[1-9][0-9]*$",
+                        "description": "The chainId of the network to deploy. By default is 1 = ETHEREUM MAINNET"
+                      }
+                    },
+                    "required": [
+                      "owners",
+                      "requiredConfirmations"
+                    ]
+                  },
+                  "complianceRules": {
+                    "type": "object",
+                    "minProperties": 1,
+                    "properties": {
+                      "totalInvestorsLimit": {
+                        "type": "integer"
+                      },
+                      "minUSTokens": {
+                        "type": "string"
+                      },
+                      "minEUTokens": {
+                        "type": "string"
+                      },
+                      "usInvestorsLimit": {
+                        "type": "integer"
+                      },
+                      "usAccreditedInvestorsLimit": {
+                        "type": "integer"
+                      },
+                      "euRetailInvestorsLimit": {
+                        "type": "integer"
+                      },
+                      "jpInvestorsLimit": {
+                        "type": "integer"
+                      },
+                      "nonAccreditedInvestorsLimit": {
+                        "type": "integer"
+                      },
+                      "maxUSInvestorsPercentage": {
+                        "type": "integer"
+                      },
+                      "blockFlowbackEndTime": {
+                        "type": "integer"
+                      },
+                      "nonUSLockPeriod": {
+                        "type": "integer"
+                      },
+                      "minimumTotalInvestors": {
+                        "type": "integer"
+                      },
+                      "minimumHoldingsPerInvestor": {
+                        "type": "string"
+                      },
+                      "maximumHoldingsPerInvestor": {
+                        "type": "string"
+                      },
+                      "usLockPeriod": {
+                        "type": "integer"
+                      },
+                      "authorizedSecurities": {
+                        "type": "string"
+                      },
+                      "forceFullTransfer": {
+                        "type": "boolean"
+                      },
+                      "forceAccredited": {
+                        "type": "boolean"
+                      },
+                      "forceAccreditedUS": {
+                        "type": "boolean"
+                      },
+                      "worldWideForceFullTransfer": {
+                        "type": "boolean"
+                      },
+                      "disallowBackDating": {
+                        "type": "boolean"
+                      }
+                    }
+                  },
+                  "countriesComplianceStatuses": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "countryName": {
+                          "type": "string"
+                        },
+                        "complianceStatus": {
+                          "type": "string",
+                          "enum": [
+                            "none",
+                            "us",
+                            "eu",
+                            "jp",
+                            "forbidden"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "countryName",
+                        "complianceStatus"
+                      ]
+                    }
+                  },
+                  "swapContract": {
+                    "type": "object",
+                    "description": "Swap Contract configuration",
+                    "properties": {
+                      "custodianAddress": {
+                        "type": "string"
+                      },
+                      "stableCoinAddress": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "custodianAddress",
+                      "stableCoinAddress"
+                    ],
+                    "nullable": true
+                  }
+                },
+                "required": [
+                  "tokenDescription",
+                  "complianceType",
+                  "lockManagerType",
+                  "roles"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The deployment id",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "description": "The deployment id"
+            }
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "description": "A token to access this route",
+            "schema": {
+              "description": "A token to access this route",
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/token/{address}": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Deployment detail",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "tokenName": {
+                      "type": "string"
+                    },
+                    "tokenSymbol": {
+                      "type": "string"
+                    },
+                    "tokenDecimals": {
+                      "type": "integer"
+                    },
+                    "tokenType": {
+                      "type": "string",
+                      "enum": [
+                        "standard",
+                        "partitioned"
+                      ]
+                    },
+                    "complianceType": {
+                      "type": "string",
+                      "enum": [
+                        "regulated",
+                        "notRegulated",
+                        "whitelisted",
+                        "partitioned"
+                      ]
+                    },
+                    "lockManagerType": {
+                      "type": "string",
+                      "enum": [
+                        "wallet",
+                        "investor",
+                        "partitioned"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Deployment detail"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "description": "Retrieve deployment information using token address",
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "getDeploymentInfoFromTokenAddress",
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "description": "The token address",
+            "schema": {
+              "type": "string",
+              "description": "The token address"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/configurations": {
+      "post": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Deployment detail",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "tokenName": {
+                      "type": "string"
+                    },
+                    "tokenSymbol": {
+                      "type": "string"
+                    },
+                    "tokenDecimals": {
+                      "type": "integer"
+                    },
+                    "tokenAddress": {
+                      "type": "string"
+                    },
+                    "lastMinedBlockNumber": {
+                      "type": "integer"
+                    },
+                    "omnibusTBEAddress": {
+                      "type": "string"
+                    },
+                    "redemptionAddress": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "pending",
+                        "inProgress",
+                        "success",
+                        "failure"
+                      ]
+                    },
+                    "started": {
+                      "type": "integer"
+                    },
+                    "swapContractAddress": {
+                      "type": "string"
+                    },
+                    "swapId": {
+                      "type": "string"
+                    },
+                    "contracts": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "description": "Return a contract deployment",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "deploymentId": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "address": {
+                            "type": "string"
+                          },
+                          "abi": {
+                            "type": "string"
+                          },
+                          "bytecode": {
+                            "type": "string"
+                          },
+                          "deployedBlockNumber": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Deployment detail"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "description": "Add a deployment pre-defined configuration",
+        "tags": [
+          "Deployments"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "The deployment id"
+                  },
+                  "tokenDescription": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "description": "The name the token"
+                      },
+                      "symbol": {
+                        "type": "string",
+                        "description": "The symbol of the token"
+                      },
+                      "decimals": {
+                        "type": "integer",
+                        "maximum": 255,
+                        "description": "The number of decimals in the token"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "standard",
+                          "partitioned"
+                        ],
+                        "description": "The type of the token to deploy"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "symbol",
+                      "decimals",
+                      "type"
+                    ]
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          },
+          "required": true
+        }
+      }
+    },
+    "/v1/deployments/{id}/contracts": {
+      "post": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Return a contract deployment",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "deploymentId": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "address": {
+                      "type": "string"
+                    },
+                    "abi": {
+                      "type": "string"
+                    },
+                    "bytecode": {
+                      "type": "string"
+                    },
+                    "deployedBlockNumber": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Return a contract deployment"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "description": "Add a contract to deployment",
+        "tags": [
+          "Contracts"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "enum": [
+                      "token",
+                      "trustService",
+                      "registryService",
+                      "complianceConfigurationService",
+                      "walletManager",
+                      "lockManager",
+                      "tokenIssuer",
+                      "walletRegistrar",
+                      "multiSigWallet",
+                      "omnibusTBEController",
+                      "transactionRelayer",
+                      "tokenReallocator",
+                      "securitizeSwap",
+                      "bulkOperator",
+                      "tokenPartitioned",
+                      "complianceServiceNotRegulated",
+                      "complianceServiceWhitelisted",
+                      "complianceServiceRegulated",
+                      "complianceServiceRegulatedPartitioned",
+                      "investorLockManager",
+                      "investorLockManagerPartitioned",
+                      "partitionsManager",
+                      "tokenLibrary",
+                      "tokenPartitionsLibrary",
+                      "complianceServiceLibrary",
+                      "complianceServicePartitionedLibrary",
+                      "omnibusTBEControllerWhitelisted",
+                      "deploymentUtils"
+                    ],
+                    "description": "contract name"
+                  },
+                  "address": {
+                    "type": "string",
+                    "description": "contract address"
+                  },
+                  "abi": {
+                    "type": "string",
+                    "description": "contract abi"
+                  },
+                  "bytecode": {
+                    "type": "string",
+                    "description": "The compiled contract's code"
+                  },
+                  "deployedBlockNumber": {
+                    "type": "integer",
+                    "description": "block number which the contract deployed at"
+                  }
+                },
+                "required": [
+                  "name",
+                  "abi",
+                  "bytecode"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The deployment id",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "description": "The deployment id"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{id}/multisig_wallet": {
+      "post": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Deploy Multsig wallet response",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "deploymentId": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "pending",
+                        "inProgress",
+                        "success",
+                        "failure"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Deploy Multsig wallet response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "description": "Create a new multisig wallet deployment task",
+        "tags": [
+          "Multisig Wallet Deployments"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "owners": {
+                    "type": "array",
+                    "minItems": {
+                      "$data": "1/requiredConfirmations"
+                    },
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "The owners addresses of the multisig contract"
+                  },
+                  "requiredConfirmations": {
+                    "type": "integer",
+                    "minimum": 2,
+                    "description": "The amount of signers that are required to execute a multisig contract transaction"
+                  },
+                  "chainId": {
+                    "type": "string",
+                    "pattern": "^0$|[1-9][0-9]*$",
+                    "description": "The chainId of the network to deploy. Default: 1"
+                  },
+                  "additionalData": {
+                    "type": "object",
+                    "properties": {
+                      "externalId": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "owners",
+                  "requiredConfirmations"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The deployment id",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "description": "The deployment id"
+            }
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "description": "A token to access this route",
+            "schema": {
+              "description": "A token to access this route",
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{id}/multisig_wallet/{multisigWalletDeploymentId}": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Retrieve multisig wallet deployment information",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "The multisig wallet deployment id"
+                    },
+                    "deploymentId": {
+                      "type": "string",
+                      "description": "The deployment id"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "pending",
+                        "inProgress",
+                        "success",
+                        "failure"
+                      ]
+                    },
+                    "walletAddress": {
+                      "type": "string",
+                      "description": "Multisig wallet address"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Retrieve multisig wallet deployment information"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "description": "Retrieve multisig wallet deployment information",
+        "tags": [
+          "Multisig Wallet Deployments"
+        ],
+        "operationId": "getMultisigWalletDeploymentInfo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The deployment id",
+            "schema": {
+              "type": "string",
+              "description": "The deployment id"
+            }
+          },
+          {
+            "name": "multisigWalletDeploymentId",
+            "in": "path",
+            "required": true,
+            "description": "The multisig wallet deployment id",
+            "schema": {
+              "type": "string",
+              "description": "The multisig wallet deployment id"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments": {
+      "post": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Deploy Token response",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "pending",
+                        "inProgress",
+                        "success",
+                        "failure"
+                      ]
+                    },
+                    "multiSigWalletDeploymentId": {
+                      "type": "string"
+                    },
+                    "swapContractDeploymentId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Deploy Token response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "description": "Create a new deployment task",
+        "tags": [
+          "Deployments"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tokenDescription": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "description": "The name the token"
+                      },
+                      "symbol": {
+                        "type": "string",
+                        "description": "The symbol of the token"
+                      },
+                      "decimals": {
+                        "type": "integer",
+                        "maximum": 255,
+                        "description": "The number of decimals in the token"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "standard",
+                          "partitioned"
+                        ],
+                        "description": "The type of the token to deploy"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "symbol",
+                      "decimals",
+                      "type"
+                    ]
+                  },
+                  "gasPrice": {
+                    "type": "string",
+                    "pattern": "^0$|[1-9][0-9]*$",
+                    "description": "The gas unit price to pay for each deployment/contract operation"
+                  },
+                  "complianceType": {
+                    "type": "string",
+                    "enum": [
+                      "regulated",
+                      "notRegulated",
+                      "whitelisted",
+                      "partitioned"
+                    ]
+                  },
+                  "lockManagerType": {
+                    "type": "string",
+                    "enum": [
+                      "wallet",
+                      "investor",
+                      "partitioned"
+                    ]
+                  },
+                  "owners": {
+                    "type": "object",
+                    "properties": {
+                      "tokenOwner": {
+                        "type": "string"
+                      },
+                      "walletRegistrarOwner": {
+                        "type": "string"
+                      },
+                      "omnibusTBEAddress": {
+                        "type": "string"
+                      },
+                      "redemptionAddress": {
+                        "type": "string"
+                      },
+                      "walletRegistrarOwnerType": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "tokenOwner",
+                      "walletRegistrarOwner"
+                    ]
+                  },
+                  "roles": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "address": {
+                          "type": "string"
+                        },
+                        "role": {
+                          "type": "string",
+                          "enum": [
+                            "none",
+                            "master",
+                            "issuer",
+                            "exchange",
+                            "transfer_agent"
+                          ]
+                        },
+                        "ownership": {
+                          "type": "string",
+                          "enum": [
+                            "single",
+                            "hsm"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "address",
+                        "role"
+                      ]
+                    }
+                  },
+                  "multisig": {
+                    "type": "object",
+                    "properties": {
+                      "owners": {
+                        "type": "array",
+                        "minItems": {
+                          "$data": "1/requiredConfirmations"
+                        },
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "The owners addresses of the multisig contract"
+                      },
+                      "requiredConfirmations": {
+                        "type": "integer",
+                        "minimum": 2,
+                        "description": "The amount of signers that are required to execute a multisig contract transaction"
+                      },
+                      "chainId": {
+                        "type": "string",
+                        "pattern": "^0$|[1-9][0-9]*$",
+                        "description": "The chainId of the network to deploy. By default is 1 = ETHEREUM MAINNET"
+                      }
+                    },
+                    "required": [
+                      "owners",
+                      "requiredConfirmations"
+                    ]
+                  },
+                  "complianceRules": {
+                    "type": "object",
+                    "minProperties": 1,
+                    "properties": {
+                      "totalInvestorsLimit": {
+                        "type": "integer"
+                      },
+                      "minUSTokens": {
+                        "type": "string"
+                      },
+                      "minEUTokens": {
+                        "type": "string"
+                      },
+                      "usInvestorsLimit": {
+                        "type": "integer"
+                      },
+                      "usAccreditedInvestorsLimit": {
+                        "type": "integer"
+                      },
+                      "euRetailInvestorsLimit": {
+                        "type": "integer"
+                      },
+                      "jpInvestorsLimit": {
+                        "type": "integer"
+                      },
+                      "nonAccreditedInvestorsLimit": {
+                        "type": "integer"
+                      },
+                      "maxUSInvestorsPercentage": {
+                        "type": "integer"
+                      },
+                      "blockFlowbackEndTime": {
+                        "type": "integer"
+                      },
+                      "nonUSLockPeriod": {
+                        "type": "integer"
+                      },
+                      "minimumTotalInvestors": {
+                        "type": "integer"
+                      },
+                      "minimumHoldingsPerInvestor": {
+                        "type": "string"
+                      },
+                      "maximumHoldingsPerInvestor": {
+                        "type": "string"
+                      },
+                      "usLockPeriod": {
+                        "type": "integer"
+                      },
+                      "authorizedSecurities": {
+                        "type": "string"
+                      },
+                      "forceFullTransfer": {
+                        "type": "boolean"
+                      },
+                      "forceAccredited": {
+                        "type": "boolean"
+                      },
+                      "forceAccreditedUS": {
+                        "type": "boolean"
+                      },
+                      "worldWideForceFullTransfer": {
+                        "type": "boolean"
+                      },
+                      "disallowBackDating": {
+                        "type": "boolean"
+                      }
+                    }
+                  },
+                  "countriesComplianceStatuses": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "countryName": {
+                          "type": "string"
+                        },
+                        "complianceStatus": {
+                          "type": "string",
+                          "enum": [
+                            "none",
+                            "us",
+                            "eu",
+                            "jp",
+                            "forbidden"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "countryName",
+                        "complianceStatus"
+                      ]
+                    }
+                  },
+                  "swapContract": {
+                    "type": "object",
+                    "description": "Swap Contract configuration",
+                    "properties": {
+                      "custodianAddress": {
+                        "type": "string"
+                      },
+                      "stableCoinAddress": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "custodianAddress",
+                      "stableCoinAddress"
+                    ],
+                    "nullable": true
+                  }
+                },
+                "required": [
+                  "tokenDescription",
+                  "complianceType",
+                  "lockManagerType",
+                  "roles"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "description": "A token to access this route",
+            "schema": {
+              "description": "A token to access this route",
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{id}/retry": {
+      "post": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Deploy Token response",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "pending",
+                        "inProgress",
+                        "success",
+                        "failure"
+                      ]
+                    },
+                    "multiSigWalletDeploymentId": {
+                      "type": "string"
+                    },
+                    "swapContractDeploymentId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Deploy Token response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "description": "Retry deployment task",
+        "tags": [
+          "Deployments"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The deployment id",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "description": "The deployment id"
+            }
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "description": "A token to access this route",
+            "schema": {
+              "description": "A token to access this route",
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{id}/deployment-logs": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "step": {
+                        "type": "number",
+                        "description": "Number of executed step",
+                        "example": 5
+                      },
+                      "stepTitle": {
+                        "type": "string",
+                        "description": "Title of executed step",
+                        "example": "Deploy libraries"
+                      },
+                      "status": {
+                        "type": "string",
+                        "enum": [
+                          "success",
+                          "failure",
+                          "skipped"
+                        ],
+                        "description": "Status of deployment step",
+                        "default": "success"
+                      },
+                      "initialDate": {
+                        "type": "number",
+                        "description": "Start date in Millis. new Date().getTime()",
+                        "example": 1676063928203
+                      },
+                      "finalDate": {
+                        "type": "number",
+                        "description": "Final date in Millis. new Date().getTime()",
+                        "example": 1676063928403
+                      },
+                      "txHash": {
+                        "type": "string",
+                        "description": "Transaction Hash",
+                        "example": "0xa440bd1011ce2e49b2f295c62bf7b4cf764450b5b11c9be0d029b9f06994da60"
+                      },
+                      "gasUsed": {
+                        "type": "string",
+                        "description": "Gas used",
+                        "example": "700000"
+                      },
+                      "contractAddress": {
+                        "type": "string",
+                        "description": "Contract Address",
+                        "example": "0x1b3a8849a7e0f7786403b2490f387f93dc5d12bc"
+                      },
+                      "from": {
+                        "type": "string",
+                        "description": "Wallet who signed the transaction",
+                        "example": "0xcc3a8849a7e0f7786403b2490f387f93dc5d12ca"
+                      },
+                      "deploymentLogs": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "example": "Deploying DSToken Proxy Contract"
+                        }
+                      },
+                      "retry": {
+                        "type": "number",
+                        "description": "Retry number",
+                        "example": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "summary": "Get logs step by step of an specific deployment",
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "getDeploymentLogs",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "deploymentId (same as abstraction-layer)",
+            "schema": {
+              "type": "string",
+              "description": "deploymentId (same as abstraction-layer)"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{id}/deployment-logs/steps/{step}": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "step": {
+                        "type": "number",
+                        "description": "Number of executed step",
+                        "example": 5
+                      },
+                      "stepTitle": {
+                        "type": "string",
+                        "description": "Title of executed step",
+                        "example": "Deploy libraries"
+                      },
+                      "status": {
+                        "type": "string",
+                        "enum": [
+                          "success",
+                          "failure",
+                          "skipped"
+                        ],
+                        "description": "Status of deployment step",
+                        "default": "success"
+                      },
+                      "initialDate": {
+                        "type": "number",
+                        "description": "Start date in Millis. new Date().getTime()",
+                        "example": 1676063928203
+                      },
+                      "finalDate": {
+                        "type": "number",
+                        "description": "Final date in Millis. new Date().getTime()",
+                        "example": 1676063928403
+                      },
+                      "txHash": {
+                        "type": "string",
+                        "description": "Transaction Hash",
+                        "example": "0xa440bd1011ce2e49b2f295c62bf7b4cf764450b5b11c9be0d029b9f06994da60"
+                      },
+                      "gasUsed": {
+                        "type": "string",
+                        "description": "Gas used",
+                        "example": "700000"
+                      },
+                      "contractAddress": {
+                        "type": "string",
+                        "description": "Contract Address",
+                        "example": "0x1b3a8849a7e0f7786403b2490f387f93dc5d12bc"
+                      },
+                      "from": {
+                        "type": "string",
+                        "description": "Wallet who signed the transaction",
+                        "example": "0xcc3a8849a7e0f7786403b2490f387f93dc5d12ca"
+                      },
+                      "deploymentLogs": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "example": "Deploying DSToken Proxy Contract"
+                        }
+                      },
+                      "retry": {
+                        "type": "number",
+                        "description": "Retry number",
+                        "example": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "summary": "Get logs of an specific step",
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "getDeploymentStepLogs",
+        "parameters": [
+          {
+            "name": "retry",
+            "in": "query",
+            "description": "Specific retry number. It is used with findStrategy = one",
+            "schema": {
+              "type": "integer",
+              "description": "Specific retry number. It is used with findStrategy = one",
+              "example": 1
+            }
+          },
+          {
+            "name": "findStrategy",
+            "in": "query",
+            "description": "Specific retry number. We can use `all` to get all retries and `one` for one specific retry",
+            "schema": {
+              "type": "string",
+              "description": "Specific retry number. We can use `all` to get all retries and `one` for one specific retry",
+              "enum": [
+                "all",
+                "one"
+              ],
+              "default": "all"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "deploymentId (same as abstraction-layer)",
+            "schema": {
+              "type": "string",
+              "description": "deploymentId (same as abstraction-layer)",
+              "example": "ad396e14-a1cd-4479-a786-d9968804f487"
+            }
+          },
+          {
+            "name": "step",
+            "in": "path",
+            "required": true,
+            "description": "The specific step to find",
+            "schema": {
+              "type": "string",
+              "description": "The specific step to find",
+              "example": "1"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/swap-contracts/{swapContractId}": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "deploymentStatus": {
+                      "type": "string",
+                      "enum": [
+                        "pending",
+                        "inProgress",
+                        "success",
+                        "failure"
+                      ]
+                    },
+                    "swapContractAddress": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "summary": "Return information about swap contract deployment status",
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "getSwapContractStatus",
+        "parameters": [
+          {
+            "name": "swapContractId",
+            "in": "path",
+            "required": true,
+            "description": "The swap contract id",
+            "schema": {
+              "type": "string",
+              "description": "The swap contract id"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/health-check": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "ok",
+                        "alarm"
+                      ]
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "service": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "summary": "Checks server health",
+        "tags": [
+          "provider"
+        ],
+        "operationId": "getCheckHealth"
+      }
+    },
+    "/v1/info": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "deploymentsStrategy": {
+                      "type": "string",
+                      "enum": [
+                        "RC",
+                        "FD"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "summary": "Return information about deployments-service provider",
+        "tags": [
+          "provider"
+        ],
+        "operationId": "getInfo"
+      }
+    },
+    "/v1/deployer-wallet": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "address": {
+                      "type": "string",
+                      "example": "0x88435610e9EeBe656eDE516f265d274B1c1e666E"
+                    },
+                    "balance": {
+                      "type": "string",
+                      "example": "100005000000"
+                    },
+                    "unit": {
+                      "type": "string",
+                      "example": "wei"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "summary": "Return address and balance in wei of deployer wallet",
+        "tags": [
+          "provider"
+        ],
+        "operationId": "getDeployerWallet"
+      }
+    }
+  }
+}

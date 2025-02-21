@@ -1,0 +1,8 @@
+{
+  "pathParams": {
+    "issuerId": "#ISSUER_ID#"
+  },
+  "rc": {},
+  "sandbox": {},
+  "production": {}
+}

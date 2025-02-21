@@ -1,0 +1,7 @@
+{
+  "expectedResponse": {
+    "body": {
+      "message": "custom body message"
+    }
+  }
+}

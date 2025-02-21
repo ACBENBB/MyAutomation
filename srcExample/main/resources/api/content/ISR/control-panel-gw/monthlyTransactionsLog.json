@@ -1,0 +1,9 @@
+{
+  "queryParams": {
+    "month": "1"
+  },
+  "skips": {
+    "bodySchemaCheck": true,
+    "bodyContentCheck": true
+  }
+}

@@ -1,0 +1,2507 @@
+{
+    "swagger": "2.0",
+    "host": "qa-api-test-issuer.invest.rc.securitize.io",
+    "basePath": "/",
+    "schemes": [
+        "https"
+    ],
+    "info": {
+        "title": "Web Api Documentation",
+        "version": "1.0.0"
+    },
+    "tags": [],
+    "paths": {
+        "/api/documents": {
+            "get": {
+                "operationId": "getApiDocuments",
+                "tags": [
+                    "Documents"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Model2"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            }
+        },
+        "/api/faq": {
+            "get": {
+                "summary": "FAQ",
+                "operationId": "getApiFaq",
+                "tags": [
+                    "Issuer FAQ"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Model5"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            }
+        },
+        "/api/issuer-settings": {
+            "get": {
+                "summary": "authentication",
+                "operationId": "getApiIssuersettings",
+                "tags": [
+                    "Issuer Settings"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Model7"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            }
+        },
+        "/api/liquidity-providers": {
+            "get": {
+                "summary": "authentication",
+                "operationId": "getApiLiquidityproviders",
+                "tags": [
+                    "Issuer Settings"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Model12"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            }
+        },
+        "/api/logout": {
+            "get": {
+                "summary": "Log Out",
+                "operationId": "getApiLogout",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Authentication"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            }
+        },
+        "/api/opportunities": {
+            "get": {
+                "operationId": "getApiOpportunities",
+                "tags": [
+                    "Opportunities"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Model15"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            }
+        },
+        "/api/portfolio": {
+            "get": {
+                "operationId": "getApiPortfolio",
+                "tags": [
+                    "Portfolio"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Model22"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            }
+        },
+        "/api/qualification-questions": {
+            "get": {
+                "summary": "Investor Qualification",
+                "operationId": "getApiQualificationquestions",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "opportunityId",
+                        "in": "query"
+                    }
+                ],
+                "tags": [
+                    "Investor Qualification"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Model25"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Investor Qualification",
+                "operationId": "postApiQualificationquestions",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "opportunityId",
+                        "in": "query"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Model54"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Investor Qualification"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Model55"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            }
+        },
+        "/api/session": {
+            "get": {
+                "summary": "Session",
+                "operationId": "getApiSession",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Authentication"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Model27"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            }
+        },
+        "/api/wallets": {
+            "get": {
+                "operationId": "getApiWallets",
+                "tags": [
+                    "Portfolio"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Model31"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            },
+            "post": {
+                "operationId": "postApiWallets",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Model56"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Portfolio"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Model31"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            }
+        },
+        "/api/authorization-settings/{countryCode}": {
+            "get": {
+                "summary": "authorization-settings by country code",
+                "operationId": "getApiAuthorizationsettingsCountrycode",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "countryCode",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "name": "state",
+                        "in": "query"
+                    }
+                ],
+                "tags": [
+                    "Authentication"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Model32"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            }
+        },
+        "/api/i18n/{language}": {
+            "get": {
+                "summary": "Internationalization",
+                "operationId": "getApiI18nLanguage",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "language ISO format case-insenitive like (en)",
+                        "enum": [
+                            "ur",
+                            "vi",
+                            "ar",
+                            "az",
+                            "be",
+                            "bg",
+                            "bs",
+                            "ca",
+                            "cs",
+                            "da",
+                            "de",
+                            "el",
+                            "en",
+                            "es",
+                            "et",
+                            "fa",
+                            "fi",
+                            "fr",
+                            "he",
+                            "hr",
+                            "hu",
+                            "hy",
+                            "id",
+                            "it",
+                            "ja",
+                            "ka",
+                            "kk",
+                            "ko",
+                            "ky",
+                            "lt",
+                            "lv",
+                            "mk",
+                            "mn",
+                            "nb",
+                            "nl",
+                            "nn",
+                            "pl",
+                            "pt",
+                            "ro",
+                            "ru",
+                            "sk",
+                            "sl",
+                            "sr",
+                            "sv",
+                            "th",
+                            "tr",
+                            "uk",
+                            "uz",
+                            "zh"
+                        ],
+                        "name": "language",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Internationalization"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "supported languages and all the translations",
+                        "schema": {
+                            "$ref": "#/definitions/Model33"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/investor-tokens/{tokenId}": {
+            "get": {
+                "operationId": "getApiInvestortokensTokenid",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "tokenId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Portfolio"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Model40"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            }
+        },
+        "/api/opportunities/{opportunityId}": {
+            "get": {
+                "operationId": "getApiOpportunitiesOpportunityid",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "opportunityId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Opportunities"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Model46"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "patchApiOpportunitiesOpportunityid",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "opportunityId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/investorInvestmentDetails"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Opportunities"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Model46"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            }
+        },
+        "/api/opportunities/{opportunityId}/wizard": {
+            "get": {
+                "operationId": "getApiOpportunitiesOpportunityidWizard",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "opportunityId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Opportunities"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Model47"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            }
+        },
+        "/api/opportunities/{opportunityId}/agreement-document": {
+            "get": {
+                "operationId": "getApiOpportunitiesOpportunityidAgreementdocument",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "opportunityId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Opportunities"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Model48"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            }
+        },
+        "/api/opportunities/{opportunityId}/deposits": {
+            "get": {
+                "operationId": "getApiOpportunitiesOpportunityidDeposits",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "opportunityId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Opportunities"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Model50"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            }
+        },
+        "/api/opportunities/{opportunityId}/broker-dealer": {
+            "get": {
+                "operationId": "getApiOpportunitiesOpportunityidBrokerdealer",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "opportunityId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Opportunities"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Model51"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            }
+        },
+        "/api/authorize": {
+            "post": {
+                "summary": "authentication",
+                "operationId": "postApiAuthorize",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Model52"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Authentication"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Model27"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            }
+        },
+        "/api/docusign": {
+            "post": {
+                "operationId": "postApiDocusign",
+                "tags": [
+                    "Opportunities"
+                ],
+                "responses": {
+                    "default": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            }
+        },
+        "/api/resend-qualification-email": {
+            "post": {
+                "summary": "Resend qualification email",
+                "operationId": "postApiResendqualificationemail",
+                "tags": [
+                    "Investor Qualification"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            }
+        },
+        "/api/fw/{api}/{any*}": {
+            "get": {
+                "operationId": "getApiFwApiAny",
+                "tags": [
+                    "Forwarding"
+                ],
+                "responses": {
+                    "default": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            },
+            "post": {
+                "operationId": "postApiFwApiAny",
+                "tags": [
+                    "Forwarding"
+                ],
+                "responses": {
+                    "default": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            },
+            "put": {
+                "operationId": "putApiFwApiAny",
+                "tags": [
+                    "Forwarding"
+                ],
+                "responses": {
+                    "default": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "patchApiFwApiAny",
+                "tags": [
+                    "Forwarding"
+                ],
+                "responses": {
+                    "default": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "deleteApiFwApiAny",
+                "tags": [
+                    "Forwarding"
+                ],
+                "responses": {
+                    "default": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Model1": {
+            "type": "object",
+            "properties": {
+                "documentId": {
+                    "type": "string"
+                },
+                "roundName": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "fundraise",
+                        "investment"
+                    ]
+                }
+            }
+        },
+        "Model2": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model1"
+            }
+        },
+        "Model3": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "question": {
+                    "type": "string"
+                },
+                "answer": {
+                    "type": "string"
+                },
+                "position": {
+                    "type": "number"
+                },
+                "isVisible": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "id",
+                "question",
+                "answer",
+                "position"
+            ]
+        },
+        "items": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model3"
+            }
+        },
+        "Model4": {
+            "type": "object",
+            "properties": {
+                "section": {
+                    "type": "string"
+                },
+                "items": {
+                    "$ref": "#/definitions/items"
+                }
+            },
+            "required": [
+                "section",
+                "items"
+            ]
+        },
+        "Model5": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model4"
+            }
+        },
+        "Model6": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "iconUrl": {
+                    "type": "string"
+                },
+                "tokenAddress": {
+                    "type": "string"
+                }
+            }
+        },
+        "tokens": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model6"
+            }
+        },
+        "telegram": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "icon": {
+                    "type": "string"
+                },
+                "alt": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "socialLinks": {
+            "type": "object",
+            "properties": {
+                "telegram": {
+                    "$ref": "#/definitions/telegram"
+                },
+                "twitter": {
+                    "$ref": "#/definitions/telegram"
+                },
+                "medium": {
+                    "$ref": "#/definitions/telegram"
+                },
+                "whatsapp": {
+                    "$ref": "#/definitions/telegram"
+                },
+                "facebook": {
+                    "$ref": "#/definitions/telegram"
+                },
+                "supportEmail": {
+                    "type": "string"
+                }
+            }
+        },
+        "about": {
+            "type": "object",
+            "properties": {
+                "background": {
+                    "type": "string"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "videoUrl": {
+                    "type": "string"
+                }
+            }
+        },
+        "announcements": {
+            "type": "object",
+            "properties": {
+                "background": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "subtitle": {
+                    "type": "string"
+                },
+                "body": {
+                    "type": "string"
+                }
+            }
+        },
+        "landingPage": {
+            "type": "object",
+            "properties": {
+                "socialLinks": {
+                    "$ref": "#/definitions/socialLinks"
+                },
+                "about": {
+                    "$ref": "#/definitions/about"
+                },
+                "announcements": {
+                    "$ref": "#/definitions/announcements"
+                }
+            }
+        },
+        "config": {
+            "type": "object",
+            "properties": {
+                "issuerLanguage": {
+                    "type": "string"
+                },
+                "logo": {
+                    "type": "string"
+                },
+                "logoSquare": {
+                    "type": "string"
+                },
+                "favicon": {
+                    "type": "string"
+                },
+                "issuerColor": {
+                    "type": "string"
+                },
+                "issuerSecondaryColor": {
+                    "type": "string"
+                },
+                "issuerName": {
+                    "type": "string"
+                },
+                "tokens": {
+                    "$ref": "#/definitions/tokens"
+                },
+                "landingPage": {
+                    "$ref": "#/definitions/landingPage"
+                },
+                "investorDetails": {
+                    "type": "string"
+                },
+                "authorizeLink": {
+                    "type": "string"
+                },
+                "registrationLink": {
+                    "type": "string"
+                },
+                "nieHost": {
+                    "type": "string"
+                },
+                "securitizeIdUrl": {
+                    "type": "string"
+                },
+                "issuerId": {
+                    "type": "string"
+                },
+                "hasFAQs": {
+                    "type": "boolean"
+                },
+                "hasOpportunities": {
+                    "type": "boolean"
+                },
+                "marketsAccreditationUrl": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "issuerLanguage",
+                "logo",
+                "logoSquare",
+                "issuerName",
+                "investorDetails",
+                "authorizeLink",
+                "registrationLink",
+                "nieHost",
+                "securitizeIdUrl",
+                "issuerId",
+                "hasFAQs",
+                "hasOpportunities",
+                "marketsAccreditationUrl"
+            ]
+        },
+        "texts": {
+            "type": "object"
+        },
+        "Model7": {
+            "type": "object",
+            "properties": {
+                "config": {
+                    "$ref": "#/definitions/config"
+                },
+                "texts": {
+                    "$ref": "#/definitions/texts"
+                },
+                "variables": {
+                    "$ref": "#/definitions/texts"
+                }
+            },
+            "required": [
+                "texts",
+                "variables"
+            ]
+        },
+        "Model8": {
+            "type": "object",
+            "properties": {
+                "domain": {
+                    "type": "string"
+                },
+                "chainId": {
+                    "type": "number"
+                },
+                "gasLimit": {
+                    "type": "number"
+                }
+            }
+        },
+        "Model9": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number"
+                },
+                "tokenAddress": {
+                    "type": "string"
+                },
+                "isSecuritizeToken": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "Model10": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model9"
+            }
+        },
+        "airswapConfig": {
+            "type": "object",
+            "properties": {
+                "config": {
+                    "$ref": "#/definitions/Model8"
+                },
+                "tokens": {
+                    "$ref": "#/definitions/Model10"
+                }
+            }
+        },
+        "Model11": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "logo": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "linkText": {
+                    "type": "string"
+                },
+                "link": {
+                    "type": "string"
+                }
+            }
+        },
+        "providers": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model11"
+            }
+        },
+        "Model12": {
+            "type": "object",
+            "properties": {
+                "airswapConfig": {
+                    "$ref": "#/definitions/airswapConfig"
+                },
+                "providers": {
+                    "$ref": "#/definitions/providers"
+                }
+            }
+        },
+        "calculator": {
+            "type": "object",
+            "properties": {
+                "tokenPriceUSD": {
+                    "type": "number",
+                    "default": 0
+                },
+                "minimumInvestmentFiatMainCurrency": {
+                    "type": "number",
+                    "default": 0
+                },
+                "mainCurrency": {
+                    "type": "string"
+                }
+            }
+        },
+        "Model13": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "order": {
+                    "type": "number",
+                    "default": 1
+                }
+            }
+        },
+        "attributes": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model13"
+            }
+        },
+        "Model14": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "isTokenCalculatorVisible": {
+                    "type": "boolean"
+                },
+                "tokenId": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "order": {
+                    "type": "number"
+                },
+                "calculator": {
+                    "$ref": "#/definitions/calculator"
+                },
+                "attributes": {
+                    "$ref": "#/definitions/attributes"
+                }
+            },
+            "required": [
+                "id",
+                "enabled",
+                "isTokenCalculatorVisible",
+                "tokenId",
+                "title",
+                "content",
+                "image",
+                "order"
+            ]
+        },
+        "Model15": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model14"
+            }
+        },
+        "Model16": {
+            "type": "object",
+            "properties": {
+                "tokenId": {
+                    "type": "string"
+                },
+                "totalTokenBalance": {
+                    "type": "number"
+                },
+                "tokenIcon": {
+                    "type": "string"
+                },
+                "tokenName": {
+                    "type": "string"
+                },
+                "custodianName": {
+                    "type": "string"
+                },
+                "tokenPrice": {
+                    "type": "number"
+                },
+                "toolTipData": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "tokenId",
+                "totalTokenBalance",
+                "tokenName",
+                "tokenPrice"
+            ]
+        },
+        "Model17": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model16"
+            }
+        },
+        "pledged": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "number"
+                },
+                "currency": {
+                    "type": "string"
+                }
+            }
+        },
+        "Model18": {
+            "type": "object",
+            "properties": {
+                "investmentStatus": {
+                    "type": "string"
+                },
+                "pledged": {
+                    "$ref": "#/definitions/pledged"
+                },
+                "totalFunded": {
+                    "$ref": "#/definitions/pledged"
+                },
+                "tokenIcon": {
+                    "type": "string"
+                },
+                "tokenId": {
+                    "type": "string"
+                },
+                "tokenName": {
+                    "type": "string"
+                },
+                "agreement": {
+                    "type": "string"
+                },
+                "opportunityId": {
+                    "type": "number"
+                },
+                "assignedUnites": {
+                    "type": "number"
+                },
+                "custodianName": {
+                    "type": "string"
+                }
+            }
+        },
+        "investmentRequests": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model18"
+            }
+        },
+        "Model19": {
+            "type": "object",
+            "properties": {
+                "tokenName": {
+                    "type": "string"
+                },
+                "tokenInvestorPays": {
+                    "type": "boolean",
+                    "default": false
+                },
+                "tokenId": {
+                    "type": "string",
+                    "x-format": {
+                        "guid": true
+                    }
+                },
+                "MainApiConnectivityStatus": {
+                    "type": "string",
+                    "enum": [
+                        "ready",
+                        "not-authorised",
+                        "syncing"
+                    ]
+                },
+                "tokensHeld": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "tokenName",
+                "tokenId",
+                "MainApiConnectivityStatus",
+                "tokensHeld"
+            ]
+        },
+        "Model20": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model19"
+            }
+        },
+        "Model21": {
+            "type": "object",
+            "properties": {
+                "securitizeIdWalletId": {
+                    "type": "string"
+                },
+                "walletName": {
+                    "type": "string"
+                },
+                "walletType": {
+                    "type": "string",
+                    "enum": [
+                        "metamask",
+                        "bitgo",
+                        "coinbase",
+                        "ethereum",
+                        "other"
+                    ]
+                },
+                "walletAddress": {
+                    "type": "string"
+                },
+                "blockchain": {
+                    "type": "string",
+                    "enum": [
+                        "ethereum",
+                        "algorand"
+                    ]
+                },
+                "walletUrl": {
+                    "type": "string"
+                },
+                "tokens": {
+                    "$ref": "#/definitions/Model20"
+                }
+            },
+            "required": [
+                "securitizeIdWalletId",
+                "walletName",
+                "walletType",
+                "walletAddress"
+            ]
+        },
+        "tokenWallets": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model21"
+            }
+        },
+        "Model22": {
+            "type": "object",
+            "properties": {
+                "tokens": {
+                    "$ref": "#/definitions/Model17"
+                },
+                "investmentRequests": {
+                    "$ref": "#/definitions/investmentRequests"
+                },
+                "pendingAssets": {
+                    "$ref": "#/definitions/investmentRequests"
+                },
+                "tokenWallets": {
+                    "$ref": "#/definitions/tokenWallets"
+                },
+                "hasTokensDeployed": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "hasTokensDeployed"
+            ]
+        },
+        "options": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "type": {
+            "type": "array",
+            "enum": [
+                "checkbox",
+                "button"
+            ],
+            "items": {
+                "type": "string"
+            }
+        },
+        "Model23": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "options": {
+                    "$ref": "#/definitions/options"
+                },
+                "valid": {
+                    "$ref": "#/definitions/options"
+                },
+                "type": {
+                    "$ref": "#/definitions/type"
+                }
+            },
+            "required": [
+                "id",
+                "title",
+                "options",
+                "valid",
+                "type"
+            ]
+        },
+        "questions": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model23"
+            }
+        },
+        "Model24": {
+            "type": "object",
+            "properties": {
+                "sectionTitle": {
+                    "type": "string"
+                },
+                "sectionSubTitle": {
+                    "type": "string"
+                },
+                "questions": {
+                    "$ref": "#/definitions/questions"
+                }
+            },
+            "required": [
+                "sectionSubTitle",
+                "questions"
+            ]
+        },
+        "Model25": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model24"
+            }
+        },
+        "countrySettings": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "reverseSolicitation": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "type"
+            ]
+        },
+        "Model26": {
+            "type": "object",
+            "properties": {
+                "taxId": {
+                    "type": "string"
+                },
+                "taxCountryCode": {
+                    "type": "string"
+                }
+            }
+        },
+        "taxInfo": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model26"
+            }
+        },
+        "user": {
+            "type": "object",
+            "properties": {
+                "investorId": {
+                    "type": "string"
+                },
+                "language": {
+                    "type": "string"
+                },
+                "investorEmail": {
+                    "type": "string"
+                },
+                "countryCode": {
+                    "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "birthDate": {
+                    "type": "string"
+                },
+                "address1": {
+                    "type": "string"
+                },
+                "address2": {
+                    "type": "string"
+                },
+                "zipCode": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "countrySettings": {
+                    "$ref": "#/definitions/countrySettings"
+                },
+                "isPendingApproval": {
+                    "type": "boolean"
+                },
+                "isRestricted": {
+                    "type": "boolean"
+                },
+                "liquidityEnabled": {
+                    "type": "boolean"
+                },
+                "taxInfo": {
+                    "$ref": "#/definitions/taxInfo"
+                },
+                "isUsaTaxResident": {
+                    "type": "boolean"
+                },
+                "terms1": {
+                    "type": "string"
+                },
+                "terms2": {
+                    "type": "string"
+                },
+                "isAgreed1": {
+                    "type": "boolean"
+                },
+                "isAgreed2": {
+                    "type": "boolean"
+                },
+                "investorFullName": {
+                    "type": "string"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "middleName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "verificationStatus": {
+                    "type": "string",
+                    "enum": [
+                        "not-verified",
+                        "verified",
+                        "pending",
+                        "service-denied",
+                        "updates-required"
+                    ]
+                },
+                "externalId": {
+                    "type": "string"
+                },
+                "allowInvest": {
+                    "type": "boolean"
+                },
+                "isTokenOwner": {
+                    "type": "boolean"
+                },
+                "investorType": {
+                    "type": "string",
+                    "enum": [
+                        "individual",
+                        "entity",
+                        "none"
+                    ]
+                },
+                "accreditedTerms": {
+                    "type": "string"
+                },
+                "registrationSource": {
+                    "type": "string"
+                },
+                "securitizeIdProfileId": {
+                    "type": "string"
+                },
+                "securitizeIdAccessToken": {
+                    "type": "string"
+                },
+                "isAccredited": {
+                    "type": "boolean"
+                },
+                "isAdditionalAccredited": {
+                    "type": "boolean"
+                },
+                "accreditedStatus": {
+                    "type": "string",
+                    "enum": [
+                        "none",
+                        "pending",
+                        "confirmed",
+                        "rejected",
+                        "no",
+                        "no-accepted"
+                    ]
+                },
+                "accreditedEmailSent": {
+                    "type": "boolean"
+                },
+                "accreditationFormAnswers": {
+                    "type": "string"
+                },
+                "formAccreditation": {
+                    "type": "boolean"
+                },
+                "accreditationFirst": {
+                    "type": "boolean"
+                },
+                "accreditationType": {
+                    "type": "string",
+                    "enum": [
+                        "self-accreditation",
+                        "third-party-accreditation"
+                    ]
+                },
+                "entityName": {
+                    "type": "string"
+                },
+                "entityType": {
+                    "type": "string",
+                    "enum": [
+                        "revocable-trust",
+                        "irrevocable-trust",
+                        "llc",
+                        "other",
+                        "limited-partnership/general-partnership",
+                        "limited-general-partnership",
+                        "corporation",
+                        "fund"
+                    ]
+                },
+                "isBrokerDealer": {
+                    "type": "boolean"
+                },
+                "bdAccountStatus": {
+                    "type": "string"
+                },
+                "mixPanelId": {
+                    "type": "string"
+                },
+                "suitabilityStatus": {
+                    "type": "string",
+                    "enum": [
+                        "none",
+                        "verified",
+                        "processing",
+                        "rejected",
+                        "not-approved"
+                    ]
+                },
+                "brokerDealerId": {
+                    "type": "number"
+                },
+                "accreditationStatus": {
+                    "type": "string",
+                    "enum": [
+                        "none",
+                        "verified",
+                        "processing",
+                        "rejected",
+                        "not-approved",
+                        "not-accredited",
+                        "pending",
+                        "expired",
+                        "updates-required"
+                    ]
+                },
+                "sidVerificationStatus": {
+                    "type": "string",
+                    "enum": [
+                        "none",
+                        "processing",
+                        "updates-required",
+                        "verified",
+                        "manual-review",
+                        "rejected",
+                        "expired"
+                    ]
+                }
+            },
+            "required": [
+                "verificationStatus"
+            ]
+        },
+        "Model27": {
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string"
+                },
+                "user": {
+                    "$ref": "#/definitions/user"
+                }
+            },
+            "required": [
+                "token"
+            ]
+        },
+        "Model28": {
+            "type": "object",
+            "properties": {
+                "tokenName": {
+                    "type": "string"
+                },
+                "tokenId": {
+                    "type": "string",
+                    "x-format": {
+                        "guid": true
+                    }
+                },
+                "tokenInvestorPays": {
+                    "type": "boolean",
+                    "default": false
+                },
+                "MainApiConnectivityStatus": {
+                    "type": "string",
+                    "enum": [
+                        "ready",
+                        "not-authorised",
+                        "syncing"
+                    ]
+                },
+                "tokensHeld": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "tokenName",
+                "tokenId",
+                "tokenInvestorPays",
+                "MainApiConnectivityStatus",
+                "tokensHeld"
+            ]
+        },
+        "Model29": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model28"
+            }
+        },
+        "Model30": {
+            "type": "object",
+            "properties": {
+                "securitizeIdWalletId": {
+                    "type": "string"
+                },
+                "walletName": {
+                    "type": "string"
+                },
+                "walletType": {
+                    "type": "string",
+                    "enum": [
+                        "metamask",
+                        "bitgo",
+                        "coinbase",
+                        "ethereum",
+                        "other"
+                    ]
+                },
+                "walletAddress": {
+                    "type": "string"
+                },
+                "blockchain": {
+                    "type": "string",
+                    "enum": [
+                        "ethereum",
+                        "algorand"
+                    ]
+                },
+                "walletUrl": {
+                    "type": "string"
+                },
+                "tokens": {
+                    "$ref": "#/definitions/Model29"
+                }
+            },
+            "required": [
+                "securitizeIdWalletId",
+                "walletName",
+                "walletType",
+                "walletAddress"
+            ]
+        },
+        "Model31": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model30"
+            }
+        },
+        "Model32": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "countryCode": {
+                    "type": "string"
+                },
+                "reverseSolicitation": {
+                    "type": "boolean"
+                },
+                "disclaimer": {
+                    "type": "string"
+                },
+                "generalDisclaimer": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "countryCode",
+                "reverseSolicitation",
+                "generalDisclaimer"
+            ]
+        },
+        "Model33": {
+            "type": "object",
+            "description": "supported languages and all the translations",
+            "properties": {
+                "languages": {
+                    "$ref": "#/definitions/texts"
+                },
+                "translations": {
+                    "$ref": "#/definitions/texts"
+                }
+            }
+        },
+        "Model34": {
+            "type": "object",
+            "properties": {
+                "pledged": {
+                    "$ref": "#/definitions/pledged"
+                },
+                "totalFunded": {
+                    "$ref": "#/definitions/pledged"
+                },
+                "activityStatus": {
+                    "type": "string",
+                    "enum": [
+                        "pending-funding",
+                        "pending-issuance",
+                        "issuance-complete"
+                    ]
+                },
+                "assignedTokens": {
+                    "type": "string"
+                },
+                "assignedBonusTokens": {
+                    "type": "string"
+                },
+                "roundName": {
+                    "type": "string"
+                },
+                "custodianName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "activityStatus",
+                "assignedTokens",
+                "assignedBonusTokens",
+                "roundName"
+            ]
+        },
+        "Model35": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model34"
+            }
+        },
+        "Model36": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "documentUrl": {
+                    "type": "string"
+                },
+                "isAccessible": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "id",
+                "title",
+                "documentUrl",
+                "isAccessible"
+            ]
+        },
+        "tokenDocuments": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model36"
+            }
+        },
+        "Model37": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "order": {
+                    "type": "number"
+                },
+                "opportunityId": {
+                    "type": "number"
+                },
+                "isAccessible": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "id",
+                "title",
+                "order",
+                "opportunityId",
+                "isAccessible"
+            ]
+        },
+        "opportunityDocuments": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model37"
+            }
+        },
+        "Model38": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number"
+                },
+                "attributeType": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "alignment": {
+                    "type": "string"
+                },
+                "order": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "id",
+                "attributeType",
+                "title",
+                "content",
+                "resource",
+                "alignment",
+                "order"
+            ]
+        },
+        "opportunityContents": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model38"
+            }
+        },
+        "Model39": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "holding": {
+                    "type": "string"
+                },
+                "netAmount": {
+                    "type": "number"
+                },
+                "payoutType": {
+                    "type": "string",
+                    "enum": [
+                        "dividend",
+                        "distribution",
+                        "royalty"
+                    ]
+                },
+                "payoutMethod": {
+                    "type": "string",
+                    "enum": [
+                        "crypto",
+                        "bank-transfer"
+                    ]
+                },
+                "currency": {
+                    "type": "string",
+                    "enum": [
+                        "USD",
+                        "ETH",
+                        "USDC"
+                    ]
+                },
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "paid",
+                        "not-paid",
+                        "rejected"
+                    ]
+                },
+                "recordDate": {
+                    "type": "string"
+                },
+                "payoutDate": {
+                    "type": "string"
+                },
+                "payoutRate": {
+                    "type": "number"
+                },
+                "withholdingRate": {
+                    "type": "number"
+                },
+                "numberOfShares": {
+                    "type": "number"
+                },
+                "grossAmount": {
+                    "type": "number"
+                },
+                "totalTaxes": {
+                    "type": "number"
+                },
+                "fees": {
+                    "type": "number"
+                }
+            }
+        },
+        "paymentHistory": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model39"
+            }
+        },
+        "Model40": {
+            "type": "object",
+            "properties": {
+                "tokenBalance": {
+                    "type": "number"
+                },
+                "tokenValue": {
+                    "type": "number"
+                },
+                "tokenDRS": {
+                    "type": "number"
+                },
+                "tokenBonus": {
+                    "type": "number"
+                },
+                "tokenName": {
+                    "type": "string"
+                },
+                "hasWallets": {
+                    "type": "boolean"
+                },
+                "investmentRequests": {
+                    "$ref": "#/definitions/Model35"
+                },
+                "tokenDocuments": {
+                    "$ref": "#/definitions/tokenDocuments"
+                },
+                "opportunityDocuments": {
+                    "$ref": "#/definitions/opportunityDocuments"
+                },
+                "opportunityContents": {
+                    "$ref": "#/definitions/opportunityContents"
+                },
+                "paymentHistory": {
+                    "$ref": "#/definitions/paymentHistory"
+                },
+                "additionalAccreditation": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "tokenBalance",
+                "tokenValue",
+                "tokenDRS",
+                "tokenBonus",
+                "tokenName",
+                "opportunityDocuments",
+                "opportunityContents",
+                "additionalAccreditation"
+            ]
+        },
+        "Model41": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number"
+                },
+                "opportunityId": {
+                    "type": "number"
+                },
+                "attributeType": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "alignment": {
+                    "type": "string"
+                },
+                "order": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "id",
+                "opportunityId",
+                "attributeType",
+                "title",
+                "content",
+                "resource",
+                "alignment",
+                "order"
+            ]
+        },
+        "contents": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model41"
+            }
+        },
+        "Model42": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number"
+                },
+                "opportunityId": {
+                    "type": "number"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "order": {
+                    "type": "number"
+                },
+                "isAccessible": {
+                    "type": "boolean"
+                },
+                "documentUrl": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "opportunityId",
+                "title",
+                "order",
+                "isAccessible"
+            ]
+        },
+        "documents": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model42"
+            }
+        },
+        "Model43": {
+            "type": "object",
+            "properties": {
+                "bonusPercentage": {
+                    "type": "number"
+                },
+                "minInvestmentAmount": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "bonusPercentage",
+                "minInvestmentAmount"
+            ]
+        },
+        "tiers": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model43"
+            }
+        },
+        "Model44": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "minAmount": {
+                    "type": "number"
+                },
+                "value": {
+                    "type": "number"
+                },
+                "rate": {
+                    "type": "number"
+                },
+                "oneShareValue": {
+                    "type": "string"
+                },
+                "tiers": {
+                    "$ref": "#/definitions/tiers"
+                }
+            },
+            "required": [
+                "name",
+                "minAmount",
+                "value"
+            ]
+        },
+        "currencies": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model44"
+            }
+        },
+        "investorInvestmentDetails": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "number",
+                    "x-constraint": {
+                        "precision": 4
+                    }
+                },
+                "currency": {
+                    "type": "string"
+                },
+                "investmentId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "amount",
+                "currency"
+            ]
+        },
+        "Model45": {
+            "type": "array",
+            "enum": [
+                "WEB3",
+                "web3",
+                "cash-account",
+                "wire-transfer-crypto",
+                "ira"
+            ],
+            "items": {
+                "type": "string"
+            }
+        },
+        "depositOptions": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model45"
+            }
+        },
+        "Model46": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "isTokenCalculatorVisible": {
+                    "type": "boolean"
+                },
+                "tokenId": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "order": {
+                    "type": "number"
+                },
+                "subscriptionAgreementDocusignId": {
+                    "type": "string"
+                },
+                "tokenName": {
+                    "type": "string"
+                },
+                "tokenDecimals": {
+                    "type": "number",
+                    "default": 0
+                },
+                "attributes": {
+                    "$ref": "#/definitions/attributes"
+                },
+                "contents": {
+                    "$ref": "#/definitions/contents"
+                },
+                "documents": {
+                    "$ref": "#/definitions/documents"
+                },
+                "currencies": {
+                    "$ref": "#/definitions/currencies"
+                },
+                "mainCurrency": {
+                    "type": "string"
+                },
+                "investorInvestmentDetails": {
+                    "$ref": "#/definitions/investorInvestmentDetails"
+                },
+                "isBrokerDealer": {
+                    "type": "boolean"
+                },
+                "tokenIcon": {
+                    "type": "string"
+                },
+                "amountRaised": {
+                    "type": "number"
+                },
+                "totalInvestorsFunded": {
+                    "type": "number"
+                },
+                "hasSignedAgreement": {
+                    "type": "boolean"
+                },
+                "depositOptions": {
+                    "$ref": "#/definitions/depositOptions"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "standard",
+                        "web3"
+                    ]
+                },
+                "canUseCA": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "id",
+                "enabled",
+                "isTokenCalculatorVisible",
+                "tokenId",
+                "title",
+                "content",
+                "image",
+                "order",
+                "subscriptionAgreementDocusignId",
+                "tokenName",
+                "contents",
+                "documents",
+                "currencies",
+                "investorInvestmentDetails"
+            ]
+        },
+        "Model47": {
+            "type": "object",
+            "properties": {
+                "investorQualification": {
+                    "type": "boolean"
+                },
+                "agreement": {
+                    "type": "boolean"
+                },
+                "payment": {
+                    "type": "boolean"
+                },
+                "counterSigned": {
+                    "type": "boolean"
+                },
+                "allowSkipAccreditation": {
+                    "type": "boolean"
+                },
+                "qualificationPageTitle": {
+                    "type": "string"
+                },
+                "additionalAccreditation": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "Model48": {
+            "type": "object",
+            "properties": {
+                "agreement": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "agreement"
+            ]
+        },
+        "Model49": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                }
+            }
+        },
+        "Model50": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model49"
+            }
+        },
+        "Model51": {
+            "type": "object",
+            "properties": {
+                "isBrokerDealer": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "Model52": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "countryCode": {
+                    "type": "string"
+                },
+                "disclaimer": {
+                    "type": "string"
+                },
+                "generalDisclaimer": {
+                    "type": "string"
+                },
+                "isAgree": {
+                    "type": "boolean",
+                    "enum": [
+                        true
+                    ]
+                }
+            },
+            "required": [
+                "code"
+            ]
+        },
+        "Model53": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "selectedOption": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "selectedOption"
+            ]
+        },
+        "Model54": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Model53"
+            }
+        },
+        "Model55": {
+            "type": "object",
+            "properties": {
+                "isAccredited": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "isAccredited"
+            ]
+        },
+        "Model56": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "securitizeIdWalletId": {
+                    "type": "string"
+                },
+                "tokenId": {
+                    "type": "string",
+                    "x-format": {
+                        "guid": true
+                    }
+                },
+                "walletName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "address",
+                "securitizeIdWalletId",
+                "tokenId",
+                "walletName"
+            ]
+        }
+    }
+}

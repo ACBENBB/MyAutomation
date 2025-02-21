@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT556_ATS_OrdersAreDisplayedInTheOrderBook" verbose="1">
+    <test name="AUT556_ATS_OrdersAreDisplayedInTheOrderBook">
+        <classes>
+            <class name="io.securitize.tests.ats.AUT556_ATS_OrdersAreDisplayedInTheOrderBook" />
+        </classes>
+    </test>
+</suite>

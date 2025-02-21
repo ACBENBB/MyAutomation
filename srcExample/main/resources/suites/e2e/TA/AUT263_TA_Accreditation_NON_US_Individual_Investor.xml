@@ -1,0 +1,7 @@
+<suite name="AUT263_TA_Accreditation_NON_US_Individual_Investor" verbose="1">
+    <test name="AUT263_TA_Accreditation_NON_US_Individual_Investor">
+        <classes>
+            <class name="io.securitize.tests.transferAgent.AUT263_TA_Accreditation_NON_US_Individual_Investor" />
+        </classes>
+    </test>
+</suite>

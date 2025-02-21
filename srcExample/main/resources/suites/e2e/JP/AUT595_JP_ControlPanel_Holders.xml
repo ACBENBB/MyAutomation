@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT595_JP_ControlPanel_Holders" verbose="1">
+    <test name="AUT595_JP_ControlPanel_Holders">
+        <classes>
+            <class name="io.securitize.tests.jp.AUT595_JP_ControlPanel_Holders" />
+        </classes>
+    </test>
+</suite>

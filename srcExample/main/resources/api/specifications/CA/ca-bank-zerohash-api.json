@@ -1,0 +1,1298 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/v1/transfers/internal": {
+      "post": {
+        "operationId": "TransfersController_createInternalTransaction",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInternalTransferRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalTransferResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transfers"
+        ]
+      }
+    },
+    "/v1/accounts": {
+      "post": {
+        "operationId": "AccountsController_createAccount",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAccountRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Create account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAccountResponseDto"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAccountResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAccountBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Accounts"
+        ]
+      }
+    },
+    "/v1/accounts/{providerId}": {
+      "get": {
+        "operationId": "AccountsController_getParticipantsByProviderId",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "providerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAccountResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Accounts"
+        ]
+      }
+    },
+    "/v1/accounts/{providerId}/balance": {
+      "get": {
+        "operationId": "AccountsController_getBalance",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "providerId",
+            "required": true,
+            "in": "path",
+            "example": "TFSLH3",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return balance for an account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBalanceResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBalanceNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Accounts"
+        ]
+      }
+    },
+    "/v1/accounts/{providerId}/deposit-instructions/crypto": {
+      "get": {
+        "operationId": "TransferMethodsController_getCryptoDepositInstructions",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "providerId",
+            "required": true,
+            "in": "path",
+            "example": "TFSLH3",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "required": false,
+            "in": "query",
+            "description": "\n      Token and Network fields are used together as filter, if network is not provided, token will only used as filter on ZH and it could not return a result.\n      i.e. There is a ZH deposit asset address which its asset is 'USDC.ETH'. If you provide token as 'USDC' and not a network, it will not return the address\n      because the ZH filter was 'USDC' and 'ETH' was not provided. If you provide both token and network, it will return the address.\n    ",
+            "schema": {
+              "enum": [
+                "USDC"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "network",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "ETH"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CryptoDepositInstructions"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCryptoDepositInstructionsNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transfer Methods"
+        ]
+      },
+      "post": {
+        "operationId": "TransferMethodsController_createCryptoDepositInstructions",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "providerId",
+            "required": true,
+            "in": "path",
+            "example": "TFSLH3",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCryptoDepositInstructionsRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Create wallet to deposit digital assets.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CryptoAddress"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CryptoAddress"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCryptoDepositInstructionsExceptionDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transfer Methods"
+        ]
+      }
+    },
+    "/v1/webhooks-events": {
+      "post": {
+        "operationId": "InternalWebhooksController_processInternalWebhook",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParticipantUpdateWebhookPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "201": {
+            "description": ""
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Webhooks Events"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "CA Bank Zero Hash Api",
+    "description": "API to interact with CA Zero Hash Column",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "ForbiddenException": {
+        "type": "object",
+        "properties": {}
+      },
+      "CreateInternalTransferRequestDto": {
+        "type": "object",
+        "properties": {
+          "fromAccountId": {
+            "type": "string"
+          },
+          "toAccountId": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 1
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "USD"
+            ]
+          }
+        },
+        "required": [
+          "fromAccountId",
+          "toAccountId",
+          "amount",
+          "currency"
+        ]
+      },
+      "InternalTransferResponseDto": {
+        "type": "object",
+        "properties": {
+          "fromAccountId": {
+            "type": "string"
+          },
+          "toAccountId": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "PENDING",
+              "DONE",
+              "FAILED",
+              "CANCELLED",
+              "REVERSED"
+            ]
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "ASSET",
+              "INTERNAL_CASH",
+              "WIRE_DOMESTIC",
+              "WIRE_INTERNATIONAL",
+              "ACH",
+              "CREDIT_CARD",
+              "EXTERNAL_PAYMENT"
+            ]
+          },
+          "amount": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "USD",
+              "USDC",
+              "EUR"
+            ]
+          },
+          "additionalData": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "fromAccountId",
+          "toAccountId",
+          "id",
+          "status",
+          "createdAt",
+          "updatedAt",
+          "method",
+          "amount",
+          "currency",
+          "additionalData"
+        ]
+      },
+      "Tax": {
+        "type": "object",
+        "properties": {
+          "taxId": {
+            "type": "string",
+            "example": "123-27-0003"
+          },
+          "taxCountryCode": {
+            "type": "string",
+            "example": "US"
+          }
+        },
+        "required": [
+          "taxId",
+          "taxCountryCode"
+        ]
+      },
+      "Address": {
+        "type": "object",
+        "properties": {
+          "country": {
+            "type": "string",
+            "example": "US"
+          },
+          "address1": {
+            "type": "string",
+            "example": "Street 123"
+          },
+          "city": {
+            "type": "string",
+            "example": "Chicago"
+          },
+          "province": {
+            "type": "string",
+            "example": "Illinois"
+          },
+          "zip_code": {
+            "type": "string",
+            "example": "60606"
+          }
+        },
+        "required": [
+          "country",
+          "address1",
+          "city",
+          "province",
+          "zip_code"
+        ]
+      },
+      "LegalSigner": {
+        "type": "object",
+        "properties": {
+          "legalName": {
+            "type": "string",
+            "example": "John Smith"
+          },
+          "investorId": {
+            "type": "string",
+            "example": "6352baebf1babb0013a1201c",
+            "description": "investorId should be mandatory when it is used to create a real ZH entity/individual. It is optional when the entity/individual is a non-investor"
+          },
+          "firstName": {
+            "type": "string",
+            "example": "John"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Smith"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "example": "1989-10-21T16:25:21Z"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "example": "+1-234-232-3232"
+          },
+          "taxDetails": {
+            "$ref": "#/components/schemas/Tax"
+          },
+          "isBeneficialOwner": {
+            "type": "boolean",
+            "example": true
+          },
+          "email": {
+            "type": "string",
+            "example": "mail@mail.com"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "investorType": {
+            "enum": [
+              "individual",
+              "entity"
+            ],
+            "type": "string",
+            "example": "individual"
+          },
+          "entityName": {
+            "type": "string",
+            "example": "Company One"
+          },
+          "entityType": {
+            "enum": [
+              "revocable-trust",
+              "irrevocable-trust",
+              "limited-partnership/general-partnership",
+              "llc",
+              "fund",
+              "joint-account",
+              "corporation",
+              "other"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "dateOfBirth",
+          "taxDetails",
+          "isBeneficialOwner",
+          "email",
+          "address",
+          "investorType"
+        ]
+      },
+      "InvestorDetails": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "string",
+            "example": "6352baebf1babb0013a1201c",
+            "description": "investorId should be mandatory when it is used to create a real Zerohash entity/individual. It is optional when the entity/individual is a non-investor"
+          },
+          "firstName": {
+            "type": "string",
+            "example": "John"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Smith"
+          },
+          "gender": {
+            "enum": [
+              "male",
+              "female",
+              "not-known"
+            ],
+            "type": "string",
+            "example": "male"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "example": "1989-10-21T16:25:21Z"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "example": "+1-234-232-3232"
+          },
+          "taxDetails": {
+            "$ref": "#/components/schemas/Tax"
+          },
+          "email": {
+            "type": "string",
+            "example": "mail@mail.com"
+          },
+          "documentType": {
+            "enum": [
+              "SSN",
+              "PASSPORT",
+              "PERSONAL_IDENTIFICATION",
+              "DRIVERS_LICENSE",
+              "OTHER"
+            ],
+            "type": "string",
+            "example": "SSN"
+          },
+          "mainIdentificationNumber": {
+            "type": "string",
+            "example": "5212425141"
+          },
+          "nationality": {
+            "type": "string",
+            "example": "US"
+          },
+          "profession": {
+            "type": "string",
+            "example": "Developer"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "countryOfBirth": {
+            "type": "string",
+            "example": "US"
+          },
+          "investorType": {
+            "enum": [
+              "individual",
+              "entity"
+            ],
+            "type": "string",
+            "example": "individual"
+          },
+          "entityName": {
+            "type": "string",
+            "example": "Company One"
+          },
+          "entityType": {
+            "enum": [
+              "revocable-trust",
+              "irrevocable-trust",
+              "limited-partnership/general-partnership",
+              "llc",
+              "fund",
+              "joint-account",
+              "corporation",
+              "other"
+            ],
+            "type": "string"
+          },
+          "entityIdNumber": {
+            "type": "string",
+            "example": "123456789"
+          },
+          "incorporationDate": {
+            "type": "string",
+            "example": "1989-10-21T16:25:21Z"
+          },
+          "website": {
+            "type": "string",
+            "example": "www.securitize.io"
+          },
+          "verifiedAt": {
+            "type": "string",
+            "example": "2021-10-21T16:25:21Z"
+          }
+        },
+        "required": [
+          "phoneNumber",
+          "email",
+          "address",
+          "investorType",
+          "verifiedAt"
+        ]
+      },
+      "CreateAccountRequestDto": {
+        "type": "object",
+        "properties": {
+          "legalSigners": {
+            "description": "NOTE: At least one legal signer should NOT be beneficial owner.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LegalSigner"
+            }
+          },
+          "cashAccountId": {
+            "type": "string",
+            "example": "ad38e1e9-0733-434d-80ae-3d7807f12345"
+          },
+          "investorDetails": {
+            "$ref": "#/components/schemas/InvestorDetails"
+          }
+        },
+        "required": [
+          "cashAccountId",
+          "investorDetails"
+        ]
+      },
+      "CreateAccountResponseDto": {
+        "type": "object",
+        "properties": {
+          "providerId": {
+            "type": "string",
+            "example": "3d02f924-072b-4701-a776-e898e14f90f6"
+          },
+          "status": {
+            "enum": [
+              "CREATED",
+              "PENDING",
+              "CLOSED",
+              "FROZEN",
+              "KYC_APPROVED",
+              "AGREEMENTS_GENERATED"
+            ],
+            "type": "string",
+            "example": "CREATED"
+          },
+          "cashAccountId": {
+            "type": "string",
+            "example": "33ece656-eef1-43b5-a851-b6b9099089a5"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "1688333150161"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "1688333151906"
+          },
+          "additionalData": {
+            "type": "object",
+            "example": {
+              "participant_code": "KCZ20C",
+              "participant_name": "Participant Name",
+              "custodian_participant_code": "",
+              "credit_limit": 0,
+              "email": "mail@mail.io",
+              "status": "approved",
+              "reason_code": null,
+              "country": "United States",
+              "state": "IL",
+              "updated_at": 1706558248601
+            }
+          }
+        },
+        "required": [
+          "providerId",
+          "status",
+          "cashAccountId",
+          "createdAt",
+          "updatedAt",
+          "additionalData"
+        ]
+      },
+      "CreateAccountBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "CREATE_ACCOUNT_BAD_REQUEST"
+          },
+          "message": {
+            "type": "string",
+            "example": "email should match format \\\"email\\\""
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "InternalServerErrorException": {
+        "type": "object",
+        "properties": {}
+      },
+      "Balance": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number"
+          },
+          "available": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "USD",
+              "USDC",
+              "EUR"
+            ]
+          }
+        },
+        "required": [
+          "total",
+          "available",
+          "currency"
+        ]
+      },
+      "GetBalanceResponseDto": {
+        "type": "object",
+        "properties": {
+          "providerId": {
+            "type": "string"
+          },
+          "balances": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Balance"
+            }
+          }
+        },
+        "required": [
+          "providerId",
+          "balances"
+        ]
+      },
+      "GetBalanceNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string",
+            "example": "Account for accountId '123' not found"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CryptoAddress": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "example": "2NCgV7BXXafJZ86utcYFs5m3tCpkcpLafeG"
+          },
+          "createdAt": {
+            "type": "number",
+            "example": 1688333150161
+          },
+          "token": {
+            "type": "string",
+            "example": "USDC"
+          },
+          "network": {
+            "type": "string",
+            "example": "ETH"
+          }
+        },
+        "required": [
+          "address",
+          "createdAt",
+          "token",
+          "network"
+        ]
+      },
+      "CryptoDepositInstructions": {
+        "type": "object",
+        "properties": {
+          "providerId": {
+            "type": "string"
+          },
+          "addresses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CryptoAddress"
+            }
+          }
+        },
+        "required": [
+          "providerId",
+          "addresses"
+        ]
+      },
+      "GetCryptoDepositInstructionsNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string",
+            "example": "Account for accountId '123' not found"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CreateCryptoDepositInstructionsRequestDto": {
+        "type": "object",
+        "properties": {
+          "network": {
+            "type": "string",
+            "enum": [
+              "ETH"
+            ],
+            "example": "ETH"
+          },
+          "token": {
+            "type": "string",
+            "enum": [
+              "USDC"
+            ],
+            "example": "USDC"
+          }
+        },
+        "required": [
+          "network",
+          "token"
+        ]
+      },
+      "CreateCryptoDepositInstructionsExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string",
+            "example": "Account for accountId '123' not found"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "ParticipantUpdateWebhookPayload": {
+        "type": "object",
+        "properties": {
+          "participant_code": {
+            "type": "string",
+            "example": "TFSLH3"
+          },
+          "timestamp": {
+            "type": "number",
+            "example": 1631533200000
+          },
+          "participant_status": {
+            "type": "string",
+            "enum": [
+              "approved",
+              "submitted",
+              "disabled",
+              "closed"
+            ]
+          },
+          "reason_code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "participant_code",
+          "timestamp",
+          "participant_status"
+        ]
+      },
+      "BadRequestException": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  }
+}

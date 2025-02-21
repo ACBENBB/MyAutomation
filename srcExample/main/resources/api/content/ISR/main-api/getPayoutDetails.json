@@ -1,0 +1,6 @@
+{
+  "skips": {
+    "entireTest": true,
+    "skipReason": "Endpoint is deprecated"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "pathParams": {
+    "id": "#ATS_INTERNAL_CASH_TRANSFER_ID#"
+  },
+  "headers": {
+    "x-api-key": "#ATS_BANK_API_KEY#"
+  },
+  "rc": {},
+  "sandbox": {}
+}

@@ -1,0 +1,13 @@
+{
+  "skips": {
+    "entireTest": false,
+    "skipReason": "",
+    "statusCodeCheck": false,
+    "bodySchemaCheck": true,
+    "bodyContentCheck": true
+  },
+  "pathParams": {
+    "address": "78559934",
+    "isocode": "US"
+  }
+}

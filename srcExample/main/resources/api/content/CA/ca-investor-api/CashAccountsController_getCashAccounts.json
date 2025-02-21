@@ -1,0 +1,12 @@
+{
+  "rc": {
+    "headers": {
+      "x-api-key": "#CA_INVESTOR_X_API_KEY#"
+    }
+  },
+  "sandbox": {
+    "headers": {
+      "x-api-key": "#CA_INVESTOR_X_API_KEY#"
+    }
+  }
+}

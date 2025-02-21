@@ -1,0 +1,662 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/v1/webhook-events/synapse": {
+      "post": {
+        "operationId": "SynapseController_processSynapseWebhook",
+        "parameters": [
+          {
+            "name": "x-synapse-signature",
+            "in": "header",
+            "description": "The signature is a SHA-1 and SHA-256 HMAC hash of the object_id + your client_id, with the secret key as your client_secret",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-synapse-signature-sha256",
+            "in": "header",
+            "description": "The signature is a SHA-1 and SHA-256 HMAC hash of the object_id + your client_id, with the secret key as your client_secret",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SynapseWebhookEventRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Synapse"
+        ]
+      }
+    },
+    "/v1/webhook-events/column": {
+      "post": {
+        "operationId": "ColumnController_processColumnWebhook",
+        "parameters": [
+          {
+            "name": "column-signature",
+            "in": "header",
+            "description": "The signature is a SHA-256 HMAC hash of the stringify body with TABS as message and with the columnWebhookKey as key.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ColumnWebhookEventRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Column"
+        ]
+      }
+    },
+    "/v1/webhook-events/zerohash": {
+      "post": {
+        "operationId": "ZeroHashController_processColumnWebhook",
+        "parameters": [
+          {
+            "name": "x-zh-hook-signature-256",
+            "in": "header",
+            "description": "The signature is a SHA-256 HMAC hash of the stringify body with TABS as message.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ZeroHashWebhookEventRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "ZeroHash"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Cash Account Webhooks Gateway",
+    "description": "API to interact with Account Site",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "Agreement": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "url"
+        ]
+      },
+      "Timeline": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "object",
+            "properties": {
+              "$date": {
+                "required": true,
+                "type": "number"
+              }
+            }
+          },
+          "note": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "date",
+          "note"
+        ]
+      },
+      "SynapseNode": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "allowed": {
+            "type": "string"
+          },
+          "allowed_status_code": {
+            "type": "number",
+            "nullable": true
+          },
+          "client": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "required": true,
+                "type": "string"
+              },
+              "name": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "extra": {
+            "type": "object",
+            "properties": {
+              "note": {
+                "required": true,
+                "type": "string",
+                "nullable": true
+              },
+              "other": {
+                "type": "object",
+                "properties": {
+                  "ib_residual": {
+                    "required": true,
+                    "type": "number"
+                  }
+                }
+              },
+              "supp_id": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "info": {
+            "type": "object",
+            "properties": {
+              "agreements": {
+                "required": true,
+                "$ref": "#/components/schemas/Agreement"
+              },
+              "balance": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "required": true,
+                    "type": "number"
+                  },
+                  "currency": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "interest": {
+                    "required": true,
+                    "type": "number"
+                  }
+                }
+              },
+              "bank_code": {
+                "required": true,
+                "type": "string"
+              },
+              "document_id": {
+                "required": true,
+                "type": "string"
+              },
+              "nickname": {
+                "required": true,
+                "type": "string"
+              },
+              "name_on_account": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "timeline": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Timeline"
+            }
+          },
+          "type": {
+            "type": "string"
+          },
+          "user_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "_id",
+          "allowed",
+          "allowed_status_code",
+          "client",
+          "extra",
+          "info",
+          "is_active",
+          "timeline",
+          "type",
+          "user_id"
+        ]
+      },
+      "SynapseWebhookEventRequestDto": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "object",
+            "properties": {
+              "$oid": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "type": {
+            "type": "string"
+          },
+          "user_id": {
+            "type": "string"
+          },
+          "allowed": {
+            "type": "string"
+          },
+          "allowed_status_code": {
+            "type": "string",
+            "nullable": true
+          },
+          "client": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "required": true,
+                "type": "string"
+              },
+              "name": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "extra": {
+            "type": "object",
+            "properties": {
+              "note": {
+                "required": true,
+                "type": "string",
+                "nullable": true
+              },
+              "other": {
+                "type": "object",
+                "properties": {
+                  "ib_residual": {
+                    "required": true,
+                    "type": "number"
+                  }
+                }
+              },
+              "supp_id": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "info": {
+            "type": "object",
+            "properties": {
+              "agreements": {
+                "required": true,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Agreement"
+                }
+              },
+              "balance": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "required": true,
+                    "type": "number"
+                  },
+                  "currency": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "interest": {
+                    "required": true,
+                    "type": "number"
+                  }
+                }
+              },
+              "bank_code": {
+                "required": true,
+                "type": "string"
+              },
+              "document_id": {
+                "required": true,
+                "type": "string"
+              },
+              "monthly_withdrawals_remaining": {
+                "required": true,
+                "type": "number",
+                "nullable": true
+              },
+              "nickname": {
+                "required": true,
+                "type": "string"
+              },
+              "name_on_account": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "timeline": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Timeline"
+            }
+          },
+          "webhook_meta": {
+            "type": "object",
+            "properties": {
+              "function": {
+                "required": true,
+                "type": "object"
+              },
+              "updated_by": {
+                "required": true,
+                "type": "string"
+              },
+              "log_id": {
+                "required": true,
+                "type": "string"
+              },
+              "date": {
+                "type": "object",
+                "properties": {
+                  "$date": {
+                    "required": true,
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          },
+          "_rest": {
+            "$ref": "#/components/schemas/SynapseNode"
+          }
+        },
+        "required": [
+          "_id",
+          "is_active",
+          "type",
+          "user_id",
+          "allowed",
+          "allowed_status_code",
+          "client",
+          "extra",
+          "info",
+          "timeline",
+          "webhook_meta",
+          "_rest"
+        ]
+      },
+      "ColumnWebhookEventRequestDto": {
+        "type": "object",
+        "properties": {
+          "created_at": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object"
+          },
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "created_at",
+          "data",
+          "id",
+          "type"
+        ]
+      },
+      "ZeroHashWebhookEventRequestDto": {
+        "type": "object",
+        "properties": {
+          "participant_code": {
+            "type": "string"
+          },
+          "participant_status": {
+            "type": "string",
+            "enum": [
+              "approved",
+              "submitted",
+              "disabled",
+              "closed"
+            ]
+          },
+          "reason_code": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "participant_code",
+          "participant_status",
+          "timestamp"
+        ]
+      }
+    }
+  }
+}

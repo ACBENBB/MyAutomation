@@ -1,0 +1,7 @@
+<suite name="AUT478_CA_Holdings_Btn_Add_Funds" verbose="1">
+    <test name="AUT478_CA_Holdings_Btn_Add_Funds">
+        <classes>
+            <class name="io.securitize.tests.ca.AUT478_CA_Holdings_Btn_Add_Funds" />
+        </classes>
+    </test>
+</suite>

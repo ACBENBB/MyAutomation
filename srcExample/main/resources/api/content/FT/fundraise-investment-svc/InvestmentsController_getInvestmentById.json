@@ -1,0 +1,12 @@
+{
+  "rc" : {
+    "pathParams": {
+      "investmentId": "655665"
+    }
+  },
+  "sandbox" : {
+    "pathParams": {
+      "investmentId": "706317"
+    }
+  }
+}

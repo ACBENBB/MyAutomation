@@ -1,0 +1,16 @@
+{
+  "pathParams": {
+    "tokenId": "#TOKEN_ID#",
+    "issuerId": "#ISSUER_ID#"
+  },
+  "sandbox": {
+    "pathParams": {
+      "tokenId": "#TOKEN_ID#",
+      "issuerId": "#ISSUER_ID#"
+    },
+    "skips": {
+      "bodySchemaCheck": true,
+      "bodyContentCheck": true
+    }
+  }
+}

@@ -1,0 +1,491 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/v2/sec-id-reverse-sync": {
+      "post": {
+        "operationId": "SecIDReverseSyncController_reverseSync",
+        "summary": "reverse sync investor information to SecID",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReverseSyncRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "SecIDReverseSync"
+        ]
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "HealthCheckController_checkDatabaseConnection",
+        "summary": "checks for db connection",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v2/isr-import-investors": {
+      "post": {
+        "operationId": "IsrImportInvestorsController_importInvestors",
+        "summary": "import investors from scv file",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IsrImportInvestorsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "IsrImportInvestors"
+        ]
+      }
+    },
+    "/api/v2/isr-import-investors/{issuerId}": {
+      "get": {
+        "operationId": "IsrImportInvestorsController_getimportInvestorsProgress",
+        "summary": "Get investors import progress",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "IsrImportInvestors"
+        ]
+      }
+    },
+    "/api/v2/isr-run-issuance": {
+      "post": {
+        "operationId": "IsrRunIssuanceController_runIssuance",
+        "summary": "run issuance",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RunIssuanceBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "IsrRunIssuance"
+        ]
+      }
+    },
+    "/api/v2/isr-import-issuance": {
+      "post": {
+        "operationId": "IsrImportIssuanceController_import",
+        "summary": "import issuance requests from csv file",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IsrImportIssuanceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "IsrImportIssuance"
+        ]
+      }
+    },
+    "/api/v2/isr-import-issuance/validate": {
+      "post": {
+        "operationId": "IsrImportIssuanceController_validate",
+        "summary": "validates import issuance requests from csv file returning a summary indicating errors in the file and a preview of what is going to be imported",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IsrImportIssuanceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "IsrImportIssuance"
+        ]
+      }
+    },
+    "/api/v2/isr-import-issuance/status/{issuerId}": {
+      "get": {
+        "operationId": "IsrImportIssuanceController_importStatus",
+        "summary": "get the status of the last processed or currently active import issuance",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "IsrImportIssuance"
+        ]
+      }
+    },
+    "/api/v2/isr-import-transaction/validate": {
+      "post": {
+        "operationId": "IsrImportTransactionController_validate",
+        "summary": "validates import transaction from csv file returning a summary indicating errors in the file and a preview of what is going to be imported",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IsrImportTransactionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Isr Import Transaction"
+        ]
+      }
+    },
+    "/api/v2/isr-import-transaction/status/{issuerId}": {
+      "get": {
+        "operationId": "IsrImportTransactionController_importStatus",
+        "summary": "get the status of the last processed or currently active import transaction",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Isr Import Transaction"
+        ]
+      }
+    },
+    "/api/v2/isr-import-transaction": {
+      "post": {
+        "operationId": "IsrImportTransactionController_import",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IsrImportTransactionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Isr Import Transaction"
+        ]
+      }
+    },
+    "/api/v2/isr-import-burn/validate": {
+      "post": {
+        "operationId": "IsrImportBurnController_validate",
+        "summary": "validates import burn from csv file returning a summary indicating errors in the file and a preview of what is going to be imported",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IsrBurnDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Isr Import Burn"
+        ]
+      }
+    },
+    "/api/v2/isr-import-burn": {
+      "post": {
+        "operationId": "IsrImportBurnController_import",
+        "summary": "Executes the bulk burn operation",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IsrBurnDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Isr Import Burn"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Control Panel Bulk Service",
+    "description": "Control Panel Bulk Service",
+    "version": "2.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "ControlPanelBulkService",
+      "description": ""
+    }
+  ],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "ReverseSyncRequestDto": {
+        "type": "object",
+        "properties": {
+          "issuerId": {
+            "type": "string"
+          },
+          "operatorId": {
+            "type": "string"
+          },
+          "userIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "issuerId",
+          "operatorId"
+        ]
+      },
+      "IsrImportInvestorsDto": {
+        "type": "object",
+        "properties": {
+          "fileKey": {
+            "type": "string"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "operatorId": {
+            "type": "number"
+          },
+          "isDryRun": {
+            "type": "boolean"
+          },
+          "triggerInvestmentEmail": {
+            "type": "boolean"
+          },
+          "totalInvestors": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "fileKey",
+          "issuerId",
+          "tokenId",
+          "operatorId",
+          "isDryRun",
+          "triggerInvestmentEmail",
+          "totalInvestors"
+        ]
+      },
+      "RunIssuanceBodyDto": {
+        "type": "object",
+        "properties": {
+          "issuerId": {
+            "type": "string"
+          },
+          "operatorId": {
+            "type": "number"
+          },
+          "investorIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "roundId": {
+            "type": "number"
+          },
+          "tokenId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "issuerId",
+          "operatorId",
+          "roundId",
+          "tokenId"
+        ]
+      },
+      "IsrImportIssuanceDto": {
+        "type": "object",
+        "properties": {
+          "fileKey": {
+            "type": "string"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "operatorId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "fileKey",
+          "issuerId",
+          "tokenId",
+          "operatorId"
+        ]
+      },
+      "IsrImportTransactionDto": {
+        "type": "object",
+        "properties": {
+          "fileKey": {
+            "type": "string"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "operatorId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "fileKey",
+          "issuerId",
+          "tokenId",
+          "operatorId"
+        ]
+      },
+      "IsrBurnDto": {
+        "type": "object",
+        "properties": {
+          "fileKey": {
+            "type": "string"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "operatorId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "fileKey",
+          "issuerId",
+          "tokenId",
+          "operatorId"
+        ]
+      }
+    }
+  }
+}

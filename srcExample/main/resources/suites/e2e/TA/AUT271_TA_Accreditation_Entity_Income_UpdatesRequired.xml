@@ -1,0 +1,7 @@
+<suite name="AUT271_TA_Accreditation_Entity_Income_UpdatesRequired" verbose="1">
+    <test name="AUT271_TA_Accreditation_Entity_Income_UpdatesRequired">
+        <classes>
+            <class name="io.securitize.tests.transferAgent.AUT271_TA_Accreditation_Entity_Income_UpdatesRequired" />
+        </classes>
+    </test>
+</suite>

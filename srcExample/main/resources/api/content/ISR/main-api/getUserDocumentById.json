@@ -1,0 +1,17 @@
+{
+  "pathParams": {
+    "userDocumentId": "190342-f",
+    "userId": "243698",
+    "issuerId": "#ISSUER_ID#"
+  },
+  "sandbox": {
+    "pathParams": {
+      "userDocumentId": "242587-f",
+      "userId": "496093",
+      "issuerId": "#ISSUER_ID#"
+    },
+    "expectedResponse": {
+      "statusCode": 401
+    }
+  }
+}

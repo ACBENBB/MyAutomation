@@ -1,0 +1,13 @@
+{
+  "pathParams": {
+    "issuerId": "#ISSUER_ID#"
+  },
+  "body": {
+    "email": "#email#",
+    "countryCode": "#countryCode#",
+    "state": "#state#"
+  },
+  "expectedResponse": {
+    "statusCode": 200
+  }
+}

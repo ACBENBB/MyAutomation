@@ -1,0 +1,10 @@
+{
+  "pathParams": {
+    "bankAccountId": ""
+  },
+  "sandbox": {
+    "pathParams": {
+      "bankAccountId": ""
+    }
+  }
+}

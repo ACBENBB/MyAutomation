@@ -1,0 +1,931 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Accreditation Api",
+    "description": "Endpoints for accreditation application",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "AccreditationAttachmentDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "verified",
+              "rejected",
+              "processing"
+            ],
+            "type": "string"
+          },
+          "fileKey": {
+            "type": "string"
+          },
+          "fileType": {
+            "enum": [
+              "application/pdf",
+              "image/png",
+              "image/jpg",
+              "image/jpeg",
+              "image/bmp"
+            ],
+            "type": "string"
+          },
+          "bucketName": {
+            "type": "string"
+          },
+          "attachmentType": {
+            "enum": [
+              "individual-income",
+              "spouses-income",
+              "certification-letter",
+              "proof-of-asset",
+              "credit-report",
+              "company-document",
+              "legal-signer",
+              "equity-owner-accreditation"
+            ],
+            "type": "string"
+          },
+          "attachmentYear": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "fileKey",
+          "fileType",
+          "bucketName",
+          "attachmentType",
+          "attachmentYear"
+        ]
+      },
+      "SignatureFileDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "fileKey": {
+            "type": "string"
+          },
+          "bucketName": {
+            "type": "string"
+          },
+          "fileType": {
+            "enum": [
+              "image/png",
+              "image/jpg"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "fileKey",
+          "bucketName",
+          "fileType"
+        ]
+      },
+      "AttorneyDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "operatorId": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "licenseNumber": {
+            "type": "string"
+          },
+          "signatureFile": {
+            "$ref": "#/components/schemas/SignatureFileDto"
+          }
+        },
+        "required": [
+          "operatorId",
+          "name",
+          "licenseNumber"
+        ]
+      },
+      "AccreditationDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "investorId": {
+            "type": "string"
+          },
+          "investorType": {
+            "enum": [
+              "entity",
+              "individual"
+            ],
+            "type": "string"
+          },
+          "investorName": {
+            "type": "string"
+          },
+          "investorEmail": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "expired",
+              "processing",
+              "rejected",
+              "updates-required",
+              "verified"
+            ],
+            "type": "string"
+          },
+          "accreditationMethod": {
+            "enum": [
+              "assets-and-investments",
+              "equity-owners",
+              "income",
+              "verification-letter",
+              "net-worth",
+              "professional-license"
+            ],
+            "type": "string"
+          },
+          "documentOrigin": {
+            "enum": [
+              "external",
+              "personal"
+            ],
+            "type": "string"
+          },
+          "individualIncomeRange": {
+            "default": null,
+            "enum": [
+              "none",
+              "50K-",
+              "50K-99K",
+              "100K-199K",
+              "200K-299K",
+              "300K+"
+            ],
+            "type": "string"
+          },
+          "jointIncomeRange": {
+            "default": null,
+            "enum": [
+              "none",
+              "50K-",
+              "50K-99K",
+              "100K-199K",
+              "200K-299K",
+              "300K+"
+            ],
+            "type": "string"
+          },
+          "incomeRange": {
+            "enum": [
+              "none",
+              "199K-",
+              "200K-299K",
+              "300K+"
+            ],
+            "type": "string"
+          },
+          "representativeType": {
+            "default": null,
+            "enum": [
+              "certified-public-accountant",
+              "licensed-attorney",
+              "registered-broker-dealer",
+              "registered-investment-adviser"
+            ],
+            "type": "string"
+          },
+          "representativeLicense": {
+            "type": "string",
+            "default": null
+          },
+          "licenseType": {
+            "default": null,
+            "enum": [
+              "finra-series-65",
+              "finra-series-7",
+              "finra-series-85"
+            ],
+            "type": "string"
+          },
+          "crdNumber": {
+            "type": "string",
+            "default": null
+          },
+          "attachments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccreditationAttachmentDto"
+            }
+          },
+          "attorney": {
+            "$ref": "#/components/schemas/AttorneyDto"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "verifiedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "rejectedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "rejectReason": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "kycStatus": {
+            "enum": [
+              "verified",
+              "processing",
+              "manual-review",
+              "updates-required",
+              "rejected",
+              "expired",
+              "none"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "investorId",
+          "investorType",
+          "investorName",
+          "investorEmail",
+          "accreditationMethod",
+          "incomeRange",
+          "attachments",
+          "createdAt",
+          "verifiedAt",
+          "rejectedAt",
+          "kycStatus"
+        ]
+      },
+      "AttorneyLetterUrlResponseDto": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      },
+      "ZipFileUrlResponseDto": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      },
+      "UpdateAccreditationDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "expired",
+              "processing",
+              "rejected",
+              "updates-required",
+              "verified"
+            ]
+          },
+          "updatedByOperatorId": {
+            "type": "string"
+          },
+          "rejectReason": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "updatedByOperatorId"
+        ]
+      },
+      "UpdateAccreditationAttorneyDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "PresignedPostDto": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "object"
+          },
+          "fileKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url",
+          "fields",
+          "fileKey"
+        ]
+      },
+      "DownloadUrlDto": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      }
+    }
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/api/v1/accreditations": {
+      "get": {
+        "operationId": "AccreditationsController_getAccreditations",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "default": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "default": 5,
+              "type": "number"
+            }
+          },
+          {
+            "name": "order-by",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "createdAt",
+              "enum": [
+                "investorType",
+                "status",
+                "accreditationMethod",
+                "createdAt"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "order-direction",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "desc",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "investorType",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "entity",
+                  "individual"
+                ]
+              }
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "expired",
+                  "processing",
+                  "rejected",
+                  "updates-required",
+                  "verified"
+                ]
+              }
+            }
+          },
+          {
+            "name": "kycStatus",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "verified",
+                  "processing",
+                  "manual-review",
+                  "updates-required",
+                  "rejected",
+                  "expired",
+                  "none"
+                ]
+              }
+            }
+          },
+          {
+            "name": "attorneyId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "zipFile",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "search",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fromUpdatedAt",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "toUpdatedAt",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Accreditations"
+        ]
+      },
+      "post": {
+        "operationId": "AccreditationsController_postAccreditation",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccreditationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccreditationDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Accreditations"
+        ]
+      }
+    },
+    "/api/v1/accreditations/{accreditationId}": {
+      "get": {
+        "operationId": "AccreditationsController_getAccreditationById",
+        "parameters": [
+          {
+            "name": "accreditationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccreditationDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Accreditations"
+        ]
+      },
+      "put": {
+        "operationId": "AccreditationsController_putAccreditation",
+        "parameters": [
+          {
+            "name": "accreditationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccreditationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccreditationDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Accreditations"
+        ]
+      },
+      "patch": {
+        "operationId": "AccreditationsController_patchAccreditation",
+        "parameters": [
+          {
+            "name": "accreditationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAccreditationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccreditationDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Accreditations"
+        ]
+      }
+    },
+    "/api/v1/accreditations/{accreditationId}/attorney-letter": {
+      "get": {
+        "operationId": "AccreditationsController_getAccreditationAttorneyLetter",
+        "parameters": [
+          {
+            "name": "accreditationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttorneyLetterUrlResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Accreditations"
+        ]
+      }
+    },
+    "/api/v1/accreditations/{accreditationId}/zip-file": {
+      "get": {
+        "operationId": "AccreditationsController_getAccreditationZipFileFile",
+        "parameters": [
+          {
+            "name": "accreditationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ZipFileUrlResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Accreditations"
+        ]
+      }
+    },
+    "/api/v1/accreditations/{accreditationId}/attorney": {
+      "put": {
+        "operationId": "AccreditationsController_putAttorney",
+        "parameters": [
+          {
+            "name": "accreditationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAccreditationAttorneyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccreditationDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Accreditations"
+        ]
+      }
+    },
+    "/api/v1/attorneys": {
+      "get": {
+        "operationId": "AttorneyController_getAttorneys",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AttorneyDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Attorneys"
+        ]
+      },
+      "post": {
+        "operationId": "AttorneyController_addAttorney",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AttorneyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttorneyDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Attorneys"
+        ]
+      }
+    },
+    "/api/v1/attachments": {
+      "get": {
+        "operationId": "AttachmentsController_getAttachmentPresignedPost",
+        "parameters": [
+          {
+            "name": "contentType",
+            "required": true,
+            "in": "query",
+            "enum": [
+              "application/pdf",
+              "image/png",
+              "image/jpg",
+              "image/jpeg",
+              "image/bmp"
+            ],
+            "isArray": false,
+            "schema": {
+              "enum": [
+                "application/pdf",
+                "image/png",
+                "image/jpg",
+                "image/jpeg",
+                "image/bmp"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PresignedPostDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Attachments"
+        ]
+      }
+    },
+    "/api/v1/attachments/verification-letter": {
+      "get": {
+        "operationId": "AttachmentsController_getVerificationLetter",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DownloadUrlDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Attachments"
+        ]
+      }
+    }
+  }
+}

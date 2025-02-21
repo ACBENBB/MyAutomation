@@ -1,0 +1,11 @@
+{
+  "pathParams": {
+    "id": "42c97798-78e3-4c96-9f66-884863446817",
+    "deploymentId": "9ee32322-5f9a-4c56-92cb-58aee3e1ee84"
+  },
+  "expectedResponse": {
+    "statusCode": 200,
+    "body": {
+    }
+  }
+}

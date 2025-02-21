@@ -1,0 +1,7 @@
+<suite name="AUT278_TA_Accreditation_Entity_Income_Rejected" verbose="1">
+    <test name="AUT278_TA_Accreditation_Entity_Income_Rejected">
+        <classes>
+            <class name="io.securitize.tests.transferAgent.AUT278_TA_Accreditation_Entity_Income_Rejected" />
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="CheckForApiChanges" verbose="1">
+    <test name="CheckForApiChanges">
+        <classes>
+            <class name="io.securitize.scripts.checkapichanges.CheckForApiChanges" />
+        </classes>
+    </test>
+</suite>

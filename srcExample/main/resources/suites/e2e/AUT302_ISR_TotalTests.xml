@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT302_ISR_TotalTests" verbose="1" parallel="methods" thread-count="10" >
+    <test name="AUT302_ISR_TotalTests">
+        <packages>
+            <package name="io.securitize.tests.controlPanel" />
+        </packages>
+    </test>
+</suite>

@@ -1,0 +1,11 @@
+{
+  "skips": {
+    "entireTest": false
+  },
+  "pathParams":
+  {
+    "issuerId": "#ISSUER_ID#",
+    "userId": "#INVESTOR_ID#",
+    "tokenWalletId": "0xdcA3419cE08930276fB3d4E198a4E968F2550f4d"
+  }
+}

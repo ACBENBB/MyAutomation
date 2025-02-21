@@ -1,0 +1,12 @@
+{
+  "skips": {
+    "entireTest": false,
+    "skipReason": "TEST TEST",
+    "statusCodeCheck": false,
+    "bodySchemaCheck": true,
+    "bodyContentCheck": false
+  },
+  "expectedResponse": {
+    "statusCode": 200
+  }
+}

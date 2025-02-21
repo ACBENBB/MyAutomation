@@ -1,0 +1,12 @@
+{
+  "issuerId": "#ISSUER_ID#",
+  "language": "#SID_LANGUAGE#",                   // "language": "EN"
+  "wallet": "#SID_WALLET#",                       //"wallet": "metamask"
+  "provider": "#SID_WALLETS_RPC_PROVIDER#",       //"provider": "ethereum"
+  "rc": {
+    // "issuerId": "42c97798-78e3-4c96-9f66-884863446817"
+  },
+  "sandbox": {
+    // "issuerId": "b038cd1f-91bc-44f1-ae84-c1051710d698"
+  }
+}

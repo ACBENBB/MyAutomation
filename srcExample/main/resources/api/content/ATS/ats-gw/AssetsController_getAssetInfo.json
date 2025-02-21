@@ -1,0 +1,11 @@
+{
+  "pathParams": {
+    "security": "#ATS_SECURITY#"
+  },
+  "headers": {
+    // "authorization": "#SID_AUTHORIZATION#"
+    //"cookie": "#SID_COOKIE#"
+  },
+  "rc": {},
+  "sandbox": {}
+}

@@ -1,0 +1,16 @@
+{
+  "skips": {
+    "entireTest": false
+  },
+  "pathParams":
+  {
+    "issuerId": "#ISSUER_ID#",
+    "userId": "#INVESTOR_ID#",
+    "labelText": "label1"
+  },
+  "sandbox": {
+    "pathParams": {
+      "labelText": "label1"
+    }
+  }
+}

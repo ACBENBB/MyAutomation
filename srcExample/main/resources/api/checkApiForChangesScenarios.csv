@@ -1,0 +1,11 @@
+scenarioName,baselineFilePath,remoteSwaggerUrl
+fr-agreement,fundraise-agreement-svc.json,https://fr-agreement-svc.internal.%s.securitize.io/doc/swagger/swagger-ui-init.js
+fr-investment,fundraise-investment.json,https://fr-investment-svc.internal.%s.securitize.io/doc/swagger/swagger-ui-init.js
+sid-promotion,promotion-service.json,https://promotion-service.internal.%s.securitize.io/swagger/swagger-ui-init.js
+sid-assets,sid-assets-service.json,https://sid-assets-service.internal.%s.securitize.io/swagger/swagger-ui-init.js
+main-api,main-api.json,https://main-api.internal.%s.securitize.io/docs/swagger-ui-init.js
+isr-investment-service,isr-investment-service.json,https://isr-investor-service.internal.%s.securitize.io/doc/swagger/swagger-ui-init.js
+control-panel-bulk-service,control-panel-bulk-service.json,https://control-panel-bulk-service.internal.%s.securitize.io/docs/swagger-ui-init.js
+control-panel-auth,control-panel-auth.json,https://control-panel-auth.internal.%s.securitize.io/docs/swagger-ui-init.js
+control-panel-gw,control-panel-gw.json,https://control-panel-gw.internal.%s.securitize.io/docs/swagger-ui-init.js
+control-panel-audit-service,control-panel-audit-service.json,https://control-panel-audit-service.internal.%s.securitize.io/docs/swagger-ui-init.js

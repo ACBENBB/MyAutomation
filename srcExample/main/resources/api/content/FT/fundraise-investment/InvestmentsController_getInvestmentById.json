@@ -1,0 +1,21 @@
+{
+  "skips": {
+    "entireTest": false,
+    "skipReason": "TEST TEST",
+    "statusCodeCheck": false,
+    "bodySchemaCheck": false,
+    "bodyContentCheck": false
+  },
+  "rc" : {
+    "pathParams":
+    {
+      "investmentId": "229702"
+    }
+  },
+  "sandbox" : {
+    "pathParams":
+    {
+      "investmentId": "706317"
+    }
+  }
+}

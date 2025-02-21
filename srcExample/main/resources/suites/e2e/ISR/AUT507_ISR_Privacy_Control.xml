@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT507_ISR_Privacy_Control" verbose="1">
+        <test name="AUT507_ISR_Privacy_Control">
+            <classes>
+                <class name="io.securitize.tests.controlPanel.AUT507_ISR_Privacy_Control" />
+            </classes>
+        </test>
+</suite>

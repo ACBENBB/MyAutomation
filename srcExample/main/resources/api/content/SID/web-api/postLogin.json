@@ -1,0 +1,15 @@
+{
+  "body": {
+    "email": "#SID_INVESTOR_EMAIL#",
+    "password": "#SID_INVESTOR_PASSWORD#"
+  },
+  "skips": {
+    "bodySchemaCheck": true,
+    "skipReason": "Body schema was skipped due to lack of schema (model instead of schema)"
+  },
+  "expectedResponse": {
+    "statusCode": 200
+  },
+  "rc": {},
+  "sandbox": {}
+}

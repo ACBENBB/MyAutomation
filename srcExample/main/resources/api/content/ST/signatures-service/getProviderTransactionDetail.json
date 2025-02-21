@@ -1,0 +1,16 @@
+{
+  "skips": {
+    "entireTest": false,
+    "skipReason": "TEST TEST",
+    "statusCodeCheck": false,
+    "bodySchemaCheck": false,
+    "bodyContentCheck": false
+  },
+  "expectedResponse": {
+    "statusCode": 200
+  },
+  "pathParams": {
+    "deploymentId": "ab805ea2-1972-4005-8861-7333b20b5c1c",
+    "id": "159162"
+  }
+}

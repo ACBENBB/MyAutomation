@@ -1,0 +1,132 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/v1/form": {
+      "get": {
+        "operationId": "FormController_getForm",
+        "summary": "Get form",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Form"
+        ]
+      },
+      "post": {
+        "operationId": "FormController_postForm",
+        "summary": "POST form",
+        "tags": [
+          "Form"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/form/{accreditationId}": {
+      "put": {
+        "operationId": "FormController_updateForm",
+        "summary": "PUT form",
+        "tags": [
+          "Form"
+        ],
+        "parameters": [
+          {
+            "name": "accreditationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/accreditations": {
+      "get": {
+        "operationId": "AccreditationsController_getAccreditations",
+        "summary": "GET Accreditations",
+        "tags": [
+          "Accreditations"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/attachments": {
+      "get": {
+        "operationId": "AttachmentsController_getAttachment",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Attachments"
+        ]
+      }
+    },
+    "/api/v1/attachments/verification-letter": {
+      "get": {
+        "operationId": "AttachmentsController_getVerificationLetter",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Attachments"
+        ]
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Accreditations GW",
+    "description": "Endpoints for Accreditations",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {}
+  }
+}

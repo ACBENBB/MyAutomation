@@ -1,0 +1,12 @@
+{
+  "pathParams": {
+    "entityInvestorId": "465206",
+    "issuerId": "aad37943-4e47-4829-ae1b-a1e5e15e9cd2"
+  },
+  "sandbox": {
+    "pathParams": {
+      "entityInvestorId": "495905",
+      "issuerId": "#ISSUER_ID#"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "pathParams":{
+    "issuerId": "#ISSUER_ID#",
+    "userId": "142080"
+  },
+  "queryParams":{
+    "token-id": "#TOKEN_ID#"
+  },
+  "skips": {
+    "bodySchemaCheck": true,
+    "bodyContentCheck": true
+  },
+  "sandbox": {
+    "pathParams": {
+      "issuerId": "#ISSUER_ID#",
+      "userId": "283607"
+    },
+    "queryParams": {
+      "token-id": "#TOKEN_ID#"
+    },
+    "skips": {
+      "bodySchemaCheck": true,
+      "bodyContentCheck": true
+    }
+  }
+}

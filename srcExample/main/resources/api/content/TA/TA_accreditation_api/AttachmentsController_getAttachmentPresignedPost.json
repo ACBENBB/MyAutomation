@@ -1,0 +1,15 @@
+{
+  "skips": {
+    "entireTest": false,
+    "skipReason": "TEST TEST",
+    "statusCodeCheck": false,
+    "bodySchemaCheck": false,
+    "bodyContentCheck": false
+  },
+  "queryParams": {
+    "contentType": "application/pdf"
+  },
+  "expectedResponse": {
+    "statusCode": 200
+  }
+}

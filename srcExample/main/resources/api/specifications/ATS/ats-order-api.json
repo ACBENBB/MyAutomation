@@ -1,0 +1,1984 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/metrics": {
+      "get": {
+        "operationId": "PrometheusController_index",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/orders": {
+      "get": {
+        "operationId": "OrdersController_getOrders",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "security",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "investorId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "exchangeType",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "TRADITIONAL",
+                  "WEB3"
+                ]
+              }
+            }
+          },
+          {
+            "name": "clearingInstrument",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "Expired",
+                  "Rejected",
+                  "Canceled",
+                  "Open",
+                  "Executed",
+                  "Draft"
+                ]
+              }
+            }
+          },
+          {
+            "name": "category",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "STAGE",
+                  "DRAFT"
+                ]
+              }
+            }
+          },
+          {
+            "name": "side",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "B",
+                "S"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "active",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "true",
+                "false"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "network",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "walletAddress",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "trades"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get all orders",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetOrdersDto"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      },
+      "post": {
+        "operationId": "OrdersController_createOrder",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrderRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create Order",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateOrderResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateOrderBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/v1/orders/validation": {
+      "post": {
+        "operationId": "OrdersController_validateOrderCreation",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateOrderCreationRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Validate Order Creation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidateOrderCreationResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidateOrderCreationBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/v1/orders/{orderId}": {
+      "get": {
+        "operationId": "OrdersController_getOrderById",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get order by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOrderDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOrderByIdNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/v1/orders/{orderId}/cancel": {
+      "post": {
+        "operationId": "OrdersController_cancelOrder",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Cancel Order",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancelOrderResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancelOrderBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancelOrderNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/v1/books": {
+      "get": {
+        "operationId": "BooksController_getBooksOld",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "security",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get all books",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Book"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Books"
+        ]
+      }
+    },
+    "/v2/books": {
+      "get": {
+        "operationId": "BooksController_getBooks",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "security",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filterPreMarket",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "true",
+                "false"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get all books",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Book"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderBookBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Books"
+        ]
+      }
+    },
+    "/v1/orders-summary": {
+      "get": {
+        "operationId": "SyncController_getOrderSummary",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "difference",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "MISSING_DB",
+                  "MISSING_PIER",
+                  "PIER_ORDER_STATUS",
+                  "DB_ORDER_DATA"
+                ]
+              }
+            }
+          },
+          {
+            "name": "action",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "CANCEL_IN_FI",
+                  "CANCEL_IN_PIER",
+                  "CREATE_IN_DB",
+                  "UPDATE_IN_DB"
+                ]
+              }
+            }
+          },
+          {
+            "name": "daysAgo",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "onlyWithDifferences",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "true",
+                "false"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get order summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetOrderSummaryByFiltersDto"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Sync"
+        ]
+      }
+    },
+    "/v1/orders-summary/sync": {
+      "post": {
+        "operationId": "SyncController_syncOrderSummary",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "difference",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "MISSING_DB",
+                  "MISSING_PIER",
+                  "PIER_ORDER_STATUS",
+                  "DB_ORDER_DATA"
+                ]
+              }
+            }
+          },
+          {
+            "name": "action",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "CANCEL_IN_FI",
+                  "CANCEL_IN_PIER",
+                  "CREATE_IN_DB",
+                  "UPDATE_IN_DB"
+                ]
+              }
+            }
+          },
+          {
+            "name": "daysAgo",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sync order summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetOrderSummarySyncByFiltersDto"
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOrderSummarySyncByFiltersDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Sync"
+        ]
+      }
+    },
+    "/v1/trades/{tradeId}/retry": {
+      "post": {
+        "operationId": "TradesController_createOrder",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tradeId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Retry Trade"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RetryTradeBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Trades"
+        ]
+      }
+    },
+    "/api/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "ATS Order Api",
+    "description": "API to interact with ATS Orders",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "ForbiddenException": {
+        "type": "object",
+        "properties": {}
+      },
+      "GetTradeDto": {
+        "type": "object",
+        "properties": {
+          "tradeId": {
+            "type": "string"
+          },
+          "security": {
+            "type": "string"
+          },
+          "exchangeType": {
+            "type": "string",
+            "enum": [
+              "TRADITIONAL",
+              "WEB3"
+            ]
+          },
+          "pierMatchId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "GENERATED",
+              "CONFIRMED",
+              "REJECTED"
+            ]
+          },
+          "date": {
+            "type": "number"
+          },
+          "quantity": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          },
+          "sellOrderId": {
+            "type": "string"
+          },
+          "buyOrderId": {
+            "type": "string"
+          },
+          "rejectedReason": {
+            "type": "string"
+          },
+          "fee": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "tradeId",
+          "security",
+          "exchangeType",
+          "status",
+          "date",
+          "quantity",
+          "price",
+          "sellOrderId",
+          "buyOrderId"
+        ]
+      },
+      "GetOrderDto": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string"
+          },
+          "exchangeType": {
+            "enum": [
+              "TRADITIONAL",
+              "WEB3"
+            ],
+            "type": "string"
+          },
+          "referenceNumber": {
+            "type": "string"
+          },
+          "clearingInstrument": {
+            "type": "string"
+          },
+          "security": {
+            "type": "string"
+          },
+          "deploymentId": {
+            "type": "string"
+          },
+          "investorId": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "Expired",
+              "Rejected",
+              "Canceled",
+              "Open",
+              "Executed",
+              "Draft"
+            ],
+            "type": "string"
+          },
+          "side": {
+            "enum": [
+              "B",
+              "S"
+            ],
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "category": {
+            "enum": [
+              "STAGE",
+              "CROX",
+              "DRAFT"
+            ],
+            "type": "string"
+          },
+          "expirationDate": {
+            "type": "number"
+          },
+          "updatedDate": {
+            "type": "number"
+          },
+          "creationDate": {
+            "type": "number"
+          },
+          "price": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "string"
+          },
+          "feePercentage": {
+            "type": "string"
+          },
+          "liveQuantity": {
+            "type": "string"
+          },
+          "liveAmount": {
+            "type": "string"
+          },
+          "liveFeeAmount": {
+            "type": "string"
+          },
+          "executedQuantity": {
+            "type": "string"
+          },
+          "executedAmount": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "trades": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetTradeDto"
+            }
+          },
+          "rejectedReason": {
+            "type": "string",
+            "enum": [
+              "WASH_CHECK"
+            ]
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "walletAddress": {
+            "type": "string"
+          },
+          "network": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "orderId",
+          "exchangeType",
+          "referenceNumber",
+          "clearingInstrument",
+          "security",
+          "investorId",
+          "status",
+          "side",
+          "type",
+          "category",
+          "expirationDate",
+          "updatedDate",
+          "creationDate",
+          "price",
+          "quantity",
+          "liveQuantity",
+          "liveAmount",
+          "liveFeeAmount",
+          "executedQuantity",
+          "executedAmount",
+          "trades",
+          "active"
+        ]
+      },
+      "GetOrdersDto": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "type": "object",
+            "properties": {
+              "total": {
+                "required": true,
+                "type": "number"
+              },
+              "offset": {
+                "required": false,
+                "type": "number"
+              },
+              "limit": {
+                "required": false,
+                "type": "number"
+              },
+              "length": {
+                "required": true,
+                "type": "number"
+              }
+            }
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetOrderDto"
+            }
+          }
+        },
+        "required": [
+          "meta",
+          "data"
+        ]
+      },
+      "CreateOrderRequestDto": {
+        "type": "object",
+        "properties": {
+          "expirationDate": {
+            "type": "number",
+            "example": 1689251364680
+          },
+          "security": {
+            "type": "string"
+          },
+          "investorId": {
+            "type": "string"
+          },
+          "side": {
+            "type": "string",
+            "enum": [
+              "B",
+              "S"
+            ]
+          },
+          "amount": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LMT"
+            ]
+          },
+          "walletAddress": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "expirationDate",
+          "security",
+          "investorId",
+          "side",
+          "amount",
+          "price",
+          "type"
+        ]
+      },
+      "CreateOrderResponseDto": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string"
+          },
+          "referenceNumber": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "orderId",
+          "referenceNumber"
+        ]
+      },
+      "CreateOrderBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "NOT_ENOUGH_CASH_FOR_SENDER",
+            "enum": [
+              "Bad Request",
+              "ASSET_NOT_FOUND",
+              "ACCOUNT_NOT_FOUND",
+              "NOT_ENOUGH_CASH_FOR_SENDER",
+              "INVALID_ORDER_AMOUNT",
+              "INVESTOR_KYC_BLOCKED",
+              "INVESTOR_KYC_EXPIRED",
+              "AUTHORIZED",
+              "NOT_ENOUGH_TOKENS_FOR_SENDER",
+              "FLOWBACK",
+              "DESTINATION_JURISDICTION_RESTRICTED",
+              "HOLD_UP_PERIOD_1Y",
+              "MAX_INVESTORS_IN_CATEGORY",
+              "ONLY_FULL_TRANSFER",
+              "MIN_TOKENS_FOR_INVESTOR",
+              "MAX_TOKENS_FOR_INVESTOR",
+              "ACCREDITATION_REQUIRED",
+              "UNKNOWN",
+              "ADD_ORDER_MAXIMUM_ORDER_UNITS",
+              "ADD_ORDER_MAXIMUM_ORDER_NOTIONAL_AMOUNT",
+              "ADD_ORDER_MAXIMUM_OVERALL_ACCOUNT_UNITS"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "ValidateOrderCreationRequestDto": {
+        "type": "object",
+        "properties": {
+          "deploymentId": {
+            "type": "string"
+          },
+          "investorId": {
+            "type": "string"
+          },
+          "side": {
+            "type": "string",
+            "enum": [
+              "B",
+              "S"
+            ]
+          }
+        },
+        "required": [
+          "deploymentId",
+          "investorId",
+          "side"
+        ]
+      },
+      "ValidateOrderCreationResponseDto": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string",
+            "example": "INVESTOR_KYC_BLOCKED",
+            "enum": [
+              "AUTHORIZED",
+              "NOT_ENOUGH_TOKENS_FOR_SENDER",
+              "FLOWBACK",
+              "DESTINATION_JURISDICTION_RESTRICTED",
+              "HOLD_UP_PERIOD_1Y",
+              "MAX_INVESTORS_IN_CATEGORY",
+              "ONLY_FULL_TRANSFER",
+              "MIN_TOKENS_FOR_INVESTOR",
+              "MAX_TOKENS_FOR_INVESTOR",
+              "ACCREDITATION_REQUIRED",
+              "UNKNOWN",
+              "INVESTOR_KYC_BLOCKED",
+              "INVESTOR_KYC_EXPIRED"
+            ]
+          },
+          "isAuthorized": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "reason",
+          "isAuthorized"
+        ]
+      },
+      "ValidateOrderCreationBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ASSET_NOT_FOUND",
+            "enum": [
+              "Bad Request",
+              "ASSET_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "GetOrderByIdNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ORDER_NOT_FOUND",
+            "enum": [
+              "ORDER_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CancelOrderResponseDto": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string"
+          },
+          "referenceNumber": {
+            "type": "string"
+          },
+          "previousStatus": {
+            "type": "string",
+            "enum": [
+              "Expired",
+              "Rejected",
+              "Canceled",
+              "Open",
+              "Executed",
+              "Draft"
+            ]
+          }
+        },
+        "required": [
+          "orderId",
+          "referenceNumber",
+          "previousStatus"
+        ]
+      },
+      "CancelOrderBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "INVALID_ORDER_STATUS",
+            "enum": [
+              "Bad Request",
+              "INVALID_ORDER_STATUS"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CancelOrderNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ORDER_NOT_FOUND",
+            "enum": [
+              "ORDER_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "Book": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "referenceNumber": {
+            "type": "string"
+          },
+          "security": {
+            "type": "string"
+          },
+          "side": {
+            "enum": [
+              "B",
+              "S"
+            ],
+            "type": "string"
+          },
+          "date": {
+            "type": "number"
+          },
+          "price": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "referenceNumber",
+          "security",
+          "side",
+          "date",
+          "price",
+          "quantity"
+        ]
+      },
+      "OrderBookBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ASSET_REGION_NOT_CONFIGURED",
+            "enum": [
+              "ASSET_REGION_NOT_CONFIGURED"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "OrderData": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string"
+          },
+          "referenceNumber": {
+            "type": "string"
+          },
+          "investorId": {
+            "type": "string"
+          },
+          "security": {
+            "type": "string"
+          },
+          "side": {
+            "type": "string",
+            "enum": [
+              "B",
+              "S"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LMT"
+            ]
+          },
+          "price": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "orderId",
+          "referenceNumber",
+          "investorId",
+          "security",
+          "side",
+          "type",
+          "price",
+          "quantity"
+        ]
+      },
+      "SummaryData": {
+        "type": "object",
+        "properties": {
+          "pierOrderId": {
+            "type": "string"
+          },
+          "matched": {
+            "type": "boolean"
+          },
+          "differences": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "MISSING_DB",
+                "MISSING_PIER",
+                "PIER_ORDER_STATUS",
+                "DB_ORDER_DATA"
+              ]
+            }
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "CANCEL_IN_FI",
+                "CANCEL_IN_PIER",
+                "CREATE_IN_DB",
+                "UPDATE_IN_DB"
+              ]
+            }
+          }
+        },
+        "required": [
+          "matched",
+          "differences",
+          "actions"
+        ]
+      },
+      "FiSummaryOrderData": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "Expired",
+              "Rejected",
+              "Canceled",
+              "Open",
+              "Executed",
+              "Draft"
+            ]
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "STAGE",
+              "CROX",
+              "DRAFT"
+            ]
+          },
+          "liveQuantity": {
+            "type": "string"
+          },
+          "executedQuantity": {
+            "type": "string"
+          },
+          "executedAmount": {
+            "type": "string"
+          },
+          "creationDate": {
+            "type": "string"
+          },
+          "updatedDate": {
+            "type": "string"
+          },
+          "expirationDate": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "category",
+          "liveQuantity",
+          "executedQuantity",
+          "executedAmount",
+          "creationDate",
+          "updatedDate",
+          "expirationDate"
+        ]
+      },
+      "DbSummaryOrderData": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "Expired",
+              "Rejected",
+              "Canceled",
+              "Open",
+              "Executed",
+              "Draft"
+            ],
+            "type": "string"
+          },
+          "category": {
+            "enum": [
+              "STAGE",
+              "CROX",
+              "DRAFT"
+            ],
+            "type": "string"
+          },
+          "liveQuantity": {
+            "type": "string"
+          },
+          "executedQuantity": {
+            "type": "string"
+          },
+          "executedAmount": {
+            "type": "string"
+          },
+          "creationDate": {
+            "type": "string"
+          },
+          "updatedDate": {
+            "type": "string"
+          },
+          "expirationDate": {
+            "type": "string"
+          },
+          "pierOrderId": {
+            "type": "string"
+          },
+          "deploymentId": {
+            "type": "string"
+          },
+          "feePercentage": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "exchangeType": {
+            "type": "string",
+            "enum": [
+              "TRADITIONAL",
+              "WEB3"
+            ]
+          }
+        },
+        "required": [
+          "status",
+          "category",
+          "liveQuantity",
+          "executedQuantity",
+          "executedAmount",
+          "creationDate",
+          "updatedDate",
+          "expirationDate",
+          "deploymentId",
+          "exchangeType"
+        ]
+      },
+      "GetOrderSummaryDto": {
+        "type": "object",
+        "properties": {
+          "order": {
+            "$ref": "#/components/schemas/OrderData"
+          },
+          "summary": {
+            "$ref": "#/components/schemas/SummaryData"
+          },
+          "fi": {
+            "type": "object",
+            "properties": {
+              "systemStatus": {
+                "required": true,
+                "enum": [
+                  "FOUND",
+                  "NOT_FOUND"
+                ],
+                "type": "string"
+              },
+              "data": {
+                "required": false,
+                "$ref": "#/components/schemas/FiSummaryOrderData"
+              }
+            }
+          },
+          "db": {
+            "type": "object",
+            "properties": {
+              "systemStatus": {
+                "required": true,
+                "enum": [
+                  "FOUND",
+                  "NOT_FOUND"
+                ],
+                "type": "string"
+              },
+              "data": {
+                "required": false,
+                "$ref": "#/components/schemas/DbSummaryOrderData"
+              }
+            }
+          },
+          "pier": {
+            "type": "object",
+            "properties": {
+              "systemStatus": {
+                "required": true,
+                "enum": [
+                  "FOUND",
+                  "NOT_FOUND"
+                ],
+                "type": "string"
+              },
+              "data": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "required": true,
+                    "enum": [
+                      "inProgress",
+                      "cancel",
+                      "done"
+                    ],
+                    "type": "string"
+                  }
+                }
+              },
+              "error": {
+                "required": false,
+                "type": "object"
+              }
+            }
+          }
+        },
+        "required": [
+          "order",
+          "summary",
+          "fi",
+          "db",
+          "pier"
+        ]
+      },
+      "GetOrderSummaryByFiltersDto": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetOrderSummaryDto"
+            }
+          }
+        },
+        "required": [
+          "total",
+          "data"
+        ]
+      },
+      "GetOrderSummarySyncDto": {
+        "type": "object",
+        "properties": {
+          "order": {
+            "$ref": "#/components/schemas/OrderData"
+          },
+          "summary": {
+            "$ref": "#/components/schemas/SummaryData"
+          },
+          "result": {
+            "type": "object",
+            "properties": {
+              "success": {
+                "required": true,
+                "type": "boolean"
+              },
+              "error": {
+                "required": false,
+                "type": "object"
+              }
+            }
+          }
+        },
+        "required": [
+          "order",
+          "summary",
+          "result"
+        ]
+      },
+      "GetOrderSummarySyncByFiltersDto": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number"
+          },
+          "synched": {
+            "type": "number"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetOrderSummarySyncDto"
+            }
+          }
+        },
+        "required": [
+          "total",
+          "synched",
+          "data"
+        ]
+      },
+      "RetryTradeBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "TRADE_NOT_FOUND",
+            "enum": [
+              "TRADE_NOT_FOUND",
+              "INVALID_TRADE_STATUS"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      }
+    }
+  }
+}

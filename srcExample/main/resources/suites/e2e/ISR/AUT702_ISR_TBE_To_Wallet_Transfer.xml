@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT702_ISR_TBE_To_Wallet_Transfer" verbose="1">
+    <test name="AUT702_ISR_TBE_To_Wallet_Transfer">
+        <classes>
+            <class name="io.securitize.tests.controlPanel.AUT702_ISR_TBE_To_Wallet_Transfer" />
+        </classes>
+    </test>
+</suite>

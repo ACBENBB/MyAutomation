@@ -1,0 +1,21 @@
+{
+  "clientId": "#ISSUER_ID#",
+  "signerId": "#SID_LEGAL_SIGNER_ID#",
+  "documentId": "#SID_DOCUMENT_ID#",
+  "rc": {
+     // "clientId": "42c97798-78e3-4c96-9f66-884863446817",
+     // "signerId": "631940878ae6ef001304e5f2",
+     // "documentId": "6208e2bb31303900139cd0a4"
+     //  path param "documentId" also exists in method 'getV1ClientidInvestorSignersSigneridDocumentsDocumentidView'
+     //  with another content of a legal signer document id
+     //  "documentId": "#SID_LEGAL_SIGNER_DOCUMENT_ID#"  //"documentId": "631940888ae6ef001304e5f4"
+  },
+  "sandbox": {
+     // "clientId": "b038cd1f-91bc-44f1-ae84-c1051710d698",
+     // "signerId": "62d4582557dd990016f46f3d",
+     // "documentId": "62d4581a57dd990016f46dbc"
+     //  path param "documentId" also exists in method 'getV1ClientidInvestorSignersSigneridDocumentsDocumentidView'
+     //  with another content of a legal signer document id
+     //  "documentId": "#SID_LEGAL_SIGNER_DOCUMENT_ID#"  //"documentId": "62d4582557dd990016f46f3f"
+  }
+}

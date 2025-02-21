@@ -1,0 +1,7 @@
+<suite name="AUT684_blackrock_E2E_primary_market" verbose="1">
+    <test name="AUT684_blackrock_E2E_primary_market">
+        <classes>
+            <class name="io.securitize.tests.blackrock.AUT684_blackrock_E2E_primary_market" />
+        </classes>
+    </test>
+</suite>

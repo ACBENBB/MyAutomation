@@ -1,0 +1,11 @@
+1. Record yourself using your webcam into mp4
+2. Use ffmpeg to convert the mp4 to mjpeg format:
+    ffmpeg -i input.mp4 livenessCheck.mjpeg
+3. Update the name of video file to use inside WebDriverFactory.java
+4. For local Chrome: Copy the mjpeg file to the resources folder
+5. For remote Chrome (Selenoid): Copy the mjpeg file to the mountData folder in the server, currently
+   it is under: /home/ubuntu/selenoid/mountData
+
+In order for Selenoid to share the mountData folder with browser containers, make sure the browsers.json
+configuration file contains instructions to mount that folder:
+    "volumes" : ["/home/ubuntu/selenoid/mountData:/tmp/mountData:ro"]

@@ -1,0 +1,16 @@
+{
+  "pathParams": {
+    "system": "#SID_SYSTEM#"
+  },
+  "queryParams": {
+    "order": "asc",
+    "page": "1",
+    "limit": "1"
+  },
+  "skips": {
+    "bodySchemaCheck": true,
+    "skipReason": "Body schema was skipped due to lack of schema (model instead of schema)"
+  },
+  "rc": {},
+  "sandbox": {}
+}

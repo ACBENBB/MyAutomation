@@ -1,0 +1,9 @@
+{
+  "skips": {
+    "entireTest": false
+  },
+  "pathParams":
+  {
+    "defaultCountrySettingsId": "1"
+  }
+}

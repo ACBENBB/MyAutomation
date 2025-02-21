@@ -1,0 +1,24 @@
+{
+  "skips": {
+    "entireTest": false,
+    "bodySchemaCheck": true,
+    "bodyContentCheck": true
+  },
+  "pathParams":
+  {
+    "snapshotId": "60908"
+  },
+  "queryParams":
+  {
+    "tokenId": "9ee32322-5f9a-4c56-92cb-58aee3e1ee84"
+  },
+  "sandbox": {
+    "pathParams": {
+      "snapshotId": "76894"
+    },
+    "queryParams":
+    {
+      "tokenId": "ff24d430-0f6d-4059-bdd5-1d5a6c8d3b88"
+    }
+  }
+}

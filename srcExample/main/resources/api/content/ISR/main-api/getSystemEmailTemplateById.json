@@ -1,0 +1,14 @@
+{
+  "pathParams": {
+    "systemEmailTemplateId": "54"
+  },
+  "skips": {
+    "bodySchemaCheck": true,
+    "bodyContentCheck": true
+  },
+  "sandbox": {
+    "pathParams": {
+      "systemEmailTemplateId": "40"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT70_SID_SumSub_Reject" verbose="1">
+    <test name="AUT70_SID_SumSub_Reject">
+        <classes>
+            <class name="io.securitize.tests.securitizeId.AUT70_SID_SumSub_Reject" />
+        </classes>
+    </test>
+</suite>

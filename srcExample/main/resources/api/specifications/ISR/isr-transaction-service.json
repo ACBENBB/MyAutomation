@@ -1,0 +1,1693 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/v1/token-transactions": {
+      "get": {
+        "operationId": "TokenTransactionsController_getTokenTransactions",
+        "parameters": [
+          {
+            "name": "startDate",
+            "required": false,
+            "in": "query",
+            "description": "Date greater than or equal to initialTimeStamp",
+            "schema": {
+              "format": "2023-12-09T13:30:38.867Z",
+              "type": "string"
+            }
+          },
+          {
+            "name": "endDate",
+            "required": false,
+            "in": "query",
+            "description": "Date lower than or equal to initialTimeStamp",
+            "schema": {
+              "format": "2023-12-09T13:30:38.867Z",
+              "type": "string"
+            }
+          },
+          {
+            "name": "hasPierMatchId",
+            "required": false,
+            "in": "query",
+            "description": "has pier match ID, applies only when type is transfer-ok",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "manuallyModified",
+            "required": false,
+            "in": "query",
+            "description": "has been manually modified",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "manuallyCreated",
+            "required": false,
+            "in": "query",
+            "description": "has been manually created",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": false,
+            "in": "query",
+            "description": "senderUserId or receiverUserId",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "issuerId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {}
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {}
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "issuance",
+                  "reallocation",
+                  "transfer-ok",
+                  "transfer-rejected",
+                  "reclaim",
+                  "destroy",
+                  "freeze",
+                  "unfreeze",
+                  "redemption"
+                ]
+              }
+            }
+          },
+          {
+            "name": "processType",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "empty",
+                  "routine",
+                  "amendment",
+                  "non-routine"
+                ]
+              }
+            }
+          },
+          {
+            "name": "source",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "other",
+                  "import"
+                ]
+              }
+            }
+          },
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "description": "Search text from blockchain transaction id, transaction hash, investor id, investor wallet",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderDirection",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": null,
+              "enum": [
+                "ASC",
+                "DESC"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderField",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": null,
+              "enum": [
+                "createdAt",
+                "updatedAt",
+                "initialTimestamp"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "includes",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "blockchainTransaction",
+                  "tokenIssuance"
+                ]
+              }
+            }
+          },
+          {
+            "name": "pierMatchId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "transactionHash",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "default": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "default": 50,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Token Transactions By Filters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTokenTransactionsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Token Transactions"
+        ]
+      },
+      "post": {
+        "operationId": "TokenTransactionsController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTokenTransactionBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successfully created Token Transaction",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenTransactionDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomBadRequestException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Token Transactions"
+        ]
+      }
+    },
+    "/v1/token-transactions/{id}": {
+      "get": {
+        "operationId": "TokenTransactionsController_getById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "includes",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "blockchainTransaction",
+                  "tokenIssuance"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Token Transaction By Id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenTransactionDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntitiyNotFoundException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Token Transactions"
+        ]
+      },
+      "patch": {
+        "operationId": "TokenTransactionsController_updateById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTokenTransactionBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update Token Transaction By Id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenTransactionDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntitiyNotFoundException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Token Transactions"
+        ]
+      },
+      "delete": {
+        "operationId": "TokenTransactionsController_deleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Token Transaction By Id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenTransactionDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomBadRequestException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntitiyNotFoundException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Token Transactions"
+        ]
+      }
+    },
+    "/v1/token-transactions/import": {
+      "post": {
+        "operationId": "TokenTransactionsController_import",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportTokenTransactionRequestBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Import Token Transactions Successful"
+          }
+        },
+        "tags": [
+          "Token Transactions"
+        ]
+      }
+    },
+    "/v1/token-issuances/sync-blockchain-transaction-id": {
+      "post": {
+        "operationId": "TokenIssuancesController_syncBlockchainTransactionId",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenIssuanceSyncBlockchainTransactionBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Sync blockchain transaction id which is not completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenIssuanceSyncBlockchainTransactionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Token Issuances"
+        ]
+      }
+    },
+    "/v1/reporting/investors/{investorId}/transactions/csv": {
+      "get": {
+        "operationId": "ReportingController_getAllTransactionsForInvestorOnCsv",
+        "parameters": [
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "issuance",
+                  "reallocation",
+                  "transfer-ok",
+                  "transfer-rejected",
+                  "reclaim",
+                  "destroy",
+                  "freeze",
+                  "unfreeze",
+                  "redemption"
+                ]
+              }
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "PresignedUrl for Investor Transactions CSV",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionsDownloadResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntitiyNotFoundException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Reporting"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "ISR Transaction Service",
+    "description": "Service to interact with Issuer Transactions",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "PersonDto": {
+        "type": "object",
+        "properties": {
+          "investorBalanceAfterTransaction": {
+            "type": "string",
+            "example": "999"
+          },
+          "walletBalanceAfterTransaction": {
+            "type": "string",
+            "example": "999"
+          },
+          "investorId": {
+            "type": "number"
+          },
+          "walletAddress": {
+            "type": "string"
+          },
+          "walletType": {
+            "type": "string",
+            "enum": [
+              "drs",
+              "bonus",
+              "onchain"
+            ]
+          }
+        }
+      },
+      "BlockchainTransactionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "InvestorLock",
+              "LockTokens",
+              "BurnTokens",
+              "BurnTBETokens",
+              "UpdateRole",
+              "IssueTokens",
+              "TransferTBE",
+              "ReallocateTokens",
+              "InternalTBETransfer",
+              "IssueTokensToTBE",
+              "ReleaseLock",
+              "HoldTrading",
+              "RemoveWallet",
+              "RegisterWallet",
+              "ReleaseTrading",
+              "RemoveInvestor",
+              "UpdateComplianceRules",
+              "UpdateCountryComplianceStatus",
+              "PierTBETransfer"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "signed",
+              "sent",
+              "success",
+              "failure"
+            ]
+          },
+          "additionalData": {
+            "type": "string"
+          },
+          "issuanceProcessId": {
+            "type": "string"
+          },
+          "issuanceProcessType": {
+            "type": "string"
+          },
+          "tokenWalletId": {
+            "type": "number"
+          },
+          "target": {
+            "type": "string",
+            "enum": [
+              "wallet",
+              "treasury"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "type",
+          "status",
+          "additionalData",
+          "issuanceProcessId",
+          "issuanceProcessType",
+          "target"
+        ]
+      },
+      "TokenIssuanceDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "userId": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "processing",
+              "success",
+              "failure",
+              "amended"
+            ]
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "automated",
+              "manual"
+            ]
+          },
+          "issuanceTime": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "userId",
+          "status",
+          "source",
+          "issuanceTime"
+        ]
+      },
+      "TokenTransactionDto": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "string",
+            "example": "999"
+          },
+          "amountInCents": {
+            "type": "string",
+            "example": "999"
+          },
+          "id": {
+            "type": "number"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "issuanceType": {
+            "enum": [
+              "prepresale",
+              "presale",
+              "mainsale",
+              "reissuance",
+              "other",
+              "drip"
+            ],
+            "type": "string"
+          },
+          "distributionId": {
+            "type": "string"
+          },
+          "initialTimestamp": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "closedTimestamp": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "blockchainTransactionId": {
+            "type": "number"
+          },
+          "transactionHash": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "issuance",
+              "reallocation",
+              "transfer-ok",
+              "transfer-rejected",
+              "reclaim",
+              "destroy",
+              "freeze",
+              "unfreeze",
+              "redemption"
+            ],
+            "type": "string"
+          },
+          "processType": {
+            "enum": [
+              "empty",
+              "routine",
+              "amendment",
+              "non-routine"
+            ],
+            "type": "string"
+          },
+          "source": {
+            "enum": [
+              "other",
+              "import"
+            ],
+            "type": "string"
+          },
+          "manuallyModified": {
+            "type": "boolean"
+          },
+          "manuallyCreated": {
+            "type": "boolean"
+          },
+          "modifierOperatorId": {
+            "type": "number"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "tokenDRSId": {
+            "type": "number"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "pierMatchId": {
+            "type": "string"
+          },
+          "costBasisUpdatedBy": {
+            "enum": [
+              "operator",
+              "investor",
+              "api"
+            ],
+            "type": "string"
+          },
+          "costBasisUpdatedById": {
+            "type": "number"
+          },
+          "costBasisUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "manualPricePerUnit": {
+            "type": "string"
+          },
+          "manualPurchaseAmount": {
+            "type": "string"
+          },
+          "manualCostBasisAmount": {
+            "type": "string"
+          },
+          "manualNetProceedAmount": {
+            "type": "string"
+          },
+          "manualGrossProceedAmount": {
+            "type": "string"
+          },
+          "pricePerUnit": {
+            "type": "string"
+          },
+          "purchaseAmount": {
+            "type": "string"
+          },
+          "costBasisAmount": {
+            "type": "string"
+          },
+          "netProceedAmount": {
+            "type": "string"
+          },
+          "grossProceedAmount": {
+            "type": "string"
+          },
+          "buyerTransactionComission": {
+            "type": "string"
+          },
+          "buyerTransactionFee": {
+            "type": "string"
+          },
+          "sellerTransactionCommission": {
+            "type": "string"
+          },
+          "sellerTransactionFee": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "sender": {
+            "$ref": "#/components/schemas/PersonDto"
+          },
+          "receiver": {
+            "$ref": "#/components/schemas/PersonDto"
+          },
+          "senderType": {
+            "enum": [
+              "investor",
+              "issuer",
+              "unknown"
+            ],
+            "type": "string"
+          },
+          "receiverType": {
+            "enum": [
+              "investor",
+              "issuer",
+              "unknown"
+            ],
+            "type": "string"
+          },
+          "tokenDecimals": {
+            "type": "number"
+          },
+          "blockchainTransaction": {
+            "$ref": "#/components/schemas/BlockchainTransactionDto"
+          },
+          "tokenIssuance": {
+            "$ref": "#/components/schemas/TokenIssuanceDto"
+          }
+        },
+        "required": [
+          "amount",
+          "amountInCents",
+          "id",
+          "issuerId",
+          "initialTimestamp",
+          "manuallyModified",
+          "manuallyCreated",
+          "tokenId",
+          "createdAt",
+          "updatedAt",
+          "tokenDecimals"
+        ]
+      },
+      "GetTokenTransactionsResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TokenTransactionDto"
+            }
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "total": {
+                "required": true,
+                "type": "number"
+              },
+              "offset": {
+                "required": false,
+                "type": "number"
+              },
+              "limit": {
+                "required": false,
+                "type": "number"
+              },
+              "length": {
+                "required": true,
+                "type": "number"
+              }
+            }
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ]
+      },
+      "EntitiyNotFoundException": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "default": 404
+          },
+          "error": {
+            "type": "string",
+            "default": "NOT_FOUND_ERROR"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "statusCode",
+          "error",
+          "message",
+          "data"
+        ]
+      },
+      "CreateTokenTransactionBodyDto": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "string",
+            "example": "999"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "blockchainTransactionId": {
+            "type": "number"
+          },
+          "closedTimestamp": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "costBasisAmount": {
+            "type": "string"
+          },
+          "costBasisUpdatedById": {
+            "type": "number"
+          },
+          "costBasisUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "costBasisUpdatedBy": {
+            "type": "string",
+            "enum": [
+              "operator",
+              "investor",
+              "api"
+            ]
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "distributionId": {
+            "type": "string"
+          },
+          "grossProceedAmount": {
+            "type": "string"
+          },
+          "initialTimestamp": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "issuanceType": {
+            "type": "string",
+            "enum": [
+              "prepresale",
+              "presale",
+              "mainsale",
+              "reissuance",
+              "other",
+              "drip"
+            ]
+          },
+          "manualCostBasisAmount": {
+            "type": "string"
+          },
+          "manualGrossProceedAmount": {
+            "type": "string"
+          },
+          "manualNetProceedAmount": {
+            "type": "string"
+          },
+          "manualPricePerUnit": {
+            "type": "string"
+          },
+          "manualPurchaseAmount": {
+            "type": "string"
+          },
+          "manuallyCreated": {
+            "type": "boolean"
+          },
+          "manuallyModified": {
+            "type": "boolean"
+          },
+          "modifierOperatorId": {
+            "type": "number"
+          },
+          "netProceedAmount": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "pierMatchId": {
+            "type": "string"
+          },
+          "pricePerUnit": {
+            "type": "string"
+          },
+          "processType": {
+            "type": "string",
+            "enum": [
+              "empty",
+              "routine",
+              "amendment",
+              "non-routine"
+            ]
+          },
+          "purchaseAmount": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "other",
+              "import"
+            ]
+          },
+          "tokenDRSId": {
+            "type": "number"
+          },
+          "transactionHash": {
+            "type": "string"
+          },
+          "sellerTransactionCommission": {
+            "type": "string"
+          },
+          "sellerTransactionFee": {
+            "type": "string"
+          },
+          "buyerTransactionComission": {
+            "type": "string"
+          },
+          "buyerTransactionFee": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "issuance",
+              "reallocation",
+              "reclaim",
+              "destroy",
+              "freeze",
+              "unfreeze",
+              "redemption"
+            ]
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "sender": {
+            "$ref": "#/components/schemas/PersonDto"
+          },
+          "receiver": {
+            "$ref": "#/components/schemas/PersonDto"
+          }
+        },
+        "required": [
+          "amount",
+          "tokenId",
+          "issuerId",
+          "initialTimestamp"
+        ]
+      },
+      "CustomBadRequestException": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "default": 400
+          },
+          "error": {
+            "type": "string",
+            "default": "BAD_REQUEST_ERROR"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "statusCode",
+          "error",
+          "message"
+        ]
+      },
+      "UpdateTokenTransactionBodyDto": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "string",
+            "example": "999"
+          },
+          "blockchainTransactionId": {
+            "type": "number"
+          },
+          "closedTimestamp": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "costBasisAmount": {
+            "type": "string"
+          },
+          "costBasisUpdatedById": {
+            "type": "number"
+          },
+          "costBasisUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "costBasisUpdatedBy": {
+            "type": "string",
+            "enum": [
+              "operator",
+              "investor",
+              "api"
+            ]
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "distributionId": {
+            "type": "string"
+          },
+          "grossProceedAmount": {
+            "type": "string"
+          },
+          "initialTimestamp": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "issuanceType": {
+            "type": "string",
+            "enum": [
+              "prepresale",
+              "presale",
+              "mainsale",
+              "reissuance",
+              "other",
+              "drip"
+            ]
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "manualCostBasisAmount": {
+            "type": "string"
+          },
+          "manualGrossProceedAmount": {
+            "type": "string"
+          },
+          "manualNetProceedAmount": {
+            "type": "string"
+          },
+          "manualPricePerUnit": {
+            "type": "string"
+          },
+          "manualPurchaseAmount": {
+            "type": "string"
+          },
+          "manuallyCreated": {
+            "type": "boolean"
+          },
+          "manuallyModified": {
+            "type": "boolean"
+          },
+          "modifierOperatorId": {
+            "type": "number"
+          },
+          "netProceedAmount": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "pierMatchId": {
+            "type": "string"
+          },
+          "pricePerUnit": {
+            "type": "string"
+          },
+          "processType": {
+            "type": "string",
+            "enum": [
+              "empty",
+              "routine",
+              "amendment",
+              "non-routine"
+            ]
+          },
+          "purchaseAmount": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "other",
+              "import"
+            ]
+          },
+          "tokenDRSId": {
+            "type": "number"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "transactionHash": {
+            "type": "string"
+          },
+          "sellerTransactionCommission": {
+            "type": "string"
+          },
+          "sellerTransactionFee": {
+            "type": "string"
+          },
+          "buyerTransactionComission": {
+            "type": "string"
+          },
+          "buyerTransactionFee": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "issuance",
+              "reallocation",
+              "reclaim",
+              "destroy",
+              "freeze",
+              "unfreeze",
+              "redemption"
+            ]
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "sender": {
+            "$ref": "#/components/schemas/PersonDto"
+          },
+          "receiver": {
+            "$ref": "#/components/schemas/PersonDto"
+          }
+        }
+      },
+      "ImportTokenTransactionDto": {
+        "type": "object",
+        "properties": {
+          "amountInCents": {
+            "type": "string",
+            "example": "999"
+          },
+          "pricePerUnit": {
+            "type": "string",
+            "example": "999"
+          },
+          "costBasisAmount": {
+            "type": "string",
+            "example": "999"
+          },
+          "purchaseAmount": {
+            "type": "string",
+            "example": "999"
+          },
+          "initialTimestamp": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "closedTimestamp": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "ethTxId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "issuance",
+              "reallocation",
+              "transfer-ok",
+              "transfer-rejected",
+              "reclaim",
+              "destroy",
+              "freeze",
+              "unfreeze",
+              "redemption"
+            ]
+          },
+          "processType": {
+            "type": "string",
+            "enum": [
+              "empty",
+              "routine",
+              "amendment",
+              "non-routine"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          },
+          "receiverInvestorId": {
+            "type": "number"
+          },
+          "receiverWalletType": {
+            "type": "string",
+            "enum": [
+              "drs",
+              "bonus",
+              "onchain"
+            ]
+          },
+          "receiverWalletAddress": {
+            "type": "string"
+          },
+          "senderInvestorId": {
+            "type": "number"
+          },
+          "senderWalletAddress": {
+            "type": "string"
+          },
+          "costBasisUpdatedBy": {
+            "type": "string",
+            "enum": [
+              "operator",
+              "investor",
+              "api"
+            ]
+          },
+          "costBasisUpdatedById": {
+            "type": "number"
+          },
+          "costBasisUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "amountInCents",
+          "pricePerUnit",
+          "initialTimestamp",
+          "type"
+        ]
+      },
+      "ImportTokenTransactionRequestBodyDto": {
+        "type": "object",
+        "properties": {
+          "issuerId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "operatorId": {
+            "type": "number"
+          },
+          "tokenTransactions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImportTokenTransactionDto"
+            }
+          }
+        },
+        "required": [
+          "issuerId",
+          "tokenId",
+          "operatorId",
+          "tokenTransactions"
+        ]
+      },
+      "TokenIssuanceSyncBlockchainTransactionBodyDto": {
+        "type": "object",
+        "properties": {
+          "dryRun": {
+            "type": "boolean",
+            "default": true
+          },
+          "includeIds": {
+            "type": "boolean",
+            "default": false
+          },
+          "take": {
+            "type": "number",
+            "default": 1000
+          },
+          "skip": {
+            "type": "number"
+          },
+          "iterate": {
+            "type": "boolean",
+            "default": true
+          }
+        },
+        "required": [
+          "dryRun",
+          "includeIds",
+          "take",
+          "iterate"
+        ]
+      },
+      "TokenIssuanceSyncBlockchainTransactionResponseDto": {
+        "type": "object",
+        "properties": {
+          "totalAmount": {
+            "type": "number"
+          },
+          "withNullAmount": {
+            "type": "number"
+          },
+          "totalWithErrors": {
+            "type": "number"
+          },
+          "ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "totalAmount",
+          "withNullAmount",
+          "ids"
+        ]
+      },
+      "TransactionsDownloadResponseDto": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      }
+    }
+  }
+}

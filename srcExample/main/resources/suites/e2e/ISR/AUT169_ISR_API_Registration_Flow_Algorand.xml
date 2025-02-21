@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT169_ISR_API_Registration_Flow_Algorand" verbose="1">
+    <test name="AUT169_ISR_API_Registration_Flow_Algorand">
+        <classes>
+            <class name="io.securitize.tests.apiTests.controlPanel.AUT169_ISR_API_Registration_Flow_Algorand" />
+        </classes>
+    </test>
+</suite>

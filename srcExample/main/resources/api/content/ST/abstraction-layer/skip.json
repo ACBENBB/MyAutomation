@@ -1,0 +1,46 @@
+[
+  {
+    "rc": [
+      "decodeTransaction",
+      "getAccountEnabled",
+      "getHolders",
+      "getMultiSigTransactionStatusSchema"
+    ],
+    "sandbox": [
+      "getDeploymentTokenDetails",
+      "decodeTransaction",
+      "getAddressBalanceByDeploymentId",
+      "getAddressBalance",
+      "getAllowance",
+      "getComplianceCounters",
+      "getComplianceRules",
+      "getCountryStatus",
+      "getEvents",
+      "getHolderAttributeValue",
+      "getHolderByWalletID",
+      "getHolder",
+      "getHolders",
+      "getInvestorLock",
+      "getLocks",
+      "getMultiSigTransactionStatusSchema",
+      "getProviderInfo",
+      "getProviderTransactionByDeploymentId",
+      "getProviderTransaction",
+      "getRoleForWallet",
+      "getWalletBalance",
+      "getWallets",
+      "getAddressLinkByDeploymentId",
+      "getAlgorandTBEAddress",
+      "getCountriesStatuses",
+      "getDeploymentGasPrice",
+      "getDeploymentInfo",
+      "getHolderBalance",
+      "getMintedTokens",
+      "getMultisigWallet",
+      "getSingleMultiSigWallet",
+      "getTokenDetails",
+      "getTransactionInformation",
+      "isAddressDeploymentsByDeploymentId"
+    ]
+  }
+]

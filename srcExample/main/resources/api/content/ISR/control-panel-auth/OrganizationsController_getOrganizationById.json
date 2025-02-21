@@ -1,0 +1,10 @@
+{
+  "skips": {
+    "entireTest": false
+  },
+  "sandbox": {
+    "pathParams": {
+      "organizationId": "d561c8e7-ceb1-41b6-ac6b-b8e435380891"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "pathParams": {
+    "issuerId": "#ISSUER_ID#"
+  },
+  "body": {
+    "email": "securitize_automation@securitize.io"
+  },
+  "expectedResponse": {
+    "statusCode": 200,
+    "body": {
+    }
+  }
+}

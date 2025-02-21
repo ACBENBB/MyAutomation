@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT563_ISR_Affiliate_Management" verbose="1">
+    <test name="AUT563_ISR_Affiliate_Management">
+        <classes>
+            <class name="io.securitize.tests.controlPanel.AUT563_ISR_Affiliate_Management" />
+        </classes>
+    </test>
+</suite>

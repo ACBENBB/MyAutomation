@@ -1,0 +1,7 @@
+<suite name="AUT504_SID_Redirect_Nie_To_SecuritizeID_And_Back" verbose="1">
+    <test name="AUT504_SID_Redirect_Nie_To_SecuritizeID_And_Back">
+        <classes>
+            <class name="io.securitize.tests.securitizeId.AUT504_SID_Redirect_Nie_To_SecuritizeID_And_Back" />
+        </classes>
+    </test>
+</suite>

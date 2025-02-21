@@ -1,0 +1,22 @@
+[
+  {
+    "rc": [
+      "getHealthCheck",
+      "getSwapContract",
+      "investorBalance",
+      "retrieveAllContractsGeneralData",
+      "retrieveDeploymentInformation",
+      "retrieveSwapContractStatus",
+      "retrieveTheNonceOfAMultisigWallet"
+    ],
+    "sandbox": [
+      "getHealthCheck",
+      "getSwapContract",
+      "investorBalance",
+      "retrieveAllContractsGeneralData",
+      "retrieveDeploymentInformation",
+      "retrieveSwapContractStatus",
+      "retrieveTheNonceOfAMultisigWallet"
+    ]
+  }
+]

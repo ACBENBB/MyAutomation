@@ -1,0 +1,12 @@
+{
+  "pathParams":
+  {
+    "issuerId": "#ISSUER_ID#"
+  },
+  "sandbox": {
+    "skips": {
+      "bodySchemaCheck": true,
+      "bodyContentCheck": true
+    }
+  }
+}

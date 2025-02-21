@@ -1,0 +1,2220 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/metrics": {
+      "get": {
+        "operationId": "PrometheusController_index",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/accounts/{investorId}/balance/tokens": {
+      "get": {
+        "operationId": "BalanceController_getTokenBalance",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "sell-orders"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Tokens Balance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TokenBalance"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Balance"
+        ]
+      }
+    },
+    "/v1/accounts/{investorId}/wallets": {
+      "get": {
+        "operationId": "AccountController_getUserWallets",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get User Wallets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Wallets"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Account"
+        ]
+      }
+    },
+    "/v1/accounts/{investorId}": {
+      "patch": {
+        "operationId": "AccountController_updateAccount",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAccountDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Account"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Update user fields"
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Account"
+        ]
+      }
+    },
+    "/v1/accounts/{investorId}/summary": {
+      "get": {
+        "operationId": "SummariesController_getAccountSummary",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "investor"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "security",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountSummary"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountSummaryNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Account Summary"
+        ]
+      }
+    },
+    "/v1/accounts/{investorId}/favourites": {
+      "get": {
+        "operationId": "AccountFavouritesController_getFavourites",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get account favourites",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetFavouriteDto"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Favourites"
+        ]
+      },
+      "post": {
+        "operationId": "AccountFavouritesController_addFavourite",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFavouriteRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Add favourite",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetFavouriteDto"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetFavouriteDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateFavouriteBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Favourites"
+        ]
+      }
+    },
+    "/v1/accounts/{investorId}/favourites/{deploymentId}": {
+      "delete": {
+        "operationId": "AccountFavouritesController_deleteFavourite",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Remove favourite"
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteFavouriteNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Favourites"
+        ]
+      }
+    },
+    "/v1/favourites": {
+      "get": {
+        "operationId": "FavouritesController_getFavourites",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "investorId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get favourites",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetFavouriteDto"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Favourites"
+        ]
+      }
+    },
+    "/v1/preferences/{investorId}": {
+      "get": {
+        "operationId": "PreferencesController_getPreferences",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get preferences",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Preferences"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetPreferencesNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Preferences"
+        ]
+      },
+      "patch": {
+        "operationId": "PreferencesController_updatePreferences",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchPreferencesDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update preferences",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Preferences"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Preferences"
+        ]
+      }
+    },
+    "/v1/accounts/{investorId}/assets": {
+      "get": {
+        "operationId": "AssetsController_getAssets",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "transferable",
+                  "inOrders",
+                  "available"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AssetBalance"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/v1/accounts/{investorId}/web3-balance": {
+      "get": {
+        "operationId": "AssetsController_getWeb3Balance",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "walletAddress",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "DS_TOKEN",
+                "STABLE_COIN"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "exclude",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "allowance",
+                  "balance"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetWeb3BalanceResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/v1/accounts/{investorId}/web3-balance/ds-tokens": {
+      "get": {
+        "operationId": "AssetsController_getDsTokensBalance",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "walletAddress",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDSTokensBalanceResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/v1/accounts/{investorId}/web3-balance/stable-coins": {
+      "get": {
+        "operationId": "AssetsController_getStableCoinsBalance",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "walletAddress",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "network",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "stableCoinName",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetStableCoinsBalanceResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/v1/migrations/accounts": {
+      "post": {
+        "operationId": "MigrationsController_migrationAccounts",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Migrations"
+        ]
+      }
+    },
+    "/api/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "ATS Account API",
+    "description": "API to interact with ATS Accounts",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "ForbiddenException": {
+        "type": "object",
+        "properties": {}
+      },
+      "TokenBalance": {
+        "type": "object",
+        "properties": {
+          "deploymentId": {
+            "type": "string"
+          },
+          "security": {
+            "type": "string"
+          },
+          "total": {
+            "type": "string"
+          },
+          "available": {
+            "type": "string"
+          },
+          "inExternalWallet": {
+            "type": "string"
+          },
+          "totalByPrice": {
+            "type": "string"
+          },
+          "availableByPrice": {
+            "type": "string"
+          },
+          "inExternalWalletByPrice": {
+            "type": "string"
+          },
+          "inSellOrders": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "deploymentId",
+          "security",
+          "total",
+          "available",
+          "inExternalWallet"
+        ]
+      },
+      "Wallet": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "walletTitle": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "network": {
+            "type": "string",
+            "enum": [
+              "ETH"
+            ]
+          },
+          "creationDate": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "walletTitle",
+          "address",
+          "network",
+          "creationDate"
+        ]
+      },
+      "Wallets": {
+        "type": "object",
+        "properties": {
+          "wallets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Wallet"
+            }
+          }
+        },
+        "required": [
+          "wallets"
+        ]
+      },
+      "GetAccountNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "UpdateAccountDto": {
+        "type": "object",
+        "properties": {
+          "isEmployee": {
+            "type": "boolean"
+          },
+          "fdId": {
+            "type": "string"
+          },
+          "ltId": {
+            "type": "string"
+          },
+          "ltEffectiveDate": {
+            "type": "number"
+          },
+          "approvedDate": {
+            "type": "number"
+          }
+        }
+      },
+      "Account": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "string"
+          },
+          "createdDate": {
+            "type": "number"
+          },
+          "updatedDate": {
+            "type": "number"
+          },
+          "approvedDate": {
+            "type": "number"
+          },
+          "fdId": {
+            "type": "string"
+          },
+          "isEmployee": {
+            "type": "boolean"
+          },
+          "ltId": {
+            "type": "string"
+          },
+          "ltEffectiveDate": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "investorId",
+          "createdDate",
+          "updatedDate",
+          "isEmployee"
+        ]
+      },
+      "CashAccountAddress": {
+        "type": "object",
+        "properties": {
+          "addressLine": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "addressLine",
+          "city",
+          "state",
+          "postalCode"
+        ]
+      },
+      "CashAccount": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "CREATED",
+              "PENDING"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "fdId": {
+            "type": "string"
+          },
+          "approvedDate": {
+            "type": "number"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "address": {
+                "required": true,
+                "$ref": "#/components/schemas/CashAccountAddress"
+              },
+              "ownerAddress": {
+                "required": false,
+                "$ref": "#/components/schemas/CashAccountAddress"
+              },
+              "accountHolder": {
+                "required": true,
+                "type": "string"
+              },
+              "accountName": {
+                "required": true,
+                "type": "string"
+              },
+              "accountNumber": {
+                "required": true,
+                "type": "string"
+              },
+              "accountType": {
+                "required": true,
+                "type": "string"
+              },
+              "routingNumber": {
+                "required": true,
+                "type": "string"
+              },
+              "accountOwnerId": {
+                "required": true,
+                "type": "string"
+              },
+              "investorId": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "status",
+          "id",
+          "data"
+        ]
+      },
+      "UserActionResponse": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "TERMS_AND_CONDITIONS_REQUIRED",
+              "COUNTRY_RESTRICTION",
+              "CASH_ACCOUNT_LOCKED_STATE",
+              "ONBOARDING_INCOMPLETED",
+              "KYC_EXPIRED",
+              "KYC_DOC_EXPIRED",
+              "INVESTOR_KYC_BLOCKED",
+              "ACCOUNT_ALREADY_CREATED"
+            ]
+          }
+        },
+        "required": [
+          "value"
+        ]
+      },
+      "UserAssetActionResponse": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string",
+            "enum": [
+              "TERMS_AND_CONDITIONS_REQUIRED",
+              "COUNTRY_RESTRICTION",
+              "CASH_ACCOUNT_LOCKED_STATE",
+              "ONBOARDING_INCOMPLETED",
+              "KYC_EXPIRED",
+              "KYC_DOC_EXPIRED",
+              "INVESTOR_KYC_BLOCKED",
+              "ACCOUNT_ALREADY_CREATED",
+              "US_FORBIDDEN_STATES",
+              "US_MINIMUM_TOKENS",
+              "PROCESSING_ACCREDITATION",
+              "ACCREDITATION_REQUIRED",
+              "LIMITED_TRADING",
+              "LEI_REQUIRED",
+              "ACCOUNT_PENDING",
+              "ACCOUNT_REQUIRED"
+            ]
+          },
+          "value": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      },
+      "UserActions": {
+        "type": "object",
+        "properties": {
+          "canUseATS": {
+            "$ref": "#/components/schemas/UserActionResponse"
+          },
+          "canTrade": {
+            "$ref": "#/components/schemas/UserAssetActionResponse"
+          },
+          "canBuy": {
+            "$ref": "#/components/schemas/UserAssetActionResponse"
+          },
+          "canSell": {
+            "$ref": "#/components/schemas/UserAssetActionResponse"
+          },
+          "canUseCA": {
+            "$ref": "#/components/schemas/UserActionResponse"
+          },
+          "canCreateAccount": {
+            "$ref": "#/components/schemas/UserActionResponse"
+          },
+          "canCashDeposit": {
+            "$ref": "#/components/schemas/UserActionResponse"
+          },
+          "canCashWithdrawal": {
+            "$ref": "#/components/schemas/UserActionResponse"
+          }
+        },
+        "required": [
+          "canUseATS",
+          "canTrade",
+          "canBuy",
+          "canSell",
+          "canUseCA",
+          "canCreateAccount",
+          "canCashDeposit",
+          "canCashWithdrawal"
+        ]
+      },
+      "Investor": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "string"
+          },
+          "mixPanelId": {
+            "type": "string"
+          },
+          "analyticsEnabled": {
+            "type": "boolean"
+          },
+          "email": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "verificationStatus": {
+            "type": "string"
+          },
+          "accountStatus": {
+            "type": "string"
+          },
+          "tfaEnabled": {
+            "type": "boolean"
+          },
+          "investorType": {
+            "type": "string"
+          },
+          "countryCode": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "pendingDeletion": {
+            "type": "boolean"
+          },
+          "deletionDeclineDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "brokerDealerId": {
+            "type": "number"
+          },
+          "accreditationStatus": {
+            "type": "string"
+          },
+          "suitabilityStatus": {
+            "type": "string",
+            "enum": [
+              "none",
+              "processing",
+              "verified",
+              "not-approved"
+            ]
+          },
+          "suitabilities": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "leiCode": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "investorId",
+          "mixPanelId",
+          "analyticsEnabled",
+          "email",
+          "fullName",
+          "verificationStatus",
+          "accountStatus",
+          "tfaEnabled",
+          "investorType",
+          "countryCode",
+          "language",
+          "pendingDeletion",
+          "deletionDeclineDate",
+          "brokerDealerId",
+          "accreditationStatus",
+          "suitabilityStatus",
+          "suitabilities"
+        ]
+      },
+      "AccountSummary": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "$ref": "#/components/schemas/Account"
+          },
+          "cashAccount": {
+            "$ref": "#/components/schemas/CashAccount"
+          },
+          "restrictions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "TERMS_AND_CONDITIONS_REQUIRED",
+                "COUNTRY_RESTRICTION",
+                "CASH_ACCOUNT_LOCKED_STATE",
+                "ONBOARDING_INCOMPLETED",
+                "KYC_EXPIRED",
+                "KYC_DOC_EXPIRED",
+                "INVESTOR_KYC_BLOCKED",
+                "ACCOUNT_ALREADY_CREATED"
+              ]
+            }
+          },
+          "assetRestriction": {
+            "type": "string",
+            "enum": [
+              "US_FORBIDDEN_STATES",
+              "US_MINIMUM_TOKENS",
+              "PROCESSING_ACCREDITATION",
+              "ACCREDITATION_REQUIRED",
+              "LIMITED_TRADING",
+              "LEI_REQUIRED",
+              "ACCOUNT_PENDING",
+              "ACCOUNT_REQUIRED"
+            ]
+          },
+          "caRestrictions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "TERMS_AND_CONDITIONS_REQUIRED",
+                "COUNTRY_RESTRICTION",
+                "CASH_ACCOUNT_LOCKED_STATE",
+                "ONBOARDING_INCOMPLETED",
+                "KYC_EXPIRED",
+                "KYC_DOC_EXPIRED",
+                "INVESTOR_KYC_BLOCKED",
+                "ACCOUNT_ALREADY_CREATED"
+              ]
+            }
+          },
+          "security": {
+            "type": "string"
+          },
+          "actions": {
+            "$ref": "#/components/schemas/UserActions"
+          },
+          "investor": {
+            "$ref": "#/components/schemas/Investor"
+          }
+        },
+        "required": [
+          "restrictions",
+          "caRestrictions",
+          "actions"
+        ]
+      },
+      "GetAccountSummaryNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "INVESTOR_NOT_FOUND",
+            "enum": [
+              "INVESTOR_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "GetFavouriteDto": {
+        "type": "object",
+        "properties": {
+          "deploymentId": {
+            "type": "string"
+          },
+          "investorId": {
+            "type": "string"
+          },
+          "creationDate": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "deploymentId",
+          "investorId",
+          "creationDate"
+        ]
+      },
+      "CreateFavouriteRequestDto": {
+        "type": "object",
+        "properties": {
+          "deploymentId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "deploymentId"
+        ]
+      },
+      "CreateFavouriteBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "FAVOURITE_ALREADY_EXIST",
+            "enum": [
+              "FAVOURITE_ALREADY_EXIST"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "DeleteFavouriteNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "FAVOURITE_NOT_FOUND",
+            "enum": [
+              "FAVOURITE_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "Preferences": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "string"
+          },
+          "favModalNotShowAgain": {
+            "type": "boolean"
+          },
+          "updatedDate": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "investorId",
+          "updatedDate"
+        ]
+      },
+      "GetPreferencesNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "PREFERENCES_NOT_FOUND",
+            "enum": [
+              "PREFERENCES_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "PatchPreferencesDto": {
+        "type": "object",
+        "properties": {
+          "favModalNotShowAgain": {
+            "type": "boolean"
+          }
+        }
+      },
+      "AssetBalance": {
+        "type": "object",
+        "properties": {
+          "asset": {
+            "type": "object",
+            "properties": {
+              "deploymentId": {
+                "required": true,
+                "type": "string"
+              },
+              "exchangeType": {
+                "required": true,
+                "enum": [
+                  "TRADITIONAL",
+                  "WEB3"
+                ],
+                "type": "string"
+              },
+              "security": {
+                "required": true,
+                "type": "string"
+              },
+              "tokenId": {
+                "required": true,
+                "type": "string"
+              },
+              "issuerId": {
+                "required": true,
+                "type": "string"
+              },
+              "investorId": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "balance": {
+            "type": "object",
+            "properties": {
+              "inExternalWallet": {
+                "type": "object",
+                "properties": {
+                  "total": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "available": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "inOrders": {
+                    "required": false,
+                    "type": "string"
+                  },
+                  "availableToTrade": {
+                    "required": false,
+                    "type": "string"
+                  }
+                }
+              },
+              "tbe": {
+                "type": "object",
+                "properties": {
+                  "total": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "available": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "inOrders": {
+                    "required": false,
+                    "type": "string"
+                  },
+                  "availableToTrade": {
+                    "required": false,
+                    "type": "string"
+                  }
+                }
+              },
+              "total": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "asset",
+          "balance"
+        ]
+      },
+      "Web3Wallet": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "address"
+        ]
+      },
+      "Web3BalanceInfo": {
+        "type": "object",
+        "properties": {
+          "transferable": {
+            "type": "string"
+          },
+          "inOrders": {
+            "type": "string"
+          },
+          "available": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "transferable",
+          "inOrders",
+          "available"
+        ]
+      },
+      "Web3AllowanceInfo": {
+        "type": "object",
+        "properties": {
+          "required": {
+            "type": "string"
+          },
+          "approved": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "required",
+          "approved"
+        ]
+      },
+      "WebTokenBalance": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "tokenAddress": {
+            "type": "string"
+          },
+          "balance": {
+            "$ref": "#/components/schemas/Web3BalanceInfo"
+          },
+          "allowance": {
+            "$ref": "#/components/schemas/Web3AllowanceInfo"
+          }
+        },
+        "required": [
+          "name",
+          "tokenAddress"
+        ]
+      },
+      "Web3DeploymentBalance": {
+        "type": "object",
+        "properties": {
+          "deploymentId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "network": {
+            "type": "string"
+          },
+          "spenderAddress": {
+            "type": "string"
+          },
+          "wallet": {
+            "$ref": "#/components/schemas/Web3Wallet"
+          },
+          "dsToken": {
+            "$ref": "#/components/schemas/WebTokenBalance"
+          },
+          "stableCoin": {
+            "$ref": "#/components/schemas/WebTokenBalance"
+          }
+        },
+        "required": [
+          "deploymentId",
+          "tokenId",
+          "network",
+          "spenderAddress",
+          "wallet",
+          "dsToken",
+          "stableCoin"
+        ]
+      },
+      "GetWeb3BalanceResponseDto": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "type": "object",
+            "properties": {
+              "length": {
+                "required": true,
+                "type": "number"
+              },
+              "total": {
+                "required": true,
+                "type": "number"
+              }
+            }
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Web3DeploymentBalance"
+            }
+          }
+        },
+        "required": [
+          "meta",
+          "data"
+        ]
+      },
+      "DsToken": {
+        "type": "object",
+        "properties": {
+          "deploymentId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "fractionBase": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "deploymentId",
+          "tokenId",
+          "type",
+          "name",
+          "address"
+        ]
+      },
+      "Web3DsTokenBalance": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "$ref": "#/components/schemas/DsToken"
+          },
+          "network": {
+            "type": "string"
+          },
+          "wallet": {
+            "$ref": "#/components/schemas/Web3Wallet"
+          },
+          "balance": {
+            "$ref": "#/components/schemas/Web3BalanceInfo"
+          },
+          "allowance": {
+            "$ref": "#/components/schemas/Web3AllowanceInfo"
+          }
+        },
+        "required": [
+          "token",
+          "network",
+          "wallet"
+        ]
+      },
+      "GetDSTokensBalanceResponseDto": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "type": "object",
+            "properties": {
+              "length": {
+                "required": true,
+                "type": "number"
+              },
+              "total": {
+                "required": true,
+                "type": "number"
+              }
+            }
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Web3DsTokenBalance"
+            }
+          }
+        },
+        "required": [
+          "meta",
+          "data"
+        ]
+      },
+      "StableCoinToken": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "fractionBase": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "type",
+          "name",
+          "address"
+        ]
+      },
+      "Web3StableCoinBalance": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "$ref": "#/components/schemas/StableCoinToken"
+          },
+          "network": {
+            "type": "string"
+          },
+          "wallet": {
+            "$ref": "#/components/schemas/Web3Wallet"
+          },
+          "balance": {
+            "$ref": "#/components/schemas/Web3BalanceInfo"
+          },
+          "allowance": {
+            "$ref": "#/components/schemas/Web3AllowanceInfo"
+          }
+        },
+        "required": [
+          "token",
+          "network",
+          "wallet"
+        ]
+      },
+      "GetStableCoinsBalanceResponseDto": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "type": "object",
+            "properties": {
+              "length": {
+                "required": true,
+                "type": "number"
+              },
+              "total": {
+                "required": true,
+                "type": "number"
+              }
+            }
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Web3StableCoinBalance"
+            }
+          }
+        },
+        "required": [
+          "meta",
+          "data"
+        ]
+      }
+    }
+  }
+}

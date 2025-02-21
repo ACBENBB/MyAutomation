@@ -1,0 +1,6 @@
+{
+    "skips": {
+        "bodySchemaCheck": false,
+        "entireTest": true
+    }
+}

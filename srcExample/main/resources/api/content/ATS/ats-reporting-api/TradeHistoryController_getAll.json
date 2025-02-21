@@ -1,0 +1,11 @@
+{
+  "queryParams": {
+    "startDate": 1519188992919,
+    "endDate": 1689251364680
+  },
+  "headers": {
+    "x-api-key": "#ATS_REPORTING_API_KEY#"
+  },
+  "rc": {},
+  "sandbox": {}
+}

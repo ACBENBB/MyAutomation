@@ -1,0 +1,450 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/cash-account/agreements-approved": {
+      "post": {
+        "operationId": "CashAccountController_sendAgreementsApprovedNotification",
+        "summary": "Send an email to a certain investor providing a record of terms and agreements approved.",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgreementsApprovedNotificationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The email has been successfully sent."
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvestorNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Cash Account"
+        ]
+      }
+    },
+    "/cash-account/withdrawal-initiated": {
+      "post": {
+        "operationId": "CashAccountController_sendNewWithdrawalNotification",
+        "summary": "Send an email to a certain investor to inform about a new withdrawal.",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewWithdrawalNotificationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The email has been successfully sent."
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvestorNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Cash Account"
+        ]
+      }
+    },
+    "/cash-account/deposit-settled": {
+      "post": {
+        "operationId": "CashAccountController_sendNewDepositNotification",
+        "summary": "Send an email to a certain investor to inform about a deposit.",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DepositSettledNotificationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The email has been successfully sent."
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvestorNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Cash Account"
+        ]
+      }
+    },
+    "/metrics": {
+      "get": {
+        "operationId": "PrometheusController_index",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "ATS Notification API",
+    "description": "API to interact with ATS Notifications",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "BankAccountHolderMismatchedDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "ForbiddenException": {
+        "type": "object",
+        "properties": {}
+      },
+      "AgreementsApprovedNotificationDto": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "investorId"
+        ]
+      },
+      "InvestorNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "INVESTOR_NOT_FOUND",
+            "enum": [
+              "INVESTOR_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "NewWithdrawalNotificationDto": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 1
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "EUR",
+              "USD"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "WIRE_DOMESTIC",
+              "WIRE_INTERNATIONAL",
+              "ACH"
+            ]
+          },
+          "date": {
+            "type": "string"
+          },
+          "minExpectedDelayInDays": {
+            "type": "number",
+            "minimum": 1
+          },
+          "maxExpectedDelayInDays": {
+            "type": "number",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "investorId",
+          "amount",
+          "currency",
+          "method",
+          "date",
+          "minExpectedDelayInDays"
+        ]
+      },
+      "DepositSettledNotificationDto": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "investorId"
+        ]
+      }
+    }
+  }
+}

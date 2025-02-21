@@ -1,0 +1,483 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/api/v1/asset-plan/create-asset-plan": {
+      "post": {
+        "operationId": "AssetPlanController_createAssetPlan",
+        "summary": "Create Asset Plan",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAssetPlanDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Asset Plan"
+        ]
+      }
+    },
+    "/api/v1/asset-plan/{assetPlanId}/investors/{investorId}": {
+      "patch": {
+        "operationId": "AssetPlanController_updateInvestorPreferences",
+        "summary": "Update investor preferences",
+        "parameters": [
+          {
+            "name": "assetPlanId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInvestorPreferencesPayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Asset Plan"
+        ]
+      }
+    },
+    "/api/v1/asset-plan": {
+      "get": {
+        "operationId": "AssetPlanController_getAssetPlan",
+        "summary": "Return asset plans based on query params",
+        "parameters": [
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "isPlanActive",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "hasInvestorReinvest",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Asset Plan"
+        ]
+      }
+    },
+    "/api/v1/asset-plan/investor-has-plan/{securitizeIdProfileId}/token-id/{tokenId}": {
+      "get": {
+        "operationId": "AssetPlanController_investorHasPlan",
+        "summary": "Return boolean if investor has a plan",
+        "parameters": [
+          {
+            "name": "securitizeIdProfileId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Asset Plan"
+        ]
+      }
+    },
+    "/api/v1/asset-plan/snapshot": {
+      "get": {
+        "operationId": "AssetPlanController_getSnapshot",
+        "summary": "Return a drip snapshot by date, token & investor(optional)",
+        "parameters": [
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Asset Plan"
+        ]
+      }
+    },
+    "/api/v1/optional-cash/recurrent-reinvestment/info": {
+      "get": {
+        "operationId": "OptionalCashController_getRecurrentReinvestmentUrlForm",
+        "summary": "Get Recurrent Reinvestment URL form",
+        "parameters": [
+          {
+            "name": "securitizeIdProfileId",
+            "required": true,
+            "in": "query",
+            "description": "Securitize iD investor profile",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Optional Cash"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "DRIP Api",
+    "description": "Endpoints for DRIP",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "CreateAssetPlanDto": {
+        "type": "object",
+        "properties": {
+          "issuerId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "controlPanelProfileId": {
+            "type": "string"
+          },
+          "securitizeIdProfileId": {
+            "type": "string"
+          },
+          "bookSharesReinvesmentPercentage": {
+            "type": "string"
+          },
+          "planSharesReinvesmentPercentage": {
+            "type": "string"
+          },
+          "hasReinvestmentActive": {
+            "type": "boolean"
+          },
+          "updatedByOperatorId": {
+            "type": "string"
+          },
+          "updatedBy": {
+            "enum": [
+              "operator",
+              "investor",
+              "system"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "issuerId",
+          "tokenId",
+          "controlPanelProfileId"
+        ]
+      },
+      "UpdateInvestorPreferencesPayloadDto": {
+        "type": "object",
+        "properties": {
+          "bookSharesReinvesmentPercentage": {
+            "type": "string"
+          },
+          "planSharesReinvesmentPercentage": {
+            "type": "string"
+          },
+          "hasReinvestmentActive": {
+            "type": "boolean"
+          },
+          "updatedByOperatorId": {
+            "type": "string"
+          },
+          "updatedBy": {
+            "default": "system",
+            "enum": [
+              "operator",
+              "investor",
+              "system"
+            ],
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

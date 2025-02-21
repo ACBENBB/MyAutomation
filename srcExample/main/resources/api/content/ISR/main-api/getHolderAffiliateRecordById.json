@@ -1,0 +1,18 @@
+{
+  "pathParams":
+  {
+    "issuerId": "#ISSUER_ID#",
+    "userId": "142080",
+    "holderAffiliateRecordId": "294240"
+  },
+  "skips": {
+    "bodySchemaCheck": true,
+    "bodyContentCheck": true
+  },
+  "sandbox": {
+    "pathParams": {
+      "userId": "283607",
+      "holderAffiliateRecordId": "5197190"
+    }
+  }
+}

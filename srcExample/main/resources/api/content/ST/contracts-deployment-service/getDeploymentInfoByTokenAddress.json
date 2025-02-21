@@ -1,0 +1,10 @@
+{
+  "pathParams": {
+    "address": "0x78Fc2C89B6dFae8aa94d9f413fF0890bdD4c39E8"
+  },
+  "expectedResponse": {
+    "statusCode": 200,
+    "body": {
+    }
+  }
+}

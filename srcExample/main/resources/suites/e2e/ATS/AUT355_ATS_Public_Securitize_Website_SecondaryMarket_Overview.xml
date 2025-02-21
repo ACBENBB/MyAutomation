@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT355_ATS_Public_Securitize_Website_SecondaryMarket_Overview" verbose="1">
+<test name="AUT355_ATS_Public_Securitize_Website_SecondaryMarket_Overview">
+    <classes>
+        <class name="io.securitize.tests.ats.AUT355_ATS_Public_Securitize_Website_SecondaryMarket_Overview" />
+    </classes>
+</test>
+</suite>

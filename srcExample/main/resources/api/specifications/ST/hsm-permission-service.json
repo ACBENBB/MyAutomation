@@ -1,0 +1,781 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "HSM Permission API",
+    "description": "",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "DeploymentDto": {
+        "type": "object",
+        "properties": {
+          "abstractionLayerDeploymentId": {
+            "type": "string",
+            "description": "Abstraction Layer Deployment Identifier"
+          }
+        },
+        "required": [
+          "abstractionLayerDeploymentId"
+        ]
+      },
+      "MessageDto": {
+        "type": "object",
+        "properties": {
+          "networkId": {
+            "type": "number",
+            "description": "Network Identifier "
+          },
+          "chainId": {
+            "type": "number",
+            "description": "Network Chain Identifier "
+          },
+          "unsignedTx": {
+            "type": "string",
+            "description": "Transaction to be pre-approved"
+          },
+          "relayerAddress": {
+            "type": "string",
+            "description": "TransactionRelayer Address"
+          },
+          "relayerNonce": {
+            "type": "number",
+            "description": "TransactionRelayer Nonce value"
+          },
+          "relayerVersion": {
+            "type": "string",
+            "description": "TranactionRelayer version",
+            "enum": [
+              "1",
+              "2",
+              "3"
+            ],
+            "default": "1"
+          },
+          "blockLimit": {
+            "type": "number",
+            "description": "Block Limit until pre-approved transaction is available"
+          }
+        },
+        "required": [
+          "networkId",
+          "chainId",
+          "unsignedTx",
+          "relayerAddress",
+          "relayerNonce",
+          "relayerVersion",
+          "blockLimit"
+        ]
+      },
+      "EIP712MessageDto": {
+        "type": "object",
+        "properties": {
+          "unsignedMessage": {
+            "type": "string",
+            "description": "Message to be pre-approved"
+          }
+        },
+        "required": [
+          "unsignedMessage"
+        ]
+      },
+      "CryptoUserDto": {
+        "type": "object",
+        "properties": {
+          "session": {
+            "type": "string",
+            "description": "CryptoUser session"
+          }
+        },
+        "required": [
+          "session"
+        ]
+      },
+      "OperatorKeysDto": {
+        "type": "object",
+        "properties": {
+          "operatorId": {
+            "type": "string",
+            "description": "Operator Identifier"
+          },
+          "operatorKeys": {
+            "description": "Operator Keys",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": "boolean",
+            "description": "Operator status"
+          }
+        },
+        "required": [
+          "operatorId",
+          "operatorKeys",
+          "status"
+        ]
+      },
+      "OperatorStatusDto": {
+        "type": "object",
+        "properties": {
+          "operatorId": {
+            "type": "string",
+            "description": "Operator Identifier"
+          },
+          "status": {
+            "type": "boolean",
+            "description": "Operator status"
+          }
+        },
+        "required": [
+          "operatorId",
+          "status"
+        ]
+      },
+      "TransactionDto": {
+        "type": "object",
+        "properties": {
+          "networkId": {
+            "type": "number",
+            "description": "Network Identifier "
+          },
+          "chainId": {
+            "type": "number",
+            "description": "Network Chain Identifier "
+          },
+          "unsignedTx": {
+            "type": "string",
+            "description": "Transaction to be pre-approved"
+          }
+        },
+        "required": [
+          "networkId",
+          "chainId",
+          "unsignedTx"
+        ]
+      },
+      "KeyPairDto": {
+        "type": "object",
+        "properties": {
+          "pkLabel": {
+            "type": "string",
+            "description": "Private Key Label"
+          },
+          "hsmAddress": {
+            "type": "string",
+            "description": "HSM Address"
+          }
+        },
+        "required": [
+          "pkLabel",
+          "hsmAddress"
+        ]
+      },
+      "OperatorRemovedKeyDto": {
+        "type": "object",
+        "properties": {
+          "operatorKey": {
+            "type": "string",
+            "description": "Operator Key"
+          }
+        },
+        "required": [
+          "operatorKey"
+        ]
+      },
+      "OperatorCryptoUserDto": {
+        "type": "object",
+        "properties": {
+          "operatorCryptoUserId": {
+            "type": "string",
+            "description": "Operator Crypto User identifier"
+          }
+        },
+        "required": [
+          "operatorCryptoUserId"
+        ]
+      }
+    }
+  },
+  "paths": {
+    "/api/v1/deployments/{deploymentId}": {
+      "put": {
+        "operationId": "DeploymentsController_updateDeployment",
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "description": "Deployment identifier",
+            "example": "2130e1de-6b1d-11eb-9439-0242ac130002",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeploymentDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Deployments"
+        ]
+      }
+    },
+    "/api/v1/deployments/{deploymentId}/key-pair": {
+      "post": {
+        "operationId": "DeploymentsController_setKeyPair",
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "description": "Deployment identifier",
+            "example": "2130e1de-6b1d-11eb-9439-0242ac130002",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Deployments"
+        ]
+      }
+    },
+    "/api/v1/deployments/{deploymentId}/signatures": {
+      "post": {
+        "operationId": "DeploymentsController_getDeploymentMessageSignature",
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "description": "Deployment identifier",
+            "example": "2130e1de-6b1d-11eb-9439-0242ac130002",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Deployments"
+        ]
+      }
+    },
+    "/api/v1/deployments/{deploymentId}/signatures/eip712": {
+      "post": {
+        "operationId": "DeploymentsController_getDeploymentEIP712MessageSignature",
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "description": "Deployment identifier",
+            "example": "2130e1de-6b1d-11eb-9439-0242ac130002",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EIP712MessageDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Deployments"
+        ]
+      }
+    },
+    "/api/v1/crypto-users/register": {
+      "post": {
+        "operationId": "CryptoUsersController_registerCryptoUser",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CryptoUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Crypto-Users"
+        ]
+      }
+    },
+    "/api/v1/operators/{operatorId}": {
+      "get": {
+        "operationId": "OperatorsController_getOperatorKeys",
+        "summary": "Get the keys of the specified operator",
+        "parameters": [
+          {
+            "name": "operatorId",
+            "required": true,
+            "in": "path",
+            "description": "Operator Identifier",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperatorKeysDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Operators"
+        ]
+      },
+      "post": {
+        "operationId": "OperatorsController_createOperator",
+        "summary": "Creates an operator and assigns to it an available crypto-user",
+        "parameters": [
+          {
+            "name": "operatorId",
+            "required": true,
+            "in": "path",
+            "description": "Operator Identifier",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperatorStatusDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Operators"
+        ]
+      },
+      "put": {
+        "operationId": "OperatorsController_toggleOperatorStatus",
+        "summary": "Toggles the operator status",
+        "parameters": [
+          {
+            "name": "operatorId",
+            "required": true,
+            "in": "path",
+            "description": "Operator Identifier",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperatorStatusDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Operators"
+        ]
+      }
+    },
+    "/api/v1/operators/{operatorId}/address/{hsmAddress}/signatures/transaction": {
+      "post": {
+        "operationId": "OperatorsController_operatorsTransactionSignature",
+        "summary": "Sign a prepared unsigned transaction with HSM",
+        "parameters": [
+          {
+            "name": "operatorId",
+            "required": true,
+            "in": "path",
+            "description": "Operator Identifier",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "hsmAddress",
+            "required": true,
+            "in": "path",
+            "description": "HSM Signer Address Identifier",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Operators"
+        ]
+      }
+    },
+    "/api/v1/operators/{operatorId}/address/{hsmAddress}/signatures/message": {
+      "post": {
+        "operationId": "OperatorsController_operatorsMessageSignature",
+        "summary": "Signs a message with HSM",
+        "parameters": [
+          {
+            "name": "operatorId",
+            "required": true,
+            "in": "path",
+            "description": "Operator Identifier",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "hsmAddress",
+            "required": true,
+            "in": "path",
+            "description": "HSM Signer Address Identifier",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Operators"
+        ]
+      }
+    },
+    "/api/v1/operators/{operatorId}/address/{hsmAddress}/signatures/messages/eip712": {
+      "post": {
+        "operationId": "OperatorsController_operatorsEIP712MessageSignature",
+        "summary": "Signs a eip712 message with HSM",
+        "parameters": [
+          {
+            "name": "operatorId",
+            "required": true,
+            "in": "path",
+            "description": "Operator Identifier",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "hsmAddress",
+            "required": true,
+            "in": "path",
+            "description": "HSM Signer Address Identifier",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EIP712MessageDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Operators"
+        ]
+      }
+    },
+    "/api/v1/operators/{operatorId}/key-pair": {
+      "post": {
+        "operationId": "OperatorsController_setKeyPair",
+        "summary": "Generates a pair of public/private keys for a specified operator",
+        "parameters": [
+          {
+            "name": "operatorId",
+            "required": true,
+            "in": "path",
+            "description": "Operator Identifier",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KeyPairDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Operators"
+        ]
+      }
+    },
+    "/api/v1/operators/{operatorId}/key-pair/{hsmAddress}": {
+      "delete": {
+        "operationId": "OperatorsController_removeKeyPair",
+        "summary": "Removes a pair of public/private keys for a specified operator",
+        "parameters": [
+          {
+            "name": "operatorId",
+            "required": true,
+            "in": "path",
+            "description": "Operator Identifier",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "hsmAddress",
+            "required": true,
+            "in": "path",
+            "description": "HSM Signer Address Identifier",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperatorRemovedKeyDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Operators"
+        ]
+      }
+    },
+    "/api/v1/operators/crypto-users/{cryptoUserId}/register": {
+      "post": {
+        "operationId": "OperatorsController_createOperatorCryptoUser",
+        "summary": "Lists a previously created crypto-user to be available for operators usage",
+        "parameters": [
+          {
+            "name": "cryptoUserId",
+            "required": true,
+            "in": "path",
+            "description": "Crypto User Identifier",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperatorCryptoUserDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Operators"
+        ]
+      }
+    },
+    "/api/v1/partners/{partnerId}/signatures": {
+      "post": {
+        "operationId": "PartnersController_getPartnerMessageSignature",
+        "parameters": [
+          {
+            "name": "partnerId",
+            "required": true,
+            "in": "path",
+            "description": "Partner identifier",
+            "example": "2130e1de-6b1d-11eb-9439-0242ac130002",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EIP712MessageDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Partners"
+        ]
+      }
+    },
+    "/api/v1/wallet-syncer/deployments/{deploymentId}": {
+      "post": {
+        "operationId": "WalletSyncerController_registerWalletSyncer",
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "description": "Deployment ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Wallet-Syncer"
+        ]
+      }
+    },
+    "/api/v1/wallet-syncer/deployments/{deploymentId}/signatures/transaction": {
+      "post": {
+        "operationId": "WalletSyncerController_walletSyncerTransactionSignature",
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Wallet-Syncer"
+        ]
+      }
+    }
+  }
+}

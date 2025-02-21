@@ -1,0 +1,24 @@
+{
+  "investorId": "#SID_INVESTOR_ID#",
+  "userId": "#SID_USER_ID#",
+  "legalSignerId": "#SID_LEGAL_SIGNER_ID#",
+  "documentId": "#SID_DOCUMENT_ID#",
+  "rc": {
+    // "investorId": "631940478ae6ef001304e311",
+    // "userId": "631940478ae6ef001304e312",
+    // "legalSignerId": "624a9d40af1ea60014921098",
+    // "documentId": "6208e2bbf836dc0013735677"
+  },
+  "sandbox": {
+    // "investorId": "62d457f30b28f5001311c39f",
+    // "userId": "62d457f30b28f5001311c3a0",
+    // "legalSignerId": "624a9d40af1ea60014921098N",
+    // "documentId": "6208e2bbf836dc0013735677"
+  },
+  "production": {
+    // "investorId": "63b44aba88502ffd2cce527b",
+    // "userId": "63b44aba88502ffd2cce528b"
+    // "legalSignerId": "63b44d760352753a1b6cf61c",
+    // "documentId": "63b44e3d88502ffd2cce6736"
+  }
+}

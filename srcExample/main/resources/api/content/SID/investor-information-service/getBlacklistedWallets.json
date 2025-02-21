@@ -1,0 +1,9 @@
+{
+  "queryParams": {
+    "page": "0",
+    "limit": "25"
+  },
+  "rc": {},
+  "sandbox": {},
+  "production": {}
+}

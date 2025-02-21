@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT546_ATS_AddFundsModal" verbose="1">
+    <test name="AUT546_ATS_AddFundsModal">
+        <classes>
+            <class name="io.securitize.tests.ats.AUT546_ATS_AddFundsModal" />
+        </classes>
+    </test>
+</suite>

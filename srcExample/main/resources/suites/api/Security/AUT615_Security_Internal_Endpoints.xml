@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT615_Security_Internal_Endpoints">
+    <test name="AUT615_Security_Internal_Endpoints">
+        <classes>
+            <class name="io.securitize.tests.securitytests.AUT615_Security_Internal_Endpoints" />
+        </classes>
+    </test>
+</suite>

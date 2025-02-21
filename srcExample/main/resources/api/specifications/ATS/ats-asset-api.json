@@ -1,0 +1,2212 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/v1/assets": {
+      "get": {
+        "operationId": "AssetsController_getAssets",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "statistics",
+                  "web3_info",
+                  "clearing_instrument_info",
+                  "halt_ranges"
+                ]
+              }
+            }
+          },
+          {
+            "name": "enabled",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "true",
+                "false"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "shadow",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "true",
+                "false"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "security",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "category",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "issuer",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "isRetail",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "true",
+                "false"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "searchText",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get all assets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetAssetDto"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ]
+      },
+      "post": {
+        "operationId": "AssetsController_createAsset",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAssetRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Create Asset",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetDto"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/v1/assets/asset-details": {
+      "get": {
+        "operationId": "AssetsController_getAssetDetails",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "asset"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": false,
+            "in": "query",
+            "example": [
+              "7e71ff61-849e-4c2c-9781-ef48c12d9481",
+              "7e71ff61-849e-4c2c-9781-ef48c12d9482"
+            ],
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Asset Details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetDetailsDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Can not get asset details"
+          }
+        },
+        "tags": [
+          "Assets"
+        ]
+      },
+      "post": {
+        "operationId": "AssetsController_createAssetDetails",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAssetDetailsRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Create Asset Details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetDetailsDto"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetDetailsDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Can not create asset detail"
+          }
+        },
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/v1/assets/statistics": {
+      "get": {
+        "operationId": "AssetsController_getAssetStatistics",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get all asset statistics",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Statistics"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/v1/assets/categories": {
+      "get": {
+        "operationId": "AssetsController_getAssetCategories",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get all asset categories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/v1/assets/{security}": {
+      "get": {
+        "operationId": "AssetsController_getAssetById",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "security",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "statistics",
+                  "web3_info",
+                  "clearing_instrument_info",
+                  "halt_ranges"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get assets by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Asset Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetNotFoundException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ]
+      },
+      "patch": {
+        "operationId": "AssetsController_updateAsset",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "security",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchAssetRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update Asset",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/v1/assets/{security}/statistics": {
+      "get": {
+        "operationId": "AssetsController_getAssetStatisticsById",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "security",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get asset statistics by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Statistics"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/v1/assets/{security}/rules": {
+      "get": {
+        "operationId": "AssetsController_getAssetRules",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "security",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Asset Rules",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetRules"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/v1/assets/{security}/displayable-content": {
+      "get": {
+        "operationId": "AssetsController_getDisplayableContent",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "security",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Data for Asset Info Tab",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetDisplayableContent"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/v1/assets/status-sync": {
+      "patch": {
+        "operationId": "AssetsController_assetStatusSync",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "region",
+            "required": false,
+            "in": "query",
+            "example": "us",
+            "schema": {
+              "enum": [
+                "eu",
+                "us"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Asset Status Sync",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusSyncResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/v1/assets/sync-fields": {
+      "post": {
+        "operationId": "AssetsController_syncFields",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "security",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sync Fields"
+          },
+          "201": {
+            "description": ""
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/v1/assets/statistics/sync": {
+      "post": {
+        "operationId": "AssetsController_syncStatistics",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sync Statistics"
+          },
+          "201": {
+            "description": ""
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/v1/assets/{deploymentId}/tbe-address": {
+      "get": {
+        "operationId": "AssetsController_getAssetWalletAddress",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get asset omnibus tbe address",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetOmnibusTBEWalletAddress"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetNotFoundException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/v1/assets/{deploymentId}/web3-info": {
+      "get": {
+        "operationId": "AssetsController_getWeb3Info",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get asset web3 info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetWeb3Info"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetNotFoundException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/v1/assets/asset-details/{deploymentId}": {
+      "patch": {
+        "operationId": "AssetsController_updateAssetDetails",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchAssetDetailsRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update Asset Details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetDetailsDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Can not update asset detail"
+          }
+        },
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/v1/issuers": {
+      "get": {
+        "operationId": "IssuersController_getIssuers",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get all issuers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Issuer"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Issuers"
+        ]
+      }
+    },
+    "/metrics": {
+      "get": {
+        "operationId": "PrometheusController_index",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "ATS Asset API",
+    "description": "API to interact with ATS Assets",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "ForbiddenException": {
+        "type": "object",
+        "properties": {}
+      },
+      "TopOfBook": {
+        "type": "object",
+        "properties": {
+          "price": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "string"
+          }
+        }
+      },
+      "StatisticsDto": {
+        "type": "object",
+        "properties": {
+          "security": {
+            "type": "string"
+          },
+          "high": {
+            "type": "string"
+          },
+          "low": {
+            "type": "string"
+          },
+          "open": {
+            "type": "string"
+          },
+          "close": {
+            "type": "string"
+          },
+          "change": {
+            "type": "string"
+          },
+          "lastPrice": {
+            "type": "string"
+          },
+          "bid": {
+            "$ref": "#/components/schemas/TopOfBook"
+          },
+          "ask": {
+            "$ref": "#/components/schemas/TopOfBook"
+          },
+          "marketCap": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "security"
+        ]
+      },
+      "FeePercentageType": {
+        "type": "object",
+        "properties": {
+          "buyer": {
+            "type": "number"
+          },
+          "seller": {
+            "type": "number"
+          }
+        }
+      },
+      "HaltRangePercentageType": {
+        "type": "object",
+        "properties": {
+          "static": {
+            "type": "number"
+          },
+          "dynamic": {
+            "type": "number"
+          }
+        }
+      },
+      "HaltRanges": {
+        "type": "object",
+        "properties": {
+          "static": {
+            "type": "object",
+            "properties": {
+              "min": {
+                "required": true,
+                "type": "string"
+              },
+              "max": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "dynamic": {
+            "type": "object",
+            "properties": {
+              "min": {
+                "required": true,
+                "type": "string"
+              },
+              "max": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "static",
+          "dynamic"
+        ]
+      },
+      "ClearingInstrumentInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "fractionBase": {
+            "type": "number"
+          },
+          "decimals": {
+            "type": "number"
+          },
+          "address": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "fractionBase",
+          "decimals"
+        ]
+      },
+      "GetAssetDto": {
+        "type": "object",
+        "properties": {
+          "deploymentId": {
+            "type": "string"
+          },
+          "security": {
+            "type": "string"
+          },
+          "fractionBase": {
+            "type": "number"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "companyName": {
+            "type": "string"
+          },
+          "logoUrl": {
+            "type": "string"
+          },
+          "ticker": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "isCrypto": {
+            "type": "boolean"
+          },
+          "isRetail": {
+            "type": "boolean"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "statistics": {
+            "$ref": "#/components/schemas/StatisticsDto"
+          },
+          "creationDate": {
+            "type": "number"
+          },
+          "updatedDate": {
+            "type": "number"
+          },
+          "link15c211": {
+            "type": "string"
+          },
+          "assetName": {
+            "type": "string"
+          },
+          "totalSupply": {
+            "type": "string"
+          },
+          "tradingType": {
+            "enum": [
+              "REGULAR",
+              "LIMITED_TRADING"
+            ],
+            "type": "string"
+          },
+          "windowStartTime": {
+            "type": "number"
+          },
+          "windowEndTime": {
+            "type": "number"
+          },
+          "clearingInstrument": {
+            "enum": [
+              "USD",
+              "EUR",
+              "EUROC",
+              "USDC"
+            ],
+            "type": "string"
+          },
+          "exchangeType": {
+            "enum": [
+              "TRADITIONAL",
+              "WEB3"
+            ],
+            "type": "string"
+          },
+          "shadow": {
+            "type": "boolean"
+          },
+          "feePercentage": {
+            "$ref": "#/components/schemas/FeePercentageType"
+          },
+          "haltRangePercentage": {
+            "$ref": "#/components/schemas/HaltRangePercentageType"
+          },
+          "haltRanges": {
+            "$ref": "#/components/schemas/HaltRanges"
+          },
+          "haltSeconds": {
+            "type": "number"
+          },
+          "haltExpirationTimestamp": {
+            "type": "number"
+          },
+          "haltStatus": {
+            "type": "boolean"
+          },
+          "assetDetailsType": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "FUND"
+            ]
+          },
+          "network": {
+            "type": "string"
+          },
+          "tokenAddress": {
+            "type": "string"
+          },
+          "spenderAddress": {
+            "type": "string"
+          },
+          "clearingInstrumentInfo": {
+            "$ref": "#/components/schemas/ClearingInstrumentInfo"
+          },
+          "region": {
+            "enum": [
+              "eu",
+              "us"
+            ],
+            "type": "string"
+          },
+          "navReportUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "deploymentId",
+          "security",
+          "fractionBase",
+          "ticker",
+          "isCrypto",
+          "isRetail",
+          "enabled",
+          "categories",
+          "creationDate",
+          "updatedDate",
+          "clearingInstrument",
+          "exchangeType",
+          "shadow",
+          "feePercentage",
+          "haltRangePercentage",
+          "haltStatus",
+          "region"
+        ]
+      },
+      "GetAssetDetailsDto": {
+        "type": "object",
+        "properties": {
+          "deploymentId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "FUND"
+            ]
+          },
+          "logo": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "assetsUnderManagement": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "deploymentId"
+        ]
+      },
+      "Statistics": {
+        "type": "object",
+        "properties": {
+          "security": {
+            "type": "string"
+          },
+          "high": {
+            "type": "string"
+          },
+          "low": {
+            "type": "string"
+          },
+          "open": {
+            "type": "string"
+          },
+          "close": {
+            "type": "string"
+          },
+          "change": {
+            "type": "string"
+          },
+          "lastPrice": {
+            "type": "string"
+          },
+          "bid": {
+            "$ref": "#/components/schemas/TopOfBook"
+          },
+          "ask": {
+            "$ref": "#/components/schemas/TopOfBook"
+          }
+        },
+        "required": [
+          "security"
+        ]
+      },
+      "AssetNotFoundException": {
+        "type": "object",
+        "properties": {}
+      },
+      "Rule": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "enum": [
+              "US_MINIMUM_TOKENS",
+              "EU_MINIMUM_TOKENS",
+              "MINIMUM_HOLDINGS_PER_INVESTOR",
+              "MAXIMUM_HOLDING_PER_INVESTOR",
+              "US_FORCE_FULL_TRANSFER",
+              "FORCE_ACCREDITED",
+              "US_FORCE_ACCREDITED",
+              "FORCE_FULL_TRANSFER",
+              "US_FORBIDDEN_STATES"
+            ],
+            "type": "string"
+          },
+          "value": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "name",
+          "value"
+        ]
+      },
+      "AssetRules": {
+        "type": "object",
+        "properties": {
+          "deploymentId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Rule"
+            }
+          }
+        },
+        "required": [
+          "deploymentId",
+          "tokenId",
+          "rules"
+        ]
+      },
+      "DisplayableContent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "opportunityId": {
+            "type": "number"
+          },
+          "order": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "VIDEO",
+              "IMAGE",
+              "TEXT",
+              "DOCUMENT",
+              "UNKNOWN"
+            ]
+          },
+          "content": {
+            "type": "string"
+          },
+          "resource": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "showToVerifiedInvestorsOnly": {
+            "type": "boolean"
+          },
+          "requireQualification": {
+            "type": "boolean"
+          },
+          "requireKyc": {
+            "type": "boolean"
+          },
+          "fileType": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "opportunityId",
+          "order",
+          "type",
+          "title"
+        ]
+      },
+      "AssetDisplayableContent": {
+        "type": "object",
+        "properties": {
+          "deploymentId": {
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "opportunityId": {
+            "type": "number"
+          },
+          "contents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DisplayableContent"
+            }
+          }
+        },
+        "required": [
+          "deploymentId",
+          "enabled",
+          "opportunityId",
+          "contents"
+        ]
+      },
+      "CreateAssetRequestDto": {
+        "type": "object",
+        "properties": {
+          "region": {
+            "enum": [
+              "eu",
+              "us"
+            ],
+            "type": "string",
+            "example": "us"
+          },
+          "feePercentage": {
+            "example": {
+              "buyer": 4,
+              "seller": 2
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FeePercentageType"
+              }
+            ]
+          },
+          "haltRangePercentage": {
+            "example": {
+              "static": 4,
+              "dynamic": 2.5
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HaltRangePercentageType"
+              }
+            ]
+          },
+          "haltExpirationTimestamp": {
+            "type": "number",
+            "example": 1753042660000
+          },
+          "clearingInstrument": {
+            "enum": [
+              "USD",
+              "EUR",
+              "EUROC",
+              "USDC"
+            ],
+            "type": "string",
+            "example": "EUROC"
+          },
+          "deploymentId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "security": {
+            "type": "string"
+          },
+          "fractionBase": {
+            "type": "number"
+          },
+          "companyName": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "ticker": {
+            "type": "string"
+          },
+          "logoUrl": {
+            "type": "string"
+          },
+          "isCrypto": {
+            "type": "boolean"
+          },
+          "isRetail": {
+            "type": "boolean"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "link15c211": {
+            "type": "string"
+          },
+          "assetName": {
+            "type": "string"
+          },
+          "tradingType": {
+            "type": "string",
+            "default": "REGULAR",
+            "enum": [
+              "REGULAR",
+              "LIMITED_TRADING"
+            ]
+          },
+          "windowStartTime": {
+            "type": "number"
+          },
+          "windowEndTime": {
+            "type": "number"
+          },
+          "exchangeType": {
+            "type": "string",
+            "default": "TRADITIONAL",
+            "enum": [
+              "TRADITIONAL",
+              "WEB3"
+            ]
+          },
+          "shadow": {
+            "type": "boolean",
+            "default": false
+          },
+          "haltSeconds": {
+            "type": "number"
+          },
+          "navReportUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "region",
+          "feePercentage",
+          "haltRangePercentage",
+          "clearingInstrument",
+          "deploymentId",
+          "tokenId",
+          "security",
+          "fractionBase",
+          "isCrypto",
+          "isRetail",
+          "enabled"
+        ]
+      },
+      "StatusSyncRegionResponseDto": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string"
+          },
+          "updatedAssets": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "failedToUpdateAssets": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "scheduletime": {
+            "type": "number"
+          },
+          "nextStatus": {
+            "type": "string",
+            "enum": [
+              "OPEN",
+              "PRE_OPEN"
+            ]
+          }
+        },
+        "required": [
+          "identifier",
+          "updatedAssets",
+          "failedToUpdateAssets",
+          "scheduletime",
+          "nextStatus"
+        ]
+      },
+      "StatusSyncResponseDto": {
+        "type": "object",
+        "properties": {
+          "regions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StatusSyncRegionResponseDto"
+            }
+          }
+        },
+        "required": [
+          "regions"
+        ]
+      },
+      "PatchAssetRequestDto": {
+        "type": "object",
+        "properties": {
+          "exchangeType": {
+            "enum": [
+              "TRADITIONAL",
+              "WEB3"
+            ],
+            "type": "string",
+            "example": "TRADITIONAL"
+          },
+          "region": {
+            "enum": [
+              "eu",
+              "us"
+            ],
+            "type": "string",
+            "example": "us"
+          },
+          "shadow": {
+            "type": "boolean",
+            "example": false
+          },
+          "feePercentage": {
+            "example": {
+              "buyer": 4,
+              "seller": 2
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FeePercentageType"
+              }
+            ]
+          },
+          "haltRangePercentage": {
+            "example": {
+              "static": 4,
+              "dynamic": 2.5
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HaltRangePercentageType"
+              }
+            ]
+          },
+          "clearingInstrument": {
+            "enum": [
+              "USD",
+              "EUR",
+              "EUROC",
+              "USDC"
+            ],
+            "type": "string",
+            "example": "EUROC"
+          },
+          "deploymentId": {
+            "type": "string"
+          },
+          "fractionBase": {
+            "type": "number"
+          },
+          "companyName": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "ticker": {
+            "type": "string"
+          },
+          "logoUrl": {
+            "type": "string"
+          },
+          "isCrypto": {
+            "type": "boolean"
+          },
+          "isRetail": {
+            "type": "boolean"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "link15c211": {
+            "type": "string"
+          },
+          "assetName": {
+            "type": "string"
+          },
+          "tradingType": {
+            "type": "string",
+            "enum": [
+              "REGULAR",
+              "LIMITED_TRADING"
+            ]
+          },
+          "windowStartTime": {
+            "type": "number"
+          },
+          "windowEndTime": {
+            "type": "number"
+          },
+          "haltSeconds": {
+            "type": "number"
+          },
+          "haltExpirationTimestamp": {
+            "type": "number"
+          },
+          "navReportUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "feePercentage",
+          "haltRangePercentage",
+          "clearingInstrument"
+        ]
+      },
+      "AssetOmnibusTBEWalletAddress": {
+        "type": "object",
+        "properties": {
+          "omnibusTBEAddress": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "omnibusTBEAddress"
+        ]
+      },
+      "AssetWeb3Info": {
+        "type": "object",
+        "properties": {
+          "deploymentId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "network": {
+            "type": "string"
+          },
+          "tokenAddress": {
+            "type": "string"
+          },
+          "spenderAddress": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "deploymentId"
+        ]
+      },
+      "CreateAssetDetailsRequestDto": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "FUND"
+            ],
+            "example": "FUND"
+          },
+          "deploymentId": {
+            "type": "string"
+          },
+          "logo": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "assetsUnderManagement": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "deploymentId"
+        ]
+      },
+      "PatchAssetDetailsRequestDto": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "FUND"
+            ],
+            "example": "FUND"
+          },
+          "logo": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "assetsUnderManagement": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "logo",
+          "description",
+          "location",
+          "assetsUnderManagement",
+          "url",
+          "labels"
+        ]
+      },
+      "Issuer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      }
+    }
+  }
+}

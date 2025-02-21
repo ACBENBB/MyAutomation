@@ -1,0 +1,15 @@
+{
+  "pathParams": {
+    "investorId": "#ATS_INVESTOR_ID#"
+  },
+  "queryParams": {
+    "deploymentId": "#ATS_DEPLOYMENT_ID#",
+    "network": "AVALANCHE",
+    "stableCoinName": "MATIC"
+  },
+  "headers": {
+    "x-api-key": "#ATS_ASSET_API_KEY#"
+  },
+  "rc": {},
+  "sandbox": {}
+}

@@ -1,0 +1,13 @@
+  [
+    {
+      "rc": [
+        "getTransactions"
+      ],
+      "sandbox": [
+        "getRequiredConfirmations",
+        "getGasPrice",
+        "getCheckHealth",
+        "getTransactions"
+      ]
+    }
+]

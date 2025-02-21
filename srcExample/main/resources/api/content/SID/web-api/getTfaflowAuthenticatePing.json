@@ -1,0 +1,17 @@
+{
+  "headers": {
+    "authorization": "#SID_AUTHORIZATION#",
+    "cookie": "#SID_COOKIE#"
+  },
+  "skips": {
+    "entireTest": true,
+    "skipReason": "Entire test was skipped since method can't be executed successfully yet"
+//     "bodySchemaCheck": true,
+//     "skipReason": "Body schema was skipped due to lack of schema (model instead of schema)"
+//   },
+//   "expectedResponse": {
+//       "statusCode": 204
+  },
+  "rc": {},
+  "sandbox": {}
+}

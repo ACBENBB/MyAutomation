@@ -1,0 +1,11 @@
+{
+  "pathParams": {
+    "language": "#SID_LANGUAGE#"
+  },
+  "skips": {
+    "bodySchemaCheck": true,
+    "skipReason": "Body schema was skipped due to lack of schema (model instead of schema)"
+  },
+  "rc": {},
+  "sandbox": {}
+}

@@ -1,0 +1,7 @@
+<suite name="AUT473_ST_InvestorPays_Reallocate" verbose="1">
+    <test name="AUT473_ST_InvestorPays_Reallocate">
+        <classes>
+            <class name="io.securitize.tests.blockchain.AUT473_ST_InvestorPays_Reallocate" />
+        </classes>
+    </test>
+</suite>

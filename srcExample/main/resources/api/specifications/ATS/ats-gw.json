@@ -1,0 +1,5644 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "ATS Gateway",
+    "description": "API to interact with ATS Sites",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "TopOfBook": {
+        "type": "object",
+        "properties": {
+          "price": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "string"
+          }
+        }
+      },
+      "Statistics": {
+        "type": "object",
+        "properties": {
+          "security": {
+            "type": "string"
+          },
+          "high": {
+            "type": "string"
+          },
+          "low": {
+            "type": "string"
+          },
+          "open": {
+            "type": "string"
+          },
+          "close": {
+            "type": "string"
+          },
+          "change": {
+            "type": "string"
+          },
+          "lastPrice": {
+            "type": "string"
+          },
+          "bid": {
+            "$ref": "#/components/schemas/TopOfBook"
+          },
+          "ask": {
+            "$ref": "#/components/schemas/TopOfBook"
+          },
+          "marketCap": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "security"
+        ]
+      },
+      "FeePercentage": {
+        "type": "object",
+        "properties": {
+          "buyer": {
+            "type": "number"
+          },
+          "seller": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "buyer",
+          "seller"
+        ]
+      },
+      "HaltRanges": {
+        "type": "object",
+        "properties": {
+          "static": {
+            "type": "object",
+            "properties": {
+              "min": {
+                "required": true,
+                "type": "string"
+              },
+              "max": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "dynamic": {
+            "type": "object",
+            "properties": {
+              "min": {
+                "required": true,
+                "type": "string"
+              },
+              "max": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "static",
+          "dynamic"
+        ]
+      },
+      "GetAssetDto": {
+        "type": "object",
+        "properties": {
+          "deploymentId": {
+            "type": "string"
+          },
+          "security": {
+            "type": "string"
+          },
+          "fractionBase": {
+            "type": "number"
+          },
+          "companyName": {
+            "type": "string"
+          },
+          "logoUrl": {
+            "type": "string"
+          },
+          "ticker": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "isCrypto": {
+            "type": "boolean"
+          },
+          "isRetail": {
+            "type": "boolean"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "statistics": {
+            "$ref": "#/components/schemas/Statistics"
+          },
+          "watchlist": {
+            "type": "boolean"
+          },
+          "assetName": {
+            "type": "string"
+          },
+          "volumeByPrice": {
+            "type": "string"
+          },
+          "tradingType": {
+            "enum": [
+              "REGULAR",
+              "LIMITED_TRADING"
+            ],
+            "type": "string"
+          },
+          "tradingDate": {
+            "type": "number"
+          },
+          "status": {
+            "enum": [
+              "OPEN",
+              "CLOSED"
+            ],
+            "type": "string"
+          },
+          "windowStartTime": {
+            "type": "number"
+          },
+          "windowEndTime": {
+            "type": "number"
+          },
+          "exchangeType": {
+            "enum": [
+              "TRADITIONAL",
+              "WEB3"
+            ],
+            "type": "string"
+          },
+          "clearingInstrument": {
+            "type": "string"
+          },
+          "network": {
+            "type": "string"
+          },
+          "tokenAddress": {
+            "type": "string"
+          },
+          "feePercentage": {
+            "$ref": "#/components/schemas/FeePercentage"
+          },
+          "region": {
+            "type": "string"
+          },
+          "navReportUrl": {
+            "type": "string"
+          },
+          "assetDetailsType": {
+            "nullable": true,
+            "enum": [
+              "FUND"
+            ],
+            "type": "string"
+          },
+          "haltRangePercentage": {
+            "type": "object"
+          },
+          "haltRanges": {
+            "$ref": "#/components/schemas/HaltRanges"
+          },
+          "haltSeconds": {
+            "type": "number"
+          },
+          "haltExpirationTimestamp": {
+            "type": "number"
+          },
+          "haltStatus": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "deploymentId",
+          "security",
+          "fractionBase",
+          "ticker",
+          "isCrypto",
+          "isRetail",
+          "enabled",
+          "watchlist",
+          "tradingType",
+          "status",
+          "exchangeType",
+          "clearingInstrument",
+          "feePercentage",
+          "haltRangePercentage"
+        ]
+      },
+      "GetIssuerDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "GetAssetFiltersDto": {
+        "type": "object",
+        "properties": {
+          "issuers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetIssuerDto"
+            }
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "issuers",
+          "categories"
+        ]
+      },
+      "AssetContentDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "order": {
+            "type": "number"
+          },
+          "type": {
+            "enum": [
+              "VIDEO",
+              "IMAGE",
+              "TEXT",
+              "DOCUMENT",
+              "UNKNOWN"
+            ],
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "resource": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "fileType": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "order",
+          "type",
+          "title"
+        ]
+      },
+      "GetAssetInfoDto": {
+        "type": "object",
+        "properties": {
+          "deploymentId": {
+            "type": "string"
+          },
+          "opportunityId": {
+            "type": "number"
+          },
+          "contents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssetContentDto"
+            }
+          }
+        },
+        "required": [
+          "contents"
+        ]
+      },
+      "GetAssetActions": {
+        "type": "object",
+        "properties": {
+          "canTrade": {
+            "type": "boolean"
+          },
+          "reason": {
+            "enum": [
+              "US_MINIMUM_TOKENS",
+              "US_FORBIDDEN_STATES"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "canTrade"
+        ]
+      },
+      "GetTradeChartTradesDto": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "number"
+          },
+          "price": {
+            "type": "number"
+          },
+          "volume": {
+            "type": "number"
+          },
+          "volumeByPrice": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "key",
+          "price",
+          "volume",
+          "volumeByPrice"
+        ]
+      },
+      "GetAssetTradeChartWithSummaryDto": {
+        "type": "object",
+        "properties": {
+          "highest": {
+            "type": "number",
+            "nullable": true
+          },
+          "lowest": {
+            "type": "number",
+            "nullable": true
+          },
+          "trend": {
+            "enum": [
+              "UP",
+              "DOWN"
+            ],
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetTradeChartTradesDto"
+            }
+          }
+        },
+        "required": [
+          "highest",
+          "lowest",
+          "trend",
+          "data"
+        ]
+      },
+      "TradeDto": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "number"
+          },
+          "price": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "string"
+          },
+          "tradeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "date",
+          "price",
+          "quantity",
+          "tradeId"
+        ]
+      },
+      "GetAssetTradeHistoryDto": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "type": "object",
+            "properties": {
+              "currentPage": {
+                "required": true,
+                "type": "number"
+              },
+              "pageSize": {
+                "required": true,
+                "type": "number"
+              },
+              "totalPages": {
+                "required": true,
+                "type": "number"
+              },
+              "totalItems": {
+                "required": true,
+                "type": "number"
+              }
+            }
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TradeDto"
+            }
+          }
+        },
+        "required": [
+          "meta",
+          "data"
+        ]
+      },
+      "GetOrderBookDtoOld": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "security": {
+            "type": "string"
+          },
+          "side": {
+            "enum": [
+              "B",
+              "S"
+            ],
+            "type": "string"
+          },
+          "date": {
+            "type": "number"
+          },
+          "price": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "security",
+          "side",
+          "date",
+          "price",
+          "quantity"
+        ]
+      },
+      "Book": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "security": {
+            "type": "string"
+          },
+          "side": {
+            "enum": [
+              "B",
+              "S"
+            ],
+            "type": "string"
+          },
+          "date": {
+            "type": "number"
+          },
+          "price": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "security",
+          "side",
+          "date",
+          "price",
+          "quantity"
+        ]
+      },
+      "GetOrderBookDto": {
+        "type": "object",
+        "properties": {
+          "topOfBook": {
+            "type": "object"
+          },
+          "book": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Book"
+            }
+          }
+        },
+        "required": [
+          "topOfBook",
+          "book"
+        ]
+      },
+      "GetAssetTBEAddressDto": {
+        "type": "object",
+        "properties": {
+          "omnibusTBEAddress": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "omnibusTBEAddress"
+        ]
+      },
+      "AssetNotFoundException": {
+        "type": "object",
+        "properties": {}
+      },
+      "GetAssetDetailsDto": {
+        "type": "object",
+        "properties": {
+          "assetName": {
+            "type": "string"
+          },
+          "symbol": {
+            "type": "string"
+          },
+          "deploymentId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "logo": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "assetsUnderManagement": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "navReportUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "assetName",
+          "symbol",
+          "deploymentId",
+          "type",
+          "logo",
+          "description",
+          "location",
+          "assetsUnderManagement",
+          "url",
+          "labels",
+          "navReportUrl"
+        ]
+      },
+      "AssetDetailsNotFoundException": {
+        "type": "object",
+        "properties": {}
+      },
+      "MarketAvailableDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "OPEN",
+              "PRE_MARKET",
+              "NOT_AVAILABLE"
+            ],
+            "type": "string"
+          },
+          "isAvailable": {
+            "type": "boolean"
+          },
+          "statusReason": {
+            "enum": [
+              "HOLIDAY",
+              "NOT_OPEN_HOURS",
+              "NOT_AVAILABLE_HOURS",
+              "WEEKEND"
+            ],
+            "type": "string"
+          },
+          "openStartTime": {
+            "type": "string"
+          },
+          "openEndTime": {
+            "type": "string"
+          },
+          "availableStartTime": {
+            "type": "string"
+          },
+          "availableEndTime": {
+            "type": "string"
+          },
+          "timeZone": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "isAvailable",
+          "openStartTime",
+          "openEndTime",
+          "availableStartTime",
+          "availableEndTime",
+          "timeZone"
+        ]
+      },
+      "Config": {
+        "type": "object",
+        "properties": {
+          "tobPercentage": {
+            "type": "string"
+          },
+          "restrictedJurisdictions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "orderFeePercentages": {
+            "type": "object",
+            "properties": {
+              "sell": {
+                "required": true,
+                "type": "string"
+              },
+              "buy": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "tobPercentage",
+          "restrictedJurisdictions",
+          "orderFeePercentages"
+        ]
+      },
+      "GetConfig_DeprecatedDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "UP",
+              "MAINTENANCE"
+            ],
+            "type": "string"
+          },
+          "market": {
+            "$ref": "#/components/schemas/MarketAvailableDto"
+          },
+          "featureFlags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "config": {
+            "$ref": "#/components/schemas/Config"
+          }
+        },
+        "required": [
+          "status",
+          "market",
+          "featureFlags",
+          "config"
+        ]
+      },
+      "MarketAvailableWithIdentifierDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "OPEN",
+              "PRE_MARKET",
+              "NOT_AVAILABLE"
+            ],
+            "type": "string"
+          },
+          "isAvailable": {
+            "type": "boolean"
+          },
+          "statusReason": {
+            "enum": [
+              "HOLIDAY",
+              "NOT_OPEN_HOURS",
+              "NOT_AVAILABLE_HOURS",
+              "WEEKEND"
+            ],
+            "type": "string"
+          },
+          "openStartTime": {
+            "type": "string"
+          },
+          "openEndTime": {
+            "type": "string"
+          },
+          "availableStartTime": {
+            "type": "string"
+          },
+          "availableEndTime": {
+            "type": "string"
+          },
+          "timeZone": {
+            "type": "string"
+          },
+          "identifier": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "isAvailable",
+          "openStartTime",
+          "openEndTime",
+          "availableStartTime",
+          "availableEndTime",
+          "timeZone",
+          "identifier"
+        ]
+      },
+      "MarketDto": {
+        "type": "object",
+        "properties": {
+          "regions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MarketAvailableWithIdentifierDto"
+            }
+          }
+        },
+        "required": [
+          "regions"
+        ]
+      },
+      "GetConfigDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "UP",
+              "MAINTENANCE"
+            ],
+            "type": "string"
+          },
+          "market": {
+            "$ref": "#/components/schemas/MarketDto"
+          },
+          "featureFlags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "config": {
+            "$ref": "#/components/schemas/Config"
+          }
+        },
+        "required": [
+          "status",
+          "market",
+          "featureFlags",
+          "config"
+        ]
+      },
+      "GetTradeDto": {
+        "type": "object",
+        "properties": {
+          "tradeId": {
+            "type": "string"
+          },
+          "security": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "GENERATED",
+              "CONFIRMED",
+              "REJECTED"
+            ],
+            "type": "string"
+          },
+          "date": {
+            "type": "number"
+          },
+          "quantity": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          },
+          "feeAmount": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "tradeId",
+          "security",
+          "status",
+          "date",
+          "quantity",
+          "price",
+          "feeAmount"
+        ]
+      },
+      "GetOrderDto": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string"
+          },
+          "referenceNumber": {
+            "type": "string"
+          },
+          "security": {
+            "type": "string"
+          },
+          "ticker": {
+            "type": "string"
+          },
+          "deploymentId": {
+            "type": "string"
+          },
+          "logoUrl": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "Expired",
+              "Rejected",
+              "Canceled",
+              "Open",
+              "Executed"
+            ],
+            "type": "string"
+          },
+          "side": {
+            "enum": [
+              "B",
+              "S"
+            ],
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "expirationDate": {
+            "type": "number"
+          },
+          "updatedDate": {
+            "type": "number"
+          },
+          "creationDate": {
+            "type": "number"
+          },
+          "endedDate": {
+            "type": "number"
+          },
+          "price": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "string"
+          },
+          "liveQuantity": {
+            "type": "string"
+          },
+          "executedQuantity": {
+            "type": "string"
+          },
+          "executedAmount": {
+            "type": "string"
+          },
+          "feePercentage": {
+            "type": "string"
+          },
+          "feeAmount": {
+            "type": "string"
+          },
+          "trades": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetTradeDto"
+            }
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "clearingInstrument": {
+            "type": "string"
+          },
+          "exchangeType": {
+            "type": "string"
+          },
+          "walletAddress": {
+            "type": "string"
+          },
+          "network": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "orderId",
+          "referenceNumber",
+          "security",
+          "ticker",
+          "status",
+          "side",
+          "type",
+          "expirationDate",
+          "updatedDate",
+          "creationDate",
+          "price",
+          "quantity",
+          "liveQuantity",
+          "executedQuantity",
+          "executedAmount",
+          "feePercentage",
+          "feeAmount",
+          "trades",
+          "active",
+          "clearingInstrument",
+          "exchangeType"
+        ]
+      },
+      "GetOrdersDto": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "type": "object",
+            "properties": {
+              "total": {
+                "required": true,
+                "type": "number"
+              },
+              "length": {
+                "required": true,
+                "type": "number"
+              },
+              "currentPage": {
+                "required": true,
+                "type": "number"
+              },
+              "pageSize": {
+                "required": true,
+                "type": "number"
+              },
+              "totalPages": {
+                "required": true,
+                "type": "number"
+              },
+              "totalItems": {
+                "required": true,
+                "type": "number"
+              }
+            }
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetOrderDto"
+            }
+          }
+        },
+        "required": [
+          "meta",
+          "data"
+        ]
+      },
+      "CreateOrderRequestDto": {
+        "type": "object",
+        "properties": {
+          "expirationTimestamp": {
+            "type": "number",
+            "example": 1689251364680
+          },
+          "security": {
+            "type": "string"
+          },
+          "side": {
+            "enum": [
+              "B",
+              "S"
+            ],
+            "type": "string"
+          },
+          "amount": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "expirationDays": {
+            "type": "number",
+            "default": 365,
+            "minimum": 0,
+            "maximum": 365
+          },
+          "walletAddress": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "expirationTimestamp",
+          "security",
+          "side",
+          "amount",
+          "price",
+          "type"
+        ]
+      },
+      "CreateOrderResponseDto": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string"
+          },
+          "referenceNumber": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "orderId",
+          "referenceNumber"
+        ]
+      },
+      "CreateOrderBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "enum": [
+              "ASSET_NOT_FOUND",
+              "NOT_ENOUGH_CASH_FOR_SENDER",
+              "INVALID_ORDER_AMOUNT",
+              "NOT_ENOUGH_TOKENS_FOR_SENDER",
+              "FLOWBACK",
+              "DESTINATION_JURISDICTION_RESTRICTED",
+              "HOLD_UP_PERIOD_1Y",
+              "MAX_INVESTORS_IN_CATEGORY",
+              "ONLY_FULL_TRANSFER",
+              "MIN_TOKENS_FOR_INVESTOR",
+              "MAX_TOKENS_FOR_INVESTOR",
+              "UNKNOWN",
+              "ADD_ORDER_MAXIMUM_ORDER_UNITS",
+              "ADD_ORDER_MAXIMUM_ORDER_NOTIONAL_AMOUNT",
+              "ADD_ORDER_MAXIMUM_OVERALL_ACCOUNT_UNITS",
+              "ACCREDITATION_REQUIRED",
+              "INVESTOR_KYC_BLOCKED",
+              "INVESTOR_KYC_EXPIRED",
+              "INVESTOR_CANNOT_CREATE_ORDER",
+              "INVALID_WALLET_ADDRESS",
+              [
+                "USER_CANNOT_TRADE_ASSET"
+              ]
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "ASSET_NOT_FOUND",
+              "NOT_ENOUGH_CASH_FOR_SENDER",
+              "INVALID_ORDER_AMOUNT",
+              "NOT_ENOUGH_TOKENS_FOR_SENDER",
+              "FLOWBACK",
+              "DESTINATION_JURISDICTION_RESTRICTED",
+              "HOLD_UP_PERIOD_1Y",
+              "MAX_INVESTORS_IN_CATEGORY",
+              "ONLY_FULL_TRANSFER",
+              "MIN_TOKENS_FOR_INVESTOR",
+              "MAX_TOKENS_FOR_INVESTOR",
+              "UNKNOWN",
+              "ADD_ORDER_MAXIMUM_ORDER_UNITS",
+              "ADD_ORDER_MAXIMUM_ORDER_NOTIONAL_AMOUNT",
+              "ADD_ORDER_MAXIMUM_OVERALL_ACCOUNT_UNITS",
+              "ACCREDITATION_REQUIRED",
+              "INVESTOR_KYC_BLOCKED",
+              "INVESTOR_KYC_EXPIRED",
+              "INVESTOR_CANNOT_CREATE_ORDER",
+              "INVALID_WALLET_ADDRESS",
+              [
+                "USER_CANNOT_TRADE_ASSET"
+              ]
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "reason",
+          "message"
+        ]
+      },
+      "ValidateOrderCreationRequestDto": {
+        "type": "object",
+        "properties": {
+          "deploymentId": {
+            "type": "string"
+          },
+          "side": {
+            "enum": [
+              "B",
+              "S"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "deploymentId",
+          "side"
+        ]
+      },
+      "ValidateOrderCreationResponseDto": {
+        "type": "object",
+        "properties": {
+          "isAuthorized": {
+            "type": "boolean"
+          },
+          "reason": {
+            "enum": [
+              "AUTHORIZED",
+              "NOT_ENOUGH_TOKENS_FOR_SENDER",
+              "FLOWBACK",
+              "DESTINATION_JURISDICTION_RESTRICTED",
+              "HOLD_UP_PERIOD_1Y",
+              "MAX_INVESTORS_IN_CATEGORY",
+              "ONLY_FULL_TRANSFER",
+              "MIN_TOKENS_FOR_INVESTOR",
+              "MAX_TOKENS_FOR_INVESTOR",
+              "ACCREDITATION_REQUIRED",
+              "UNKNOWN"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "isAuthorized",
+          "reason"
+        ]
+      },
+      "ValidateOrderCreationBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ASSET_NOT_FOUND",
+            "enum": [
+              "Bad Request",
+              "ASSET_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CancelOrderResponseDto": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string"
+          },
+          "referenceNumber": {
+            "type": "string"
+          },
+          "previousStatus": {
+            "enum": [
+              "Expired",
+              "Rejected",
+              "Canceled",
+              "Open",
+              "Executed"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "orderId",
+          "referenceNumber",
+          "previousStatus"
+        ]
+      },
+      "CancelOrderExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "enum": [
+              "ORDER_NOT_FOUND",
+              "MARKET_NOT_AVAILABLE"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "AllowanceCalculationRequestDto": {
+        "type": "object",
+        "properties": {
+          "deploymentId": {
+            "type": "string"
+          },
+          "side": {
+            "type": "string",
+            "enum": [
+              "B",
+              "S"
+            ]
+          },
+          "walletAddress": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "deploymentId",
+          "side",
+          "walletAddress",
+          "amount",
+          "price"
+        ]
+      },
+      "AllowanceCalculationResponseDto": {
+        "type": "object",
+        "properties": {
+          "walletAddress": {
+            "type": "string"
+          },
+          "spenderAddress": {
+            "type": "string"
+          },
+          "tokenAddress": {
+            "type": "string"
+          },
+          "allowanceNeeded": {
+            "type": "string"
+          },
+          "allowanceCurrent": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "walletAddress",
+          "spenderAddress",
+          "tokenAddress",
+          "allowanceNeeded",
+          "allowanceCurrent"
+        ]
+      },
+      "AllowanceCalculationBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "enum": [
+              "INVALID_WEB3_BALANCE"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "AllowanceCalculationNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "enum": [
+              "ASSET_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "GetAssetHoldingDto": {
+        "type": "object",
+        "properties": {
+          "asset": {
+            "type": "object",
+            "properties": {
+              "security": {
+                "required": true,
+                "type": "string"
+              },
+              "deploymentId": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "balance": {
+            "type": "object",
+            "properties": {
+              "inExternalWallet": {
+                "type": "object",
+                "properties": {
+                  "total": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "available": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "availableToTrade": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "inOrders": {
+                    "required": true,
+                    "type": "string"
+                  }
+                }
+              },
+              "tbe": {
+                "type": "object",
+                "properties": {
+                  "total": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "available": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "availableToTrade": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "inOrders": {
+                    "required": true,
+                    "type": "string"
+                  }
+                }
+              },
+              "inOrders": {
+                "required": true,
+                "type": "string"
+              },
+              "total": {
+                "required": true,
+                "type": "string"
+              },
+              "locked": {
+                "required": true,
+                "type": "string"
+              },
+              "totalByPrice": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "asset",
+          "balance"
+        ]
+      },
+      "GetCashBalanceDto": {
+        "type": "object",
+        "properties": {
+          "available": {
+            "type": "number"
+          },
+          "inOrders": {
+            "type": "number"
+          },
+          "instantSettlementLocked": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "available",
+          "inOrders"
+        ]
+      },
+      "GetTokenBalanceDto": {
+        "type": "object",
+        "properties": {
+          "deploymentId": {
+            "type": "string"
+          },
+          "security": {
+            "type": "string"
+          },
+          "total": {
+            "type": "string"
+          },
+          "available": {
+            "type": "string"
+          },
+          "inExternalWallet": {
+            "type": "string"
+          },
+          "totalByPrice": {
+            "type": "string"
+          },
+          "availableByPrice": {
+            "type": "string"
+          },
+          "inExternalWalletByPrice": {
+            "type": "string"
+          },
+          "inSellOrders": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "deploymentId",
+          "security",
+          "total",
+          "available",
+          "inExternalWallet"
+        ]
+      },
+      "GetBalanceDto": {
+        "type": "object",
+        "properties": {
+          "cash": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetCashBalanceDto"
+            }
+          },
+          "tradable": {
+            "type": "object",
+            "properties": {
+              "totalByPrice": {
+                "required": true,
+                "type": "string"
+              },
+              "assets": {
+                "required": true,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/GetTokenBalanceDto"
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "cash",
+          "tradable"
+        ]
+      },
+      "CreateFavouriteRequestDto": {
+        "type": "object",
+        "properties": {
+          "deploymentId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "deploymentId"
+        ]
+      },
+      "CreateFavouriteBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "FAVOURITE_ALREADY_EXIST",
+            "enum": [
+              "FAVOURITE_ALREADY_EXIST"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "DeleteFavouriteNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "FAVOURITE_NOT_FOUND",
+            "enum": [
+              "FAVOURITE_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "AddressDto": {
+        "type": "object",
+        "properties": {
+          "addressLine": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "addressLine",
+          "city",
+          "state",
+          "postalCode"
+        ]
+      },
+      "Account": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "CREATED",
+              "PENDING"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "address": {
+                "required": true,
+                "$ref": "#/components/schemas/AddressDto"
+              },
+              "ownerAddress": {
+                "required": false,
+                "$ref": "#/components/schemas/AddressDto"
+              },
+              "accountHolder": {
+                "required": true,
+                "type": "string"
+              },
+              "accountName": {
+                "required": true,
+                "type": "string"
+              },
+              "accountNumber": {
+                "required": true,
+                "type": "string"
+              },
+              "accountType": {
+                "required": true,
+                "type": "string"
+              },
+              "routingNumber": {
+                "required": true,
+                "type": "string"
+              },
+              "accountOwnerId": {
+                "required": true,
+                "type": "string"
+              },
+              "investorId": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "status",
+          "id",
+          "data"
+        ]
+      },
+      "UserActionResponse": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "boolean"
+          },
+          "reason": {
+            "enum": [
+              "TERMS_AND_CONDITIONS_REQUIRED",
+              "COUNTRY_RESTRICTION",
+              "CASH_ACCOUNT_LOCKED_STATE",
+              "ONBOARDING_INCOMPLETED",
+              "KYC_EXPIRED",
+              "KYC_DOC_EXPIRED",
+              "INVESTOR_KYC_BLOCKED",
+              "ACCOUNT_ALREADY_CREATED",
+              "ACCOUNT_PENDING",
+              "ACCOUNT_REQUIRED"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      },
+      "UserAssetActionResponse": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      },
+      "UserActions": {
+        "type": "object",
+        "properties": {
+          "canUseATS": {
+            "$ref": "#/components/schemas/UserActionResponse"
+          },
+          "canTrade": {
+            "$ref": "#/components/schemas/UserAssetActionResponse"
+          },
+          "canBuy": {
+            "$ref": "#/components/schemas/UserAssetActionResponse"
+          },
+          "canSell": {
+            "$ref": "#/components/schemas/UserAssetActionResponse"
+          },
+          "canUseCA": {
+            "$ref": "#/components/schemas/UserActionResponse"
+          },
+          "canCreateAccount": {
+            "$ref": "#/components/schemas/UserActionResponse"
+          },
+          "canCashDeposit": {
+            "$ref": "#/components/schemas/UserActionResponse"
+          },
+          "canCashWithdrawal": {
+            "$ref": "#/components/schemas/UserActionResponse"
+          }
+        },
+        "required": [
+          "canUseATS",
+          "canTrade",
+          "canBuy",
+          "canSell",
+          "canUseCA",
+          "canCreateAccount",
+          "canCashDeposit",
+          "canCashWithdrawal"
+        ]
+      },
+      "UserSummary": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "$ref": "#/components/schemas/Account"
+          },
+          "restrictions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "TERMS_AND_CONDITIONS_REQUIRED",
+                "COUNTRY_RESTRICTION",
+                "ONBOARDING_INCOMPLETED",
+                "KYC_EXPIRED",
+                "KYC_DOC_EXPIRED",
+                "INVESTOR_KYC_BLOCKED",
+                "ACCOUNT_ALREADY_CREATED",
+                "ACCOUNT_PENDING",
+                "ACCOUNT_REQUIRED",
+                "CASH_ACCOUNT_LOCKED_STATE"
+              ]
+            }
+          },
+          "assetRestriction": {
+            "type": "string",
+            "enum": [
+              "US_FORBIDDEN_STATES",
+              "US_MINIMUM_TOKENS",
+              "PROCESSING_ACCREDITATION",
+              "ACCREDITATION_REQUIRED"
+            ]
+          },
+          "security": {
+            "type": "string"
+          },
+          "actions": {
+            "$ref": "#/components/schemas/UserActions"
+          }
+        },
+        "required": [
+          "restrictions",
+          "actions"
+        ]
+      },
+      "GetAccountDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "CREATED",
+              "PENDING"
+            ],
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "address": {
+                "required": true,
+                "$ref": "#/components/schemas/AddressDto"
+              },
+              "ownerAddress": {
+                "required": false,
+                "$ref": "#/components/schemas/AddressDto"
+              },
+              "accountHolder": {
+                "required": true,
+                "type": "string"
+              },
+              "accountName": {
+                "required": true,
+                "type": "string"
+              },
+              "accountNumber": {
+                "required": true,
+                "type": "string"
+              },
+              "accountType": {
+                "required": true,
+                "type": "string"
+              },
+              "routingNumber": {
+                "required": true,
+                "type": "string"
+              },
+              "accountOwnerId": {
+                "required": true,
+                "type": "string"
+              },
+              "investorId": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "status",
+          "id",
+          "data"
+        ]
+      },
+      "GetAccountSummaryDto": {
+        "type": "object",
+        "properties": {
+          "cashAccount": {
+            "$ref": "#/components/schemas/GetAccountDto"
+          },
+          "restrictions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "TERMS_AND_CONDITIONS_REQUIRED",
+                "COUNTRY_RESTRICTION",
+                "CASH_ACCOUNT_LOCKED_STATE",
+                "ONBOARDING_INCOMPLETED",
+                "KYC_EXPIRED",
+                "KYC_DOC_EXPIRED",
+                "INVESTOR_KYC_BLOCKED",
+                "ACCOUNT_ALREADY_CREATED",
+                "ACCOUNT_PENDING",
+                "ACCOUNT_REQUIRED"
+              ]
+            }
+          },
+          "assetRestriction": {
+            "enum": [
+              "US_FORBIDDEN_STATES",
+              "US_MINIMUM_TOKENS",
+              "PROCESSING_ACCREDITATION",
+              "ACCREDITATION_REQUIRED",
+              "LIMITED_TRADING",
+              "LEI_REQUIRED"
+            ],
+            "type": "string"
+          },
+          "security": {
+            "type": "string"
+          },
+          "actions": {
+            "$ref": "#/components/schemas/UserActions"
+          }
+        },
+        "required": [
+          "restrictions",
+          "actions"
+        ]
+      },
+      "WalletDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "walletTitle": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "network": {
+            "type": "string"
+          },
+          "creationDate": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "walletTitle",
+          "address",
+          "network",
+          "creationDate"
+        ]
+      },
+      "GetWalletsDto": {
+        "type": "object",
+        "properties": {
+          "wallets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WalletDto"
+            }
+          }
+        },
+        "required": [
+          "wallets"
+        ]
+      },
+      "GetWalletsNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "Web3BalanceInfo": {
+        "type": "object",
+        "properties": {
+          "transferable": {
+            "type": "string"
+          },
+          "inOrders": {
+            "type": "string"
+          },
+          "available": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "transferable",
+          "inOrders",
+          "available"
+        ]
+      },
+      "WebTokenBalance": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "tokenAddress": {
+            "type": "string"
+          },
+          "balance": {
+            "$ref": "#/components/schemas/Web3BalanceInfo"
+          }
+        },
+        "required": [
+          "name",
+          "tokenAddress"
+        ]
+      },
+      "GetWalletBalanceResponseDto": {
+        "type": "object",
+        "properties": {
+          "deploymentId": {
+            "type": "string"
+          },
+          "network": {
+            "type": "string"
+          },
+          "dsToken": {
+            "$ref": "#/components/schemas/WebTokenBalance"
+          },
+          "stableCoin": {
+            "$ref": "#/components/schemas/WebTokenBalance"
+          }
+        },
+        "required": [
+          "deploymentId",
+          "network",
+          "dsToken",
+          "stableCoin"
+        ]
+      },
+      "GetWalletBalanceBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "INVALID_WEB3_BALANCE",
+            "enum": [
+              "INVALID_WEB3_BALANCE"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "GetFavTermsNotShowDto": {
+        "type": "object",
+        "properties": {
+          "favModalNotShowAgain": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "favModalNotShowAgain"
+        ]
+      },
+      "TokenInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "address"
+        ]
+      },
+      "GetBlockchainProviderDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "rpc": {
+            "type": "string"
+          },
+          "chainId": {
+            "type": "number"
+          },
+          "networkId": {
+            "type": "number"
+          },
+          "stableCoins": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TokenInfo"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "rpc",
+          "chainId",
+          "networkId",
+          "stableCoins"
+        ]
+      },
+      "GenerateWWalletsAgreementRequestDto": {
+        "type": "object",
+        "properties": {
+          "blockchainType": {
+            "enum": [
+              "ETH",
+              "avalanche",
+              "polygon",
+              "algorand"
+            ],
+            "type": "string"
+          },
+          "walletAddress": {
+            "type": "string",
+            "example": "0xF66d0f33fd12d8B6e7Cf96102eCAb919832ccb52"
+          }
+        },
+        "required": [
+          "blockchainType",
+          "walletAddress"
+        ]
+      },
+      "WalletsAgreementDto": {
+        "type": "object",
+        "properties": {
+          "agreement": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "agreement"
+        ]
+      },
+      "GenerateWalletsAgreementBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "enum": [
+              "INVESTOR_WALLET_ALREADY_ADDED",
+              "MAX_INVESTOR_WALLETS",
+              "INVALID_WALLET_ADDRESS"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "AddWalletRequestDto": {
+        "type": "object",
+        "properties": {
+          "walletType": {
+            "enum": [
+              "metamask",
+              "walletconnect"
+            ],
+            "type": "string"
+          },
+          "blockchainType": {
+            "enum": [
+              "ETH",
+              "avalanche",
+              "polygon",
+              "algorand"
+            ],
+            "type": "string"
+          },
+          "signature": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "walletType",
+          "blockchainType",
+          "signature"
+        ]
+      },
+      "AddWalletResponseDto": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "walletType": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "agreement": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "required": true,
+                "type": "string"
+              },
+              "signature": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "creationDate": {
+            "type": "string"
+          },
+          "blockchainType": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "_id",
+          "walletType",
+          "title",
+          "address",
+          "agreement",
+          "creationDate",
+          "blockchainType"
+        ]
+      },
+      "AddWalletBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "enum": [
+              "INVESTOR_WALLET_ALREADY_ADDED",
+              "MAX_INVESTOR_WALLETS",
+              "INVALID_WALLET_ADDRESS",
+              "WALLET_ALREADY_IN_USE"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      }
+    }
+  },
+  "paths": {
+    "/api/v1/assets": {
+      "get": {
+        "operationId": "AssetsController_getAssetCatalog_Deprecated",
+        "parameters": [
+          {
+            "name": "category",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "issuer",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "isRetail",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "true",
+                "false"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "searchText",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Asset Catalog",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetAssetDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/assets-catalog": {
+      "get": {
+        "operationId": "AssetsController_getAssetCatalog",
+        "parameters": [
+          {
+            "name": "category",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "issuer",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "isRetail",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "true",
+                "false"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "searchText",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Market Asset Catalog",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetAssetDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/assets/filters": {
+      "get": {
+        "operationId": "AssetsController_getAssetFilters",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get Asset Filters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetFiltersDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/assets/slug/{slug}": {
+      "get": {
+        "operationId": "AssetsController_getAssetBySlug",
+        "parameters": [
+          {
+            "name": "slug",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Asset Data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/assets/{security}/info": {
+      "get": {
+        "operationId": "AssetsController_getAssetInfo",
+        "parameters": [
+          {
+            "name": "security",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Data for Asset Info Tab",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetInfoDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/assets/{security}/user-actions": {
+      "get": {
+        "operationId": "AssetsController_canTradeAsset",
+        "parameters": [
+          {
+            "name": "security",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get user actions for a specific asset",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetActions"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/assets/{deploymentId}/trades": {
+      "get": {
+        "operationId": "AssetsController_getTradeHistorySummary",
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "timeFrame",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "day",
+                "week",
+                "month",
+                "quarter",
+                "year"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Data for Asset Trade Chart",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetTradeChartTradesDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v2/assets/{deploymentId}/trades": {
+      "get": {
+        "operationId": "AssetsController_getTradeHistoryWithSummary",
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "timeFrame",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "day",
+                "week",
+                "month",
+                "quarter",
+                "year"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Data for Asset Trade Chart including summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetTradeChartWithSummaryDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/assets/{deploymentId}/trades-history": {
+      "get": {
+        "operationId": "AssetsController_getTradeHistory",
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "required": false,
+            "in": "query",
+            "example": 1519188992919,
+            "schema": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageNumber",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get history of trades for the asset with pagination",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetTradeHistoryDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/assets/{security}/book": {
+      "get": {
+        "operationId": "AssetsController_getOrderBookOld",
+        "parameters": [
+          {
+            "name": "security",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Asset Order Book",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetOrderBookDtoOld"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v2/assets/{security}/book": {
+      "get": {
+        "operationId": "AssetsController_getOrderBook",
+        "parameters": [
+          {
+            "name": "security",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Asset Order Book",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOrderBookDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/assets/{deploymentId}/tbe-address": {
+      "get": {
+        "operationId": "AssetsController_getAssetTBEAddress",
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Asset Omnibus TBE Address",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetTBEAddressDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetNotFoundException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/assets/asset-details": {
+      "get": {
+        "operationId": "AssetsController_getAssetDetails",
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Asset Details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetDetailsDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetDetailsNotFoundException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/connect/v1/assets/": {
+      "get": {
+        "operationId": "ConnectAssetsController_getAssetCatalog",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "issuer",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "isRetail",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "true",
+                "false"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "searchText",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Asset Catalog",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetAssetDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Assets"
+        ]
+      }
+    },
+    "/connect/v1/assets/filters": {
+      "get": {
+        "operationId": "ConnectAssetsController_getAssetFilters",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Asset Filters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetFiltersDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Assets"
+        ]
+      }
+    },
+    "/connect/v1/assets/slug/{slug}": {
+      "get": {
+        "operationId": "ConnectAssetsController_getAssetBySlug",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "slug",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Asset Data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Assets"
+        ]
+      }
+    },
+    "/connect/v1/assets/{security}/info": {
+      "get": {
+        "operationId": "ConnectAssetsController_getAssetInfo",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "security",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Data for Asset Info Tab",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetInfoDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Assets"
+        ]
+      }
+    },
+    "/connect/v1/assets/{security}/user-actions": {
+      "get": {
+        "operationId": "ConnectAssetsController_canTradeAsset",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "security",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get user actions for a specific asset",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetActions"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Assets"
+        ]
+      }
+    },
+    "/connect/v1/assets/{deploymentId}/trades": {
+      "get": {
+        "operationId": "ConnectAssetsController_getTradeHistorySummary",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "timeFrame",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "day",
+                "week",
+                "month",
+                "quarter",
+                "year"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Data for Asset Trade Chart",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetTradeChartTradesDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Assets"
+        ]
+      }
+    },
+    "/connect/v2/assets/{deploymentId}/trades": {
+      "get": {
+        "operationId": "ConnectAssetsController_getTradeHistoryWithSummary",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "timeFrame",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "day",
+                "week",
+                "month",
+                "quarter",
+                "year"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Data for Asset Trade Chart including summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetTradeChartWithSummaryDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Assets"
+        ]
+      }
+    },
+    "/connect/v1/assets/{deploymentId}/trades-history": {
+      "get": {
+        "operationId": "ConnectAssetsController_getTradeHistory",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "required": false,
+            "in": "query",
+            "example": 1519188992919,
+            "schema": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageNumber",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get history of trades for the asset with pagination",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetTradeHistoryDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Assets"
+        ]
+      }
+    },
+    "/connect/v1/assets/{security}/book": {
+      "get": {
+        "operationId": "ConnectAssetsController_getOrderBookOld",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "security",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Asset Order Book",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetOrderBookDtoOld"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Assets"
+        ]
+      }
+    },
+    "/connect/v2/assets/{security}/book": {
+      "get": {
+        "operationId": "ConnectAssetsController_getOrderBook",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "security",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Asset Order Book",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOrderBookDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Assets"
+        ]
+      }
+    },
+    "/connect/v1/assets/{deploymentId}/tbe-address": {
+      "get": {
+        "operationId": "ConnectAssetsController_getAssetTBEAddress",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Asset Omnibus TBE Address",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetTBEAddressDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetNotFoundException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Assets"
+        ]
+      }
+    },
+    "/api/v2/config": {
+      "get": {
+        "operationId": "ConfigDeprecatedController_getConfigDeprecated",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get Config (Deprecated)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetConfig_DeprecatedDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Config (Deprecated)"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/config": {
+      "get": {
+        "operationId": "ConfigController_getConfig",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get Config",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetConfigDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Config"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/connect/v2/config": {
+      "get": {
+        "operationId": "ConnectConfigController_getConfig",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Config",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetConfigDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Config"
+        ]
+      }
+    },
+    "/connect/v1/config": {
+      "get": {
+        "operationId": "ConnectConfigDeprecatedController_getConfig",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Config (Deprecated)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetConfig_DeprecatedDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Config (Deprecated)"
+        ]
+      }
+    },
+    "/api/v1/orders": {
+      "get": {
+        "operationId": "OrdersController_getOrders",
+        "parameters": [
+          {
+            "name": "security",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "active",
+                "closed"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNumber",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get orders",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOrdersDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "OrdersController_createOrder",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrderRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create Order",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateOrderResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateOrderBadRequestExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/orders/validation": {
+      "post": {
+        "operationId": "OrdersController_validateOrderCreation",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateOrderCreationRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Validate Order Creation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidateOrderCreationResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidateOrderCreationBadRequestExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/orders/{orderId}/cancel": {
+      "post": {
+        "operationId": "OrdersController_cancelOrder",
+        "parameters": [
+          {
+            "name": "orderId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Cancel Order",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancelOrderResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancelOrderExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/orders/allowance-calculation": {
+      "post": {
+        "operationId": "OrdersController_allowanceCalculation",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AllowanceCalculationRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Allowance Calculation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AllowanceCalculationResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AllowanceCalculationBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AllowanceCalculationNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/connect/v1/orders": {
+      "get": {
+        "operationId": "ConnectOrdersController_getOrders",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "security",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "active",
+                "closed"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNumber",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get orders",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOrdersDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Orders"
+        ]
+      },
+      "post": {
+        "operationId": "ConnectOrdersController_createOrder",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrderRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create Order",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateOrderResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateOrderBadRequestExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Orders"
+        ]
+      }
+    },
+    "/connect/v1/orders/validation": {
+      "post": {
+        "operationId": "ConnectOrdersController_validateOrderCreation",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateOrderCreationRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Validate Order Creation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidateOrderCreationResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidateOrderCreationBadRequestExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Orders"
+        ]
+      }
+    },
+    "/connect/v1/orders/{orderId}/cancel": {
+      "post": {
+        "operationId": "ConnectOrdersController_cancelOrder",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Cancel Order",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancelOrderResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancelOrderExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Orders"
+        ]
+      }
+    },
+    "/api/v1/account/assets": {
+      "get": {
+        "operationId": "AccountAssetsController_getAssetHoldings",
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "portfolio_info"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Asset Holdings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetAssetHoldingDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Account Assets"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v2/account/balance": {
+      "get": {
+        "operationId": "BalanceController_getUserBalance",
+        "parameters": [
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "instant-settlement"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get User Balance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBalanceDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Account"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/account/favourites": {
+      "post": {
+        "operationId": "FavouritesController_createFavourite",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFavouriteRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create Favourite for user"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateFavouriteBadRequestExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Favourites"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/account/favourites/{deploymentId}": {
+      "delete": {
+        "operationId": "FavouritesController_deleteFavourite",
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "201": {
+            "description": "Delete Favourite"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteFavouriteNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Favourites"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/user-summary": {
+      "get": {
+        "operationId": "UserSummaryController_getUserSummaryOld",
+        "parameters": [
+          {
+            "name": "security",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get User Summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserSummary"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "User"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v2/user-summary": {
+      "get": {
+        "operationId": "UserSummaryController_getUserSummary",
+        "parameters": [
+          {
+            "name": "security",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get User Summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountSummaryDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "User"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/account/wallets": {
+      "get": {
+        "operationId": "WalletsController_getUserWallets",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get Wallets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetWalletsDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetWalletsNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Wallets"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/account/wallets/{walletAddress}/web3-balance": {
+      "get": {
+        "operationId": "WalletsController_getWalletBalance",
+        "parameters": [
+          {
+            "name": "walletAddress",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "DS_TOKEN",
+                "STABLE_COIN"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Wallet Balance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetWalletBalanceResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetWalletBalanceBadRequestExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Wallets"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/connect/v1/account/assets": {
+      "get": {
+        "operationId": "ConnectAccountAssetsController_getAssetHoldings",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "portfolio_info"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Asset Holdings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetAssetHoldingDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Account Assets"
+        ]
+      }
+    },
+    "/connect/v2/account/balance": {
+      "get": {
+        "operationId": "ConnectBalanceController_getUserBalance",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "instant-settlement"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get User Balance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBalanceDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Account"
+        ]
+      }
+    },
+    "/connect/v1/account/favourites": {
+      "post": {
+        "operationId": "ConnectFavouritesController_createFavourite",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFavouriteRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create Favourite for user"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateFavouriteBadRequestExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Favourites"
+        ]
+      }
+    },
+    "/connect/v1/account/favourites/{deploymentId}": {
+      "delete": {
+        "operationId": "ConnectFavouritesController_deleteFavourite",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "201": {
+            "description": "Delete Favourite"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteFavouriteNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Favourites"
+        ]
+      }
+    },
+    "/connect/v1/user-summary": {
+      "get": {
+        "operationId": "ConnectUserSummaryController_getUserSummary",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "security",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get User Summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountSummaryDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - User"
+        ]
+      }
+    },
+    "/connect/v1/account/wallets": {
+      "get": {
+        "operationId": "ConnectWalletsController_getUserWallets",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Wallets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetWalletsDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetWalletsNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Wallets"
+        ]
+      }
+    },
+    "/connect/v1/account/wallets/{walletAddress}/web3-balance": {
+      "get": {
+        "operationId": "ConnectWalletsController_getWalletBalance",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "walletAddress",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "DS_TOKEN",
+                "STABLE_COIN"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Wallet Balance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetWalletBalanceResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetWalletBalanceBadRequestExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Wallets"
+        ]
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/connect/v1/health": {
+      "get": {
+        "operationId": "ConnectHealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Health"
+        ]
+      }
+    },
+    "/api/v1/preferences/fav-terms-not-show": {
+      "get": {
+        "operationId": "PreferencesController_getFavsTermsNotShow",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get Favourites Terms Preference",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetFavTermsNotShowDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Preferences"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "PreferencesController_postFavsTermsNotShow",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Set true Favourites Terms Preference"
+          }
+        },
+        "tags": [
+          "Preferences"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/connect/v1/preferences/fav-terms-not-show": {
+      "get": {
+        "operationId": "ConnectPreferencesController_getFavsTermsNotShow",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Favourites Terms Preference",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetFavTermsNotShowDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Preferences"
+        ]
+      },
+      "post": {
+        "operationId": "ConnectPreferencesController_postFavsTermsNotShow",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Set true Favourites Terms Preference"
+          }
+        },
+        "tags": [
+          "Connect - Preferences"
+        ]
+      }
+    },
+    "/api/v1/blockchain/providers/{providerName}": {
+      "get": {
+        "operationId": "BlockchainController_getBlockchainProvider",
+        "parameters": [
+          {
+            "name": "providerName",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Blockchain Provider by name",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBlockchainProviderDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Blockchain"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/blockchain/wallets/agreement": {
+      "post": {
+        "operationId": "BlockchainController_getWalletsAgreement",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateWWalletsAgreementRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Get Wallets Agreement",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalletsAgreementDto"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalletsAgreementDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenerateWalletsAgreementBadRequestExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Blockchain"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/blockchain/whitelisted-wallets": {
+      "post": {
+        "operationId": "BlockchainController_addWallet",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddWalletRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "21": {
+            "description": "Add Wallet",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddWalletResponseDto"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddWalletResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddWalletBadRequestExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Blockchain"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/connect/v1/blockchain/providers/{providerName}": {
+      "get": {
+        "operationId": "ConnectBlockchainController_getBlockchainProvider",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "providerName",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Blockchain Provider by name",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBlockchainProviderDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Blockchain"
+        ]
+      }
+    },
+    "/connect/v1/blockchain/wallets/agreement": {
+      "post": {
+        "operationId": "ConnectBlockchainController_getWalletsAgreement",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateWWalletsAgreementRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Get Wallets Agreement",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalletsAgreementDto"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalletsAgreementDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenerateWalletsAgreementBadRequestExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Blockchain"
+        ]
+      }
+    }
+  }
+}

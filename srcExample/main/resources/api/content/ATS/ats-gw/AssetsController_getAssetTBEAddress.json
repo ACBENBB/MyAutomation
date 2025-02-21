@@ -1,0 +1,10 @@
+{
+  "pathParams": {
+    "deploymentId": "#ATS_DEPLOYMENT_ID#"
+  },
+  "headers": {
+    // "authorization": "#SID_AUTHORIZATION#"
+  },
+  "rc": {},
+  "sandbox": {}
+}

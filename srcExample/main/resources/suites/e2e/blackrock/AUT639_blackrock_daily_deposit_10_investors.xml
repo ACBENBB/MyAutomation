@@ -1,0 +1,7 @@
+<suite name="AUT639_blackrock_daily_deposit_10_investors" verbose="1">
+    <test name="AUT639_blackrock_daily_deposit_10_investors">
+        <classes>
+            <class name="io.securitize.tests.blackrock.AUT639_blackrock_daily_deposit_10_investors" />
+        </classes>
+    </test>
+</suite>

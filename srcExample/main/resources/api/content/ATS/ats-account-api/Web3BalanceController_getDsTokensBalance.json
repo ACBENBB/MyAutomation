@@ -1,0 +1,13 @@
+{
+  "pathParams": {
+    "investorId": "#ATS_INVESTOR_ID#"
+  },
+  "queryParams": {
+    "deploymentId": "#ATS_DEPLOYMENT_ID#"
+  },
+  "headers": {
+    "x-api-key": "#ATS_ACCOUNT_API_KEY#"
+  },
+  "rc": {},
+  "sandbox": {}
+}

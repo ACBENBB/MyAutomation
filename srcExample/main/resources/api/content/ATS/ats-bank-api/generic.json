@@ -1,0 +1,23 @@
+{
+  "investorId": "#ATS_INVESTOR_ID#",
+  "fundsTransferId": "#ATS_FUNDS_TRANSFER_ID#",
+  "id": "",
+  "rc": {
+  // "investorId": "638c835c85d361e6bcd5ada4"
+  // "fundsTransferId": "3b7f8664-6c29-4555-928e-e3ea62b644a0"
+  // "id" is used in 2 methods:
+  // 1.TradesController_getTrade
+  // "id": "#ATS_QUOTE_ID#" //"id": "5685215e-39b1-4059-b50d-accc8fd06973"
+  // 2.InternalCashTransfersController_getById
+  // "id": "#ATS_INTERNAL_CASH_TRANSFER_ID#"  //"id": "9f26a770-6b34-4966-82e1-7bf06d3d87b0"
+  },
+  "sandbox": {
+  // "investorId": "638c87b54106e5409d288a1a"
+  // "fundsTransferId": "89db8fff-0b9c-4b0d-b82f-d02ec9b77464"
+  // "id" is used in 2 methods:
+  // 1.TradesController_getTrade
+  // "id": "#ATS_QUOTE_ID#" //"id": "a96a6283-dabc-4224-9cbb-37a0f679de3b"
+  // 2.InternalCashTransfersController_getById
+  // "id": "#ATS_INTERNAL_CASH_TRANSFER_ID#"  //"id": "7c772e0c-513d-470f-a4ec-51e055fb4c4d"
+  }
+}

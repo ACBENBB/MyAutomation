@@ -1,0 +1,8 @@
+{
+  "pathParams":
+  {
+    "issuerId": "#ISSUER_ID#",
+    "tokenId": "#TOKEN_ID#",
+    "investmentRoundId": "100837"
+  }
+}

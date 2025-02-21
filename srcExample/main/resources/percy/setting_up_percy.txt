@@ -1,0 +1,23 @@
+===================================================
+In order to run percy tests you need the following:
+===================================================
+
+1) Install nodeJS, npm and Maven on your machine
+
+2) Install the percy tool globally:
+    npm i -g @percy/cli
+
+3) Make sure percy has permissions for needed folders:
+    mkdir /home/ubuntu/.nvm/versions/node/v12.16.3/lib/node_modules/@percy/cli/node_modules/@percy/core/.local-chromium
+    sudo chown jenkins /home/ubuntu/.nvm/versions/node/v12.16.3/lib/node_modules/@percy/cli/node_modules/@percy/core/.local-chromium
+
+4) Setup environment variable with percy token:
+    export PERCY_TOKEN=xxxxxxxxxxxxxxxxxxxxxxx
+    export visualTestingEngine=percy
+
+5) Add percy to your tests:
+    Percy percy = new Percy(Browser.getDriver());  // initialize percy
+    percy.snapshot("SecuritizeId Login Screen2");  // take snapshot and push it to server for comparison
+
+6) Run your tests using the percy executable with maven: (Update suite file name to your needs)
+    percy exec --config src/main/resources/percy/percy.yml -- mvn compile failsafe:integration-test failsafe:verify -DsuiteXmlFile=SyncSecuritizeIdToIssuer.xml

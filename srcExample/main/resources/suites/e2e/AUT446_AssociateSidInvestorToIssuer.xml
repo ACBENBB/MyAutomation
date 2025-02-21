@@ -1,0 +1,7 @@
+<suite name="AUT446_AssociateSidInvestorToIssuer" verbose="1">
+    <test name="AUT446_AssociateSidInvestorToIssuer">
+        <classes>
+            <class name="io.securitize.scripts.AUT446_AssociateSidInvestorToIssuer" />
+        </classes>
+    </test>
+</suite>

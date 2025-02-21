@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT571_JP_CpPlus_Bank_Deposit_File" verbose="1">
+    <test name="AUT571_JP_CpPlus_Bank_Deposit_File">
+        <classes>
+            <class name="io.securitize.tests.jp.AUT571_JP_CpPlus_Bank_Deposit_File" />
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,7 @@
+<suite name="AUT611_ST_Pier_FullMatch" verbose="1">
+    <test name="AUT611_ST_Pier_FullMatch">
+        <classes>
+            <class name="io.securitize.tests.blockchain.AUT611_ST_Pier_FullMatch" />
+        </classes>
+    </test>
+</suite>

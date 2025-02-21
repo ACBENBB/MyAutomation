@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT466_ATS_Sanity_Prod" verbose="1">
+    <test name="AUT466_ATS_Sanity_Prod">
+        <classes>
+            <class name="io.securitize.tests.ats.AUT466_ATS_Sanity_Prod" />
+        </classes>
+    </test>
+</suite>

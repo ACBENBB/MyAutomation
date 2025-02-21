@@ -1,0 +1,7 @@
+<suite name="AUT416_ST_Web3Swap_HolderTokenTransaction" verbose="1">
+    <test name="AUT416_ST_Web3Swap_HolderTokenTransaction">
+        <classes>
+            <class name="io.securitize.tests.blockchain.AUT474_ST_Web3Swap_HolderTokenTransaction" />
+        </classes>
+    </test>
+</suite>

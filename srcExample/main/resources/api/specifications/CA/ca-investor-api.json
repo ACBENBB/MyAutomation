@@ -1,0 +1,1614 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/v2/accounts/{investorId}/balance": {
+      "get": {
+        "operationId": "AccountsController_getBalance",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "instant-settlement"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "currency",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "USD",
+                "EUR"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Balance"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBalanceNotFoundExceptionDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBalanceInternalServerException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Accounts"
+        ]
+      }
+    },
+    "/v2/accounts/{investorId}/agreements": {
+      "post": {
+        "operationId": "AgreementsController_createAgreements",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create Account Agreement",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAgreementsResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAgreementBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAgreementNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agreements"
+        ]
+      }
+    },
+    "/v1/accounts/{investorId}/agreements/acceptance": {
+      "post": {
+        "operationId": "AgreementsController_acceptAgreements",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AcceptAgreementsRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AcceptAgreementsBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AcceptAgreementsNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agreements"
+        ]
+      }
+    },
+    "/v1/accounts/{investorId}/legal-signers": {
+      "post": {
+        "operationId": "AgreementsController_addLegalSigners",
+        "summary": "",
+        "description": "FOR INTERNAL USE ONLY - Add legal signers to investor's provider account",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddLegalSignersRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "FOR INTERNAL USE ONLY - Add legal signers to investor's provider account"
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvestorNotFoundException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "tags": [
+          "Agreements"
+        ]
+      }
+    },
+    "/v1/accounts/{investorId}/upload-documents": {
+      "post": {
+        "operationId": "AgreementsController_uploadDocuments",
+        "summary": "",
+        "description": "FOR INTERNAL USE ONLY - Add physical documents to investor's provider account\n    WARNING: Do not use this endpoint on entity users with Legal Signers already added.",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UploadDocumentsRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "FOR INTERNAL USE ONLY - Add physical documents to investor's provider account\n    WARNING: Do not use this endpoint on entity users with Legal Signers already added."
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvestorNotFoundException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "tags": [
+          "Agreements"
+        ]
+      }
+    },
+    "/v1/cash-accounts": {
+      "get": {
+        "operationId": "CashAccountsController_getCashAccounts",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "cashAccountId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "providerId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "system-accounts"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "provider",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "PRIMETRUST",
+                "SYNAPSE",
+                "BBVA",
+                "COLUMN",
+                "PAXOS",
+                "ZEROHASH"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCashAccountsResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Cash Accounts"
+        ]
+      },
+      "post": {
+        "operationId": "CashAccountsController_createCashAccount",
+        "summary": "",
+        "description": "\n      FOR NON INVESTOR ONLY - Please check which schema you want to use and which fields those need,\n      not all providers are needed to use the present endpoint\n    ",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCashAccountRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Create Cash Account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CashAccount"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Cash Accounts"
+        ]
+      }
+    },
+    "/v1/cash-accounts/{cashAccountId}/system-accounts": {
+      "post": {
+        "operationId": "CashAccountsController_createSystemAccount",
+        "summary": "",
+        "description": "\n      FOR NON INVESTOR ONLY - Please check which schema you want to use and which fields those need.\n    ",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cashAccountId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSystemAccountRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated Cash Account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CashAccount"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Cash Accounts"
+        ]
+      }
+    },
+    "/v1/cash-accounts/{cashAccountId}": {
+      "delete": {
+        "operationId": "CashAccountsController_deleteCashAccount",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cashAccountId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Cash Account (only internal test purpose)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CashAccount"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Cash Accounts"
+        ]
+      }
+    },
+    "/v1/cash-accounts/sync": {
+      "post": {
+        "operationId": "CashAccountsController_syncCashAccounts",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sync Cash Accounts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SyncCashAccountsResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Cash Accounts"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "CA Investor Api",
+    "description": "API to interact with CA Investors",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "ForbiddenException": {
+        "type": "object",
+        "properties": {}
+      },
+      "GetAccountSummaryNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "INVESTOR_NOT_FOUND",
+            "enum": [
+              "INVESTOR_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CashBalance": {
+        "type": "object",
+        "properties": {
+          "available": {
+            "type": "number"
+          },
+          "total": {
+            "type": "number"
+          },
+          "locked": {
+            "type": "number"
+          },
+          "instantSettlementLocked": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "USD",
+              "EUR"
+            ]
+          }
+        },
+        "required": [
+          "available",
+          "total",
+          "locked",
+          "currency"
+        ]
+      },
+      "Balance": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "balance": {
+                "required": true,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CashBalance"
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "GetBalanceNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "GetBalanceInternalServerException": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "SYSTEM_ACCOUNT_NOT_FOUND",
+            "enum": [
+              "SYSTEM_ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "Agreement": {
+        "type": "object",
+        "properties": {
+          "agreementContent": {
+            "type": "string"
+          },
+          "agreementId": {
+            "type": "string"
+          },
+          "providerType": {
+            "type": "string",
+            "enum": [
+              "PRIMETRUST",
+              "SYNAPSE",
+              "BBVA",
+              "COLUMN",
+              "PAXOS",
+              "ZEROHASH"
+            ]
+          }
+        },
+        "required": [
+          "agreementContent",
+          "providerType"
+        ]
+      },
+      "CreateAgreementsResponseDto": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "string"
+          },
+          "agreements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Agreement"
+            }
+          }
+        },
+        "required": [
+          "investorId",
+          "agreements"
+        ]
+      },
+      "CreateAgreementBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "INVALID_ACTION",
+            "enum": [
+              "INVALID_ACTION",
+              "Bad Request"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "details": {
+            "type": "string",
+            "enum": [
+              "ONBOARDING_INCOMPLETED",
+              "KYC_EXPIRED",
+              "KYC_DOC_EXPIRED",
+              "INVESTOR_KYC_BLOCKED",
+              "ACCOUNT_ALREADY_CREATED",
+              "ACCOUNT_PENDING",
+              "ACCOUNT_REQUIRED",
+              "CASH_ACCOUNT_LOCKED_STATE",
+              "CASH_ACCOUNT_DISABLED"
+            ]
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CreateAgreementNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "INVESTOR_NOT_FOUND",
+            "enum": [
+              "INVESTOR_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "AcceptAgreementsRequestDto": {
+        "type": "object",
+        "properties": {
+          "providerType": {
+            "enum": [
+              "PRIMETRUST",
+              "SYNAPSE",
+              "BBVA",
+              "COLUMN",
+              "PAXOS",
+              "ZEROHASH"
+            ],
+            "type": "string",
+            "example": "ZEROHASH"
+          },
+          "signature": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "providerType"
+        ]
+      },
+      "AcceptAgreementsBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "AGREEMENTS_ALREADY_ACCEPTED",
+            "enum": [
+              "INVALID_ACTION",
+              "AGREEMENTS_ALREADY_ACCEPTED",
+              "AGREEMENTS_NOT_GENERATED",
+              "CREATE_BANK_ACCOUNT_BAD_REQUEST"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "details": {
+            "type": "string",
+            "enum": [
+              "ONBOARDING_INCOMPLETED",
+              "KYC_EXPIRED",
+              "KYC_DOC_EXPIRED",
+              "INVESTOR_KYC_BLOCKED",
+              "ACCOUNT_ALREADY_CREATED",
+              "ACCOUNT_PENDING",
+              "ACCOUNT_REQUIRED",
+              "CASH_ACCOUNT_LOCKED_STATE",
+              "CASH_ACCOUNT_DISABLED"
+            ]
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "AcceptAgreementsNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "INVESTOR_NOT_FOUND",
+            "enum": [
+              "INVESTOR_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "AddLegalSignersRequestDto": {
+        "type": "object",
+        "properties": {
+          "providerType": {
+            "type": "string",
+            "enum": [
+              "PRIMETRUST",
+              "SYNAPSE",
+              "BBVA",
+              "COLUMN",
+              "PAXOS",
+              "ZEROHASH"
+            ]
+          }
+        },
+        "required": [
+          "providerType"
+        ]
+      },
+      "InvestorNotFoundException": {
+        "type": "object",
+        "properties": {}
+      },
+      "UploadDocumentsRequestDto": {
+        "type": "object",
+        "properties": {
+          "providerType": {
+            "type": "string",
+            "enum": [
+              "PRIMETRUST",
+              "SYNAPSE",
+              "BBVA",
+              "COLUMN",
+              "PAXOS",
+              "ZEROHASH"
+            ]
+          }
+        },
+        "required": [
+          "providerType"
+        ]
+      },
+      "SystemAccount": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "providerStatus": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "AGREEMENTS_GENERATED",
+              "KYC_APPROVED",
+              "PENDING",
+              "CREATED",
+              "CLOSED",
+              "FROZEN"
+            ]
+          },
+          "providerId": {
+            "type": "string"
+          },
+          "provider": {
+            "type": "string",
+            "enum": [
+              "PRIMETRUST",
+              "SYNAPSE",
+              "BBVA",
+              "COLUMN",
+              "PAXOS",
+              "ZEROHASH"
+            ]
+          },
+          "agreementsAccepted": {
+            "type": "boolean"
+          },
+          "additionalData": {
+            "type": "object"
+          },
+          "cashAccountId": {
+            "type": "string"
+          },
+          "cashAccount": {
+            "$ref": "#/components/schemas/CashAccount"
+          }
+        },
+        "required": [
+          "id",
+          "providerStatus",
+          "providerId",
+          "provider",
+          "agreementsAccepted",
+          "cashAccountId"
+        ]
+      },
+      "CashAccount": {
+        "type": "object",
+        "properties": {
+          "cashAccountId": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "DRAFT",
+              "CREATED",
+              "PENDING",
+              "CLOSED",
+              "FROZEN"
+            ],
+            "type": "string"
+          },
+          "investorId": {
+            "type": "string"
+          },
+          "systemAccounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SystemAccount"
+            }
+          }
+        },
+        "required": [
+          "cashAccountId",
+          "status"
+        ]
+      },
+      "GetCashAccountsResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CashAccount"
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "BadRequestException": {
+        "type": "object",
+        "properties": {}
+      },
+      "ZeroHashAddress": {
+        "type": "object",
+        "properties": {
+          "country": {
+            "type": "string",
+            "example": "US"
+          },
+          "address": {
+            "type": "string",
+            "example": "Street 123"
+          },
+          "city": {
+            "type": "string",
+            "example": "Chicago"
+          },
+          "province": {
+            "type": "string",
+            "example": "IL"
+          },
+          "zipCode": {
+            "type": "string",
+            "example": "60606"
+          }
+        },
+        "required": [
+          "country",
+          "address",
+          "city",
+          "province",
+          "zipCode"
+        ]
+      },
+      "Tax": {
+        "type": "object",
+        "properties": {
+          "taxId": {
+            "type": "string",
+            "example": "123-27-0003"
+          },
+          "taxCountryCode": {
+            "type": "string",
+            "example": "US"
+          }
+        },
+        "required": [
+          "taxId",
+          "taxCountryCode"
+        ]
+      },
+      "ZeroHashIndividualInfo": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "example": "John"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Smith"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "example": "1989-10-21T16:25:21Z"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "example": "+1-234-232-3232"
+          },
+          "taxDetails": {
+            "$ref": "#/components/schemas/Tax"
+          },
+          "mainIdentificationNumber": {
+            "type": "string",
+            "example": "5212425141"
+          },
+          "documentType": {
+            "enum": [
+              "SSN",
+              "PASSPORT",
+              "PERSONAL_IDENTIFICATION",
+              "DRIVERS_LICENSE",
+              "OTHER"
+            ],
+            "type": "string",
+            "example": "SSN"
+          },
+          "nationality": {
+            "type": "string",
+            "example": "US"
+          }
+        },
+        "required": [
+          "lastName",
+          "phoneNumber"
+        ]
+      },
+      "ZeroHashLegalSigner": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "example": "John"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Smith"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "example": "1989-10-21T16:25:21Z"
+          },
+          "email": {
+            "type": "string",
+            "example": "test@test.com"
+          },
+          "taxDetails": {
+            "$ref": "#/components/schemas/Tax"
+          },
+          "address": {
+            "$ref": "#/components/schemas/ZeroHashAddress"
+          },
+          "isBeneficialOwner": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName",
+          "dateOfBirth",
+          "email",
+          "taxDetails",
+          "address",
+          "isBeneficialOwner"
+        ]
+      },
+      "ZeroHashEntityIssuerInfo": {
+        "type": "object",
+        "properties": {
+          "entityName": {
+            "type": "string",
+            "example": "Company One"
+          },
+          "entityIdNumber": {
+            "type": "string",
+            "example": "11-1111333"
+          },
+          "entityIncorporationDate": {
+            "type": "string",
+            "example": "1989-10-21T16:25:21Z"
+          },
+          "website": {
+            "type": "string",
+            "example": "www.google.com"
+          },
+          "type": {
+            "enum": [
+              "revocable-trust",
+              "irrevocable-trust",
+              "limited-partnership/general-partnership",
+              "llc",
+              "fund",
+              "joint-account",
+              "corporation",
+              "other"
+            ],
+            "type": "string",
+            "example": "llc"
+          },
+          "entityLegalSigners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ZeroHashLegalSigner"
+            }
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "ZeroHashProviderInfoDto": {
+        "type": "object",
+        "properties": {
+          "providerName": {
+            "default": "ZEROHASH",
+            "enum": [
+              "PRIMETRUST",
+              "SYNAPSE",
+              "BBVA",
+              "COLUMN",
+              "PAXOS",
+              "ZEROHASH"
+            ],
+            "type": "string",
+            "example": "ZEROHASH"
+          },
+          "email": {
+            "type": "string",
+            "example": "mail@mail.com"
+          },
+          "address": {
+            "$ref": "#/components/schemas/ZeroHashAddress"
+          },
+          "verifiedAt": {
+            "type": "string",
+            "example": "2021-06-16T09:28:14Z"
+          },
+          "individualInfo": {
+            "$ref": "#/components/schemas/ZeroHashIndividualInfo"
+          },
+          "entityIssuerInfo": {
+            "$ref": "#/components/schemas/ZeroHashEntityIssuerInfo"
+          }
+        },
+        "required": [
+          "providerName",
+          "email",
+          "address",
+          "verifiedAt"
+        ]
+      },
+      "BBVAProviderInfoDto": {
+        "type": "object",
+        "properties": {
+          "providerName": {
+            "default": "BBVA",
+            "enum": [
+              "PRIMETRUST",
+              "SYNAPSE",
+              "BBVA",
+              "COLUMN",
+              "PAXOS",
+              "ZEROHASH"
+            ],
+            "type": "string",
+            "example": "BBVA"
+          }
+        },
+        "required": [
+          "providerName"
+        ]
+      },
+      "CommonInfoFields": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "individual",
+              "entity",
+              "issuer"
+            ],
+            "type": "string",
+            "example": "individual"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "CreateCashAccountRequestDto": {
+        "type": "object",
+        "properties": {
+          "providers": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/ZeroHashProviderInfoDto"
+                },
+                {
+                  "$ref": "#/components/schemas/BBVAProviderInfoDto"
+                }
+              ]
+            }
+          },
+          "info": {
+            "$ref": "#/components/schemas/CommonInfoFields"
+          }
+        },
+        "required": [
+          "providers",
+          "info"
+        ]
+      },
+      "CreateSystemAccountRequestDto": {
+        "type": "object",
+        "properties": {
+          "provider": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/ZeroHashProviderInfoDto"
+              },
+              {
+                "$ref": "#/components/schemas/BBVAProviderInfoDto"
+              }
+            ]
+          },
+          "info": {
+            "$ref": "#/components/schemas/CommonInfoFields"
+          }
+        },
+        "required": [
+          "provider",
+          "info"
+        ]
+      },
+      "SyncCashAccountsResponseDto": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number"
+          },
+          "updated": {
+            "type": "number"
+          },
+          "failedCashAccountIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "total",
+          "updated",
+          "failedCashAccountIds"
+        ]
+      }
+    }
+  }
+}

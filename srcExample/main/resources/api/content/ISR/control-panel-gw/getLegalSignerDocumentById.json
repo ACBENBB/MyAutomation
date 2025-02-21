@@ -1,0 +1,16 @@
+{
+  "pathParams": {
+    "issuerId": "aad37943-4e47-4829-ae1b-a1e5e15e9cd2",
+    "entityInvestorId": "465206",
+    "securitizeLegalSignerId": "63d7a09a37a34cd5b5f372ed",
+    "securitizeDocumentId": "63d7a09a37a34cd5b5f372ef"
+  },
+  "sandbox": {
+    "pathParams": {
+      "issuerId": "b038cd1f-91bc-44f1-ae84-c1051710d698",
+      "entityInvestorId": "495905",
+      "securitizeLegalSignerId": "63cec0a2a14d4c3bd263ec4c",
+      "securitizeDocumentId": "63cec0a2a14d4c3bd263ec4e"
+    }
+  }
+}

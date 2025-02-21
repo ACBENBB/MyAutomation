@@ -1,0 +1,8 @@
+This extension was downloaded from the official Google Chrome store, using this command:
+
+https://clients2.google.com/service/update2/crx?response=redirect&os=linux&arch=x64&os_arch=x86_64&nacl_arch=x86-64&prod=chromium&prodchannel=unknown&prodversion=[PRODVERSION]&lang=en-US&acceptformat=crx2,crx3&x=id%3D[EXTENSIONID]%26installsource%3Dondemand%26uc
+    * [PRODVERSION] is the version of Chrome, which must be 31.0.1609.0 at the very least, and
+    * [EXTENSIONID] is the ID of the extension
+
+example how to run this from the commandline:
+curl -L https://clients2.google.com/service/update2/crx\?response\=redirect\&os\=linux\&arch\=x64\&os_arch\=x86_64\&nacl_arch\=x86-64\&prod\=chromium\&prodchannel\=unknown\&prodversion\=107.0.5304.110\&lang\=en-US\&acceptformat\=crx2,crx3\&x\=id%3Dmpbjkejclgfgadiemmefgebjfooflfhl%26installsource%3Dondemand%26uc > buster.crx

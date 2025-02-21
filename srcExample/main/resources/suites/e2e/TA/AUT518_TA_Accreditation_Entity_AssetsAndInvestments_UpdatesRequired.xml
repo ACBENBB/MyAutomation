@@ -1,0 +1,7 @@
+<suite name="AUT518_TA_Accreditation_Entity_AssetsAndInvestments_UpdatesRequired" verbose="1">
+    <test name="AUT518_TA_Accreditation_Entity_AssetsAndInvestments_UpdatesRequired">
+        <classes>
+            <class name="io.securitize.tests.transferAgent.AUT518_TA_Accreditation_Entity_AssetsAndInvestments_UpdatesRequired" />
+        </classes>
+    </test>
+</suite>

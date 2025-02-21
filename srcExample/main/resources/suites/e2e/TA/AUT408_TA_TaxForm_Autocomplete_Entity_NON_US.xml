@@ -1,0 +1,7 @@
+<suite name="AUT408_TA_TaxForm_Autocomplete_Entity_NON_US" verbose="1">
+    <test name="AUT408_TA_TaxForm_Autocomplete_Entity_NON_US">
+        <classes>
+            <class name="io.securitize.tests.transferAgent.AUT408_TA_TaxForm_Autocomplete_Entity_NON_US"/>
+        </classes>
+    </test>
+</suite>

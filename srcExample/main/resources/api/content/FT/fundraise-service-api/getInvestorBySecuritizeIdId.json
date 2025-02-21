@@ -1,0 +1,17 @@
+{
+    "skips": {
+        "entireTest": true,
+        "skipReason": "TEST TEST",
+        "statusCodeCheck": false,
+        "bodySchemaCheck": false,
+        "bodyContentCheck": false
+    },
+    "expectedResponse": {
+        "statusCode": 200
+    },
+    "pathParams":
+    {
+        "investorSecuritizeId": "1234123",
+        "issuerId": "1234123"
+    }
+}

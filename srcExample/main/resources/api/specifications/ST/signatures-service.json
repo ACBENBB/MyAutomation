@@ -1,0 +1,3273 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Signatures service API",
+    "version": "1.0.0"
+  },
+  "components": {},
+  "tags": [
+    {
+      "name": "transactions"
+    },
+    {
+      "name": "multisig"
+    },
+    {
+      "name": "config"
+    }
+  ],
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "paths": {
+    "/v1/deployments/{deploymentId}/transactions/bulk": {
+      "post": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "externalId": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string",
+                        "enum": [
+                          "pending",
+                          "sent",
+                          "success",
+                          "failure",
+                          "mempool",
+                          "canceled"
+                        ]
+                      },
+                      "transactionData": {
+                        "type": "string",
+                        "description": "The transactionData to be signed"
+                      },
+                      "additionalData": {
+                        "type": "object",
+                        "description": "Additional information to use during signing process",
+                        "properties": {
+                          "networkId": {
+                            "type": "integer"
+                          },
+                          "networkType": {
+                            "type": "string"
+                          },
+                          "chainId": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "summary": "Create a set of transactions in pending status",
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "createBulkTransactionsSchema",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": [
+                {
+                  "description": "Issuing 50 tokens to user Vitaliy test January, address:0x3FBa048E1Ca3BC800Ab3677e4E22f0Ae97Ce331F, issuance time is July 5, 2021",
+                  "maskedDescription": "Issuing 50 to broker dealer BDExample, address: 0x3FBa048E1Ca3BC800Ab3677e4E22f0Ae97Ce331F , issuance time is July 5, 2021",
+                  "brokerDealerGroupId": 104,
+                  "operatorId": 1221,
+                  "operatorName": "Darth Vader Perez",
+                  "type": "IssueTokens",
+                  "transactionPaymentStrategy": "issuer",
+                  "transaction": {
+                    "apiName": "tokenApi",
+                    "apiMethod": "v1DeploymentsIdTokensPost",
+                    "txCreationBody": {
+                      "dryrun": false,
+                      "to": "0x3FBa048E1Ca3BC800Ab3677e4E22f0Ae97Ce331F",
+                      "value": "50",
+                      "issuanceTime": 1577923200
+                    },
+                    "txCreationArguments": [
+                      "0eede6ce-35bc-4f2c-82ee-030b3d5c230a"
+                    ]
+                  }
+                }
+              ],
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "description": {
+                      "type": "string",
+                      "description": "Unmasked transaction description"
+                    },
+                    "maskedDescription": {
+                      "type": "string",
+                      "description": "Masked description with broker dealer information"
+                    },
+                    "operatorId": {
+                      "type": "number",
+                      "description": "Id of the operator who created the transaction"
+                    },
+                    "operatorName": {
+                      "type": "string",
+                      "description": "Name of the operator who created the transaction"
+                    },
+                    "brokerDealerGroupId": {
+                      "type": "integer",
+                      "description": "The ID of the broker dealer group"
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "LockTokens",
+                        "BurnTokens",
+                        "BurnTBETokens",
+                        "UpdateRole",
+                        "IssueTokens",
+                        "TransferTBE",
+                        "InternalTBETransfer",
+                        "IssueTokensToTBE",
+                        "ReleaseLock",
+                        "HoldTrading",
+                        "RemoveWallet",
+                        "RegisterWallet",
+                        "ReleaseTrading",
+                        "RemoveInvestor",
+                        "UpdateComplianceRules",
+                        "UpdateCountryComplianceStatus",
+                        "CreateAssetAlgorand",
+                        "ReallocateTokens"
+                      ]
+                    },
+                    "transactionPaymentStrategy": {
+                      "type": "string",
+                      "enum": [
+                        "issuer",
+                        "investor"
+                      ],
+                      "default": "issuer"
+                    },
+                    "transaction": {
+                      "type": "object",
+                      "properties": {
+                        "to": {
+                          "type": "string"
+                        },
+                        "data": {
+                          "type": "string"
+                        },
+                        "value": {
+                          "type": "string"
+                        },
+                        "chainId": {
+                          "type": "integer"
+                        },
+                        "nonce": {
+                          "type": "string"
+                        },
+                        "gasPrice": {
+                          "type": "string"
+                        },
+                        "gasLimit": {
+                          "type": "integer"
+                        },
+                        "apiName": {
+                          "type": "string"
+                        },
+                        "apiMethod": {
+                          "type": "string"
+                        },
+                        "txCreationBody": {
+                          "type": "object"
+                        },
+                        "txCreationArguments": {
+                          "type": "array",
+                          "description": "Creation arguments",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "description",
+                    "transaction"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{deploymentId}/transactions": {
+      "post": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "externalId": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "pending",
+                        "sent",
+                        "success",
+                        "failure",
+                        "mempool",
+                        "canceled"
+                      ]
+                    },
+                    "transactionData": {
+                      "type": "string",
+                      "description": "The transactionData to be signed"
+                    },
+                    "additionalData": {
+                      "type": "object",
+                      "description": "Additional information to use during signing process",
+                      "properties": {
+                        "networkId": {
+                          "type": "integer"
+                        },
+                        "networkType": {
+                          "type": "string"
+                        },
+                        "chainId": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "summary": "Create a new transaction in pending status",
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "createTransaction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "description": "Issuing 50 tokens to user Vitaliy test January, address:0x3FBa048E1Ca3BC800Ab3677e4E22f0Ae97Ce331F, issuance time is July 5, 2021",
+                "maskedDescription": "Issuing 50 to broker dealer BDExample, address: 0x3FBa048E1Ca3BC800Ab3677e4E22f0Ae97Ce331F , issuance time is July 5, 2021",
+                "brokerDealerGroupId": 104,
+                "operatorId": 1221,
+                "operatorName": "Darth Vader Perez",
+                "type": "IssueTokens",
+                "transactionPaymentStrategy": "issuer",
+                "transaction": {
+                  "apiName": "tokenApi",
+                  "apiMethod": "v1DeploymentsIdTokensPost",
+                  "txCreationBody": {
+                    "dryrun": false,
+                    "to": "0x3FBa048E1Ca3BC800Ab3677e4E22f0Ae97Ce331F",
+                    "value": "50",
+                    "issuanceTime": 1577923200
+                  },
+                  "txCreationArguments": [
+                    "0eede6ce-35bc-4f2c-82ee-030b3d5c230a"
+                  ]
+                }
+              },
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string",
+                    "description": "Unmasked transaction description"
+                  },
+                  "maskedDescription": {
+                    "type": "string",
+                    "description": "Masked description with broker dealer information"
+                  },
+                  "operatorId": {
+                    "type": "number",
+                    "description": "Id of the operator who created the transaction"
+                  },
+                  "operatorName": {
+                    "type": "string",
+                    "description": "Name of the operator who created the transaction"
+                  },
+                  "brokerDealerGroupId": {
+                    "type": "integer",
+                    "description": "The ID of the broker dealer group"
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "LockTokens",
+                      "BurnTokens",
+                      "BurnTBETokens",
+                      "UpdateRole",
+                      "IssueTokens",
+                      "TransferTBE",
+                      "InternalTBETransfer",
+                      "IssueTokensToTBE",
+                      "ReleaseLock",
+                      "HoldTrading",
+                      "RemoveWallet",
+                      "RegisterWallet",
+                      "ReleaseTrading",
+                      "RemoveInvestor",
+                      "UpdateComplianceRules",
+                      "UpdateCountryComplianceStatus",
+                      "CreateAssetAlgorand",
+                      "ReallocateTokens"
+                    ]
+                  },
+                  "transactionPaymentStrategy": {
+                    "type": "string",
+                    "enum": [
+                      "issuer",
+                      "investor"
+                    ],
+                    "default": "issuer"
+                  },
+                  "transaction": {
+                    "type": "object",
+                    "properties": {
+                      "to": {
+                        "type": "string"
+                      },
+                      "data": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "string"
+                      },
+                      "chainId": {
+                        "type": "integer"
+                      },
+                      "nonce": {
+                        "type": "string"
+                      },
+                      "gasPrice": {
+                        "type": "string"
+                      },
+                      "gasLimit": {
+                        "type": "integer"
+                      },
+                      "apiName": {
+                        "type": "string"
+                      },
+                      "apiMethod": {
+                        "type": "string"
+                      },
+                      "txCreationBody": {
+                        "type": "object"
+                      },
+                      "txCreationArguments": {
+                        "type": "array",
+                        "description": "Creation arguments",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "type",
+                  "description",
+                  "transaction"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "totalItems": {
+                      "type": "number"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "externalId": {
+                            "type": "string",
+                            "description": "The uuid of the transaction signature"
+                          },
+                          "deploymentId": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "string",
+                            "description": "TransactionType of operation for example IssueToken or RegisterWallet"
+                          },
+                          "status": {
+                            "type": "string",
+                            "enum": [
+                              "sent",
+                              "success",
+                              "failure"
+                            ],
+                            "description": "Status of transaction"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "operatorName": {
+                            "type": "string",
+                            "description": "Name of operator who created the transaction"
+                          },
+                          "creationTime": {
+                            "type": "number",
+                            "description": "Creation date"
+                          },
+                          "date": {
+                            "type": "string",
+                            "description": "Creation time in ISO Format"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "summary": "Retrieves a list of transactions",
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "getTransactions",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "pending",
+                "sent",
+                "success",
+                "failure",
+                "mempool",
+                "canceled",
+                "all"
+              ]
+            }
+          },
+          {
+            "name": "transactionProviderId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "pattern": "(0x)[0-9a-fA-F]*$"
+            }
+          },
+          {
+            "name": "transactionId",
+            "in": "query",
+            "description": "AbstractionLayer transaction id",
+            "schema": {
+              "type": "string",
+              "description": "AbstractionLayer transaction id"
+            }
+          },
+          {
+            "name": "transactionPaymentStrategy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "issuer",
+                "investor"
+              ]
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "LockTokens",
+                "BurnTokens",
+                "BurnTBETokens",
+                "UpdateRole",
+                "IssueTokens",
+                "TransferTBE",
+                "InternalTBETransfer",
+                "IssueTokensToTBE",
+                "ReleaseLock",
+                "HoldTrading",
+                "RemoveWallet",
+                "RegisterWallet",
+                "ReleaseTrading",
+                "RemoveInvestor",
+                "UpdateComplianceRules",
+                "UpdateCountryComplianceStatus",
+                "CreateAssetAlgorand",
+                "ReallocateTokens"
+              ]
+            }
+          },
+          {
+            "name": "brokerDealerGroupId",
+            "in": "query",
+            "description": "The ID of the BrokerDealer Group",
+            "schema": {
+              "type": "integer",
+              "description": "The ID of the BrokerDealer Group"
+            }
+          },
+          {
+            "name": "bdRestrictedAccess",
+            "in": "query",
+            "description": "True if issuer should return masked descriptions",
+            "schema": {
+              "type": "boolean",
+              "description": "True if issuer should return masked descriptions",
+              "default": false
+            }
+          },
+          {
+            "name": "externalId",
+            "in": "query",
+            "description": "External Id - uuid",
+            "schema": {
+              "type": "string",
+              "description": "External Id - uuid"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of records per page",
+            "schema": {
+              "type": "integer",
+              "description": "Maximum number of records per page",
+              "minimum": 1,
+              "maximum": 500
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Number of page",
+            "schema": {
+              "type": "integer",
+              "description": "Number of page",
+              "minimum": 0
+            }
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{deploymentId}/transactions/{id}": {
+      "put": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "externalId": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "pending",
+                        "sent",
+                        "success",
+                        "failure",
+                        "mempool",
+                        "canceled"
+                      ]
+                    },
+                    "transactionData": {
+                      "type": "string",
+                      "description": "The transactionData to be signed"
+                    },
+                    "additionalData": {
+                      "type": "object",
+                      "description": "Additional information to use during signing process",
+                      "properties": {
+                        "networkId": {
+                          "type": "integer"
+                        },
+                        "networkType": {
+                          "type": "string"
+                        },
+                        "chainId": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "summary": "Update a transaction in pending status",
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "updateTransaction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "description": "Issuing 50 tokens to user Vitaliy test January, address:0x3FBa048E1Ca3BC800Ab3677e4E22f0Ae97Ce331F, issuance time is July 5, 2021",
+                "maskedDescription": "Issuing 50 to broker dealer BDExample, address: 0x3FBa048E1Ca3BC800Ab3677e4E22f0Ae97Ce331F , issuance time is July 5, 2021",
+                "brokerDealerGroupId": 104,
+                "operatorId": 1221,
+                "operatorName": "Darth Vader Perez",
+                "type": "IssueTokens",
+                "transactionPaymentStrategy": "issuer",
+                "transaction": {
+                  "apiName": "tokenApi",
+                  "apiMethod": "v1DeploymentsIdTokensPost",
+                  "txCreationBody": {
+                    "dryrun": false,
+                    "to": "0x3FBa048E1Ca3BC800Ab3677e4E22f0Ae97Ce331F",
+                    "value": "50",
+                    "issuanceTime": 1577923200
+                  },
+                  "txCreationArguments": [
+                    "0eede6ce-35bc-4f2c-82ee-030b3d5c230a"
+                  ]
+                }
+              },
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string",
+                    "description": "Unmasked transaction description"
+                  },
+                  "maskedDescription": {
+                    "type": "string",
+                    "description": "Masked description with broker dealer information"
+                  },
+                  "operatorId": {
+                    "type": "number",
+                    "description": "Id of the operator who created the transaction"
+                  },
+                  "operatorName": {
+                    "type": "string",
+                    "description": "Name of the operator who created the transaction"
+                  },
+                  "brokerDealerGroupId": {
+                    "type": "integer",
+                    "description": "The ID of the broker dealer group"
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "LockTokens",
+                      "BurnTokens",
+                      "BurnTBETokens",
+                      "UpdateRole",
+                      "IssueTokens",
+                      "TransferTBE",
+                      "InternalTBETransfer",
+                      "IssueTokensToTBE",
+                      "ReleaseLock",
+                      "HoldTrading",
+                      "RemoveWallet",
+                      "RegisterWallet",
+                      "ReleaseTrading",
+                      "RemoveInvestor",
+                      "UpdateComplianceRules",
+                      "UpdateCountryComplianceStatus",
+                      "CreateAssetAlgorand",
+                      "ReallocateTokens"
+                    ]
+                  },
+                  "transactionPaymentStrategy": {
+                    "type": "string",
+                    "enum": [
+                      "issuer",
+                      "investor"
+                    ],
+                    "default": "issuer"
+                  },
+                  "transaction": {
+                    "type": "object",
+                    "properties": {
+                      "to": {
+                        "type": "string"
+                      },
+                      "data": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "string"
+                      },
+                      "chainId": {
+                        "type": "integer"
+                      },
+                      "nonce": {
+                        "type": "string"
+                      },
+                      "gasPrice": {
+                        "type": "string"
+                      },
+                      "gasLimit": {
+                        "type": "integer"
+                      },
+                      "apiName": {
+                        "type": "string"
+                      },
+                      "apiMethod": {
+                        "type": "string"
+                      },
+                      "txCreationBody": {
+                        "type": "object"
+                      },
+                      "txCreationArguments": {
+                        "type": "array",
+                        "description": "Creation arguments",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "type",
+                  "description",
+                  "transaction"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+            }
+          }
+        ]
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "externalId": {
+                      "type": "string",
+                      "description": "uuid of the transaction signature. Used to send events in AL"
+                    },
+                    "deploymentId": {
+                      "type": "string",
+                      "description": "id of abstraction-layer"
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "TransactionType of operation for example IssueToken or RegisterWallet"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "sent",
+                        "success",
+                        "failure"
+                      ],
+                      "description": "Status of transaction"
+                    },
+                    "transaction": {
+                      "type": "object",
+                      "properties": {
+                        "apiName": {
+                          "type": "string"
+                        },
+                        "apiMethod": {
+                          "type": "string"
+                        },
+                        "txCreationBody": {
+                          "type": "object",
+                          "properties": {
+                            "holder": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "country": {
+                                  "type": "string"
+                                },
+                                "wallets": {
+                                  "type": "string"
+                                },
+                                "attributes": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "name": {
+                                        "type": "string"
+                                      },
+                                      "expiry": {
+                                        "type": "integer"
+                                      },
+                                      "status": {
+                                        "type": "string"
+                                      },
+                                      "countryCode": {
+                                        "type": "string"
+                                      },
+                                      "createInvestor": {
+                                        "type": "boolean"
+                                      },
+                                      "kyc": {
+                                        "type": "string"
+                                      },
+                                      "qualified": {
+                                        "type": "string"
+                                      },
+                                      "accredited": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "additionalProperties": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              },
+                              "additionalProperties": {
+                                "type": "string"
+                              }
+                            },
+                            "holders": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "country": {
+                                    "type": "string"
+                                  },
+                                  "wallets": {
+                                    "type": "string"
+                                  },
+                                  "attributes": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "name": {
+                                          "type": "string"
+                                        },
+                                        "expiry": {
+                                          "type": "integer"
+                                        },
+                                        "status": {
+                                          "type": "string"
+                                        },
+                                        "countryCode": {
+                                          "type": "string"
+                                        },
+                                        "createInvestor": {
+                                          "type": "boolean"
+                                        },
+                                        "kyc": {
+                                          "type": "string"
+                                        },
+                                        "qualified": {
+                                          "type": "string"
+                                        },
+                                        "accredited": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "additionalProperties": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                },
+                                "additionalProperties": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "lock": {
+                              "type": "object",
+                              "properties": {
+                                "value": {
+                                  "type": "string"
+                                },
+                                "reason": {
+                                  "type": "string"
+                                },
+                                "releaseTime": {
+                                  "type": "integer"
+                                }
+                              },
+                              "additionalProperties": {
+                                "type": "string"
+                              }
+                            },
+                            "complianceRules": {
+                              "type": "object",
+                              "description": "Compliance rules",
+                              "properties": {
+                                "totalInvestorsLimit": {
+                                  "type": "integer"
+                                },
+                                "minUSTokens": {
+                                  "type": "string",
+                                  "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                                },
+                                "minEUTokens": {
+                                  "type": "string",
+                                  "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                                },
+                                "usInvestorsLimit": {
+                                  "type": "integer"
+                                },
+                                "usAccreditedInvestorsLimit": {
+                                  "type": "integer"
+                                },
+                                "nonAccreditedInvestorsLimit": {
+                                  "type": "integer"
+                                },
+                                "euRetailInvestorsLimit": {
+                                  "type": "integer"
+                                },
+                                "jpInvestorsLimit": {
+                                  "type": "integer"
+                                },
+                                "maxUSInvestorsPercentage": {
+                                  "type": "integer"
+                                },
+                                "blockFlowbackEndTime": {
+                                  "type": "integer"
+                                },
+                                "nonUSLockPeriod": {
+                                  "type": "integer"
+                                },
+                                "minimumTotalInvestors": {
+                                  "type": "integer"
+                                },
+                                "minimumHoldingsPerInvestor": {
+                                  "type": "string",
+                                  "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                                },
+                                "maximumHoldingsPerInvestor": {
+                                  "type": "string",
+                                  "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                                },
+                                "usLockPeriod": {
+                                  "type": "integer"
+                                },
+                                "forceFullTransfer": {
+                                  "type": "boolean"
+                                },
+                                "forceAccredited": {
+                                  "type": "boolean"
+                                },
+                                "forceAccreditedUS": {
+                                  "type": "boolean"
+                                },
+                                "worldWideForceFullTransfer": {
+                                  "type": "boolean"
+                                }
+                              }
+                            }
+                          },
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        },
+                        "txCreationArguments": {
+                          "type": "array",
+                          "description": "Creation arguments",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "transactionId": {
+                      "type": "string",
+                      "description": "Transaction ID in AbstractionLayer"
+                    },
+                    "transactionProviderId": {
+                      "type": "string",
+                      "description": "transactionProviderId in AbstractionLayer"
+                    },
+                    "signedAddress": {
+                      "type": "string",
+                      "description": "Address who signed the transaction"
+                    },
+                    "creationTime": {
+                      "type": "number",
+                      "description": "Creation date"
+                    },
+                    "date": {
+                      "type": "string",
+                      "description": "Create date in ISO format"
+                    },
+                    "signedTime": {
+                      "type": "number",
+                      "description": "Signed date"
+                    },
+                    "blockTime": {
+                      "type": "integer",
+                      "description": "blockTime of transaction"
+                    },
+                    "blockNumber": {
+                      "type": "integer",
+                      "description": "blockNumber of transaction"
+                    },
+                    "operatorId": {
+                      "type": "integer",
+                      "description": "ID of the operator who created the transaction"
+                    },
+                    "operatorName": {
+                      "type": "string",
+                      "description": "Name of operator who created the transaction"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "A field that details the last error with the transaction"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "summary": "Retrieves the data of a transaction",
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "getTransaction",
+        "parameters": [
+          {
+            "name": "brokerDealerGroupId",
+            "in": "query",
+            "description": "The ID of the BrokerDealer Group",
+            "schema": {
+              "type": "integer",
+              "description": "The ID of the BrokerDealer Group"
+            }
+          },
+          {
+            "name": "bdRestrictedAccess",
+            "in": "query",
+            "description": "True if issuer should return masked descriptions",
+            "schema": {
+              "type": "boolean",
+              "description": "True if issuer should return masked descriptions",
+              "default": false
+            }
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "The id and deploymentId of deleted transaction",
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "The id and deploymentId of deleted transaction"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "summary": "Deletes a transaction",
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "deleteTransaction",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "in": "query",
+            "description": "The issuerId of the token. If sent, it deletes main-api blockchain-transaction",
+            "schema": {
+              "type": "string",
+              "description": "The issuerId of the token. If sent, it deletes main-api blockchain-transaction"
+            }
+          },
+          {
+            "name": "tokenId",
+            "in": "query",
+            "description": "TokenId of token. If sent, it deletes main-api blockchain-transaction",
+            "schema": {
+              "type": "string",
+              "description": "TokenId of token. If sent, it deletes main-api blockchain-transaction"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "description": "The abstraction-layer deployment id.",
+            "schema": {
+              "type": "string",
+              "description": "The abstraction-layer deployment id."
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{deploymentId}/transactions/{id}/status": {
+      "put": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "externalId": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "pending",
+                        "sent",
+                        "success",
+                        "failure",
+                        "mempool",
+                        "canceled"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "summary": "Updates transactionProviderId (blockchain transactionHash) and status of a transaction",
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "updateTransactionStatus",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "transactionProviderId": "0x8b1603e8312aa54f3ef05c3917ab9a0fd3300cb2985f15849f32e9418e2abc85"
+              },
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "pending",
+                      "sent",
+                      "success",
+                      "failure",
+                      "mempool",
+                      "canceled"
+                    ],
+                    "default": "sent"
+                  },
+                  "transactionProviderId": {
+                    "type": "string",
+                    "description": "Transaction Hash returned by blockchain after sending signed transactions. SENT by default."
+                  }
+                },
+                "required": [
+                  "transactionProviderId"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{deploymentId}/transactions/{id}/provider-detail": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "transactionProviderId": {
+                      "type": "string",
+                      "description": "transactionProviderId in AbstractionLayer"
+                    },
+                    "blockNumber": {
+                      "type": "integer"
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "Status of transaction"
+                    },
+                    "finalized": {
+                      "type": "boolean"
+                    },
+                    "gasPrice": {
+                      "type": "string",
+                      "description": "Gas price of the transaction"
+                    },
+                    "signerAddress": {
+                      "type": "string",
+                      "description": "Address who signed the transaction"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "summary": "Retrieves the detail of a transaction from the provider",
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "getProviderTransactionDetail",
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{deploymentId}/transactions/{id}/ds-protocol": {
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "transactionId": {
+                      "type": "string",
+                      "description": "The ID of AbstractionLayer transaction"
+                    },
+                    "transactionData": {
+                      "type": "string",
+                      "description": "Unsigned transaction"
+                    },
+                    "additionalData": {
+                      "type": "object",
+                      "properties": {
+                        "networkId": {
+                          "type": "integer"
+                        },
+                        "networkType": {
+                          "type": "string"
+                        },
+                        "chainId": {
+                          "type": "integer"
+                        },
+                        "txType": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "summary": "Invokes the DSProtocol operation to create an unsigned transaction. It calls AL and creates a new UUID called transactionId",
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "invokeDsProtocolService",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "identity": "0xA2e126bbc1Be6c40c4e614038f18fc54125e03B6"
+              },
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "identity": {
+                    "type": "string",
+                    "description": "Address used to sign the transaction"
+                  }
+                },
+                "required": [
+                  "identity"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{deploymentId}/transactions/{id}/speed-up": {
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "transactionId": {
+                      "type": "string",
+                      "description": "The ID of AbstractionLayer transaction"
+                    },
+                    "transactionData": {
+                      "type": "string",
+                      "description": "Unsigned transaction"
+                    },
+                    "additionalData": {
+                      "type": "object",
+                      "properties": {
+                        "networkId": {
+                          "type": "integer"
+                        },
+                        "networkType": {
+                          "type": "string"
+                        },
+                        "chainId": {
+                          "type": "integer"
+                        },
+                        "txType": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "summary": "Speed Up a transaction and returns unsigned transaction data to be signed",
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "speedUpTransactionService",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "identity": "0x311c06eba0514677601c712ca8ad1d87dc7e1dd1",
+                "gasPrice": "1500000000000000"
+              },
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "identity": {
+                    "type": "string",
+                    "description": "Address who will sign the transaction"
+                  },
+                  "gasPrice": {
+                    "type": "string",
+                    "description": "The new gasPrice to speedUp transaction",
+                    "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                  }
+                },
+                "required": [
+                  "gasPrice"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{deploymentId}/transactions/{id}/cancel": {
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "transactionId": {
+                      "type": "string",
+                      "description": "The ID of AbstractionLayer transaction"
+                    },
+                    "transactionData": {
+                      "type": "string",
+                      "description": "Unsigned transaction"
+                    },
+                    "additionalData": {
+                      "type": "object",
+                      "properties": {
+                        "networkId": {
+                          "type": "integer"
+                        },
+                        "networkType": {
+                          "type": "string"
+                        },
+                        "chainId": {
+                          "type": "integer"
+                        },
+                        "txType": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "summary": "Cancel a transaction. It return unsigned transaction",
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "cancelTransactionService",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "identity": "0x311c06eba0514677601c712ca8ad1d87dc7e1dd1"
+              },
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "identity": {
+                    "type": "string",
+                    "description": "Address who will sign the transaction"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{deploymentId}/transactions/{id}/signature": {
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Signed transaction sending result",
+                  "properties": {
+                    "transactionProviderId": {
+                      "type": "string"
+                    },
+                    "transactionId": {
+                      "type": "string",
+                      "description": "The ID of AbstractionLayer transaction"
+                    },
+                    "signatureId": {
+                      "type": "string",
+                      "description": "The ID of AbstractionLayer signatures"
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "The status of the transaction in AbstractionLayer"
+                    },
+                    "transactionData": {
+                      "type": "string",
+                      "description": "The transactionData to sign final multisig transactions"
+                    },
+                    "additionalData": {
+                      "type": "object",
+                      "description": "The additionalData to sign final multisig transactions",
+                      "properties": {
+                        "networkId": {
+                          "type": "integer"
+                        },
+                        "networkType": {
+                          "type": "string"
+                        },
+                        "chainId": {
+                          "type": "integer"
+                        },
+                        "multiSigTransactionExecution": {
+                          "type": "boolean"
+                        }
+                      },
+                      "additionalProperties": true
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Signed transaction sending result"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "summary": "Sends a signed transaction to be executed. It calls AbstractionLayer",
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "sendTransactionSignature",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "transactionOperation": "sign",
+                "transactionData": "0x7f7465737432000000000000000000000000000000000000000000000000000000600057",
+                "identity": "0xC17a59228C04D1eeAB92b9E45A7175b361c1e958",
+                "additionalData": {
+                  "multiSigTransactionExecution": true,
+                  "multiSigWalletId": "5ec2e141-22fb-491c-b45d-19450ee54b86",
+                  "multiSigWalletNonce": "15",
+                  "clientTransactionId": "1515",
+                  "signature": {
+                    "s": "0x12c4c303c735e4d60bd74e093100c16f65ff602c91df2b8214fbdf636d6bfb11",
+                    "r": "0x4bc984e5e17c69829cfc287e9fb1f91076f8f62e7593cc645a17dddb8d0b5ada",
+                    "v": 27
+                  }
+                }
+              },
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "transactionOperation": {
+                    "type": "string",
+                    "enum": [
+                      "sign",
+                      "speed-up",
+                      "cancel"
+                    ],
+                    "default": "sign",
+                    "description": "Use speed-up or cancel after calling transaction/{id}/speed-up or transaction/{id}/cancel endpoints. Default: sign"
+                  },
+                  "identity": {
+                    "type": "string",
+                    "description": "The address of the user who signed the transaction"
+                  },
+                  "transactionData": {
+                    "type": "string",
+                    "description": "Signed transaction data to execute"
+                  },
+                  "additionalData": {
+                    "type": "object",
+                    "description": "Additional data to execute transactions",
+                    "properties": {
+                      "multiSigTransactionExecution": {
+                        "type": "boolean",
+                        "description": "True to invoke DSProtocol multisigWallet.execute transaction."
+                      },
+                      "multiSigWalletId": {
+                        "type": "string",
+                        "description": "The id of the multisig wallet used to sign the transaction"
+                      },
+                      "multiSigWalletNonce": {
+                        "type": "string",
+                        "description": "The nonce of the multisig wallet"
+                      },
+                      "clientTransactionId": {
+                        "type": "string",
+                        "description": "Id of the transaction of the caller system"
+                      },
+                      "signature": {
+                        "type": "object",
+                        "description": "Signature in r,s,v format",
+                        "properties": {
+                          "s": {
+                            "type": "string",
+                            "pattern": "(0x)[0-9a-fA-F]*$",
+                            "description": "s signature"
+                          },
+                          "r": {
+                            "type": "string",
+                            "pattern": "(0x)[0-9a-fA-F]*$",
+                            "description": "r signature"
+                          },
+                          "v": {
+                            "type": "integer",
+                            "description": "v signature"
+                          }
+                        },
+                        "required": [
+                          "r",
+                          "s",
+                          "v"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "identity",
+                  "transactionData"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{deploymentId}/multisig-wallets": {
+      "get": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "description": "List of Multisig wallets",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "address": {
+                        "type": "string",
+                        "pattern": "(0x)[0-9a-fA-F]*$"
+                      }
+                    },
+                    "required": [
+                      "address"
+                    ]
+                  }
+                }
+              }
+            },
+            "description": "List of Multisig wallets"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "summary": "Retrieves the data of a multisig wallet transaction",
+        "tags": [
+          "multisig"
+        ],
+        "operationId": "getMultisigWallets",
+        "parameters": [
+          {
+            "name": "includeNonce",
+            "in": "query",
+            "description": "True to return the nonce of the wallet if it is deployed",
+            "schema": {
+              "type": "boolean",
+              "description": "True to return the nonce of the wallet if it is deployed"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "description": "The deployment Id",
+            "schema": {
+              "description": "The deployment Id",
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{deploymentId}/multisig-wallets/{multisigWalletId}": {
+      "get": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "MultiSig wallet",
+                  "properties": {
+                    "walletName": {
+                      "type": "string"
+                    },
+                    "threshold": {
+                      "type": "number"
+                    },
+                    "walletAddress": {
+                      "type": "string",
+                      "pattern": "(0x)[0-9a-fA-F]*$"
+                    },
+                    "deploymentStatus": {
+                      "type": "string",
+                      "enum": [
+                        "pending",
+                        "inProgress",
+                        "success",
+                        "failure"
+                      ]
+                    },
+                    "deploymentId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "MultiSig wallet"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "summary": "Retrieves data about specified multisig wallet",
+        "tags": [
+          "multisig"
+        ],
+        "operationId": "getSingleMultiSigWallet",
+        "parameters": [
+          {
+            "name": "includeNonce",
+            "in": "query",
+            "description": "True to return the nonce of the wallet if it is deployed",
+            "schema": {
+              "type": "boolean",
+              "description": "True to return the nonce of the wallet if it is deployed"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "description": "The deployment Id",
+            "schema": {
+              "description": "The deployment Id",
+              "type": "string"
+            }
+          },
+          {
+            "name": "multisigWalletId",
+            "in": "path",
+            "required": true,
+            "description": "The wallet Id",
+            "schema": {
+              "description": "The wallet Id",
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{deploymentId}/multisig-wallets/transactions/{id}/status": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "The signatures of the off-chain transactions are saved until reaching the minimum amount required to execute it (threshold). This service returns the number of signatures so far",
+                  "type": "object",
+                  "properties": {
+                    "transactionId": {
+                      "type": "string",
+                      "description": "The id of the transaction"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "pending",
+                        "sent",
+                        "success",
+                        "failure",
+                        "mempool",
+                        "canceled"
+                      ]
+                    },
+                    "signatures": {
+                      "type": "number",
+                      "description": "The number of off-chain saved signatures of the transaction"
+                    },
+                    "threshold": {
+                      "type": "number",
+                      "description": "The number of off-chain required signatures to sign the transaction"
+                    },
+                    "nonce": {
+                      "type": "string",
+                      "description": "The nonce of the multisig wallet when the trasaction is created"
+                    },
+                    "multiSigWalletId": {
+                      "type": "string",
+                      "description": "The id of the multisig"
+                    },
+                    "transactionData": {
+                      "type": "string",
+                      "description": "The transactionData of the transaction"
+                    },
+                    "additionalData": {
+                      "type": "object",
+                      "properties": {
+                        "networkId": {
+                          "type": "integer"
+                        },
+                        "networkType": {
+                          "type": "string"
+                        },
+                        "chainId": {
+                          "type": "integer"
+                        },
+                        "txType": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": true
+                    }
+                  }
+                }
+              }
+            },
+            "description": "The signatures of the off-chain transactions are saved until reaching the minimum amount required to execute it (threshold). This service returns the number of signatures so far"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "summary": "Get current status of a multisig transaction",
+        "tags": [
+          "multisig"
+        ],
+        "operationId": "getMultiSigTransactionStatusSchema",
+        "parameters": [
+          {
+            "name": "includeTransactionData",
+            "in": "query",
+            "description": "True to include transactionData, false otherwise",
+            "schema": {
+              "type": "boolean",
+              "description": "True to include transactionData, false otherwise"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{deploymentId}/multisig-wallets/transactions/{id}/signatures": {
+      "delete": {
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "pending",
+                        "sent",
+                        "success",
+                        "failure",
+                        "mempool",
+                        "canceled"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "summary": "Delete all the signatures of a specific multi-sig transaction",
+        "tags": [
+          "multisig"
+        ],
+        "operationId": "deleteMultiSigTransactionSignatures",
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "description": "Token DeploymentId",
+            "schema": {
+              "type": "string",
+              "description": "Token DeploymentId"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Transaction ID",
+            "schema": {
+              "type": "number",
+              "description": "Transaction ID",
+              "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{deploymentId}/gas-price": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "gasPrice": {
+                      "type": "string"
+                    },
+                    "gasPriceUnit": {
+                      "type": "string"
+                    },
+                    "cryptoCurrencySymbol": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "summary": "Return the recommended gas price - in wei - according to priority",
+        "tags": [
+          "config"
+        ],
+        "operationId": "getGasPrice",
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/health": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "service": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "summary": "Checks provider server health",
+        "tags": [
+          "provider"
+        ],
+        "operationId": "getCheckHealth"
+      }
+    },
+    "/v1/health-check": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "service": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "summary": "Checks provider server health",
+        "tags": [
+          "provider"
+        ],
+        "operationId": "getCheckHealth"
+      }
+    },
+    "/v1/deployments/{deploymentId}/create-asset": {
+      "post": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "externalId": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "pending",
+                        "sent",
+                        "success",
+                        "failure",
+                        "mempool",
+                        "canceled"
+                      ]
+                    },
+                    "transactionData": {
+                      "type": "string",
+                      "description": "The transactionData to be signed"
+                    },
+                    "additionalData": {
+                      "type": "object",
+                      "description": "Additional information to use during signing process",
+                      "properties": {
+                        "networkId": {
+                          "type": "integer"
+                        },
+                        "networkType": {
+                          "type": "string"
+                        },
+                        "chainId": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Error method",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error method"
+          }
+        },
+        "summary": "Create asset for algorand in pending status",
+        "tags": [
+          "deploy"
+        ],
+        "operationId": "createAsset",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "description": "Deploy new token algorand tokenName asset, deploy time is July 5, 2021",
+                "type": "CreateAssetAlgorand",
+                "transactionPaymentStrategy": "issuer",
+                "transaction": {
+                  "apiName": "tokenApi",
+                  "apiMethod": "v1DeploymentsIdCreateAssetAlgorandPost",
+                  "txCreationBody": {
+                    "tokenDescription": {
+                      "name": "tokenName",
+                      "symbol": "TKN",
+                      "decimals": 0,
+                      "assetUrl": "https://tokenName.com",
+                      "assetMetadataHash": "16efaa3924a6fd9d3a4824799a4ac65d",
+                      "totalAssets": "1000000",
+                      "masterAccount": "RESVQS5KLTZOLAEIDCXMS37KNBGSJONTVZZNOFSP3J2BRADFYCAS4EMHPM",
+                      "freezeAccount": "FRZTLKCFJFKS6UKDI4JSBP4K3E4PLMLMXPBWX4IDPAE2XOQ25YHDW6JYOY",
+                      "clawbackAccount": "CLAGH4Y7ZH6PKKOQRUP7PV3RZA65ZAVZENCKDHBIBPAOIGI4SM64ZP2I7U"
+                    }
+                  },
+                  "txCreationArguments": [
+                    "0eede6ce-35bc-4f2c-82ee-030b3d5c230a"
+                  ]
+                }
+              },
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string",
+                    "description": "Unmasked transaction description"
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "LockTokens",
+                      "BurnTokens",
+                      "BurnTBETokens",
+                      "UpdateRole",
+                      "IssueTokens",
+                      "TransferTBE",
+                      "InternalTBETransfer",
+                      "IssueTokensToTBE",
+                      "ReleaseLock",
+                      "HoldTrading",
+                      "RemoveWallet",
+                      "RegisterWallet",
+                      "ReleaseTrading",
+                      "RemoveInvestor",
+                      "UpdateComplianceRules",
+                      "UpdateCountryComplianceStatus",
+                      "CreateAssetAlgorand",
+                      "ReallocateTokens"
+                    ]
+                  },
+                  "transactionPaymentStrategy": {
+                    "type": "string",
+                    "enum": [
+                      "issuer",
+                      "investor"
+                    ],
+                    "default": "issuer"
+                  },
+                  "transaction": {
+                    "required": [
+                      "tokenDescription",
+                      "provider"
+                    ]
+                  },
+                  "transactionId": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "description",
+                  "transaction"
+                ]
+              }
+            }
+          },
+          "required": true
+        }
+      }
+    }
+  }
+}

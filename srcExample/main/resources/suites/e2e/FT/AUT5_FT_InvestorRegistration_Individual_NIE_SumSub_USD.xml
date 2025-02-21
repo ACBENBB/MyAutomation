@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT5_FT_InvestorRegistration_Individual_NIE_SumSub_USD" verbose="1">
+    <test name="AUT5_FT_InvestorRegistration_Individual_NIE_SumSub_USD">
+        <classes>
+            <class name="io.securitize.tests.fundraise.AUT5_FT_InvestorRegistration_Individual_NIE_SumSub" >
+                <methods>
+                    <include name="AUT5_FT_InvestorRegistration_Individual_NIE_SumSub_USD"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,7 @@
+<suite name="AUT541_CA_Withdrawal_US_Account_USDC" verbose="1">
+    <test name="AUT541_CA_Withdrawal_US_Account_USDC">
+        <classes>
+            <class name="io.securitize.tests.ca.AUT541_CA_Withdrawal_US_Account_USDC" />
+        </classes>
+    </test>
+</suite>

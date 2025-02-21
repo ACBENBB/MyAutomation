@@ -1,0 +1,7 @@
+<suite name="AUT491_TA_Distributions_W8BENE_Accept" verbose="1">
+    <test name="AUT491_TA_Distributions_W8BENE_Accept">
+        <classes>
+            <class name="io.securitize.tests.transferAgent.AUT491_TA_Distributions_W8BENE_Accept"/>
+        </classes>
+    </test>
+</suite>

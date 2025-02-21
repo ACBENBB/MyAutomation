@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT74_ISR_InvestorRegistration_FBO" verbose="1">
+    <parameter name="investmentCurrency"  value="USD"/>
+    <parameter name="currencyName"  value="United States Dollar"/>
+    <test name="AUT74_ISR_InvestorRegistration_FBO">
+        <classes>
+            <class name="io.securitize.tests.controlPanel.AUT74_ISR_InvestorRegistration_FBO_USD" />
+        </classes>
+    </test>
+</suite>

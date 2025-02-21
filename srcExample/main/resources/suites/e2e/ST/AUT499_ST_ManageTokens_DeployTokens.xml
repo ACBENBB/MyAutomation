@@ -1,0 +1,7 @@
+<suite name="AUT499_ST_ManageTokens_DeployTokens" verbose="1">
+    <test name="AUT499_ST_ManageTokens_DeployTokens">
+        <classes>
+            <class name="io.securitize.tests.blockchain.AUT499_ST_ManageTokens_DeployTokens"/>
+        </classes>
+    </test>
+</suite>

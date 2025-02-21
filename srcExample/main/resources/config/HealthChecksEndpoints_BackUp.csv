@@ -1,0 +1,19 @@
+name,url,tags,ignoreList
+ISR - control panel gw api,https://cp.rc.securitize.io/api/v2/health-check,rc
+Blockchain - Signature service endpoint for sync,http://signature.rc.securitize.io/v1/health-check,rc
+Blockchain - Abstraction layer service,https://al.rc.securitize.io/v1/health-check,rc
+Blockchain - Contract data service for ETH,https://cds.rc.securitize.io/v1/health-check,notNightly
+Blockchain - Contract data service for Quorum,https://cdsq.rc.securitize.io/v1/health-check,rc
+Blockchain - Contract data service for Avalanche,https://cdsav.rc.securitize.io/v1/health-check,notNightly
+Blockchain - Transaction service for ETH,https://ts.rc.securitize.io/v1/health-check,notNightly
+Blockchain - Transaction service for Quorum,https://tsq.rc.securitize.io/v1/health-check,rc
+Blockchain - Transaction service for Avalanche,https://tsav.rc.securitize.io/v1/health-check,notNightly
+Blockchain - Auto-Deployment service endpoint,https://depmgmt.rc.securitize.io/v1/health-check,notNightly
+Blockchain - Pier Service,http://pier.rc.securitize.io/health,notNightly,details;error;info
+Blockchain - Algorand provider,https://algorand.rc.securitize.io/v1/health-check,notNightly
+TA - Endpoint for payout api,https://api-payouts.rc.securitize.io/api/v1/health-check,notNightly
+TA - Accreditaion service,https://accreditationapi.rc.securitize.io/api/v1/health-check,notNightly
+ATS - ATS main API,https://atsmainapi.dev.securitize.io/api/health,notNightly
+ATS - ATS Bank API,http://atsbankapi.dev.securitize.io/health,notNightly,info;error;details
+ATS - ATS public gateway,https://ats-public-gw.rc.securitize.io/health,notNightly,info;error;details
+ATS - ATS rtgw service,https://ats-gw.rc.securitize.io/health,notNightly,info;error;details

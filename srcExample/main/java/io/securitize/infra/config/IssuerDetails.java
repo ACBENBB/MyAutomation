@@ -1,0 +1,48 @@
+package io.securitize.infra.config;
+public enum IssuerDetails {
+    issuerFullName,
+    issuersFullName,
+    issuerInvestPrefix,
+    issuerDashboardPrefix,
+    issuerID,
+    issuerSecret,
+    issuedTokenName,
+    signerWalletAddress,
+    signerPrivateKey,
+    issuedAssetId,
+    investmentName,
+    investmentMarketName,
+    investorPaymentWalletAddress,
+    investorPaymentWalletPrivateKey,
+    investorEmailHealthChecks,
+    invPaysETHTokenName,
+    invPaysETHSignerWalletAddress,
+    invPaysETHSignerPrivateKey,
+    issuerPaysETHTokenName,
+    issuerPaysETHSignerWalletAddress,
+    issuerPaysETHSignerPrivateKey,
+    issuerPaysETHTokenNameTransferAgentRole,
+    issuerPaysETHSignerWalletAddressTransferAgentRole,
+    issuerPaysETHSignerPrivateKeyTransferAgentRole,
+    controlBookToken,
+    controlBookTokenSignerWalletAddress,
+    controlBookTokenSignerPrivateKey,
+    signerAddress,
+    signerPK,
+    // DISTRIBUTIONS
+    distributionsIssuerId,
+    distributionsTokenId,
+
+
+    quorumTokenName,
+    quorumSignerWalletAddress,
+    quorumSignerPrivateKey,
+    ethereum_sepoliaTokenName,
+    ethereum_sepoliaSignerWalletAddress,
+    ethereum_sepoliaSignerPrivateKey,
+    polygon_mumbaiTokenName,
+    polygon_mumbaiSignerWalletAddress,
+    polygon_mumbaiSignerPrivateKey,
+    avalanche_avaxTokenName
+}
+

@@ -1,0 +1,10 @@
+{
+    "rc" : {
+    },
+    "sandbox" : {
+    },
+    "pathParams":
+    {
+        "tokenId": "#TOKEN_ID#"
+    }
+}

@@ -1,0 +1,8 @@
+{
+  "pathParams": {
+    "userId": "#SID_USER_ID#"
+  },
+  "rc": {},
+  "sandbox": {},
+  "production": {}
+}

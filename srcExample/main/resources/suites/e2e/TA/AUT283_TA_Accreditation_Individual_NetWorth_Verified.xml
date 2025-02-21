@@ -1,0 +1,7 @@
+<suite name="AUT283_TA_Accreditation_Individual_NetWorth_Verified" verbose="1">
+    <test name="AUT283_TA_Accreditation_Individual_NetWorth_Verified">
+        <classes>
+            <class name="io.securitize.tests.transferAgent.AUT283_TA_Accreditation_Individual_NetWorth_Verified" />
+        </classes>
+    </test>
+</suite>

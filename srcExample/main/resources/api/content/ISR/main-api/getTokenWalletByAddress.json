@@ -1,0 +1,16 @@
+{
+  "skips": {
+    "entireTest": false
+  },
+  "pathParams":
+  {
+    "issuerId": "#ISSUER_ID#",
+    "tokenId": "#TOKEN_ID#",
+    "address": "0xf4e9c49ad5483272e8f60029e35f969030ac7a3f"
+  },
+  "sandbox": {
+    "pathParams": {
+      "address": "0x961d03bf387d515da9093174405f3750b75cc6f4"
+    }
+  }
+}

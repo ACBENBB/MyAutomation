@@ -1,0 +1,7 @@
+<suite name="AUT261_SID_Website_Regression_Overview" verbose="1">
+    <test name="AUT261_SID_Website_Regression_Overview">
+        <classes>
+            <class name="io.securitize.tests.securitizeId.AUT261_SID_Website_Regression_Overview" />
+        </classes>
+    </test>
+</suite>

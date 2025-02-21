@@ -1,0 +1,14 @@
+{
+  "headers": {
+    // "authorization": "#SID_AUTHORIZATION#"
+    //"cookie": "#SID_COOKIE#"
+
+  },
+  "rc": {},
+  "sandbox": {
+    "skips": {
+      "entireTest": true,
+      "skipReason": "Test skipped since it returns status code 404"
+    }
+  }
+}

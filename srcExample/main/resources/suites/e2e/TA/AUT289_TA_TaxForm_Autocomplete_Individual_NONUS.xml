@@ -1,0 +1,7 @@
+<suite name="AUT289_TA_TaxForm_Autocomplete_Individual_NONUS" verbose="1">
+    <test name="AUT289_TA_TaxForm_Autocomplete_Individual_NONUS">
+        <classes>
+            <class name="io.securitize.tests.transferAgent.AUT289_TA_TaxForm_Autocomplete_Individual_NONUS"/>
+        </classes>
+    </test>
+</suite>

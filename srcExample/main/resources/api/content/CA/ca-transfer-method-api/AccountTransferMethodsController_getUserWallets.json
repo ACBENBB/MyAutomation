@@ -1,0 +1,18 @@
+{
+  "rc": {
+    "headers": {
+      "x-api-key": "#CA_TRANSFER_METHOD_X_API_KEY#"
+    },
+    "queryParams": {
+      "investorId": "#CA_INVESTOR_ID#"
+    }
+  },
+  "sandbox": {
+    "headers": {
+      "x-api-key": "#CA_TRANSFER_METHOD_X_API_KEY#"
+    },
+    "queryParams": {
+      "investorId": "#CA_INVESTOR_ID#"
+    }
+  }
+}

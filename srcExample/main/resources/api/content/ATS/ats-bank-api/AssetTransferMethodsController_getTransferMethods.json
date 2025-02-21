@@ -1,0 +1,12 @@
+{
+  "queryParams": {
+    "investorId": "#ATS_INVESTOR_ID#",
+    "asset": "USDC",
+    "direction": "incoming"
+  },
+  "headers": {
+    "x-api-key": "#ATS_BANK_API_KEY#"
+  },
+  "rc": {},
+  "sandbox": {}
+}

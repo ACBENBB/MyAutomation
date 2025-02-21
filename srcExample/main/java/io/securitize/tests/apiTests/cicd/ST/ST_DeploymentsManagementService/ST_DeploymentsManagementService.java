@@ -1,0 +1,170 @@
+package io.securitize.tests.apiTests.cicd.ST.ST_DeploymentsManagementService;
+
+import io.restassured.http.*;
+import io.securitize.infra.api.apicodegen.*;
+import org.testng.annotations.*;
+
+public class ST_DeploymentsManagementService extends BaseApiTest {
+
+//    @Test()
+//    public void updateDeploymentDescriptionTest172() {
+//        testRequest(Method.PUT, "http://depmgmt.{environment}.securitize.io/v1/deployments/{id}/description", "updateDeploymentDescription", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"type\":\"object\"}}}}");
+//    }
+
+
+    @Test()
+    public void getComplianceCountersTest430() {
+        testRequest(Method.GET, "http://depmgmt.{environment}.securitize.io/v1/deployments/{id}/compliance/counters", "getComplianceCounters", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\",\"properties\":{\"usAccreditedInvestorsCount\":{\"type\":\"integer\"},\"euRetailInvestorsCounts\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"countryCode\":{\"type\":\"string\"},\"count\":{\"type\":\"integer\"}}}},\"accreditedInvestorsCount\":{\"type\":\"integer\"},\"jpInvestorsCount\":{\"type\":\"integer\"},\"totalInvestorsCount\":{\"type\":\"integer\"},\"usInvestorsCount\":{\"type\":\"integer\"}}}}}}");
+    }
+
+
+//    @Test()
+//    public void postDeployMultiSigWalletsTest363() {
+//        testRequest(Method.POST, "http://depmgmt.{environment}.securitize.io/v1/deployments/{id}/multisig_wallets/post-deployment", "postDeployMultiSigWallets", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"type\":\"object\"}}}}");
+//    }
+
+
+//    @Test()
+//    public void deletePendingTransactionByExternalIdTest293() {
+//        testRequest(Method.DELETE, "http://depmgmt.{environment}.securitize.io/v1/transactions/external-id/{externalTransactionId}", "deletePendingTransactionByExternalId", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"type\":\"object\"}}}}");
+//    }
+
+
+    @Test()
+    public void getDeploymentsBasicInfoTest350() {
+        testRequest(Method.GET, "http://depmgmt.{environment}.securitize.io/v1/issuers/{id}/deployments-basic-info", "getDeploymentsBasicInfo", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"symbol\":{\"type\":\"string\"},\"totalSupply\":{\"type\":[\"number\",\"null\"]},\"metadataHash\":{\"type\":[\"string\",\"null\"]},\"url\":{\"type\":[\"string\",\"null\"]},\"tokenAddress\":{\"type\":[\"string\",\"null\"]},\"issuerId\":{\"type\":\"string\"},\"provider\":{\"type\":\"string\"},\"decimals\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"},\"id\":{\"type\":\"string\"},\"tokenType\":{\"type\":\"string\",\"enum\":[\"standard\",\"partitioned\"]},\"abstractionLayerDeploymentId\":{\"type\":[\"string\",\"null\"]},\"status\":{\"type\":\"string\",\"enum\":[\"initial\",\"pending\",\"inProgress\",\"success\",\"failure\"]}}}}}}}");
+    }
+
+
+//    @Test()
+//    public void retryDeploymentTest788() {
+//        testRequest(Method.POST, "http://depmgmt.{environment}.securitize.io/v1/deployments/{id}/retry", "retryDeployment", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\",\"properties\":{\"Id\":{\"type\":\"string\"},\"status\":{\"type\":\"string\",\"enum\":[\"INITIAL\",\"PENDING\",\"IN_PROGRESS\",\"SUCCESS\",\"FAILURE\"]}}}}}}");
+//    }
+
+
+    @Test()
+    public void getIssuerDeploymentBasicInfoTest13() {
+        testRequest(Method.GET, "http://depmgmt.{environment}.securitize.io/v1/issuers/{id}/deployments/{deploymentId}/basic-info", "getIssuerDeploymentBasicInfo", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\",\"properties\":{\"symbol\":{\"type\":\"string\"},\"totalSupply\":{\"nullable\":true,\"type\":\"number\"},\"metadataHash\":{\"nullable\":true,\"type\":\"string\"},\"url\":{\"nullable\":true,\"type\":\"string\"},\"tokenAddress\":{\"nullable\":true,\"type\":\"string\"},\"issuerId\":{\"type\":\"string\"},\"provider\":{\"type\":\"string\"},\"decimals\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"},\"id\":{\"type\":\"string\"},\"tokenType\":{\"type\":\"string\",\"enum\":[\"standard\",\"partitioned\"]},\"abstractionLayerDeploymentId\":{\"nullable\":true,\"type\":\"string\"},\"status\":{\"type\":\"string\",\"enum\":[\"initial\",\"pending\",\"inProgress\",\"success\",\"failure\"]}}}}}}");
+    }
+
+
+    @Test()
+    public void getTransactionsTest463() {
+        testRequest(Method.GET, "http://depmgmt.{environment}.securitize.io/v1/deployments/{id}/transactions", "getTransactions", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"issuerId\":{\"type\":\"string\"},\"createdAt\":{\"type\":\"integer\"},\"data\":{\"additionalProperties\":true,\"type\":\"object\"},\"deploymentId\":{\"type\":\"string\"},\"blockNumber\":{\"type\":[\"integer\",\"null\"]},\"id\":{\"type\":\"string\"},\"transactionProviderId\":{\"type\":[\"string\",\"null\"]},\"externalTransactionId\":{\"type\":[\"string\",\"null\"]},\"type\":{\"type\":\"string\",\"enum\":[\"complianceRules\",\"countryComplianceStatus\",\"role\",\"createAsset\"]},\"status\":{\"type\":\"string\",\"enum\":[\"initialDeployment\",\"pending\",\"signed\",\"sent\",\"success\",\"failure\"]},\"updatedAt\":{\"type\":\"integer\"}}}}}}}");
+    }
+
+
+    @Test()
+    public void getWalletBalanceTest100() {
+        testRequest(Method.GET, "http://depmgmt.{environment}.securitize.io/v1/deployments/{id}/wallet/{address}/balance", "getWalletBalance", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\",\"properties\":{\"wallet\":{\"type\":\"string\"},\"balance\":{\"type\":\"string\"}}}}}}");
+    }
+
+
+    @Test()
+    public void getAvailableNetworksTest471() {
+        testRequest(Method.GET, "http://depmgmt.{environment}.securitize.io/v1/deployments/available-networks", "getAvailable Networks", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"id\":{\"type\":\"string\"},\"sort_order\":{\"type\":\"number\"}}}}}}}");
+    }
+
+
+//    @Test()
+//    public void createPermissionsTest70() {
+//        testRequest(Method.POST, "http://depmgmt.{environment}.securitize.io/v1/deployments/{id}/permissions", "createPermissions", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"type\":\"object\"}}}}");
+//    }
+
+
+    @Test()
+    public void getPermissionsTest791() {
+        testRequest(Method.GET, "http://depmgmt.{environment}.securitize.io/v1/deployments/{id}/permissions", "getPermissions", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\",\"properties\":{\"roles\":{\"minItems\":1,\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"address\":{\"type\":\"string\"},\"role\":{\"type\":\"string\",\"enum\":[\"none\",\"master\",\"issuer\",\"exchange\"]},\"ownership\":{\"default\":\"single\",\"type\":\"string\",\"enum\":[\"single\",\"multisig\",\"hsm\"]},\"comment\":{\"type\":\"string\"}}}},\"owners\":{\"type\":\"object\",\"properties\":{\"omnibusTBEAddress\":{\"type\":\"string\"},\"tokenOwner\":{\"type\":\"string\"},\"walletRegistrarOwnerBalance\":{\"type\":\"string\"},\"walletRegistrarOwner\":{\"type\":\"string\"},\"walletRegistrarPrivateKey\":{\"type\":\"string\"}}}}}}}}");
+    }
+
+
+//    @Test()
+//    public void updatePermissionsTest771() {
+//        testRequest(Method.PUT, "http://depmgmt.{environment}.securitize.io/v1/deployments/{id}/permissions", "updatePermissions", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"type\":\"object\"}}}}");
+//    }
+//
+//
+//    @Test()
+//    public void deployTokenTest805() {
+//        testRequest(Method.POST, "http://depmgmt.{environment}.securitize.io/v1/deployments/{id}/deploy", "deployToken", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"type\":\"object\"}}}}");
+//    }
+
+
+    @Test()
+    public void getIssuerDeploymentInfoTest62() {
+        testRequest(Method.GET, "http://depmgmt.{environment}.securitize.io/v1/issuers/{id}/deployments/{deploymentId}", "getIssuerDeploymentInfo", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\",\"properties\":{\"symbol\":{\"type\":\"string\"},\"totalSupply\":{\"nullable\":true,\"type\":\"number\"},\"roles\":{\"minItems\":1,\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"address\":{\"type\":\"string\"},\"role\":{\"type\":\"string\",\"enum\":[\"none\",\"master\",\"issuer\",\"exchange\"]},\"ownership\":{\"default\":\"single\",\"type\":\"string\",\"enum\":[\"single\",\"multisig\",\"hsm\"]},\"comment\":{\"type\":\"string\"}}}},\"countriesComplianceStatuses\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"complianceStatus\":{\"type\":\"string\",\"enum\":[\"none\",\"us\",\"eu\",\"jp\",\"forbidden\"]},\"comment\":{\"type\":\"string\"},\"countryName\":{\"format\":\"countryCode\",\"type\":\"string\"}},\"required\":[\"countryName\",\"complianceStatus\"]}},\"owners\":{\"type\":\"object\",\"properties\":{\"omnibusTBEAddress\":{\"type\":\"string\"},\"tokenOwner\":{\"type\":\"string\"},\"walletRegistrarOwnerBalance\":{\"type\":\"string\"},\"walletRegistrarOwner\":{\"type\":\"string\"},\"walletRegistrarPrivateKey\":{\"type\":\"string\"}}},\"metadataHash\":{\"nullable\":true,\"type\":\"string\"},\"url\":{\"nullable\":true,\"type\":\"string\"},\"complianceType\":{\"type\":\"string\",\"enum\":[\"notRegulated\",\"whitelisted\",\"regulated\",\"partitioned\"]},\"tokenAddress\":{\"nullable\":true,\"type\":\"string\"},\"issuerId\":{\"type\":\"string\"},\"complianceRules\":{\"type\":\"object\",\"properties\":{\"authorizedSecurities\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"pattern\":\"^0$|[1-9]$|[1-9][0-9]+$\",\"type\":\"string\"}},\"required\":[\"value\"]},\"forceFullTransfer\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"boolean\"}},\"required\":[\"value\"]},\"forceAccredited\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"boolean\"}},\"required\":[\"value\"]},\"nonUSLockPeriod\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"nonAccreditedInvestorsLimit\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"maxUSInvestorsPercentage\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"forceAccreditedUS\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"boolean\"}},\"required\":[\"value\"]},\"usAccreditedInvestorsLimit\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"worldWideForceFullTransfer\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"boolean\"}},\"required\":[\"value\"]},\"minEUTokens\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"pattern\":\"^0$|[1-9]$|[1-9][0-9]+$\",\"type\":\"string\"}},\"required\":[\"value\"]},\"usLockPeriod\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"jpInvestorsLimit\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"blockFlowbackEndTime\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"totalInvestorsLimit\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"euRetailInvestorsLimit\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"usInvestorsLimit\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"minimumHoldingsPerInvestor\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"pattern\":\"^0$|[1-9]$|[1-9][0-9]+$\",\"type\":\"string\"}},\"required\":[\"value\"]},\"maximumHoldingsPerInvestor\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"pattern\":\"^0$|[1-9]$|[1-9][0-9]+$\",\"type\":\"string\"}},\"required\":[\"value\"]},\"minimumTotalInvestors\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"minUSTokens\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"pattern\":\"^0$|[1-9]$|[1-9][0-9]+$\",\"type\":\"string\"}},\"required\":[\"value\"]}}},\"provider\":{\"type\":\"string\"},\"decimals\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"},\"id\":{\"type\":\"string\"},\"lockManagerType\":{\"type\":\"string\",\"enum\":[\"wallet\",\"investor\",\"partitioned\"]},\"tokenType\":{\"type\":\"string\",\"enum\":[\"standard\",\"partitioned\"]},\"abstractionLayerDeploymentId\":{\"nullable\":true,\"type\":\"string\"},\"status\":{\"type\":\"string\",\"enum\":[\"initial\",\"pending\",\"inProgress\",\"success\",\"failure\"]}}}}}}");
+    }
+
+
+    @Test()
+    public void getDeploymentTest279() {
+        testRequest(Method.GET, "http://depmgmt.{environment}.securitize.io/v1/deployments/{id}", "getDeployment", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\",\"properties\":{\"symbol\":{\"type\":\"string\"},\"totalSupply\":{\"nullable\":true,\"type\":\"number\"},\"roles\":{\"minItems\":1,\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"address\":{\"type\":\"string\"},\"role\":{\"type\":\"string\",\"enum\":[\"none\",\"master\",\"issuer\",\"exchange\"]},\"ownership\":{\"default\":\"single\",\"type\":\"string\",\"enum\":[\"single\",\"multisig\",\"hsm\"]},\"comment\":{\"type\":\"string\"}}}},\"countriesComplianceStatuses\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"complianceStatus\":{\"type\":\"string\",\"enum\":[\"none\",\"us\",\"eu\",\"jp\",\"forbidden\"]},\"comment\":{\"type\":\"string\"},\"countryName\":{\"format\":\"countryCode\",\"type\":\"string\"}},\"required\":[\"countryName\",\"complianceStatus\"]}},\"owners\":{\"type\":\"object\",\"properties\":{\"omnibusTBEAddress\":{\"type\":\"string\"},\"tokenOwner\":{\"type\":\"string\"},\"walletRegistrarOwnerBalance\":{\"type\":\"string\"},\"walletRegistrarOwner\":{\"type\":\"string\"},\"walletRegistrarPrivateKey\":{\"type\":\"string\"}}},\"metadataHash\":{\"nullable\":true,\"type\":\"string\"},\"url\":{\"nullable\":true,\"type\":\"string\"},\"complianceType\":{\"type\":\"string\",\"enum\":[\"notRegulated\",\"whitelisted\",\"regulated\",\"partitioned\"]},\"tokenAddress\":{\"nullable\":true,\"type\":\"string\"},\"issuerId\":{\"type\":\"string\"},\"complianceRules\":{\"type\":\"object\",\"properties\":{\"authorizedSecurities\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"pattern\":\"^0$|[1-9]$|[1-9][0-9]+$\",\"type\":\"string\"}},\"required\":[\"value\"]},\"forceFullTransfer\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"boolean\"}},\"required\":[\"value\"]},\"forceAccredited\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"boolean\"}},\"required\":[\"value\"]},\"nonUSLockPeriod\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"nonAccreditedInvestorsLimit\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"maxUSInvestorsPercentage\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"forceAccreditedUS\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"boolean\"}},\"required\":[\"value\"]},\"usAccreditedInvestorsLimit\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"worldWideForceFullTransfer\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"boolean\"}},\"required\":[\"value\"]},\"minEUTokens\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"pattern\":\"^0$|[1-9]$|[1-9][0-9]+$\",\"type\":\"string\"}},\"required\":[\"value\"]},\"usLockPeriod\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"jpInvestorsLimit\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"blockFlowbackEndTime\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"totalInvestorsLimit\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"euRetailInvestorsLimit\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"usInvestorsLimit\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"minimumHoldingsPerInvestor\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"pattern\":\"^0$|[1-9]$|[1-9][0-9]+$\",\"type\":\"string\"}},\"required\":[\"value\"]},\"maximumHoldingsPerInvestor\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"pattern\":\"^0$|[1-9]$|[1-9][0-9]+$\",\"type\":\"string\"}},\"required\":[\"value\"]},\"minimumTotalInvestors\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"minUSTokens\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"pattern\":\"^0$|[1-9]$|[1-9][0-9]+$\",\"type\":\"string\"}},\"required\":[\"value\"]}}},\"provider\":{\"type\":\"string\"},\"decimals\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"},\"id\":{\"type\":\"string\"},\"lockManagerType\":{\"type\":\"string\",\"enum\":[\"wallet\",\"investor\",\"partitioned\"]},\"tokenType\":{\"type\":\"string\",\"enum\":[\"standard\",\"partitioned\"]},\"abstractionLayerDeploymentId\":{\"nullable\":true,\"type\":\"string\"},\"status\":{\"type\":\"string\",\"enum\":[\"initial\",\"pending\",\"inProgress\",\"success\",\"failure\"]}}}}}}");
+    }
+
+
+//    @Test()
+//    public void createDeploymentTest424() {
+//        testRequest(Method.POST, "http://depmgmt.{environment}.securitize.io/v1/issuers/{id}/deployments", "createDeployment", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"}}}}}}");
+//    }
+
+
+    @Test()
+    public void getDeploymentsTest452() {
+        testRequest(Method.GET, "http://depmgmt.{environment}.securitize.io/v1/issuers/{id}/deployments", "getDeployments", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"symbol\":{\"type\":\"string\"},\"totalSupply\":{\"type\":[\"number\",\"null\"]},\"roles\":{\"minItems\":1,\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"address\":{\"type\":\"string\"},\"role\":{\"type\":\"string\",\"enum\":[\"none\",\"master\",\"issuer\",\"exchange\"]},\"ownership\":{\"default\":\"single\",\"type\":\"string\",\"enum\":[\"single\",\"multisig\",\"hsm\"]},\"comment\":{\"type\":\"string\"}}}},\"countriesComplianceStatuses\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"complianceStatus\":{\"type\":\"string\",\"enum\":[\"none\",\"us\",\"eu\",\"jp\",\"forbidden\"]},\"comment\":{\"type\":\"string\"},\"countryName\":{\"format\":\"countryCode\",\"type\":\"string\"}},\"required\":[\"countryName\",\"complianceStatus\"]}},\"owners\":{\"type\":\"object\",\"properties\":{\"omnibusTBEAddress\":{\"type\":\"string\"},\"tokenOwner\":{\"type\":\"string\"},\"walletRegistrarOwnerBalance\":{\"type\":\"string\"},\"walletRegistrarOwner\":{\"type\":\"string\"},\"walletRegistrarPrivateKey\":{\"type\":\"string\"}}},\"metadataHash\":{\"type\":[\"string\",\"null\"]},\"url\":{\"type\":[\"string\",\"null\"]},\"complianceType\":{\"type\":\"string\",\"enum\":[\"notRegulated\",\"whitelisted\",\"regulated\",\"partitioned\"]},\"tokenAddress\":{\"type\":[\"string\",\"null\"]},\"issuerId\":{\"type\":\"string\"},\"complianceRules\":{\"type\":\"object\",\"properties\":{\"authorizedSecurities\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"pattern\":\"^0$|[1-9]$|[1-9][0-9]+$\",\"type\":\"string\"}},\"required\":[\"value\"]},\"forceFullTransfer\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"boolean\"}},\"required\":[\"value\"]},\"forceAccredited\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"boolean\"}},\"required\":[\"value\"]},\"nonUSLockPeriod\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"nonAccreditedInvestorsLimit\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"maxUSInvestorsPercentage\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"forceAccreditedUS\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"boolean\"}},\"required\":[\"value\"]},\"usAccreditedInvestorsLimit\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"worldWideForceFullTransfer\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"boolean\"}},\"required\":[\"value\"]},\"minEUTokens\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"pattern\":\"^0$|[1-9]$|[1-9][0-9]+$\",\"type\":\"string\"}},\"required\":[\"value\"]},\"usLockPeriod\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"jpInvestorsLimit\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"blockFlowbackEndTime\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"totalInvestorsLimit\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"euRetailInvestorsLimit\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"usInvestorsLimit\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"minimumHoldingsPerInvestor\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"pattern\":\"^0$|[1-9]$|[1-9][0-9]+$\",\"type\":\"string\"}},\"required\":[\"value\"]},\"maximumHoldingsPerInvestor\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"pattern\":\"^0$|[1-9]$|[1-9][0-9]+$\",\"type\":\"string\"}},\"required\":[\"value\"]},\"minimumTotalInvestors\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"minUSTokens\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"pattern\":\"^0$|[1-9]$|[1-9][0-9]+$\",\"type\":\"string\"}},\"required\":[\"value\"]}}},\"provider\":{\"type\":\"string\"},\"decimals\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"},\"id\":{\"type\":\"string\"},\"lockManagerType\":{\"type\":\"string\",\"enum\":[\"wallet\",\"investor\",\"partitioned\"]},\"tokenType\":{\"type\":\"string\",\"enum\":[\"standard\",\"partitioned\"]},\"abstractionLayerDeploymentId\":{\"type\":[\"string\",\"null\"]},\"status\":{\"type\":\"string\",\"enum\":[\"initial\",\"pending\",\"inProgress\",\"success\",\"failure\"]}}}}}}}");
+    }
+
+
+//    @Test()
+//    public void createMultiSigWalletTest681() {
+//        testRequest(Method.POST, "http://depmgmt.{environment}.securitize.io/v1/deployments/{id}/multisig_wallets", "createMultiSigWallet", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"}}}}}}");
+//    }
+
+
+    @Test()
+    public void getAllMultiSigWalletsTest210() {
+        testRequest(Method.GET, "http://depmgmt.{environment}.securitize.io/v1/deployments/{id}/multisig_wallets", "getAllMultiSigWallets", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"deploymentStatus\":{\"type\":\"string\"},\"walletName\":{\"type\":\"string\"},\"deploymentId\":{\"type\":\"string\"},\"threshold\":{\"type\":\"number\"},\"owners\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"address\":{\"type\":\"string\"},\"comment\":{\"type\":\"string\"}},\"required\":[\"address\"]}},\"id\":{\"type\":\"string\"},\"walletAddress\":{\"type\":\"string\"}}}}}}}");
+    }
+
+
+//    @Test()
+//    public void createMultiSigWalletTest367() {
+//        testRequest(Method.PUT, "http://depmgmt.{environment}.securitize.io/v1/deployments/{id}/multisig_wallets", "createMultiSigWallet", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"}}}}}}");
+//    }
+//
+//
+//    @Test()
+//    public void updateDeploymentComplianceTypeTest36() {
+//        testRequest(Method.PUT, "http://depmgmt.{environment}.securitize.io/v1/deployments/{id}/compliance-type", "updateDeploymentComplianceType", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"type\":\"object\"}}}}");
+//    }
+//
+//
+//    @Test()
+//    public void createComplianceTest49() {
+//        testRequest(Method.POST, "http://depmgmt.{environment}.securitize.io/v1/deployments/{id}/compliance", "createCompliance", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"type\":\"object\"}}}}");
+//    }
+
+
+    @Test()
+    public void getComplianceTest977() {
+        testRequest(Method.GET, "http://depmgmt.{environment}.securitize.io/v1/deployments/{id}/compliance", "getCompliance", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\",\"properties\":{\"complianceRules\":{\"type\":\"object\",\"properties\":{\"authorizedSecurities\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"pattern\":\"^0$|[1-9]$|[1-9][0-9]+$\",\"type\":\"string\"}},\"required\":[\"value\"]},\"forceFullTransfer\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"boolean\"}},\"required\":[\"value\"]},\"forceAccredited\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"boolean\"}},\"required\":[\"value\"]},\"nonUSLockPeriod\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"nonAccreditedInvestorsLimit\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"maxUSInvestorsPercentage\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"forceAccreditedUS\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"boolean\"}},\"required\":[\"value\"]},\"usAccreditedInvestorsLimit\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"worldWideForceFullTransfer\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"boolean\"}},\"required\":[\"value\"]},\"minEUTokens\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"pattern\":\"^0$|[1-9]$|[1-9][0-9]+$\",\"type\":\"string\"}},\"required\":[\"value\"]},\"usLockPeriod\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"jpInvestorsLimit\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"blockFlowbackEndTime\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"totalInvestorsLimit\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"euRetailInvestorsLimit\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"usInvestorsLimit\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"minimumHoldingsPerInvestor\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"pattern\":\"^0$|[1-9]$|[1-9][0-9]+$\",\"type\":\"string\"}},\"required\":[\"value\"]},\"maximumHoldingsPerInvestor\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"pattern\":\"^0$|[1-9]$|[1-9][0-9]+$\",\"type\":\"string\"}},\"required\":[\"value\"]},\"minimumTotalInvestors\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"type\":\"integer\"}},\"required\":[\"value\"]},\"minUSTokens\":{\"type\":\"object\",\"properties\":{\"comment\":{\"type\":\"string\"},\"value\":{\"pattern\":\"^0$|[1-9]$|[1-9][0-9]+$\",\"type\":\"string\"}},\"required\":[\"value\"]}}},\"countriesComplianceStatuses\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"complianceStatus\":{\"type\":\"string\",\"enum\":[\"none\",\"us\",\"eu\",\"jp\",\"forbidden\"]},\"comment\":{\"type\":\"string\"},\"countryName\":{\"format\":\"countryCode\",\"type\":\"string\"}},\"required\":[\"countryName\",\"complianceStatus\"]}}}}}}}");
+    }
+
+
+//    @Test()
+//    public void updateComplianceTest77() {
+//        testRequest(Method.PUT, "http://depmgmt.{environment}.securitize.io/v1/deployments/{id}/compliance", "updateCompliance", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"type\":\"object\"}}}}");
+//    }
+
+
+    @Test()
+    public void getDeploymentCostEstimationTest453() {
+        testRequest(Method.GET, "http://depmgmt.{environment}.securitize.io/v1/deployments/deployment-cost-estimation/{networkId}", "getDeploymentCostEstimation", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\",\"properties\":{\"deploymentEstimations\":{\"type\":\"object\",\"properties\":{\"complianceServiceNotRegulated\":{\"type\":\"string\"},\"complianceServicePartitioned\":{\"type\":\"string\"},\"complianceServiceRegulated\":{\"type\":\"string\"},\"complianceServiceWhitelisted\":{\"type\":\"string\"}}},\"estimatedDeploymentGas\":{\"type\":\"string\"},\"gasPrice\":{\"type\":\"string\"}}}}}}");
+    }
+
+
+    @Test()
+    public void getHealthCheckTest69() {
+        testRequest(Method.GET, "http://depmgmt.{environment}.securitize.io/v1/health-check", "getHealthCheck", LoginAs.OPERATOR, "ST/deployments-management-service", "{\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\",\"properties\":{\"service\":{\"type\":\"string\"},\"error\":{\"type\":\"string\"},\"status\":{\"type\":\"string\",\"enum\":[\"OK\",\"ALARM\"]}}}}}}");
+    }
+
+}

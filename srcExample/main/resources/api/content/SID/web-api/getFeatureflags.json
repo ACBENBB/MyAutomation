@@ -1,0 +1,8 @@
+{
+  "skips": {
+    "bodySchemaCheck": true,
+    "skipReason": "Test was skipped due to lack of schema (model instead of schema)"
+  },
+  "rc": {},
+  "sandbox": {}
+}

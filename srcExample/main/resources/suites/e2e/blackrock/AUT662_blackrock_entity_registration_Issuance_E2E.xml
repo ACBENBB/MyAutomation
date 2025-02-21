@@ -1,0 +1,7 @@
+<suite name="AUT662_blackrock_entity_registration_Issuance_E2E" verbose="1">
+    <test name="AUT662_blackrock_entity_registration_Issuance_E2E">
+        <classes>
+            <class name="io.securitize.tests.blackrock.AUT662_blackrock_entity_registration_Issuance_E2E" />
+        </classes>
+    </test>
+</suite>

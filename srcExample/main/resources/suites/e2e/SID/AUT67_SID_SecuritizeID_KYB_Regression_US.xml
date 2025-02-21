@@ -1,0 +1,7 @@
+<suite name="AUT67_SID_SecuritizeID_KYB_Regression_US" verbose="1">
+    <test name="AUT67_SID_SecuritizeID_KYB_Regression_US">
+        <classes>
+            <class name="io.securitize.tests.securitizeId.AUT67_SID_SecuritizeID_KYB_Regression_US" />
+        </classes>
+    </test>
+</suite>

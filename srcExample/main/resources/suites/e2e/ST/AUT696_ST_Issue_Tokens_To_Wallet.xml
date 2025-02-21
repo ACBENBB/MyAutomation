@@ -1,0 +1,7 @@
+<suite name="AUT696_ST_Issue_Tokens_To_Wallet" verbose="1">
+    <test name="AUT696_ST_Issue_Tokens_To_Wallet">
+        <classes>
+            <class name="io.securitize.tests.blockchain.AUT696_ST_Issue_Tokens_To_Wallet" />
+        </classes>
+    </test>
+</suite>

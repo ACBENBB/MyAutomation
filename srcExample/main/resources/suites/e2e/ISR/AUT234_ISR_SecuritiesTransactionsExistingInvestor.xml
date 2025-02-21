@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT234_ISR_SecuritiesTransactionsExistingInvestor" verbose="1">
+    <test name="AUT234_ISR_SecuritiesTransactionsExistingInvestor">
+        <classes>
+            <class name="io.securitize.tests.controlPanel.AUT234_ISR_Securities_Transactions_Existing_Investor" />
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,8 @@
+{
+  "pathParams":
+  {
+    "issuerId": "#ISSUER_ID#",
+    "countryCode": "CA",
+    "regionCode": "QC"
+  }
+}

@@ -1,0 +1,26 @@
+This extension was downloaded from the official Google Chrome store, using this command:
+
+https://clients2.google.com/service/update2/crx?response=redirect&os=linux&arch=x64&os_arch=x86_64&nacl_arch=x86-64&prod=chromium&prodchannel=unknown&prodversion=[PRODVERSION]&lang=en-US&acceptformat=crx2,crx3&x=id%3D[EXTENSIONID]%26installsource%3Dondemand%26uc
+    * [PRODVERSION] is the version of Chrome, which must be 31.0.1609.0 at the very least, and
+    * [EXTENSIONID] is the ID of the extension
+
+example how to run this from the commandline:
+curl -L https://clients2.google.com/service/update2/crx?response=redirect&os=linux&arch=x64&os_arch=x86_64&nacl_arch=x86-64&prod=chromium&prodchannel=unknown&prodversion=91.0.4442.4&lang=en-US&acceptformat=crx2,crx3&x=id%3Dnkbihfbeogaeaoehlefnkodbefgpgknn%26installsource%3Dondemand%26uc > metaMask.crx
+
+
+Important!
+As of 09/11/2023 MetaMask has a new security feature which might randomly break the automation with this exception:
+    org.openqa.selenium.JavascriptException: javascript error: LavaMoat - property "ret_nodes" of globalThis is inaccessible under scuttling mode. To learn more visit https://github.com/LavaMoat/LavaMoat/pull/360.
+The fix is to disable 'scuttleGlobalThis' by following these guides:
+    https://stackoverflow.com/questions/76252205/runtime-callfunctionon-threw-exception-error-lavamoat-property-proxy-of-gl?noredirect=1&lq=1
+    https://github.com/LavaMoat/LavaMoat/pull/360
+Basically:
+    1. Rename metaMask.crx to metaMask.zip
+    2. Extract all files
+    3. Edit file runtime-lavamoat.js -> line 92 change:
+        this:
+            {"scuttleGlobalThis":{"enabled":true,
+        to this:
+            {"scuttleGlobalThis":{"enabled":false,
+    4. Zip all files back to metaMask.zip
+    5. Rename metaMask.zip to metaMask.crx

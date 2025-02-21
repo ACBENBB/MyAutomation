@@ -1,0 +1,15 @@
+{
+  "pathParams": {
+    "tokenId": "#TOKEN_ID#",
+    "issuerId": "#ISSUER_ID#"
+  },
+
+  "queryParams": {
+    "month": 12
+  },
+
+  "skips": {
+    "bodySchemaCheck": true,
+    "bodyContentCheck": true
+  }
+}

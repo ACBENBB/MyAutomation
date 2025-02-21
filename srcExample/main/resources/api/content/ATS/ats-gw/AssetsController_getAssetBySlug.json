@@ -1,0 +1,11 @@
+{
+  "pathParams": {
+    "slug": "#ATS_DEPLOYMENT_ID#"
+  },
+  "headers": {
+    // "authorization": "#SID_AUTHORIZATION#"
+    //"cookie": "#SID_COOKIE#"
+  },
+  "rc": {},
+  "sandbox": {}
+}

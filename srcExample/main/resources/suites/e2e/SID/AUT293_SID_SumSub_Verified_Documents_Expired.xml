@@ -1,0 +1,7 @@
+<suite name="AUT293_SID_SumSub_Verified_Documents_Expired" verbose="1">
+    <test name="AUT293_SID_SumSub_Verified_Documents_Expired">
+        <classes>
+            <class name="io.securitize.tests.securitizeId.AUT293_SID_SumSub_Verified_Documents_Expired"/>
+        </classes>
+    </test>
+</suite>

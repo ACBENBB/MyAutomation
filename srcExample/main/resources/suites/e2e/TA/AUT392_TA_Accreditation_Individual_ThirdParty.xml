@@ -1,0 +1,7 @@
+<suite name="AUT392_TA_Accreditation_Individual_ThirdParty" verbose="1">
+    <test name="AUT392_TA_Accreditation_Individual_ThirdParty">
+        <classes>
+            <class name="io.securitize.tests.transferAgent.AUT392_TA_Accreditation_Individual_ThirdParty"/>
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,7060 @@
+{
+  "swagger": "2.0",
+  "host": "www.google.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "info": {
+    "title": "Web Api Documentation",
+    "version": "1.0.0"
+  },
+  "tags": [],
+  "paths": {
+    "/accreditation": {
+      "get": {
+        "summary": "Investor Accreditation",
+        "operationId": "getAccreditation",
+        "tags": [
+          "accreditation"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model1"
+            },
+            "description": "Successful"
+          }
+        }
+      },
+      "post": {
+        "summary": "Investor Accreditation",
+        "operationId": "postAccreditation",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model70"
+            }
+          }
+        ],
+        "tags": [
+          "accreditation"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model1"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/documents": {
+      "get": {
+        "summary": "Documents and Statements",
+        "operationId": "getDocuments",
+        "tags": [
+          "documents"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model3"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/feature-flags": {
+      "get": {
+        "summary": "Feature Flags",
+        "operationId": "getFeatureflags",
+        "tags": [
+          "feature-flags"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model4"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "getHealth",
+        "tags": [
+          "health"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/immediate-data": {
+      "get": {
+        "summary": "GET IMMEDIATE DATA",
+        "operationId": "getImmediatedata",
+        "tags": [
+          "immediate-data"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model5"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/import-information": {
+      "get": {
+        "summary": "get import information",
+        "operationId": "getImportinformation",
+        "tags": [
+          "import-information"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model6"
+            },
+            "description": "Successful"
+          }
+        }
+      },
+      "post": {
+        "summary": "get import information",
+        "operationId": "postImportinformation",
+        "tags": [
+          "import-information"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/ip-data": {
+      "get": {
+        "summary": "authentication",
+        "operationId": "getIpdata",
+        "tags": [
+          "ip-data"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model7"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/logout": {
+      "get": {
+        "summary": "Log Out",
+        "operationId": "getLogout",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "authorization",
+            "in": "header",
+            "required": true
+          }
+        ],
+        "tags": [
+          "logout"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/me": {
+      "get": {
+        "summary": "GET ME",
+        "operationId": "getMe",
+        "tags": [
+          "me"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model8"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/opportunities": {
+      "get": {
+        "summary": "get opportunities list",
+        "operationId": "getOpportunities",
+        "parameters": [
+          {
+            "type": "array",
+            "x-constraint": {
+              "single": true
+            },
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "issuers",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "x-convert": {
+              "case": "lower"
+            },
+            "name": "sort",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "x-constraint": {
+              "single": true
+            },
+            "items": {
+              "type": "string",
+              "x-convert": {
+                "case": "lower"
+              }
+            },
+            "collectionFormat": "multi",
+            "name": "search",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "x-constraint": {
+              "single": true
+            },
+            "items": {
+              "type": "string",
+              "x-convert": {
+                "case": "lower"
+              }
+            },
+            "collectionFormat": "multi",
+            "name": "tags",
+            "in": "query"
+          }
+        ],
+        "tags": [
+          "opportunities"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model10"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/promotions": {
+      "get": {
+        "summary": "get SID promotions",
+        "operationId": "getPromotions",
+        "tags": [
+          "promotions"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model12"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/reverse-solicitation": {
+      "get": {
+        "summary": "Returns reverse solicitation status",
+        "operationId": "getReversesolicitation",
+        "tags": [
+          "reverse-solicitation"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model13"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/session": {
+      "get": {
+        "summary": "Session",
+        "operationId": "getSession",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "authorization",
+            "in": "header",
+            "required": true
+          }
+        ],
+        "tags": [
+          "session"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model15"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/signers": {
+      "get": {
+        "summary": "signers",
+        "operationId": "getSigners",
+        "tags": [
+          "signers"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model18"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/suitability": {
+      "get": {
+        "summary": "get suitability",
+        "operationId": "getSuitability",
+        "tags": [
+          "suitability"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model21"
+            },
+            "description": "Successful"
+          }
+        }
+      },
+      "patch": {
+        "summary": "update suitability",
+        "operationId": "patchSuitability",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model112"
+            }
+          }
+        ],
+        "tags": [
+          "suitability"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model21"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/wallets": {
+      "get": {
+        "summary": "get investor wallet",
+        "operationId": "getWallets",
+        "parameters": [
+          {
+            "type": "boolean",
+            "default": false,
+            "name": "register-issuer-wallets",
+            "in": "query"
+          }
+        ],
+        "tags": [
+          "wallets"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model23"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/asset-performance/config": {
+      "get": {
+        "summary": "Asset Performance Config",
+        "operationId": "getAssetperformanceConfig",
+        "parameters": [
+          {
+            "type": "string",
+            "x-alternatives": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "collectionFormat": "multi",
+                "name": "token-id"
+              }
+            ],
+            "name": "token-id",
+            "in": "query"
+          }
+        ],
+        "tags": [
+          "asset-performance"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model24"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/documents/address": {
+      "get": {
+        "summary": "proof of address documents",
+        "operationId": "getDocumentsAddress",
+        "tags": [
+          "documents"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model26"
+            },
+            "description": "Successful"
+          }
+        }
+      },
+      "post": {
+        "summary": "Save investor documents",
+        "operationId": "postDocumentsAddress",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model87"
+            }
+          }
+        ],
+        "tags": [
+          "documents"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model26"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/documents/identity": {
+      "get": {
+        "summary": "Internationalization",
+        "operationId": "getDocumentsIdentity",
+        "tags": [
+          "documents"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model26"
+            },
+            "description": "Successful"
+          }
+        }
+      },
+      "post": {
+        "summary": "Save investor documents",
+        "operationId": "postDocumentsIdentity",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model88"
+            }
+          }
+        ],
+        "tags": [
+          "documents"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model26"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/i18n/{language}": {
+      "get": {
+        "summary": "Internationalization",
+        "operationId": "getI18nLanguage",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "language ISO format case-insenitive like (en)",
+            "enum": [
+              "ur",
+              "vi",
+              "ar",
+              "az",
+              "be",
+              "bg",
+              "bs",
+              "ca",
+              "cs",
+              "da",
+              "de",
+              "el",
+              "en",
+              "es",
+              "et",
+              "fa",
+              "fi",
+              "fr",
+              "he",
+              "hr",
+              "hu",
+              "hy",
+              "id",
+              "it",
+              "ja",
+              "ka",
+              "kk",
+              "ko",
+              "ky",
+              "lt",
+              "lv",
+              "mk",
+              "mn",
+              "nb",
+              "nl",
+              "nn",
+              "pl",
+              "pt",
+              "ro",
+              "ru",
+              "sk",
+              "sl",
+              "sr",
+              "sv",
+              "th",
+              "tr",
+              "uk",
+              "uz",
+              "zh"
+            ],
+            "name": "language",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "i18n"
+        ],
+        "responses": {
+          "200": {
+            "description": "supported languages and all the translations",
+            "schema": {
+              "$ref": "#/definitions/Model27"
+            }
+          }
+        }
+      }
+    },
+    "/investments/cash-account": {
+      "get": {
+        "summary": "Get Investor Cash Account",
+        "operationId": "getInvestmentsCashaccount",
+        "tags": [
+          "investments"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model29"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/investments/investment-requests": {
+      "get": {
+        "summary": "Get Investment Requests",
+        "operationId": "getInvestmentsInvestmentrequests",
+        "tags": [
+          "investments"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model31"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/issuer-info/{issuerId}": {
+      "get": {
+        "summary": "get requesting issuer info",
+        "operationId": "getIssuerinfoIssuerid",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "authorization",
+            "in": "header",
+            "required": true
+          }
+        ],
+        "tags": [
+          "issuer-info"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model32"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/opportunities/filters": {
+      "get": {
+        "summary": "get opportunities filters",
+        "operationId": "getOpportunitiesFilters",
+        "tags": [
+          "opportunities"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model34"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/profile/additional-info": {
+      "get": {
+        "summary": "get additional information of investor",
+        "operationId": "getProfileAdditionalinfo",
+        "tags": [
+          "profile"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model36"
+            },
+            "description": "Successful"
+          }
+        }
+      },
+      "put": {
+        "summary": "update additional information of investor",
+        "operationId": "putProfileAdditionalinfo",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model120"
+            }
+          }
+        ],
+        "tags": [
+          "profile"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model36"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/profile/address-info": {
+      "get": {
+        "summary": "get address information of investor",
+        "operationId": "getProfileAddressinfo",
+        "tags": [
+          "profile"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model37"
+            },
+            "description": "Successful"
+          }
+        }
+      },
+      "put": {
+        "summary": "update address information of investor",
+        "operationId": "putProfileAddressinfo",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model122"
+            }
+          }
+        ],
+        "tags": [
+          "profile"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model37"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/profile/archive": {
+      "get": {
+        "summary": "account info url",
+        "operationId": "getProfileArchive",
+        "tags": [
+          "profile"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model38"
+            },
+            "description": "Successful"
+          }
+        }
+      },
+      "post": {
+        "summary": "Delete account",
+        "operationId": "postProfileArchive",
+        "tags": [
+          "profile"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/profile/entity-info": {
+      "get": {
+        "summary": "get entity information of investor",
+        "operationId": "getProfileEntityinfo",
+        "tags": [
+          "profile"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model39"
+            },
+            "description": "Successful"
+          }
+        }
+      },
+      "put": {
+        "summary": "update entity information of investor",
+        "operationId": "putProfileEntityinfo",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model124"
+            }
+          }
+        ],
+        "tags": [
+          "profile"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model39"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/profile/legal-info": {
+      "get": {
+        "summary": "get legal information of investor",
+        "operationId": "getProfileLegalinfo",
+        "tags": [
+          "profile"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model41"
+            },
+            "description": "Successful"
+          }
+        }
+      },
+      "put": {
+        "summary": "update legal information of investor",
+        "operationId": "putProfileLegalinfo",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model126"
+            }
+          }
+        ],
+        "tags": [
+          "profile"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model127"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/profile/personal-info": {
+      "get": {
+        "summary": "get personal information of investor",
+        "operationId": "getProfilePersonalinfo",
+        "tags": [
+          "profile"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model42"
+            },
+            "description": "Successful"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update individual information",
+        "operationId": "putProfilePersonalinfo",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model128"
+            }
+          }
+        ],
+        "tags": [
+          "profile"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model129"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/profile/two-factor-seed": {
+      "get": {
+        "summary": "get seed for two factor auth enabling",
+        "operationId": "getProfileTwofactorseed",
+        "tags": [
+          "profile"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model43"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/profile/wizard-status": {
+      "get": {
+        "summary": "get passed wizard steps",
+        "operationId": "getProfileWizardstatus",
+        "tags": [
+          "profile"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model4"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/public-issuer-info/{issuerId}": {
+      "get": {
+        "summary": "get requesting issuer info",
+        "operationId": "getPublicissuerinfoIssuerid",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "authorization",
+            "in": "header",
+            "required": true
+          }
+        ],
+        "tags": [
+          "public-issuer-info"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model44"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/register/restricted-countries": {
+      "get": {
+        "summary": "authentication",
+        "operationId": "getRegisterRestrictedcountries",
+        "tags": [
+          "register"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/documentVerificationErrors"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/session/list": {
+      "get": {
+        "summary": "Session list",
+        "operationId": "getSessionList",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "authorization",
+            "in": "header",
+            "required": true
+          }
+        ],
+        "tags": [
+          "session"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model46"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/signers/documents": {
+      "get": {
+        "summary": "signers",
+        "operationId": "getSignersDocuments",
+        "tags": [
+          "signers"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/sumsub-session/documents-expired": {
+      "get": {
+        "summary": "get sumsub session",
+        "operationId": "getSumsubsessionDocumentsexpired",
+        "tags": [
+          "sumsub-session"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model47"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/sumsub-session/file-upload": {
+      "get": {
+        "summary": "get sumsub session",
+        "operationId": "getSumsubsessionFileupload",
+        "tags": [
+          "sumsub-session"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model48"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/sumsub-session/liveness": {
+      "get": {
+        "summary": "get liveness session",
+        "operationId": "getSumsubsessionLiveness",
+        "tags": [
+          "sumsub-session"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model48"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/tfa-flow/liveness": {
+      "get": {
+        "summary": "reset-two-fa liveness",
+        "operationId": "getTfaflowLiveness",
+        "tags": [
+          "tfa-flow"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model49"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/user/authorized-investors": {
+      "get": {
+        "summary": "get authorized investors acounts",
+        "operationId": "getUserAuthorizedinvestors",
+        "tags": [
+          "user"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model51"
+            },
+            "description": "Successful"
+          }
+        }
+      },
+      "post": {
+        "summary": "send authorized acount invitaions",
+        "operationId": "postUserAuthorizedinvestors",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model100"
+            }
+          }
+        ],
+        "tags": [
+          "user"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Successful"
+          }
+        }
+      },
+      "delete": {
+        "summary": "removes authorized acount for invitaions",
+        "operationId": "deleteUserAuthorizedinvestors",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model110"
+            }
+          }
+        ],
+        "tags": [
+          "user"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/v2/suitability": {
+      "get": {
+        "summary": "get suitability",
+        "operationId": "getV2Suitability",
+        "tags": [
+          "v2"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model55"
+            },
+            "description": "Successful"
+          }
+        }
+      },
+      "patch": {
+        "summary": "update suitability",
+        "operationId": "patchV2Suitability",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model117"
+            }
+          }
+        ],
+        "tags": [
+          "v2"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model55"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/wallets/tokens": {
+      "get": {
+        "summary": "get investor tokens in wallets",
+        "operationId": "getWalletsTokens",
+        "tags": [
+          "wallets"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model57"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/wallets-rpc/{provider}": {
+      "get": {
+        "summary": "get wallets rpc",
+        "operationId": "getWalletsrpcProvider",
+        "parameters": [
+          {
+            "type": "string",
+            "enum": [
+              "ethereum",
+              "avalanche",
+              "polygon",
+              "xdc"
+            ],
+            "name": "provider",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "wallets-rpc"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model58"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/documents/{documentId}/download": {
+      "get": {
+        "summary": "Tax Form Download Url",
+        "operationId": "getDocumentsDocumentidDownload",
+        "tags": [
+          "documents"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model38"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/investments/token-details/{tokenId}": {
+      "get": {
+        "summary": "get investor token details by tokenId",
+        "operationId": "getInvestmentsTokendetailsTokenid",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "tokenId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "investments"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model59"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/sumsub-session/documents-expired/progress": {
+      "get": {
+        "summary": "get sumsub progress",
+        "operationId": "getSumsubsessionDocumentsexpiredProgress",
+        "tags": [
+          "sumsub-session"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model47"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/tfa-flow/authenticate/ping": {
+      "get": {
+        "summary": "ping session tfa",
+        "operationId": "getTfaflowAuthenticatePing",
+        "tags": [
+          "tfa-flow"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/v2/investments/issued": {
+      "get": {
+        "summary": "Get Issued Assets",
+        "operationId": "getV2InvestmentsIssued",
+        "tags": [
+          "v2"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model61"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/v3/investments/issued": {
+      "get": {
+        "summary": "Get Issued Assets",
+        "operationId": "getV3InvestmentsIssued",
+        "tags": [
+          "v3"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model61"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/wallets/tokens/operational": {
+      "get": {
+        "summary": "Get Investor Tokens to Authorize / Withdraw",
+        "operationId": "getWalletsTokensOperational",
+        "tags": [
+          "wallets"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model63"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/wallets/{wallet}/agreement": {
+      "get": {
+        "summary": "get wallet agreement",
+        "operationId": "getWalletsWalletAgreement",
+        "parameters": [
+          {
+            "type": "string",
+            "enum": [
+              "metamask",
+              "coinbase",
+              "walletconnect"
+            ],
+            "name": "wallet",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "wallets"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model64"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/investments/token-details/{tokenId}/tbe-balances": {
+      "get": {
+        "summary": "get investor token details by tokenId",
+        "operationId": "getInvestmentsTokendetailsTokenidTbebalances",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "tokenId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "investments"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model65"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/investments/token-details/{tokenId}/wallets": {
+      "get": {
+        "summary": "get investor token details by tokenId",
+        "operationId": "getInvestmentsTokendetailsTokenidWallets",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "tokenId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "investments"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model67"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/investments/token-details/{tokenId}/recurring-investment": {
+      "get": {
+        "summary": "drip pass through",
+        "operationId": "getInvestmentsTokendetailsTokenidRecurringinvestment",
+        "tags": [
+          "investments"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/issuer/{issuerId}/tokens/{tokenId}/documents": {
+      "get": {
+        "operationId": "getIssuerIssueridTokensTokenidDocuments",
+        "tags": [
+          "issuer"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model69"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/authorize-issuer": {
+      "post": {
+        "summary": "check investor-issuer permissions",
+        "operationId": "postAuthorizeissuer",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "authorization",
+            "in": "header",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model71"
+            }
+          }
+        ],
+        "tags": [
+          "authorize-issuer"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model72"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/is-authorized": {
+      "post": {
+        "summary": "check investor-issuer permissions",
+        "operationId": "postIsauthorized",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "authorization",
+            "in": "header",
+            "required": true
+          }
+        ],
+        "tags": [
+          "is-authorized"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "summary": "authentication",
+        "operationId": "postLogin",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model73"
+            }
+          }
+        ],
+        "tags": [
+          "login"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model15"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/register": {
+      "post": {
+        "operationId": "postRegister",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model74"
+            }
+          }
+        ],
+        "tags": [
+          "register"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/request-reset-password": {
+      "post": {
+        "summary": "request reset password",
+        "operationId": "postRequestresetpassword",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model75"
+            }
+          }
+        ],
+        "tags": [
+          "request-reset-password"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/reset-password": {
+      "post": {
+        "summary": "request password",
+        "operationId": "postResetpassword",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model76"
+            }
+          }
+        ],
+        "tags": [
+          "reset-password"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model15"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/set-invite-password": {
+      "post": {
+        "summary": "set invite password",
+        "operationId": "postSetinvitepassword",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model77"
+            }
+          }
+        ],
+        "tags": [
+          "set-invite-password"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model15"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/signer": {
+      "post": {
+        "summary": "create signer",
+        "operationId": "postSigner",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model82"
+            }
+          }
+        ],
+        "tags": [
+          "signer"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model18"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/verify-email": {
+      "post": {
+        "operationId": "postVerifyemail",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model83"
+            }
+          }
+        ],
+        "tags": [
+          "verify-email"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model15"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/verify-reset-password-code": {
+      "post": {
+        "summary": "request password verification",
+        "operationId": "postVerifyresetpasswordcode",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model84"
+            }
+          }
+        ],
+        "tags": [
+          "verify-reset-password-code"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model85"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/profile/change-password": {
+      "post": {
+        "summary": "change password for an investor",
+        "operationId": "postProfileChangepassword",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model89"
+            }
+          }
+        ],
+        "tags": [
+          "profile"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/profile/delete-account": {
+      "post": {
+        "summary": "Delete account",
+        "operationId": "postProfileDeleteaccount",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model4"
+            }
+          }
+        ],
+        "tags": [
+          "profile"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/user"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/profile/disable-two-factor": {
+      "post": {
+        "summary": "private endpoint - disable user 2fa authorization",
+        "operationId": "postProfileDisabletwofactor",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model90"
+            }
+          }
+        ],
+        "tags": [
+          "profile"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/user"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/profile/enable-two-factor": {
+      "post": {
+        "summary": "private endpoint - enable user 2fa authorization",
+        "operationId": "postProfileEnabletwofactor",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model90"
+            }
+          }
+        ],
+        "tags": [
+          "profile"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/user"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/profile/run-verification": {
+      "post": {
+        "summary": "private endpoint - disable user 2fa authorization",
+        "operationId": "postProfileRunverification",
+        "tags": [
+          "profile"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/user"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/profile/verify-password": {
+      "post": {
+        "summary": "verify password for an investor",
+        "operationId": "postProfileVerifypassword",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model91"
+            }
+          }
+        ],
+        "tags": [
+          "profile"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/register/resend-email": {
+      "post": {
+        "operationId": "postRegisterResendemail",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model92"
+            }
+          }
+        ],
+        "tags": [
+          "register"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/tfa-flow/authenticate": {
+      "post": {
+        "summary": "authentication-tfa",
+        "operationId": "postTfaflowAuthenticate",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model93"
+            }
+          }
+        ],
+        "tags": [
+          "tfa-flow"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model94"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/tfa-flow/is-eligible": {
+      "post": {
+        "summary": "eligible-tfa-check",
+        "operationId": "postTfaflowIseligible",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model93"
+            }
+          }
+        ],
+        "tags": [
+          "tfa-flow"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model95"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/tfa-flow/refresh-session": {
+      "post": {
+        "summary": "refresh-tfa-session",
+        "operationId": "postTfaflowRefreshsession",
+        "tags": [
+          "tfa-flow"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model94"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/tfa-flow/submit": {
+      "post": {
+        "summary": "authentication-tfa",
+        "operationId": "postTfaflowSubmit",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model96"
+            }
+          }
+        ],
+        "tags": [
+          "tfa-flow"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model94"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/upload/temp": {
+      "post": {
+        "summary": "File upload",
+        "operationId": "postUploadTemp",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model97"
+            }
+          }
+        ],
+        "tags": [
+          "upload"
+        ],
+        "responses": {
+          "200": {
+            "description": "upload result",
+            "schema": {
+              "$ref": "#/definitions/Model98"
+            }
+          }
+        }
+      }
+    },
+    "/wallets/algorand": {
+      "post": {
+        "summary": "create algorand wallet",
+        "operationId": "postWalletsAlgorand",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model101"
+            }
+          }
+        ],
+        "tags": [
+          "wallets"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model23"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/wallets/avalanche": {
+      "post": {
+        "summary": "create avalanche wallet",
+        "operationId": "postWalletsAvalanche",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model102"
+            }
+          }
+        ],
+        "tags": [
+          "wallets"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model23"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/wallets/polygon": {
+      "post": {
+        "summary": "create avalanche wallet",
+        "operationId": "postWalletsPolygon",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model102"
+            }
+          }
+        ],
+        "tags": [
+          "wallets"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model23"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/wallets/{wallet}": {
+      "post": {
+        "summary": "create wallet",
+        "operationId": "postWalletsWallet",
+        "parameters": [
+          {
+            "type": "string",
+            "enum": [
+              "metamask",
+              "coinbase",
+              "walletconnect"
+            ],
+            "name": "wallet",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model102"
+            }
+          }
+        ],
+        "tags": [
+          "wallets"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model23"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/login/investor/{investorId}": {
+      "post": {
+        "summary": "login investor",
+        "operationId": "postLoginInvestorInvestorid",
+        "tags": [
+          "login"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/profile/user/investors": {
+      "post": {
+        "summary": "create investor and affiliate him to a user",
+        "operationId": "postProfileUserInvestors",
+        "tags": [
+          "profile"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model15"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/token-wallets/algorand/check-approved": {
+      "post": {
+        "summary": "get investor wallet",
+        "operationId": "postTokenwalletsAlgorandCheckapproved",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model103"
+            }
+          }
+        ],
+        "tags": [
+          "token-wallets"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model104"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/user/authorized-investors/approve": {
+      "post": {
+        "summary": "authorize acount",
+        "operationId": "postUserAuthorizedinvestorsApprove",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model105"
+            }
+          }
+        ],
+        "tags": [
+          "user"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/user/authorized-investors/approve-request": {
+      "post": {
+        "summary": "approves authorized acount request",
+        "operationId": "postUserAuthorizedinvestorsApproverequest",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model105"
+            }
+          }
+        ],
+        "tags": [
+          "user"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/user/authorized-investors/role": {
+      "post": {
+        "summary": "change authorized account role",
+        "operationId": "postUserAuthorizedinvestorsRole",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model106"
+            }
+          }
+        ],
+        "tags": [
+          "user"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/wallets/{walletId}/tokens/{tokenId}/withdraw": {
+      "post": {
+        "summary": "Withdraw Investor Token to Wallet",
+        "operationId": "postWalletsWalletidTokensTokenidWithdraw",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "walletId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "tokenId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model107"
+            }
+          }
+        ],
+        "tags": [
+          "wallets"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model108"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/wallets/{walletId}/tokens/{tokenId}/authorize": {
+      "post": {
+        "summary": "Authorize Investor Wallet to Token",
+        "operationId": "postWalletsWalletidTokensTokenidAuthorize",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "walletId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "tokenId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model109"
+            }
+          }
+        ],
+        "tags": [
+          "wallets"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model108"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/documents/{documentId}": {
+      "delete": {
+        "summary": "Delete investor document",
+        "operationId": "deleteDocumentsDocumentid",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "documentId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "documents"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/session/{sessionId}": {
+      "delete": {
+        "summary": "Session delete",
+        "operationId": "deleteSessionSessionid",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "authorization",
+            "in": "header",
+            "required": true
+          }
+        ],
+        "tags": [
+          "session"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/signer/{signerId}": {
+      "delete": {
+        "summary": "signers",
+        "operationId": "deleteSignerSignerid",
+        "tags": [
+          "signer"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model18"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/documents/bucket/{fileName}": {
+      "delete": {
+        "summary": "Delete investor document by file name",
+        "operationId": "deleteDocumentsBucketFilename",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "fileName",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "documents"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/investments/investment-requests/{id}": {
+      "delete": {
+        "summary": "Cancel Investment Request By Id",
+        "operationId": "deleteInvestmentsInvestmentrequestsId",
+        "parameters": [
+          {
+            "type": "number",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "investments"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model31"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/language/update": {
+      "patch": {
+        "summary": "Internationalization",
+        "operationId": "patchLanguageUpdate",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model113"
+            }
+          }
+        ],
+        "tags": [
+          "language"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/user"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/profile/update": {
+      "patch": {
+        "summary": "Internationalization",
+        "operationId": "patchProfileUpdate",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model113"
+            }
+          }
+        ],
+        "tags": [
+          "profile"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/user"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/wallets/{walletId}": {
+      "patch": {
+        "summary": "get investor wallet",
+        "operationId": "patchWalletsWalletid",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "walletId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model118"
+            }
+          }
+        ],
+        "tags": [
+          "wallets"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model23"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/investments/token-details/{tokenId}/dividend-reinvestment": {
+      "patch": {
+        "summary": "update dividend-reinvestment for token",
+        "operationId": "patchInvestmentsTokendetailsTokenidDividendreinvestment",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "tokenId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model119"
+            }
+          }
+        ],
+        "tags": [
+          "investments"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model59"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/profile/broker-dealer": {
+      "put": {
+        "summary": "edit broker-dealer id",
+        "operationId": "putProfileBrokerdealer",
+        "tags": [
+          "profile"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model123"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/profile/investor-type": {
+      "put": {
+        "summary": "Update investor type of investor",
+        "operationId": "putProfileInvestortype",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model125"
+            }
+          }
+        ],
+        "tags": [
+          "profile"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/profile/phone-number": {
+      "put": {
+        "summary": "Update investor telephone number",
+        "operationId": "putProfilePhonenumber",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model131"
+            }
+          }
+        ],
+        "tags": [
+          "profile"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model132"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/signers/{signerId}": {
+      "put": {
+        "summary": "signers",
+        "operationId": "putSignersSignerid",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model135"
+            }
+          }
+        ],
+        "tags": [
+          "signers"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model136"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/wallets/{walletId}/tokens/{tokenId}/{operation}": {
+      "put": {
+        "summary": "Update Signature",
+        "operationId": "putWalletsWalletidTokensTokenidOperation",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "walletId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "tokenId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "enum": [
+              "withdraw",
+              "authorize"
+            ],
+            "name": "operation",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Model137"
+            }
+          }
+        ],
+        "tags": [
+          "wallets"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Model1": {
+      "type": "object",
+      "properties": {
+        "sectionTitle": {
+          "type": "string"
+        },
+        "sectionSubTitle": {
+          "type": "string"
+        },
+        "qualificationText": {
+          "type": "string"
+        },
+        "yesText": {
+          "type": "string"
+        },
+        "noText": {
+          "type": "string"
+        },
+        "externalAccreditationLink": {
+          "type": "string"
+        },
+        "isAllowedToChangeAccreditation": {
+          "type": "boolean"
+        },
+        "additionalAccreditation": {
+          "type": "boolean"
+        },
+        "accreditationStatus": {
+          "type": "string",
+          "enum": [
+            "none",
+            "verified",
+            "processing",
+            "rejected",
+            "not-accredited",
+            "pending",
+            "expired",
+            "updates-required"
+          ]
+        }
+      }
+    },
+    "documentVerificationErrors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "Model2": {
+      "type": "object",
+      "properties": {
+        "docType": {
+          "type": "string",
+          "enum": [
+            "passport",
+            "driving-licence",
+            "national-identity-card",
+            "residence-permit",
+            "visa",
+            "passport-card",
+            "work-permit",
+            "state-id",
+            "tax-id",
+            "uk-biometric-residence-permit",
+            "list-of-trustees",
+            "voter-id",
+            "certificate-of-naturalisation",
+            "home-office-letter",
+            "immigration-status-document",
+            "birth-certificate",
+            "selfie",
+            "document-or-certificate-of-trust",
+            "list-of-officers-and-directors",
+            "operating-agreement",
+            "members-and-authorised-signers-list",
+            "by-laws",
+            "articles-of-corporation",
+            "shareholders-list-and-authorised-signers-list",
+            "partnership-agreement",
+            "certificate-of-formation",
+            "lp-list-and-authorised-signers-list",
+            "list-of-managers",
+            "private-placement-memorandum",
+            "evidence-of-ein",
+            "articles-of-incorporation",
+            "adverse-media",
+            "audited-financials",
+            "authorized-signers-list",
+            "bank-statement",
+            "board-resolutions",
+            "certificate-of-good-standing",
+            "other",
+            "org-chart",
+            "employment-letter",
+            "financial-documents",
+            "identity-doc",
+            "idology-report",
+            "articles-of-organization",
+            "offering-agreement",
+            "organization-chart",
+            "proof-of-address",
+            "shareholders-list",
+            "tax-document"
+          ]
+        },
+        "docCategory": {
+          "type": "string",
+          "enum": [
+            "signer-entity",
+            "signer-identification",
+            "selfie",
+            "address-proof",
+            "identification",
+            "entity",
+            "other"
+          ]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date"
+        },
+        "side": {
+          "type": "string",
+          "enum": [
+            "front",
+            "back"
+          ]
+        },
+        "documentName": {
+          "type": "string"
+        },
+        "fileType": {
+          "type": "string"
+        },
+        "documentVerificationErrors": {
+          "$ref": "#/definitions/documentVerificationErrors"
+        },
+        "verificationStatus": {
+          "type": "string",
+          "enum": [
+            "not-verified",
+            "verified",
+            "pending",
+            "manual-review",
+            "updates-required"
+          ]
+        },
+        "documentId": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "x-format": {
+            "uri": true
+          }
+        }
+      }
+    },
+    "Model3": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model2"
+      }
+    },
+    "Model4": {
+      "type": "object"
+    },
+    "Model5": {
+      "type": "object",
+      "properties": {
+        "verificationStatus": {
+          "type": "string",
+          "enum": [
+            "not-verified",
+            "verified",
+            "pending",
+            "service-denied",
+            "updates-required",
+            "expired",
+            "documents-expired",
+            "blocked"
+          ]
+        }
+      },
+      "required": [
+        "verificationStatus"
+      ]
+    },
+    "Model6": {
+      "type": "object",
+      "properties": {
+        "issuerName": {
+          "type": "string"
+        },
+        "isImportForbidden": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Model7": {
+      "type": "object",
+      "properties": {
+        "country_code": {
+          "type": "string"
+        },
+        "continent_name": {
+          "type": "string"
+        },
+        "ip": {
+          "type": "string"
+        }
+      }
+    },
+    "Model8": {
+      "type": "object",
+      "properties": {
+        "suitabilityStatus": {
+          "type": "string",
+          "enum": [
+            "none",
+            "verified",
+            "processing",
+            "not-approved"
+          ]
+        },
+        "suitabilityEUStatus": {
+          "type": "string",
+          "enum": [
+            "none",
+            "verified",
+            "processing",
+            "not-approved"
+          ]
+        },
+        "hasEscrowAccount": {
+          "type": "boolean"
+        },
+        "hasLinkedAccount": {
+          "type": "boolean"
+        },
+        "isAllowedBrokerDealer": {
+          "type": "boolean"
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "string"
+      }
+    },
+    "Model9": {
+      "type": "object",
+      "properties": {
+        "issuerId": {
+          "type": "string"
+        },
+        "issuerName": {
+          "type": "string"
+        },
+        "issuerLogo": {
+          "type": "string"
+        },
+        "opportunityName": {
+          "type": "string"
+        },
+        "opportunityId": {
+          "type": "number"
+        },
+        "shareValue": {
+          "type": "number"
+        },
+        "dashboardUrl": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "tokenIcon": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "tags": {
+          "$ref": "#/definitions/tags"
+        }
+      },
+      "required": [
+        "issuerId",
+        "issuerName",
+        "issuerLogo",
+        "opportunityName",
+        "opportunityId",
+        "shareValue",
+        "dashboardUrl",
+        "image",
+        "description"
+      ]
+    },
+    "Model10": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model9"
+      }
+    },
+    "Model11": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "imageLink": {
+          "type": "string"
+        },
+        "link": {
+          "type": "string"
+        },
+        "linkText": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "subtitle",
+        "imageLink",
+        "link",
+        "linkText",
+        "isActive"
+      ]
+    },
+    "Model12": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model11"
+      }
+    },
+    "Model13": {
+      "type": "object",
+      "properties": {
+        "reverseSolicitation": {
+          "type": "boolean"
+        }
+      }
+    },
+    "userInvestors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model4"
+      }
+    },
+    "Model14": {
+      "type": "object",
+      "properties": {
+        "updateType": {
+          "type": "string",
+          "enum": [
+            "additional-legal-signers",
+            "additional-documentation",
+            "legal-signers-missing-info",
+            "comment-to-investor-comment"
+          ]
+        },
+        "legalSignerId": {
+          "type": "string"
+        },
+        "legalSignerName": {
+          "type": "string"
+        },
+        "updateName": {
+          "type": "string"
+        },
+        "updateDocType": {
+          "type": "string",
+          "enum": [
+            "passport",
+            "driving-licence",
+            "national-identity-card",
+            "residence-permit",
+            "visa",
+            "passport-card",
+            "work-permit",
+            "state-id",
+            "tax-id",
+            "uk-biometric-residence-permit",
+            "voter-id",
+            "certificate-of-naturalisation",
+            "home-office-letter",
+            "immigration-status-document",
+            "birth-certificate",
+            "selfie",
+            "document-or-certificate-of-trust",
+            "list-of-officers-and-directors",
+            "list-of-trustees",
+            "certificate-of-formation",
+            "articles-of-organization",
+            "operating-agreement",
+            "members-and-authorised-signers-list",
+            "by-laws",
+            "articles-of-corporation",
+            "shareholders-list-and-authorised-signers-list",
+            "partnership-agreement",
+            "lp-list-and-authorised-signers-list",
+            "list-of-managers",
+            "private-placement-memorandum",
+            "evidence-of-ein",
+            "org-chart",
+            "other",
+            "articles-of-incorporation",
+            "adverse-media",
+            "audited-financials",
+            "authorized-signers-list",
+            "bank-statement",
+            "board-resolutions",
+            "certificate-of-good-standing",
+            "employment-letter",
+            "financial-documents",
+            "identity-doc",
+            "idology-report",
+            "offering-agreement",
+            "organization-chart",
+            "proof-of-address",
+            "shareholders-list",
+            "tax-document"
+          ]
+        }
+      }
+    },
+    "requestedUpdates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model14"
+      }
+    },
+    "user": {
+      "type": "object",
+      "properties": {
+        "mixPanelId": {
+          "type": "string",
+          "default": ""
+        },
+        "intent": {
+          "type": "string",
+          "default": ""
+        },
+        "analyticsEnabled": {
+          "type": "boolean",
+          "default": true
+        },
+        "investorId": {
+          "type": "string"
+        },
+        "verificationErrors": {
+          "$ref": "#/definitions/documentVerificationErrors"
+        },
+        "fullName": {
+          "type": "string"
+        },
+        "entityName": {
+          "type": "string"
+        },
+        "entityType": {
+          "type": "string"
+        },
+        "contactEmail": {
+          "type": "string"
+        },
+        "contactDetails": {
+          "$ref": "#/definitions/Model4"
+        },
+        "email": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "viewer",
+            "assistant",
+            "admin"
+          ]
+        },
+        "accreditationStatus": {
+          "type": "string",
+          "enum": [
+            "none",
+            "verified",
+            "processing",
+            "rejected",
+            "not-accredited",
+            "pending",
+            "expired",
+            "updates-required"
+          ]
+        },
+        "verificationStatus": {
+          "type": "string",
+          "enum": [
+            "not-verified",
+            "verified",
+            "pending",
+            "service-denied",
+            "updates-required",
+            "expired",
+            "documents-expired",
+            "blocked"
+          ]
+        },
+        "accountStatus": {
+          "type": "string"
+        },
+        "suitabilityStatus": {
+          "type": "string",
+          "enum": [
+            "none",
+            "not-approved",
+            "processing",
+            "verified"
+          ]
+        },
+        "suitabilityEUStatus": {
+          "type": "string",
+          "enum": [
+            "none",
+            "not-approved",
+            "processing",
+            "verified"
+          ]
+        },
+        "tfaEnabled": {
+          "type": "boolean"
+        },
+        "language": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "investorType": {
+          "type": "string",
+          "enum": [
+            "individual",
+            "entity"
+          ]
+        },
+        "pendingDeletion": {
+          "type": "boolean"
+        },
+        "brokerDealerId": {
+          "type": "number"
+        },
+        "deletionDeclineDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "userInvestors": {
+          "$ref": "#/definitions/userInvestors"
+        },
+        "investorUserId": {
+          "type": "string"
+        },
+        "investorUserEmail": {
+          "type": "string",
+          "x-format": {
+            "email": true
+          }
+        },
+        "isInvestorTypeFinal": {
+          "type": "boolean"
+        },
+        "isAllowedBrokerDealer": {
+          "type": "boolean"
+        },
+        "isEnhancedVerificationRequested": {
+          "type": "boolean"
+        },
+        "requestedUpdates": {
+          "$ref": "#/definitions/requestedUpdates"
+        }
+      },
+      "required": [
+        "investorId",
+        "fullName",
+        "email",
+        "role",
+        "verificationStatus",
+        "accountStatus",
+        "tfaEnabled",
+        "language",
+        "countryCode",
+        "investorUserId"
+      ]
+    },
+    "Model15": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        },
+        "user": {
+          "$ref": "#/definitions/user"
+        },
+        "redirectTo": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "token"
+      ]
+    },
+    "individualName": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "middleName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        }
+      }
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "street": {
+          "type": "string"
+        },
+        "entrance": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "zip": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 10
+        }
+      }
+    },
+    "Model16": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string"
+        },
+        "verificationStatus": {
+          "type": "string",
+          "enum": [
+            "not-verified",
+            "verified",
+            "pending",
+            "manual-review",
+            "updates-required"
+          ]
+        },
+        "side": {
+          "type": "string"
+        },
+        "docType": {
+          "type": "string",
+          "enum": [
+            "proof-of-address",
+            "passport",
+            "driving-licence",
+            "national-identity-card",
+            "residence-permit",
+            "visa",
+            "passport-card",
+            "work-permit",
+            "state-id",
+            "uk-biometric-residence-permit",
+            "tax-id",
+            "voter-id",
+            "certificate-of-naturalisation",
+            "home-office-letter",
+            "immigration-status-document",
+            "birth-certificate",
+            "other",
+            "selfie",
+            "document-or-certificate-of-trust",
+            "list-of-trustees",
+            "certificate-of-formation",
+            "partnership-agreement",
+            "lp-list-and-authorised-signers-list",
+            "articles-of-organization",
+            "operating-agreement",
+            "members-and-authorised-signers-list",
+            "by-laws",
+            "articles-of-corporation",
+            "shareholders-list-and-authorised-signers-list",
+            "org-chart"
+          ]
+        },
+        "docCategory": {
+          "type": "string",
+          "enum": [
+            "signer-entity",
+            "signer-identification",
+            "selfie",
+            "address-proof",
+            "identification",
+            "entity",
+            "other"
+          ]
+        },
+        "documentVerificationErrors": {
+          "$ref": "#/definitions/documentVerificationErrors"
+        },
+        "createDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "fileName": {
+          "type": "string"
+        },
+        "fileType": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string",
+          "x-format": {
+            "uri": true
+          }
+        }
+      },
+      "required": [
+        "documentId"
+      ]
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model16"
+      }
+    },
+    "Model17": {
+      "type": "object",
+      "properties": {
+        "signerId": {
+          "type": "string"
+        },
+        "signerType": {
+          "type": "string",
+          "enum": [
+            "individual",
+            "entity"
+          ]
+        },
+        "legalName": {
+          "type": "string"
+        },
+        "businessName": {
+          "type": "string"
+        },
+        "entityType": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "taxId": {
+          "type": "string"
+        },
+        "taxCountryCode": {
+          "type": "string"
+        },
+        "isBeneficialOwner": {
+          "type": "boolean",
+          "default": false
+        },
+        "isLegalSigner": {
+          "type": "boolean"
+        },
+        "uboOwning": {
+          "type": "string",
+          "enum": [
+            "none",
+            "10+",
+            "25+"
+          ]
+        },
+        "individualName": {
+          "$ref": "#/definitions/individualName"
+        },
+        "address": {
+          "$ref": "#/definitions/address"
+        },
+        "documents": {
+          "$ref": "#/definitions/documents"
+        },
+        "birthDate": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "required": [
+        "address"
+      ]
+    },
+    "Model18": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model17"
+      }
+    },
+    "investorInformation": {
+      "type": "object",
+      "properties": {
+        "investorType": {
+          "type": "string",
+          "enum": [
+            "entity",
+            "individual"
+          ]
+        },
+        "licensedBrokerDealer": {
+          "type": "boolean"
+        },
+        "registeredRepresentativeOfBrokerDealer": {
+          "type": "boolean"
+        },
+        "brokerDealerName": {
+          "type": "string"
+        },
+        "isMemberOrEmployedAtStockExchangeOrFINRA": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "investorType",
+        "isMemberOrEmployedAtStockExchangeOrFINRA"
+      ]
+    },
+    "investmentExperienceInYears": {
+      "type": "object",
+      "properties": {
+        "stocks": {
+          "type": "string",
+          "enum": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5+"
+          ]
+        },
+        "bonds": {
+          "type": "string",
+          "enum": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5+"
+          ]
+        },
+        "options": {
+          "type": "string",
+          "enum": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5+"
+          ]
+        },
+        "oilAndGas": {
+          "type": "string",
+          "enum": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5+"
+          ]
+        },
+        "digitalAssets": {
+          "type": "string",
+          "enum": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5+"
+          ]
+        },
+        "privatePlacement": {
+          "type": "string",
+          "enum": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5+"
+          ]
+        },
+        "realEstate": {
+          "type": "string",
+          "enum": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5+"
+          ]
+        }
+      }
+    },
+    "investmentFrequency": {
+      "type": "object",
+      "properties": {
+        "exchangeTradedSecurities": {
+          "type": "string",
+          "enum": [
+            "occasionally",
+            "never",
+            "often"
+          ]
+        },
+        "privatePlacements": {
+          "type": "string",
+          "enum": [
+            "occasionally",
+            "never",
+            "often"
+          ]
+        },
+        "investmentObjectives": {
+          "type": "string",
+          "enum": [
+            "conservative",
+            "income",
+            "growth-and-speculation"
+          ]
+        }
+      },
+      "required": [
+        "exchangeTradedSecurities",
+        "privatePlacements",
+        "investmentObjectives"
+      ]
+    },
+    "riskToleranceAffirmation": {
+      "type": "object",
+      "properties": {
+        "highRiskTolerance": {
+          "type": "boolean"
+        },
+        "understandInvestmentOnDTM": {
+          "type": "boolean"
+        },
+        "noLiquidityNeedsForInvestmentOnDTM": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "highRiskTolerance",
+        "understandInvestmentOnDTM",
+        "noLiquidityNeedsForInvestmentOnDTM"
+      ]
+    },
+    "Model19": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "Model20": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model19"
+      }
+    },
+    "Model21": {
+      "type": "object",
+      "properties": {
+        "investorInformation": {
+          "$ref": "#/definitions/investorInformation"
+        },
+        "investmentExperienceInYears": {
+          "$ref": "#/definitions/investmentExperienceInYears"
+        },
+        "investmentFrequency": {
+          "$ref": "#/definitions/investmentFrequency"
+        },
+        "riskToleranceAffirmation": {
+          "$ref": "#/definitions/riskToleranceAffirmation"
+        },
+        "confirmedAffirmations": {
+          "$ref": "#/definitions/documentVerificationErrors"
+        },
+        "fullName": {
+          "type": "string"
+        },
+        "signingConfirmed": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "none",
+            "verified",
+            "processing",
+            "rejected",
+            "not-approved"
+          ]
+        },
+        "documents": {
+          "$ref": "#/definitions/Model20"
+        }
+      }
+    },
+    "Model22": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "walletType": {
+          "type": "string"
+        },
+        "blockchainType": {
+          "type": "string"
+        },
+        "creationDate": {
+          "type": "string"
+        }
+      }
+    },
+    "Model23": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model22"
+      }
+    },
+    "Model24": {
+      "type": "object",
+      "properties": {
+        "assetPerformanceTokenIdsStatus": {
+          "$ref": "#/definitions/Model4"
+        }
+      }
+    },
+    "Model25": {
+      "type": "object",
+      "properties": {
+        "docType": {
+          "type": "string",
+          "enum": [
+            "passport",
+            "driving-licence",
+            "national-identity-card",
+            "residence-permit",
+            "visa",
+            "passport-card",
+            "work-permit",
+            "state-id",
+            "tax-id",
+            "uk-biometric-residence-permit",
+            "list-of-trustees",
+            "voter-id",
+            "certificate-of-naturalisation",
+            "home-office-letter",
+            "immigration-status-document",
+            "birth-certificate",
+            "selfie",
+            "document-or-certificate-of-trust",
+            "list-of-officers-and-directors",
+            "operating-agreement",
+            "members-and-authorised-signers-list",
+            "by-laws",
+            "articles-of-corporation",
+            "shareholders-list-and-authorised-signers-list",
+            "partnership-agreement",
+            "certificate-of-formation",
+            "lp-list-and-authorised-signers-list",
+            "list-of-managers",
+            "private-placement-memorandum",
+            "evidence-of-ein",
+            "articles-of-incorporation",
+            "adverse-media",
+            "audited-financials",
+            "authorized-signers-list",
+            "bank-statement",
+            "board-resolutions",
+            "certificate-of-good-standing",
+            "other",
+            "org-chart",
+            "employment-letter",
+            "financial-documents",
+            "identity-doc",
+            "idology-report",
+            "articles-of-organization",
+            "offering-agreement",
+            "organization-chart",
+            "proof-of-address",
+            "shareholders-list",
+            "tax-document"
+          ]
+        },
+        "docCategory": {
+          "type": "string",
+          "enum": [
+            "signer-entity",
+            "signer-identification",
+            "selfie",
+            "address-proof",
+            "identification",
+            "entity",
+            "other"
+          ]
+        },
+        "createDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "side": {
+          "type": "string",
+          "enum": [
+            "front",
+            "back"
+          ]
+        },
+        "fileName": {
+          "type": "string"
+        },
+        "fileType": {
+          "type": "string"
+        },
+        "documentVerificationErrors": {
+          "$ref": "#/definitions/documentVerificationErrors"
+        },
+        "verificationStatus": {
+          "type": "string",
+          "enum": [
+            "not-verified",
+            "verified",
+            "pending",
+            "manual-review",
+            "updates-required"
+          ]
+        },
+        "documentId": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string",
+          "x-format": {
+            "uri": true
+          }
+        }
+      }
+    },
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model25"
+      }
+    },
+    "Model26": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/data"
+        },
+        "mainIdentificationNumber": {
+          "type": "string",
+          "minLength": 3
+        }
+      }
+    },
+    "languages": {
+      "type": "object",
+      "description": "{ \"EN\": { \"language\": \"EN\", \"title\": \"English\", \"direction\": \"ltr\" } }"
+    },
+    "translations": {
+      "type": "object",
+      "description": "key - value object with translations like {\"login.login-button\" : \"Login\"}"
+    },
+    "Model27": {
+      "type": "object",
+      "description": "supported languages and all the translations",
+      "properties": {
+        "languages": {
+          "$ref": "#/definitions/languages"
+        },
+        "translations": {
+          "$ref": "#/definitions/translations"
+        }
+      }
+    },
+    "totalBalanceIn": {
+      "type": "object",
+      "properties": {
+        "USD": {
+          "type": "number",
+          "default": 0
+        },
+        "EUR": {
+          "type": "number",
+          "default": 0
+        }
+      }
+    },
+    "Model28": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "type": "string",
+          "enum": [
+            "USD",
+            "EUR"
+          ]
+        },
+        "total": {
+          "type": "number"
+        }
+      }
+    },
+    "cashBalances": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model28"
+      }
+    },
+    "Model29": {
+      "type": "object",
+      "properties": {
+        "isProcessing": {
+          "type": "boolean"
+        },
+        "canCashDeposit": {
+          "type": "boolean"
+        },
+        "canCashWithdrawal": {
+          "type": "boolean"
+        },
+        "canCreateAccount": {
+          "type": "boolean"
+        },
+        "canUseCA": {
+          "type": "boolean"
+        },
+        "totalCashBalance": {
+          "type": "number"
+        },
+        "totalUsdCashBalance": {
+          "type": "number"
+        },
+        "totalBalanceIn": {
+          "$ref": "#/definitions/totalBalanceIn"
+        },
+        "usedCurrencies": {
+          "$ref": "#/definitions/documentVerificationErrors"
+        },
+        "cashBalances": {
+          "$ref": "#/definitions/cashBalances"
+        }
+      }
+    },
+    "pledged": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number"
+        }
+      }
+    },
+    "Model30": {
+      "type": "object",
+      "properties": {
+        "issuerId": {
+          "type": "string"
+        },
+        "issuerName": {
+          "type": "string"
+        },
+        "issuerLogo": {
+          "type": "string"
+        },
+        "blockchain": {
+          "type": "string"
+        },
+        "dashboardUrl": {
+          "type": "string"
+        },
+        "pledged": {
+          "$ref": "#/definitions/pledged"
+        },
+        "totalFunded": {
+          "$ref": "#/definitions/pledged"
+        },
+        "tokenIcon": {
+          "type": "string"
+        },
+        "tokenName": {
+          "type": "string"
+        },
+        "opportunityId": {
+          "type": "number"
+        },
+        "tokenId": {
+          "type": "string"
+        },
+        "isPrimary": {
+          "type": "boolean",
+          "default": false
+        },
+        "id": {
+          "type": "number"
+        }
+      }
+    },
+    "investmentRequests": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model30"
+      }
+    },
+    "Model31": {
+      "type": "object",
+      "properties": {
+        "investmentRequests": {
+          "$ref": "#/definitions/investmentRequests"
+        }
+      }
+    },
+    "Model32": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "reverseSolicitation": {
+          "type": "boolean"
+        },
+        "disclaimer": {
+          "type": "string"
+        },
+        "generalDisclaimer": {
+          "type": "string"
+        },
+        "issuerIcon": {
+          "type": "string"
+        },
+        "issuerSquareIcon": {
+          "type": "string"
+        },
+        "issuerName": {
+          "type": "string"
+        },
+        "blockchain": {
+          "type": "string"
+        }
+      }
+    },
+    "Model33": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "label"
+      ]
+    },
+    "issuersFilterItems": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model33"
+      }
+    },
+    "Model34": {
+      "type": "object",
+      "properties": {
+        "issuersFilterItems": {
+          "$ref": "#/definitions/issuersFilterItems"
+        },
+        "tagsFilterItems": {
+          "$ref": "#/definitions/issuersFilterItems"
+        },
+        "opportunityNameFilterItems": {
+          "$ref": "#/definitions/issuersFilterItems"
+        }
+      },
+      "required": [
+        "issuersFilterItems",
+        "tagsFilterItems",
+        "opportunityNameFilterItems"
+      ]
+    },
+    "Model35": {
+      "type": "object",
+      "properties": {
+        "taxCountryCode": {
+          "type": "string"
+        },
+        "taxId": {
+          "type": "string"
+        }
+      }
+    },
+    "Model36": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model35"
+      }
+    },
+    "Model37": {
+      "type": "object",
+      "properties": {
+        "street": {
+          "type": "string"
+        },
+        "entrance": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "zip": {
+          "type": "string"
+        }
+      }
+    },
+    "Model38": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "Model39": {
+      "type": "object",
+      "properties": {
+        "entityName": {
+          "type": "string"
+        },
+        "businesses": {
+          "type": "string"
+        },
+        "sourceOfFunds": {
+          "type": "string"
+        },
+        "lineOfBusiness": {
+          "type": "string"
+        },
+        "leiCode": {
+          "type": "string"
+        },
+        "entityType": {
+          "type": "string"
+        },
+        "entityIdNumber": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "incorporationDate": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "Model40": {
+      "type": "object",
+      "properties": {
+        "taxId": {
+          "type": "string"
+        },
+        "taxCountryCode": {
+          "type": "string"
+        }
+      }
+    },
+    "tax": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model40"
+      }
+    },
+    "Model41": {
+      "type": "object",
+      "properties": {
+        "birthCountry": {
+          "type": "string"
+        },
+        "birthCity": {
+          "type": "string"
+        },
+        "birthState": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string",
+          "enum": [
+            "male",
+            "female"
+          ]
+        },
+        "tax": {
+          "$ref": "#/definitions/tax"
+        }
+      }
+    },
+    "phone": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "number": {
+          "type": "string"
+        },
+        "fullNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "Model42": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "middleName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "birthday": {
+          "type": "string",
+          "format": "date"
+        },
+        "phone": {
+          "$ref": "#/definitions/phone"
+        }
+      }
+    },
+    "Model43": {
+      "type": "object",
+      "properties": {
+        "seed": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "seed"
+      ]
+    },
+    "Model44": {
+      "type": "object",
+      "properties": {
+        "issuerIcon": {
+          "type": "string"
+        },
+        "issuerName": {
+          "type": "string"
+        }
+      }
+    },
+    "Model45": {
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "type": "string"
+        },
+        "lastActive": {
+          "type": "string",
+          "format": "date"
+        },
+        "userAgent": {
+          "type": "string"
+        },
+        "expires": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "required": [
+        "sessionId",
+        "lastActive",
+        "userAgent",
+        "expires"
+      ]
+    },
+    "Model46": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model45"
+      }
+    },
+    "liveness": {
+      "type": "object",
+      "properties": {
+        "isComplete": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "isComplete"
+      ]
+    },
+    "Model47": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string"
+        },
+        "sumsubApiUrl": {
+          "type": "string"
+        },
+        "liveness": {
+          "$ref": "#/definitions/liveness"
+        },
+        "fileUpload": {
+          "$ref": "#/definitions/liveness"
+        }
+      },
+      "required": [
+        "accessToken",
+        "sumsubApiUrl"
+      ]
+    },
+    "Model48": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string"
+        },
+        "sumsubApiUrl": {
+          "type": "string"
+        },
+        "isComplete": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "accessToken",
+        "sumsubApiUrl",
+        "isComplete"
+      ]
+    },
+    "Model49": {
+      "type": "object",
+      "properties": {
+        "sumsubApiUrl": {
+          "type": "string"
+        },
+        "isLivenessComplete": {
+          "type": "boolean"
+        },
+        "accessToken": {
+          "type": "string"
+        }
+      }
+    },
+    "Model50": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "x-format": {
+            "email": true
+          }
+        },
+        "investorId": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "email",
+        "investorId",
+        "role",
+        "status",
+        "displayName"
+      ]
+    },
+    "Model51": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model50"
+      }
+    },
+    "Model52": {
+      "type": "object",
+      "properties": {
+        "stocks": {
+          "type": "string",
+          "enum": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5+"
+          ]
+        },
+        "bonds": {
+          "type": "string",
+          "enum": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5+"
+          ]
+        },
+        "options": {
+          "type": "string",
+          "enum": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5+"
+          ]
+        },
+        "oilAndGas": {
+          "type": "string",
+          "enum": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5+"
+          ]
+        },
+        "digitalAssets": {
+          "type": "string",
+          "enum": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5+"
+          ]
+        },
+        "privatePlacement": {
+          "type": "string",
+          "enum": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5+"
+          ]
+        },
+        "realEstate": {
+          "type": "string",
+          "enum": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5+"
+          ]
+        }
+      },
+      "required": [
+        "stocks",
+        "bonds",
+        "options",
+        "oilAndGas",
+        "digitalAssets",
+        "privatePlacement",
+        "realEstate"
+      ]
+    },
+    "us": {
+      "type": "object",
+      "properties": {
+        "investorInformation": {
+          "$ref": "#/definitions/investorInformation"
+        },
+        "investmentExperienceInYears": {
+          "$ref": "#/definitions/Model52"
+        },
+        "investmentFrequency": {
+          "$ref": "#/definitions/investmentFrequency"
+        },
+        "riskToleranceAffirmation": {
+          "$ref": "#/definitions/riskToleranceAffirmation"
+        },
+        "confirmedAffirmations": {
+          "$ref": "#/definitions/documentVerificationErrors"
+        },
+        "fullName": {
+          "type": "string"
+        },
+        "signingConfirmed": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "none",
+            "verified",
+            "processing",
+            "rejected",
+            "not-approved"
+          ]
+        },
+        "documents": {
+          "$ref": "#/definitions/Model20"
+        }
+      }
+    },
+    "Model53": {
+      "type": "object",
+      "properties": {
+        "investorType": {
+          "type": "string",
+          "enum": [
+            "retail",
+            "professional"
+          ]
+        },
+        "investorTypeTreatedAsRetailInvestor": {
+          "type": "boolean"
+        },
+        "isMemberWithPublicResponsibility": {
+          "type": "boolean"
+        },
+        "educationalLevel": {
+          "type": "string",
+          "enum": [
+            "basic-studies",
+            "higher-education",
+            "higher-education-economic-background"
+          ]
+        },
+        "mainOccupation": {
+          "type": "string",
+          "enum": [
+            "self-employed",
+            "employee-without-manager-role",
+            "employee-with-manager-role",
+            "retired",
+            "other"
+          ]
+        },
+        "originOfResourcesLawfulActivities": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "investorType",
+        "educationalLevel",
+        "mainOccupation",
+        "originOfResourcesLawfulActivities"
+      ]
+    },
+    "investorKnowledge": {
+      "type": "object",
+      "properties": {
+        "sharesQuotedInRegulatedMarkets": {
+          "type": "string",
+          "enum": [
+            "none",
+            "few",
+            "some",
+            "much"
+          ]
+        },
+        "treasuryBillsTradeBillsBondsAndOtherSecuritizedDebt": {
+          "type": "string",
+          "enum": [
+            "none",
+            "few",
+            "some",
+            "much"
+          ]
+        },
+        "mutualFundsCollectiveInvestment": {
+          "type": "string",
+          "enum": [
+            "none",
+            "few",
+            "some",
+            "much"
+          ]
+        },
+        "derivatives": {
+          "type": "string",
+          "enum": [
+            "none",
+            "few",
+            "some",
+            "much"
+          ]
+        },
+        "ventureCapital": {
+          "type": "string",
+          "enum": [
+            "none",
+            "few",
+            "some",
+            "much"
+          ]
+        },
+        "transactionsWithCryptoAddress": {
+          "type": "string",
+          "enum": [
+            "none",
+            "few",
+            "some",
+            "much"
+          ]
+        }
+      },
+      "required": [
+        "sharesQuotedInRegulatedMarkets",
+        "treasuryBillsTradeBillsBondsAndOtherSecuritizedDebt",
+        "mutualFundsCollectiveInvestment",
+        "derivatives",
+        "ventureCapital",
+        "transactionsWithCryptoAddress"
+      ]
+    },
+    "Model54": {
+      "type": "object",
+      "properties": {
+        "sharesQuotedInRegulatedMarkets": {
+          "type": "string",
+          "enum": [
+            "none",
+            "one-to-five",
+            "five-plus"
+          ]
+        },
+        "treasuryBillsTradeBillsBondsAndOtherSecuritizedDebt": {
+          "type": "string",
+          "enum": [
+            "none",
+            "one-to-five",
+            "five-plus"
+          ]
+        },
+        "mutualFundsCollectiveInvestment": {
+          "type": "string",
+          "enum": [
+            "none",
+            "one-to-five",
+            "five-plus"
+          ]
+        },
+        "derivatives": {
+          "type": "string",
+          "enum": [
+            "none",
+            "one-to-five",
+            "five-plus"
+          ]
+        },
+        "ventureCapital": {
+          "type": "string",
+          "enum": [
+            "none",
+            "one-to-five",
+            "five-plus"
+          ]
+        },
+        "transactionsWithCryptoAddress": {
+          "type": "string",
+          "enum": [
+            "none",
+            "one-to-five",
+            "five-plus"
+          ]
+        }
+      },
+      "required": [
+        "sharesQuotedInRegulatedMarkets",
+        "treasuryBillsTradeBillsBondsAndOtherSecuritizedDebt",
+        "mutualFundsCollectiveInvestment",
+        "derivatives",
+        "ventureCapital",
+        "transactionsWithCryptoAddress"
+      ]
+    },
+    "knowledgeTest": {
+      "type": "object",
+      "properties": {
+        "whatIsBlockchain": {
+          "type": "string",
+          "enum": [
+            "database-used-by-banks-to-keep-cryptocurrency",
+            "form-of-speculative-investment",
+            "technology-to-keep-records-manage-transactions",
+            "dont-know"
+          ]
+        },
+        "whatCharacteristicsBlockchainTechProvideToLedger": {
+          "type": "string",
+          "enum": [
+            "security-immutability-auditability-of-transactions",
+            "scarcity-and-protection-from-inflation-in-assets",
+            "growing-value-of-investments",
+            "dont-know"
+          ]
+        },
+        "howCanAssetsBeHeldOnBlockchain": {
+          "type": "string",
+          "enum": [
+            "kept-in-computer-or-smartphone",
+            "using-wallets",
+            "must-be-held-via-exchanges",
+            "dont-know"
+          ]
+        },
+        "whatAreTheRisksOfBlockchain": {
+          "type": "string",
+          "enum": [
+            "wallets-can-be-easily-drained-by-a-third-party",
+            "immutability-of-transactions-losing-access-to-wallet",
+            "volatility-of-price-of-cryptocurrencies",
+            "dont-know"
+          ]
+        }
+      },
+      "required": [
+        "whatIsBlockchain",
+        "whatCharacteristicsBlockchainTechProvideToLedger",
+        "howCanAssetsBeHeldOnBlockchain",
+        "whatAreTheRisksOfBlockchain"
+      ]
+    },
+    "eu": {
+      "type": "object",
+      "properties": {
+        "investorInformation": {
+          "$ref": "#/definitions/Model53"
+        },
+        "investorKnowledge": {
+          "$ref": "#/definitions/investorKnowledge"
+        },
+        "investmentFrequency": {
+          "$ref": "#/definitions/Model54"
+        },
+        "knowledgeTest": {
+          "$ref": "#/definitions/knowledgeTest"
+        },
+        "confirmedAffirmations": {
+          "$ref": "#/definitions/documentVerificationErrors"
+        },
+        "signingConfirmed": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "none",
+            "verified",
+            "processing",
+            "rejected",
+            "not-approved"
+          ]
+        }
+      }
+    },
+    "Model55": {
+      "type": "object",
+      "properties": {
+        "us": {
+          "$ref": "#/definitions/us"
+        },
+        "eu": {
+          "$ref": "#/definitions/eu"
+        }
+      }
+    },
+    "Model56": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "syncing",
+            "ready"
+          ]
+        },
+        "issuerId": {
+          "type": "string"
+        },
+        "tokenId": {
+          "type": "string"
+        },
+        "blockchainType": {
+          "type": "string"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "tokenName": {
+          "type": "string"
+        },
+        "tokensHeld": {
+          "type": "number"
+        },
+        "unitValue": {
+          "type": "number"
+        },
+        "currency": {
+          "type": "string",
+          "enum": [
+            "USD",
+            "EUR"
+          ]
+        },
+        "tokenIcon": {
+          "type": "string"
+        }
+      }
+    },
+    "Model57": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model56"
+      }
+    },
+    "Model58": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "rpc": {
+          "type": "string"
+        },
+        "chainId": {
+          "type": "number"
+        },
+        "networkId": {
+          "type": "number"
+        },
+        "allowTestnet": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Model59": {
+      "type": "object",
+      "enum": [
+        {
+          "value": {}
+        }
+      ],
+      "properties": {
+        "reInvestActivated": {
+          "type": "boolean"
+        },
+        "distributionId": {
+          "type": "string"
+        },
+        "distributionEndDate": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number"
+        },
+        "isDripActive": {
+          "type": "boolean"
+        },
+        "hasPlan": {
+          "type": "boolean"
+        },
+        "issuerId": {
+          "type": "string"
+        },
+        "issuerName": {
+          "type": "string"
+        },
+        "issuerLogo": {
+          "type": "string"
+        },
+        "blockchain": {
+          "type": "string"
+        },
+        "dashboardUrl": {
+          "type": "string"
+        },
+        "tokenId": {
+          "type": "string"
+        },
+        "tokenName": {
+          "type": "string"
+        },
+        "tokenIcon": {
+          "type": "string"
+        },
+        "isEvergreen": {
+          "type": "boolean"
+        },
+        "assetPerformanceTokenIdsStatus": {
+          "$ref": "#/definitions/Model4"
+        }
+      }
+    },
+    "Model60": {
+      "type": "object",
+      "properties": {
+        "issuerId": {
+          "type": "string"
+        },
+        "issuerName": {
+          "type": "string"
+        },
+        "issuerLogo": {
+          "type": "string"
+        },
+        "blockchain": {
+          "type": "string"
+        },
+        "dashboardUrl": {
+          "type": "string"
+        },
+        "accountBalance": {
+          "type": "number"
+        },
+        "network": {
+          "type": "string"
+        },
+        "issuerMainCurrency": {
+          "type": "string",
+          "enum": [
+            "USD",
+            "EUR"
+          ]
+        },
+        "url": {
+          "type": "string"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "tokenIcon": {
+          "type": "string"
+        },
+        "tokenName": {
+          "type": "string"
+        },
+        "isWithdrawInProgress": {
+          "type": "boolean",
+          "default": false
+        },
+        "fboBalance": {
+          "type": "number",
+          "default": 0
+        },
+        "tokenId": {
+          "type": "string"
+        },
+        "deploymentId": {
+          "type": "string"
+        },
+        "totalUnits": {
+          "type": "number"
+        },
+        "lastPrice": {
+          "type": "number"
+        },
+        "holdingsValue": {
+          "type": "number"
+        },
+        "dailyChange": {
+          "type": "string"
+        },
+        "tradingEnabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "showTBEWallet": {
+          "type": "boolean",
+          "default": false
+        },
+        "TBEWalletAddress": {
+          "type": "string"
+        },
+        "isEvergreen": {
+          "type": "boolean",
+          "default": false
+        },
+        "isInvestPrimaryMarket": {
+          "type": "boolean",
+          "default": false
+        },
+        "fundraiseEnabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "opportunityId": {
+          "type": "number"
+        },
+        "isPendingAsset": {
+          "type": "boolean",
+          "default": false
+        },
+        "pendingAssetTotalUnits": {
+          "type": "number"
+        },
+        "pendingAssetHoldingsValue": {
+          "type": "number"
+        }
+      }
+    },
+    "investments": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model60"
+      }
+    },
+    "Model61": {
+      "type": "object",
+      "properties": {
+        "displayCurrency": {
+          "type": "string",
+          "enum": [
+            "USD",
+            "EUR"
+          ]
+        },
+        "totalBalanceIn": {
+          "$ref": "#/definitions/totalBalanceIn"
+        },
+        "totalBalance": {
+          "type": "number",
+          "default": 0
+        },
+        "investments": {
+          "$ref": "#/definitions/investments"
+        }
+      }
+    },
+    "Model62": {
+      "type": "object",
+      "properties": {
+        "isTokensHolder": {
+          "type": "boolean"
+        },
+        "isInvestorPays": {
+          "type": "boolean"
+        },
+        "address": {
+          "type": "string"
+        },
+        "blockchainType": {
+          "type": "string"
+        },
+        "deploymentId": {
+          "type": "string"
+        },
+        "issuerId": {
+          "type": "string"
+        },
+        "issuerLogo": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "default": "not-authorised",
+          "enum": [
+            "not-authorised",
+            "syncing",
+            "ready",
+            "syncing-investor-pays"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "tokenId": {
+          "type": "string"
+        },
+        "tokenLogoUrl": {
+          "type": "string"
+        },
+        "tokenName": {
+          "type": "string"
+        },
+        "walletType": {
+          "type": "string"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "tokensTreasury": {
+          "type": "number"
+        },
+        "walletId": {
+          "type": "string"
+        },
+        "isEvm": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Model63": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model62"
+      }
+    },
+    "Model64": {
+      "type": "object",
+      "properties": {
+        "agreement": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "agreement"
+      ]
+    },
+    "Model65": {
+      "type": "object",
+      "properties": {
+        "issuerId": {
+          "type": "string"
+        },
+        "tokenId": {
+          "type": "string"
+        },
+        "isAffiliate": {
+          "type": "boolean"
+        },
+        "securitizeIdProfileId": {
+          "type": "string"
+        },
+        "inProgressTBETokensWithdrawalsAmount": {
+          "type": "string"
+        },
+        "inProgressBurnTBETokensAmount": {
+          "type": "string"
+        },
+        "totalTBETokensInLockUpPeriod": {
+          "type": "string"
+        },
+        "inProgressInternalTBETransferTokensAmount": {
+          "type": "string"
+        },
+        "openSellOrderTBETokensAmount": {
+          "type": "string"
+        },
+        "lockedTBETokensAmount": {
+          "type": "string"
+        },
+        "totalTBETokensHeld": {
+          "type": "string"
+        },
+        "totalTBETokensWithdrawableAmount": {
+          "type": "string"
+        },
+        "decimals": {
+          "type": "number",
+          "default": 0
+        }
+      }
+    },
+    "Model66": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "walletType": {
+          "type": "string"
+        },
+        "blockchainType": {
+          "type": "string"
+        },
+        "walletId": {
+          "type": "number"
+        },
+        "totalUnits": {
+          "type": "number"
+        },
+        "lastPrice": {
+          "type": "number"
+        },
+        "holdingsValue": {
+          "type": "number"
+        }
+      }
+    },
+    "Model67": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model66"
+      }
+    },
+    "Model68": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string"
+        },
+        "roundName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "fundraise",
+            "investment"
+          ]
+        }
+      }
+    },
+    "Model69": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model68"
+      }
+    },
+    "Model70": {
+      "type": "object",
+      "properties": {
+        "isAccredited": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "isAccredited"
+      ]
+    },
+    "Model71": {
+      "type": "object",
+      "properties": {
+        "issuerId": {
+          "type": "string"
+        },
+        "redirectUrl": {
+          "type": "string"
+        },
+        "permissions": {
+          "$ref": "#/definitions/documentVerificationErrors"
+        }
+      },
+      "required": [
+        "issuerId",
+        "redirectUrl",
+        "permissions"
+      ]
+    },
+    "Model72": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        }
+      }
+    },
+    "Model73": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "x-format": {
+            "email": true
+          }
+        },
+        "password": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "tfaToken": {
+          "type": "string",
+          "minLength": 6
+        }
+      },
+      "required": [
+        "email",
+        "password"
+      ]
+    },
+    "Model74": {
+      "type": "object",
+      "properties": {
+        "mixPanelId": {
+          "type": "string",
+          "default": ""
+        },
+        "intent": {
+          "type": "string",
+          "default": ""
+        },
+        "analyticsEnabled": {
+          "type": "boolean",
+          "default": true
+        },
+        "issuerId": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "phone": {
+          "$ref": "#/definitions/phone"
+        },
+        "email": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"
+        },
+        "language": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "termsAgreed": {
+          "type": "boolean",
+          "enum": [
+            true
+          ]
+        },
+        "redirectTo": {
+          "type": "string",
+          "enum": [
+            "market",
+            "secondary-market"
+          ]
+        },
+        "authorizedAccountCode": {
+          "type": "string"
+        },
+        "investorType": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "email",
+        "language",
+        "password",
+        "countryCode",
+        "state",
+        "termsAgreed"
+      ]
+    },
+    "Model75": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "x-format": {
+            "email": true
+          }
+        },
+        "language": {
+          "type": "string",
+          "description": "language ISO format case-insenitive like (en)",
+          "enum": [
+            "ur",
+            "vi",
+            "ar",
+            "az",
+            "be",
+            "bg",
+            "bs",
+            "ca",
+            "cs",
+            "da",
+            "de",
+            "el",
+            "en",
+            "es",
+            "et",
+            "fa",
+            "fi",
+            "fr",
+            "he",
+            "hr",
+            "hu",
+            "hy",
+            "id",
+            "it",
+            "ja",
+            "ka",
+            "kk",
+            "ko",
+            "ky",
+            "lt",
+            "lv",
+            "mk",
+            "mn",
+            "nb",
+            "nl",
+            "nn",
+            "pl",
+            "pt",
+            "ro",
+            "ru",
+            "sk",
+            "sl",
+            "sr",
+            "sv",
+            "th",
+            "tr",
+            "uk",
+            "uz",
+            "zh"
+          ]
+        }
+      },
+      "required": [
+        "email",
+        "language"
+      ]
+    },
+    "Model76": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "x-format": {
+            "guid": {
+              "version": [
+                "uuidv4",
+                "uuidv5"
+              ]
+            }
+          }
+        },
+        "tfaToken": {
+          "type": "string",
+          "minLength": 6
+        },
+        "newPassword": {
+          "type": "string",
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "code",
+        "newPassword"
+      ]
+    },
+    "Model77": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string",
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "code",
+        "password"
+      ]
+    },
+    "Model78": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9áéíóúñZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/\\\\. ]+$"
+        },
+        "middleName": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9áéíóúñZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/\\\\. ]+$"
+        },
+        "lastName": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9áéíóúñZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/\\\\. ]+$"
+        }
+      },
+      "required": [
+        "firstName",
+        "lastName"
+      ]
+    },
+    "Model79": {
+      "type": "object",
+      "properties": {
+        "street": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9áéíóúñZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/\\\\. ]+$"
+        },
+        "entrance": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9áéíóúñZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/\\\\. ]+$"
+        },
+        "city": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9áéíóúñZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/\\\\. ]+$"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "zip": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 10,
+          "pattern": "^[a-zA-Z0-9áéíóúñZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/\\\\. ]+$"
+        }
+      },
+      "required": [
+        "street",
+        "city",
+        "countryCode",
+        "state",
+        "zip"
+      ]
+    },
+    "Model80": {
+      "type": "object",
+      "properties": {
+        "side": {
+          "type": "string"
+        },
+        "docType": {
+          "type": "string",
+          "enum": [
+            "proof-of-address",
+            "passport",
+            "driving-licence",
+            "national-identity-card",
+            "residence-permit",
+            "visa",
+            "passport-card",
+            "work-permit",
+            "state-id",
+            "uk-biometric-residence-permit",
+            "tax-id",
+            "voter-id",
+            "certificate-of-naturalisation",
+            "home-office-letter",
+            "immigration-status-document",
+            "birth-certificate",
+            "other",
+            "selfie",
+            "document-or-certificate-of-trust",
+            "list-of-trustees",
+            "certificate-of-formation",
+            "partnership-agreement",
+            "lp-list-and-authorised-signers-list",
+            "articles-of-organization",
+            "operating-agreement",
+            "members-and-authorised-signers-list",
+            "by-laws",
+            "articles-of-corporation",
+            "shareholders-list-and-authorised-signers-list",
+            "org-chart"
+          ]
+        },
+        "docCategory": {
+          "type": "string",
+          "enum": [
+            "signer-entity",
+            "signer-identification",
+            "selfie",
+            "address-proof",
+            "identification",
+            "entity",
+            "other"
+          ]
+        },
+        "documentVerificationErrors": {
+          "$ref": "#/definitions/documentVerificationErrors"
+        },
+        "createDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "fileName": {
+          "type": "string"
+        },
+        "fileType": {
+          "type": "string"
+        },
+        "uri": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "side",
+        "docType",
+        "docCategory",
+        "fileName",
+        "fileType",
+        "uri"
+      ]
+    },
+    "Model81": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/Model80"
+      }
+    },
+    "Model82": {
+      "type": "object",
+      "properties": {
+        "signerType": {
+          "type": "string",
+          "enum": [
+            "individual",
+            "entity"
+          ]
+        },
+        "legalName": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9áéíóúñZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/\\\\. ]+$"
+        },
+        "businessName": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9áéíóúñZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/\\\\. ]+$"
+        },
+        "entityType": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "x-format": {
+            "email": {
+              "tlds": false
+            }
+          }
+        },
+        "taxId": {
+          "type": "string"
+        },
+        "taxCountryCode": {
+          "type": "string"
+        },
+        "isBeneficialOwner": {
+          "type": "string"
+        },
+        "isLegalSigner": {
+          "type": "string"
+        },
+        "uboOwning": {
+          "type": "string",
+          "default": "none",
+          "enum": [
+            "none",
+            "10+",
+            "25+"
+          ]
+        },
+        "individualName": {
+          "$ref": "#/definitions/Model78"
+        },
+        "address": {
+          "$ref": "#/definitions/Model79"
+        },
+        "documents": {
+          "$ref": "#/definitions/Model81"
+        },
+        "birthDate": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "required": [
+        "signerType",
+        "legalName",
+        "businessName",
+        "entityType",
+        "email",
+        "taxCountryCode",
+        "individualName",
+        "address",
+        "documents",
+        "birthDate"
+      ]
+    },
+    "Model83": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "token"
+      ]
+    },
+    "Model84": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "x-format": {
+            "guid": {
+              "version": [
+                "uuidv4",
+                "uuidv5"
+              ]
+            }
+          }
+        }
+      },
+      "required": [
+        "code"
+      ]
+    },
+    "Model85": {
+      "type": "object",
+      "properties": {
+        "tfaRequired": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Model86": {
+      "type": "object",
+      "properties": {
+        "docType": {
+          "type": "string",
+          "enum": [
+            "passport",
+            "driving-licence",
+            "national-identity-card",
+            "residence-permit",
+            "visa",
+            "passport-card",
+            "work-permit",
+            "state-id",
+            "tax-id",
+            "uk-biometric-residence-permit",
+            "list-of-trustees",
+            "voter-id",
+            "certificate-of-naturalisation",
+            "home-office-letter",
+            "immigration-status-document",
+            "birth-certificate",
+            "selfie",
+            "document-or-certificate-of-trust",
+            "list-of-officers-and-directors",
+            "operating-agreement",
+            "members-and-authorised-signers-list",
+            "by-laws",
+            "articles-of-corporation",
+            "shareholders-list-and-authorised-signers-list",
+            "partnership-agreement",
+            "certificate-of-formation",
+            "lp-list-and-authorised-signers-list",
+            "list-of-managers",
+            "private-placement-memorandum",
+            "evidence-of-ein",
+            "articles-of-incorporation",
+            "adverse-media",
+            "audited-financials",
+            "authorized-signers-list",
+            "bank-statement",
+            "board-resolutions",
+            "certificate-of-good-standing",
+            "other",
+            "org-chart",
+            "employment-letter",
+            "financial-documents",
+            "identity-doc",
+            "idology-report",
+            "articles-of-organization",
+            "offering-agreement",
+            "organization-chart",
+            "proof-of-address",
+            "shareholders-list",
+            "tax-document"
+          ]
+        },
+        "docCategory": {
+          "type": "string",
+          "enum": [
+            "signer-entity",
+            "signer-identification",
+            "selfie",
+            "address-proof",
+            "identification",
+            "entity",
+            "other"
+          ]
+        },
+        "createDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "side": {
+          "type": "string",
+          "enum": [
+            "front",
+            "back"
+          ]
+        },
+        "fileName": {
+          "type": "string"
+        },
+        "fileType": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "x-format": {
+            "uri": true
+          }
+        }
+      },
+      "required": [
+        "docType",
+        "docCategory",
+        "side",
+        "fileName",
+        "fileType",
+        "url"
+      ]
+    },
+    "Model87": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model86"
+      }
+    },
+    "Model88": {
+      "type": "object",
+      "properties": {
+        "documents": {
+          "$ref": "#/definitions/Model87"
+        },
+        "mainIdentificationNumber": {
+          "type": "string",
+          "minLength": 3
+        }
+      }
+    },
+    "Model89": {
+      "type": "object",
+      "properties": {
+        "currentPassword": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "newPassword": {
+          "type": "string",
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "currentPassword",
+        "newPassword"
+      ]
+    },
+    "Model90": {
+      "type": "object",
+      "properties": {
+        "tfaToken": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string",
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "password"
+      ]
+    },
+    "Model91": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string",
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "password"
+      ]
+    },
+    "Model92": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "x-format": {
+            "email": true
+          }
+        },
+        "issuerId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "email"
+      ]
+    },
+    "Model93": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "x-format": {
+            "email": true
+          }
+        },
+        "password": {
+          "type": "string",
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "email",
+        "password"
+      ]
+    },
+    "documentTypes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "driving-licence",
+          "driving-license",
+          "national-identity-card",
+          "passport"
+        ]
+      }
+    },
+    "Model94": {
+      "type": "object",
+      "properties": {
+        "isComplete": {
+          "type": "boolean"
+        },
+        "documentTypes": {
+          "$ref": "#/definitions/documentTypes"
+        },
+        "taxIdType": {
+          "type": "string",
+          "enum": [
+            "taxId",
+            "ssn",
+            "none"
+          ]
+        }
+      },
+      "required": [
+        "taxIdType"
+      ]
+    },
+    "Model95": {
+      "type": "object",
+      "properties": {
+        "isEligible": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Model96": {
+      "type": "object",
+      "properties": {
+        "documentType": {
+          "type": "string"
+        },
+        "taxId": {
+          "type": "string"
+        },
+        "mainIdentificationNumber": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "documentType",
+        "mainIdentificationNumber"
+      ]
+    },
+    "headers": {
+      "type": "object",
+      "properties": {
+        "content-type": {
+          "type": "string",
+          "enum": [
+            "image/jpeg",
+            "image/png",
+            "application/pdf"
+          ]
+        },
+        "content-disposition": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "content-type",
+        "content-disposition"
+      ]
+    },
+    "hapi": {
+      "type": "object",
+      "properties": {
+        "filename": {
+          "type": "string"
+        },
+        "headers": {
+          "$ref": "#/definitions/headers"
+        }
+      },
+      "required": [
+        "filename"
+      ]
+    },
+    "file": {
+      "type": "object",
+      "x-meta": {
+        "swaggerType": "file"
+      },
+      "properties": {
+        "pipe": {
+          "type": "string"
+        },
+        "hapi": {
+          "$ref": "#/definitions/hapi"
+        }
+      },
+      "required": [
+        "pipe"
+      ]
+    },
+    "Model97": {
+      "type": "object",
+      "properties": {
+        "file": {
+          "$ref": "#/definitions/file",
+          "type": "file",
+          "in": "formData"
+        }
+      }
+    },
+    "Model98": {
+      "type": "object",
+      "description": "upload result",
+      "properties": {
+        "fileName": {
+          "type": "string"
+        },
+        "fileType": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "Model99": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "x-format": {
+            "email": true
+          }
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "viewer",
+            "assistant",
+            "admin"
+          ]
+        }
+      },
+      "required": [
+        "email",
+        "role"
+      ]
+    },
+    "Model100": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/Model99"
+      }
+    },
+    "Model101": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "address"
+      ]
+    },
+    "Model102": {
+      "type": "object",
+      "properties": {
+        "signature": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "signature"
+      ]
+    },
+    "Model103": {
+      "type": "object",
+      "properties": {
+        "issuerId": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "tokenId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "issuerId",
+        "address",
+        "tokenId"
+      ]
+    },
+    "Model104": {
+      "type": "object",
+      "properties": {
+        "isApproved": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "isApproved"
+      ]
+    },
+    "Model105": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code"
+      ]
+    },
+    "Model106": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "x-format": {
+            "email": true
+          }
+        },
+        "newRole": {
+          "type": "string",
+          "enum": [
+            "viewer",
+            "assistant",
+            "admin"
+          ]
+        }
+      },
+      "required": [
+        "email",
+        "newRole"
+      ]
+    },
+    "Model107": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "string"
+        },
+        "payingWalletAddress": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount"
+      ]
+    },
+    "Model108": {
+      "type": "object",
+      "properties": {
+        "unsignedTransaction": {
+          "type": "string"
+        },
+        "signatureTransactionId": {
+          "type": "string"
+        }
+      }
+    },
+    "Model109": {
+      "type": "object",
+      "properties": {
+        "payingWalletAddress": {
+          "type": "string"
+        }
+      }
+    },
+    "Model110": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "x-format": {
+            "email": true
+          }
+        }
+      },
+      "required": [
+        "email"
+      ]
+    },
+    "Model111": {
+      "type": "object",
+      "properties": {
+        "investorType": {
+          "type": "string",
+          "enum": [
+            "entity",
+            "individual"
+          ]
+        },
+        "licensedBrokerDealer": {
+          "type": "boolean"
+        },
+        "registeredRepresentativeOfBrokerDealer": {
+          "type": "boolean"
+        },
+        "brokerDealerName": {
+          "type": "string"
+        },
+        "isMemberOrEmployedAtStockExchangeOrFINRA": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "investorType",
+        "licensedBrokerDealer",
+        "registeredRepresentativeOfBrokerDealer",
+        "brokerDealerName",
+        "brokerDealerName",
+        "isMemberOrEmployedAtStockExchangeOrFINRA"
+      ]
+    },
+    "Model112": {
+      "type": "object",
+      "properties": {
+        "investorInformation": {
+          "$ref": "#/definitions/Model111"
+        },
+        "investmentExperienceInYears": {
+          "$ref": "#/definitions/investmentExperienceInYears"
+        },
+        "investmentFrequency": {
+          "$ref": "#/definitions/investmentFrequency"
+        },
+        "riskToleranceAffirmation": {
+          "$ref": "#/definitions/riskToleranceAffirmation"
+        },
+        "confirmedAffirmations": {
+          "$ref": "#/definitions/documentVerificationErrors"
+        },
+        "fullName": {
+          "type": "string"
+        },
+        "signingConfirmed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Model113": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "type": "string",
+          "description": "language ISO format case-insenitive like (en)"
+        }
+      },
+      "required": [
+        "language"
+      ]
+    },
+    "Model114": {
+      "type": "object",
+      "properties": {
+        "investorInformation": {
+          "$ref": "#/definitions/Model111"
+        },
+        "investmentExperienceInYears": {
+          "$ref": "#/definitions/Model52"
+        },
+        "investmentFrequency": {
+          "$ref": "#/definitions/investmentFrequency"
+        },
+        "riskToleranceAffirmation": {
+          "$ref": "#/definitions/riskToleranceAffirmation"
+        },
+        "confirmedAffirmations": {
+          "$ref": "#/definitions/documentVerificationErrors"
+        },
+        "fullName": {
+          "type": "string"
+        },
+        "signingConfirmed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Model115": {
+      "type": "object",
+      "properties": {
+        "investorType": {
+          "type": "string",
+          "enum": [
+            "retail",
+            "professional"
+          ]
+        },
+        "investorTypeTreatedAsRetailInvestor": {
+          "type": "boolean"
+        },
+        "isMemberWithPublicResponsibility": {
+          "type": "boolean"
+        },
+        "educationalLevel": {
+          "type": "string"
+        },
+        "mainOccupation": {
+          "type": "string"
+        },
+        "originOfResourcesLawfulActivities": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "investorTypeTreatedAsRetailInvestor"
+      ]
+    },
+    "Model116": {
+      "type": "object",
+      "properties": {
+        "investorInformation": {
+          "$ref": "#/definitions/Model115"
+        },
+        "investorKnowledge": {
+          "$ref": "#/definitions/investorKnowledge"
+        },
+        "investmentFrequency": {
+          "$ref": "#/definitions/Model54"
+        },
+        "knowledgeTest": {
+          "$ref": "#/definitions/knowledgeTest"
+        },
+        "confirmedAffirmations": {
+          "$ref": "#/definitions/documentVerificationErrors"
+        },
+        "signingConfirmed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Model117": {
+      "type": "object",
+      "properties": {
+        "us": {
+          "$ref": "#/definitions/Model114"
+        },
+        "eu": {
+          "$ref": "#/definitions/Model116"
+        }
+      }
+    },
+    "Model118": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title"
+      ]
+    },
+    "Model119": {
+      "type": "object",
+      "properties": {
+        "dividendReinvest": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "dividendReinvest"
+      ]
+    },
+    "Model120": {
+      "type": "object",
+      "properties": {
+        "tax": {
+          "$ref": "#/definitions/Model36"
+        }
+      }
+    },
+    "Model121": {
+      "type": "object",
+      "properties": {
+        "street": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9áéíóúñZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/\\\\. ]+$"
+        },
+        "entrance": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9áéíóúñZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/\\\\. ]+$"
+        },
+        "city": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9áéíóúñZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/\\\\. ]+$"
+        },
+        "state": {
+          "type": "string"
+        },
+        "zip": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 10,
+          "pattern": "^[a-zA-Z0-9áéíóúñZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/\\\\. ]+$"
+        }
+      },
+      "required": [
+        "street",
+        "city",
+        "zip"
+      ]
+    },
+    "Model122": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "$ref": "#/definitions/Model121"
+        }
+      },
+      "required": [
+        "address"
+      ]
+    },
+    "Model123": {
+      "type": "object",
+      "properties": {
+        "brokerDealerId": {
+          "type": "number"
+        }
+      }
+    },
+    "Model124": {
+      "type": "object",
+      "properties": {
+        "entityName": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9áéíóúñZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/\\\\. ]+$"
+        },
+        "businesses": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9áéíóúñZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/\\\\. ]+$"
+        },
+        "sourceOfFunds": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9áéíóúñZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/\\\\. ]+$"
+        },
+        "lineOfBusiness": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9áéíóúñZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/\\\\. ]+$"
+        },
+        "leiCode": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9áéíóúñZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/\\\\. ]+$"
+        },
+        "entityType": {
+          "type": "string",
+          "enum": [
+            "revocable-trust",
+            "irrevocable-trust",
+            "llc",
+            "other",
+            "limited-partnership/general-partnership",
+            "corporation",
+            "fund",
+            "joint-account"
+          ]
+        },
+        "entityIdNumber": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9áéíóúñZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/\\\\. ]+$"
+        },
+        "incorporationDate": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "required": [
+        "entityName",
+        "businesses",
+        "sourceOfFunds",
+        "lineOfBusiness",
+        "entityType",
+        "entityIdNumber",
+        "incorporationDate"
+      ]
+    },
+    "Model125": {
+      "type": "object",
+      "properties": {
+        "investorType": {
+          "type": "string",
+          "enum": [
+            "individual",
+            "entity"
+          ]
+        }
+      },
+      "required": [
+        "investorType"
+      ]
+    },
+    "Model126": {
+      "type": "object",
+      "properties": {
+        "birthCountry": {
+          "type": "string"
+        },
+        "birthCity": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9áéíóúñZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/\\\\. ]+$"
+        },
+        "birthState": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string",
+          "enum": [
+            "male",
+            "female"
+          ]
+        },
+        "tax": {
+          "$ref": "#/definitions/Model36"
+        }
+      },
+      "required": [
+        "birthCountry",
+        "birthCity",
+        "birthState",
+        "gender"
+      ]
+    },
+    "Model127": {
+      "type": "object",
+      "properties": {
+        "birthCountry": {
+          "type": "string"
+        },
+        "birthCity": {
+          "type": "string"
+        },
+        "birthState": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string",
+          "enum": [
+            "male",
+            "female"
+          ]
+        },
+        "tax": {
+          "$ref": "#/definitions/Model36"
+        }
+      },
+      "required": [
+        "birthCountry",
+        "birthCity",
+        "birthState",
+        "gender"
+      ]
+    },
+    "Model128": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9áéíóúñZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/\\\\. ]+$"
+        },
+        "middleName": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9áéíóúñZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/\\\\. ]+$"
+        },
+        "lastName": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9áéíóúñZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/\\\\. ]+$"
+        },
+        "birthday": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "Model129": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "middleName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "birthday": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "required": [
+        "firstName",
+        "lastName",
+        "birthday"
+      ]
+    },
+    "Model130": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "number": {
+          "type": "string"
+        },
+        "fullNumber": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "number"
+      ]
+    },
+    "Model131": {
+      "type": "object",
+      "properties": {
+        "phone": {
+          "$ref": "#/definitions/Model130"
+        }
+      },
+      "required": [
+        "phone"
+      ]
+    },
+    "Model132": {
+      "type": "object",
+      "properties": {
+        "phone": {
+          "$ref": "#/definitions/phone"
+        }
+      },
+      "required": [
+        "phone"
+      ]
+    },
+    "Model133": {
+      "type": "object",
+      "properties": {
+        "side": {
+          "type": "string"
+        },
+        "docType": {
+          "type": "string",
+          "enum": [
+            "proof-of-address",
+            "passport",
+            "driving-licence",
+            "national-identity-card",
+            "residence-permit",
+            "visa",
+            "passport-card",
+            "work-permit",
+            "state-id",
+            "uk-biometric-residence-permit",
+            "tax-id",
+            "voter-id",
+            "certificate-of-naturalisation",
+            "home-office-letter",
+            "immigration-status-document",
+            "birth-certificate",
+            "other",
+            "selfie",
+            "document-or-certificate-of-trust",
+            "list-of-trustees",
+            "certificate-of-formation",
+            "partnership-agreement",
+            "lp-list-and-authorised-signers-list",
+            "articles-of-organization",
+            "operating-agreement",
+            "members-and-authorised-signers-list",
+            "by-laws",
+            "articles-of-corporation",
+            "shareholders-list-and-authorised-signers-list",
+            "org-chart"
+          ]
+        },
+        "docCategory": {
+          "type": "string",
+          "enum": [
+            "signer-entity",
+            "signer-identification",
+            "selfie",
+            "address-proof",
+            "identification",
+            "entity",
+            "other"
+          ]
+        },
+        "documentVerificationErrors": {
+          "$ref": "#/definitions/documentVerificationErrors"
+        },
+        "createDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "fileName": {
+          "type": "string"
+        },
+        "fileType": {
+          "type": "string"
+        },
+        "uri": {
+          "type": "string"
+        },
+        "documentId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "side",
+        "docType",
+        "docCategory",
+        "fileName",
+        "fileType"
+      ]
+    },
+    "Model134": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/Model133"
+      }
+    },
+    "Model135": {
+      "type": "object",
+      "properties": {
+        "signerType": {
+          "type": "string",
+          "enum": [
+            "individual",
+            "entity"
+          ]
+        },
+        "legalName": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9áéíóúñZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/\\\\. ]+$"
+        },
+        "businessName": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9áéíóúñZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/\\\\. ]+$"
+        },
+        "entityType": {
+          "type": "string"
+        },
+        "taxId": {
+          "type": "string"
+        },
+        "taxCountryCode": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "x-format": {
+            "email": {
+              "tlds": false
+            }
+          }
+        },
+        "isBeneficialOwner": {
+          "type": "boolean",
+          "default": false
+        },
+        "isLegalSigner": {
+          "type": "string"
+        },
+        "uboOwning": {
+          "type": "string",
+          "default": "none",
+          "enum": [
+            "none",
+            "10+",
+            "25+"
+          ]
+        },
+        "individualName": {
+          "$ref": "#/definitions/Model78"
+        },
+        "address": {
+          "$ref": "#/definitions/Model79"
+        },
+        "documents": {
+          "$ref": "#/definitions/Model134"
+        },
+        "birthDate": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "required": [
+        "signerType",
+        "legalName",
+        "businessName",
+        "entityType",
+        "taxCountryCode",
+        "email",
+        "isBeneficialOwner",
+        "individualName",
+        "address",
+        "documents",
+        "birthDate"
+      ]
+    },
+    "Model136": {
+      "type": "object",
+      "properties": {
+        "signerId": {
+          "type": "string"
+        },
+        "signerType": {
+          "type": "string",
+          "enum": [
+            "individual",
+            "entity"
+          ]
+        },
+        "legalName": {
+          "type": "string"
+        },
+        "businessName": {
+          "type": "string"
+        },
+        "entityType": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "taxId": {
+          "type": "string"
+        },
+        "taxCountryCode": {
+          "type": "string"
+        },
+        "isBeneficialOwner": {
+          "type": "boolean",
+          "default": false
+        },
+        "isLegalSigner": {
+          "type": "boolean"
+        },
+        "uboOwning": {
+          "type": "string",
+          "enum": [
+            "none",
+            "10+",
+            "25+"
+          ]
+        },
+        "individualName": {
+          "$ref": "#/definitions/individualName"
+        },
+        "address": {
+          "$ref": "#/definitions/address"
+        },
+        "documents": {
+          "$ref": "#/definitions/documents"
+        },
+        "birthDate": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "Model137": {
+      "type": "object",
+      "properties": {
+        "signature": {
+          "type": "string"
+        },
+        "signatureTransactionId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "signature",
+        "signatureTransactionId"
+      ]
+    }
+  }
+}

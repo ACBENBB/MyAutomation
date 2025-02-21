@@ -1,0 +1,22 @@
+[
+  {
+    "rc": [
+
+    ],
+    "sandbox": [
+      "DepositTransactionController_getDepositTransactionsByInvestorId",
+      "DepositWalletController_getDepositWalletById",
+      "DepositTransactionController_getDepositTransactionsByWalletId",
+      "DepositWalletController_getDepositWalletById",
+      "DepositWalletController_getDepositWalletsByInvestorId",
+      "DepositWalletController_getDepositWallets",
+      "InvestmentRequestController_getInvestmentRequestById",
+      "InvestmentRequestController_getInvestmentRequestsByTokenId",
+      "InvestmentRequestController_getInvestmentRequestsForTokensAndWallets",
+      "InvestmentRequestController_getInvestorInvestmentRequestsPerRound",
+      "InvestmentRoundController_getInvestmentRoundById",
+      "InvestmentRoundController_getInvestmentRounds"
+
+    ]
+  }
+]

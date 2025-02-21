@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT536_ISR_Unlock_Tokens_TBE" verbose="1">
+    <test name="AUT536_ISR_Unlock_Tokens_TBE">
+        <classes>
+            <class name="io.securitize.tests.controlPanel.AUT536_ISR_Unlock_Tokens_TBE" />
+        </classes>
+    </test>
+</suite>

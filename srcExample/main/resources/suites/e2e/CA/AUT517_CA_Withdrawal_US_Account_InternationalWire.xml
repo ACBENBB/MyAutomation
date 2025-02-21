@@ -1,0 +1,7 @@
+<suite name="AUT517_CA_Withdrawal_US_Account_InternationalWire" verbose="1">
+    <test name="AUT517_CA_Withdrawal_US_Account_InternationalWire">
+        <classes>
+            <class name="io.securitize.tests.ca.AUT517_CA_Withdrawal_US_Account_InternationalWire" />
+        </classes>
+    </test>
+</suite>

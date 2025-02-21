@@ -1,0 +1,16 @@
+{
+    "skips": {
+        "entireTest": true,
+        "skipReason": "TEST TEST",
+        "statusCodeCheck": false,
+        "bodySchemaCheck": false,
+        "bodyContentCheck": false
+    },
+    "pathParams":
+    {
+        "blockchainTransactionId": "#334234#"
+    },
+    "expectedResponse": {
+        "statusCode": 200
+    }
+}

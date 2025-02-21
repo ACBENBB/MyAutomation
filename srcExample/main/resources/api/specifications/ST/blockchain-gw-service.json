@@ -1,0 +1,2676 @@
+{
+"openapi": "3.0.0",
+"info": {
+"title": "Blockchain Gateway Service",
+"description": "API to interact with Blockchain Services",
+"version": "1.0",
+"contact": {}
+},
+"tags": [],
+"servers": [],
+"components": {
+"schemas": {
+"AttestationDto": {
+"type": "object",
+"properties": {
+"status": {
+"type": "string",
+"example": "passed"
+}
+},
+"required": [
+"status"
+]
+},
+"PartnerRequirementDto": {
+"type": "object",
+"properties": {
+"kyc": {
+"type": "boolean",
+"description": "Partner kyc",
+"example": true
+},
+"accredited": {
+"type": "boolean",
+"description": "Partner kyc",
+"example": false
+}
+},
+"required": [
+"kyc",
+"accredited"
+]
+},
+"PartnerDto": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string",
+"description": "Partner id"
+},
+"name": {
+"type": "string",
+"description": "Partner name"
+},
+"requirements": {
+"description": "Partner requirements",
+"allOf": [
+{
+"$ref": "#/components/schemas/PartnerRequirementDto"
+}
+]
+},
+"countries": {
+"description": "Partner countries rules",
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"states": {
+"description": "Partner states rules",
+"type": "array",
+"items": {
+"type": "string"
+}
+}
+},
+"required": [
+"id",
+"name",
+"requirements",
+"countries",
+"states"
+]
+},
+"PartnerCreate": {
+"type": "object",
+"properties": {
+"name": {
+"type": "string",
+"description": "Partner name",
+"example": "Uniswap"
+},
+"id": {
+"type": "string",
+"description": "Issuer identifier",
+"example": "123e4567-e89b-12d3-a456-426614174000"
+}
+},
+"required": [
+"name",
+"id"
+]
+},
+"PartnerCountryDto": {
+"type": "object",
+"properties": {
+"countryId": {
+"type": "string",
+"description": "Country ID",
+"example": "US"
+},
+"forbidden": {
+"type": "boolean",
+"description": "Country forbidden flag",
+"example": false
+}
+},
+"required": [
+"countryId",
+"forbidden"
+]
+},
+"PartnerStateDto": {
+"type": "object",
+"properties": {
+"stateId": {
+"type": "string",
+"description": "State ID",
+"example": "NY"
+},
+"forbidden": {
+"type": "boolean",
+"description": "State forbidden flag",
+"example": false
+}
+},
+"required": [
+"stateId",
+"forbidden"
+]
+},
+"PartnerCreateRules": {
+"type": "object",
+"properties": {
+"requirements": {
+"description": "Partner requirements",
+"allOf": [
+{
+"$ref": "#/components/schemas/PartnerRequirementDto"
+}
+]
+},
+"countries": {
+"description": "Partner countries",
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/PartnerCountryDto"
+}
+},
+"states": {
+"description": "Partner states",
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/PartnerStateDto"
+}
+}
+},
+"required": [
+"requirements",
+"countries",
+"states"
+]
+},
+"DefiTransactionDto": {
+"type": "object",
+"properties": {
+"preparedTransaction": {
+"type": "string",
+"description": "Prepared transaction hash",
+"example": "0xf86c258502540be40083035b609482e041e84074fc5f5947d4d27e3c44f824b7a1a187b1a2bc2ec500008078a04a7db627266fa9a4116e3f6b33f5d245db40983234eb356261f36808909d2848a0166fa098a2ce3bda87af6000ed0083e3bf7cc31c6686b670bd85cbc6da2d6e85"
+}
+},
+"required": [
+"preparedTransaction"
+]
+},
+"Holder": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string",
+"description": "Investor blockchain ID",
+"example": "787521da-9f10-11ec-b909-0242ac120002"
+},
+"wallet": {
+"type": "string",
+"description": "Investor wallet",
+"example": "0x73e2B830a0EF397C4cb791f8C5C68D25997cf437"
+},
+"country": {
+"type": "string",
+"description": "Investor Country",
+"example": "US"
+},
+"kyc": {
+"type": "string",
+"description": "Investor KYC attribute",
+"example": "approved",
+"enum": [
+"approved",
+"rejected",
+"pending"
+]
+},
+"accredited": {
+"type": "string",
+"description": "Investor accredited attribute",
+"example": "pending",
+"enum": [
+"approved",
+"rejected",
+"pending"
+]
+},
+"qualified": {
+"type": "string",
+"description": "Investor qualified attribute",
+"example": "rejected",
+"enum": [
+"approved",
+"rejected",
+"pending"
+]
+}
+},
+"required": [
+"id",
+"wallet",
+"country"
+]
+},
+"SwapRequestDTO": {
+"type": "object",
+"properties": {
+"holder": {
+"$ref": "#/components/schemas/Holder"
+},
+"purchaseAmount": {
+"type": "string",
+"description": "Investment amount",
+"example": "100",
+"pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+},
+"value": {
+"type": "string",
+"description": "Security Tokens to be purchased",
+"example": "50",
+"pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+},
+"issuanceTime": {
+"type": "number",
+"description": "Issuance timestamp",
+"example": 1677674649331
+},
+"documentHash": {
+"type": "string",
+"description": "Hash representation of investor document",
+"example": "0x33027547537d35728a741470df1ccf65de10b454ca0def7c5c20b257b7b8d161"
+}
+},
+"required": [
+"holder",
+"purchaseAmount",
+"value",
+"documentHash"
+]
+},
+"SwapResponseDTO": {
+"type": "object",
+"properties": {
+"transactionId": {
+"type": "string",
+"description": "Transaction ID",
+"example": "000ba0d0-77c0-4b92-bf4c-468f9df56da5"
+},
+"transactionData": {
+"type": "string",
+"description": "Transaction encoded data ready to be signed and sent",
+"example": "0x00000000000000000000000000000008080"
+}
+},
+"required": [
+"transactionId",
+"transactionData"
+]
+},
+"ContractSwapResponseDTO": {
+"type": "object",
+"properties": {
+"address": {
+"type": "string",
+"description": "Swap Contract Address",
+"example": "0x0438609260EbE2153beBAafCBC18E2AC388b784C"
+}
+},
+"required": [
+"address"
+]
+},
+"DeploymentLogsResponseDTO": {
+"type": "object",
+"properties": {
+"step": {
+"type": "number",
+"description": "Number of executed step",
+"example": 5
+},
+"stepTitle": {
+"type": "string",
+"description": "Title of executed step",
+"example": "Deploying migration contract"
+},
+"status": {
+"type": "string",
+"description": "Status of executed step",
+"example": "success",
+"enum": [
+"success",
+"failure"
+]
+},
+"initialDate": {
+"type": "number",
+"description": "Initial time of step in millis",
+"example": 1212122233
+},
+"finalDate": {
+"type": "number",
+"description": "Final time of step in millis",
+"example": 1212122433
+},
+"txHash": {
+"type": "string",
+"description": "Transaction hash",
+"example": "0x44c37ef93642ae03216e3383120061c1c6bca79733582d0244f86af059b55f3f"
+},
+"gasUsed": {
+"type": "string",
+"description": "Gas used by transaction execution",
+"example": "9999999"
+},
+"contractAddress": {
+"type": "string",
+"description": "Deployed contract address",
+"example": "0x1b3a8849a7e0f7786403b2490f387f93dc5d12bc"
+},
+"from": {
+"type": "string",
+"description": "Address who sent the address",
+"example": "0xd8559dfed9300775a2def456c7bda65310ad21e6"
+},
+"deploymentLogs": {
+"type": "array",
+"description": "Address who sent the address",
+"example": [
+"Deploying Migration Contract"
+]
+}
+},
+"required": [
+"step",
+"stepTitle",
+"status",
+"initialDate",
+"finalDate",
+"txHash",
+"gasUsed",
+"contractAddress",
+"from",
+"deploymentLogs"
+]
+},
+"TransferableTokensResponseDTO": {
+"type": "object",
+"properties": {
+"balance": {
+"type": "string",
+"description": "The balance of transferable",
+"example": "15000000"
+}
+},
+"required": [
+"balance"
+]
+},
+"GetErc20BalanceResponseDTO": {
+"type": "object",
+"properties": {
+"balance": {
+"type": "string",
+"description": "The balance of erc20 tokens",
+"example": "15000000"
+}
+},
+"required": [
+"balance"
+]
+},
+"GetErc20AllowanceResponseDTO": {
+"type": "object",
+"properties": {
+"allowance": {
+"type": "string",
+"description": "The allowance of erc20 tokens",
+"example": "15000000"
+}
+},
+"required": [
+"allowance"
+]
+},
+"GetErc20InfoResponseDTO": {
+"type": "object",
+"properties": {
+"decimals": {
+"type": "number",
+"description": "Decimals of token",
+"example": 4
+},
+"symbol": {
+"type": "string",
+"description": "The symbol of token",
+"example": "SUSDC"
+},
+"name": {
+"type": "string",
+"description": "The name of token",
+"example": "Securitize USDC"
+},
+"totalSupply": {
+"type": "string",
+"description": "Total Supply",
+"example": "1900000"
+}
+},
+"required": [
+"decimals",
+"symbol",
+"name",
+"totalSupply"
+]
+},
+"GetDeployerWalletResponseDTO": {
+"type": "object",
+"properties": {
+"address": {
+"type": "string",
+"description": "The deployer address",
+"example": "0x7A945de8BAE58c0581BE8A1E55963cF140725A35"
+},
+"balance": {
+"type": "string",
+"description": "The balance of deployer address",
+"example": "15600000005000000"
+},
+"unit": {
+"type": "string",
+"description": "Balance unit",
+"example": "wei"
+}
+},
+"required": [
+"address",
+"balance",
+"unit"
+]
+},
+"DeploymentInfoDto": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string",
+"description": "Deployment ID",
+"example": "000ba0d0-77c0-4b92-bf4c-468f9df56da5"
+},
+"issuerId": {
+"type": "string",
+"description": "Deployment issuer ID",
+"example": "000ba0d0-77c0-4b92-bf4c-468f9df56da5"
+},
+"name": {
+"type": "string",
+"description": "Deployment name",
+"example": "Token Name"
+},
+"symbol": {
+"type": "string",
+"description": "Deployment symbol",
+"example": "TOKEN"
+},
+"decimals": {
+"type": "number",
+"description": "Deployment decimals",
+"example": 18
+},
+"owners": {
+"type": "object",
+"description": "Deployment owners"
+},
+"roles": {
+"description": "Deployment roles",
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"complianceRules": {
+"type": "object",
+"description": "Deployment compliance rules"
+},
+"countriesComplianceStatuses": {
+"description": "Deployment countries compliance statuses",
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"abstractionLayerDeploymentId": {
+"type": "string",
+"description": "Deployment abstraction layer deployment ID",
+"example": "000ba0d0-77c0-4b92-bf4c-468f9df56da5"
+},
+"tokenType": {
+"type": "string",
+"description": "Deployment token type",
+"example": "standard"
+},
+"complianceType": {
+"type": "string",
+"description": "Deployment compliance type",
+"example": "regulated"
+},
+"lockManagerType": {
+"type": "string",
+"description": "Deployment lock manager type",
+"example": "wallet"
+},
+"provider": {
+"type": "string",
+"description": "Deployment provider type",
+"example": "ethereum"
+},
+"tokenAddress": {
+"type": "string",
+"description": "Deployment token address",
+"example": "0x0438609260EbE2153beBAafCBC18E2AC388b784C"
+},
+"status": {
+"type": "string",
+"description": "Deployment status",
+"example": "initial"
+},
+"url": {
+"type": "string",
+"description": "Deployment url",
+"example": "https://example.com"
+},
+"metadataHash": {
+"type": "string",
+"description": "Metadata hash"
+},
+"totalSupply": {
+"type": "number",
+"description": "Deployment total supply",
+"example": "1000000000000000000000000"
+}
+},
+"required": [
+"id",
+"issuerId",
+"name",
+"symbol",
+"decimals",
+"owners",
+"roles",
+"complianceRules",
+"countriesComplianceStatuses",
+"abstractionLayerDeploymentId",
+"tokenType",
+"complianceType",
+"lockManagerType",
+"provider",
+"tokenAddress",
+"status",
+"url",
+"metadataHash",
+"totalSupply"
+]
+},
+"StableCoinDto": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string",
+"description": "Stable Coin Id",
+"example": "000ba0d0-77c0-4b92-bf4c-468f9df56da5"
+},
+"name": {
+"type": "string",
+"description": "Stable Coin Symbol",
+"example": "USDC"
+},
+"address": {
+"type": "string",
+"description": "Stable Coin Address",
+"example": "0x54BDb6F311C6d2271C7e9efD8333884deAb62Caa"
+}
+},
+"required": [
+"id",
+"name",
+"address"
+]
+},
+"TransactionSignatureItemDTO": {
+"type": "object",
+"properties": {
+"id": {
+"type": "integer",
+"description": "Transaction signature ID",
+"example": 1223
+},
+"externalId": {
+"type": "string",
+"description": "External ID.",
+"example": "000ba0d0-77c0-4b92-bf4c-468f9df56da5"
+},
+"deploymentId": {
+"type": "string",
+"description": "Deployment Id (abstraction-layer-deployment-id)",
+"example": "123ba0d0-27c0-3b92-bf4c-558f9df56abc"
+},
+"type": {
+"type": "string",
+"description": "TransactionSignature type",
+"enum": [
+"LockTokens",
+"BurnTokens",
+"BurnTBETokens",
+"UpdateRole",
+"IssueTokens",
+"TransferTBE",
+"InternalTBETransfer",
+"IssueTokensToTBE",
+"ReleaseLock",
+"HoldTrading",
+"RemoveWallet",
+"RegisterWallet",
+"ReleaseTrading",
+"RemoveInvestor",
+"UpdateComplianceRules",
+"UpdateCountryComplianceStatus",
+"CreateAssetAlgorand",
+"ReallocateTokens"
+],
+"example": "IssueTokensToTBE"
+},
+"status": {
+"type": "string",
+"description": "TransactionSignature status",
+"enum": [
+"pending",
+"sent",
+"success",
+"failure",
+"mempool",
+"canceled"
+],
+"example": "success"
+},
+"description": {
+"type": "string",
+"description": "Description",
+"example": "Issue 100 Token to user ExampleUser"
+},
+"operatorName": {
+"type": "string",
+"description": "The name of the operator who created the transactions",
+"example": "Operator Perez"
+},
+"operatorId": {
+"type": "integer",
+"description": "The ID of the operator who created the transactions",
+"example": 20
+},
+"creationTime": {
+"type": "integer",
+"description": "Creation date",
+"example": 1657056872000
+},
+"date": {
+"type": "integer",
+"description": "Creation time in ISO Format",
+"example": "2022-07-05T21:34:32.000Z"
+}
+}
+},
+"TransactionsSignatureListDTO": {
+"type": "object",
+"properties": {
+"totalItems": {
+"type": "integer",
+"description": "Total number of transaction-signatures",
+"example": 1
+},
+"data": {
+"description": "Transactions-signatures list",
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/TransactionSignatureItemDTO"
+}
+}
+}
+},
+"BorrowingDto": {
+"type": "object",
+"properties": {
+"loanBookAddress": {
+"type": "string",
+"description": "Loan book address",
+"example": "0x0b2e7e0e9492Cc5c5090c50d2Db94c1c5c6accC1"
+},
+"borrower": {
+"type": "string",
+"description": "Borrower address",
+"example": "0x40e4DC61fa15C3982b2f1ed0d7e826b7AD2A6d80"
+},
+"loanId": {
+"type": "string",
+"description": "The loanId",
+"example": "0xe7b0b95628d268217ec3b6570aeeea63c2fe5225222e9015d22b1e6e0b36c3e9"
+},
+"legalContractHash": {
+"type": "string",
+"description": "Hash of accepted contract file",
+"example": "0x6668c29f92a40c4193693ce2078f89a03172e4d7b00dcc02798e9d04ae8b4666"
+},
+"amount": {
+"type": "string",
+"description": "Amount to be borrowed",
+"example": "100"
+}
+},
+"required": [
+"loanBookAddress",
+"borrower",
+"loanId",
+"legalContractHash",
+"amount"
+]
+},
+"PrestoTransactionDto": {
+"type": "object",
+"properties": {
+"preparedTransaction": {
+"type": "string",
+"description": "Prepared transaction hash",
+"example": "0xf86c258502540be40083035b609482e041e84074fc5f5947d4d27e3c44f824b7a1a187b1a2bc2ec500008078a04a7db627266fa9a4116e3f6b33f5d245db40983234eb356261f36808909d2848a0166fa098a2ce3bda87af6000ed0083e3bf7cc31c6686b670bd85cbc6da2d6e85"
+}
+},
+"required": [
+"preparedTransaction"
+]
+},
+"MatchRequestBodyDto": {
+"type": "object",
+"properties": {
+"stableCoinAddress": {
+"type": "string",
+"description": "Stable coin address selected to buy the DSToken",
+"example": "0x6d5f628e43E0697Bd3259fA2756a9bE8d992fAcE"
+},
+"buyerSecuritizeId": {
+"type": "string",
+"description": "Buyer securitizeId",
+"example": "6352c661f1babb0013a12609"
+},
+"sellerAddress": {
+"type": "string",
+"description": "Address of the investor who sells DSToken",
+"example": "0x4baD557BE00259b27B3a31B28F91319EC92A9E45"
+},
+"buyerAddress": {
+"type": "string",
+"description": "Address of the investor who buys DSToken using stable-coins to pay",
+"example": "0x53C324c433276E7be64Ea3b05A1cD6d5ba93462B"
+},
+"stableCoinAmount": {
+"type": "string",
+"description": "Amount of stable coins without decimals",
+"example": "10000000"
+},
+"dsTokenAmount": {
+"type": "string",
+"description": "Amount of DSToken without decimals",
+"example": "150000"
+},
+"buyerFee": {
+"type": "string",
+"description": "Fee for buyer without decimals",
+"example": "250000"
+},
+"sellerFee": {
+"type": "string",
+"description": "Fee for seller without decimals",
+"example": "200000"
+}
+},
+"required": [
+"stableCoinAddress",
+"buyerSecuritizeId",
+"sellerAddress",
+"buyerAddress",
+"stableCoinAmount",
+"dsTokenAmount",
+"buyerFee",
+"sellerFee"
+]
+},
+"TransactionHashDto": {
+"type": "object",
+"properties": {
+"transactionHash": {
+"type": "string",
+"description": "transactionHash from blockchain, also know as transaction_provider_id in abstraction-layer",
+"example": "0x57b14c7cf306a9330993e56328474e4090ebe91624bf749e6c7c46c3d33398b9"
+}
+},
+"required": [
+"transactionHash"
+]
+},
+"MatchHandlerResponseDto": {
+"type": "object",
+"properties": {
+"address": {
+"type": "string",
+"description": "Address of MatchHandler contract",
+"example": "0x4f2D48edc62A51B13256Bd3E73B6cAE0149c8b10"
+}
+},
+"required": [
+"address"
+]
+},
+"RegisterInvestorRequestBodyDto": {
+"type": "object",
+"properties": {
+"securitizeId": {
+"type": "string",
+"description": "SecuritizeID",
+"example": "631902b3faca5c0013418140"
+}
+},
+"required": [
+"securitizeId"
+]
+},
+"InvestorDetailsDto": {
+"type": "object",
+"properties": {
+"securitizeId": {
+"type": "string",
+"description": "Securitize-ID",
+"example": "631902b3faca5c0013418140"
+},
+"blockchainId": {
+"type": "string",
+"description": "Blockchain ID",
+"example": "99f314fd81f84d3eb2b636a22ac301fc"
+},
+"accredited": {
+"type": "string",
+"description": "Accreditation status",
+"example": "pending",
+"enum": [
+"pending",
+"approved",
+"rejected"
+]
+},
+"qualified": {
+"type": "string",
+"description": "Qualification status",
+"example": "approved",
+"enum": [
+"pending",
+"approved",
+"rejected"
+]
+},
+"kyc": {
+"type": "string",
+"description": "KYC status",
+"example": "rejected",
+"enum": [
+"pending",
+"approved",
+"rejected"
+]
+},
+"countryCode": {
+"type": "string",
+"description": "Country in ISO Code",
+"example": "ES"
+},
+"state": {
+"type": "string",
+"description": "State in ISO Code",
+"example": "NY"
+}
+},
+"required": [
+"securitizeId",
+"blockchainId"
+]
+},
+"GasPriceDto": {
+"type": "object",
+"properties": {
+"unit": {
+"type": "string",
+"description": "Unit",
+"example": "wei"
+},
+"cryptoCurrencySymbol": {
+"type": "string",
+"description": "Cryptocurrency symbol",
+"example": "MATIC"
+},
+"gasPrice": {
+"type": "string",
+"description": "Gas Price",
+"example": "1000000"
+},
+"type": {
+"type": "string",
+"description": "Transaction type. legacy: type 0, eip1559: type 2",
+"enum": [
+"legacy",
+"eip1559"
+],
+"example": "legacy"
+}
+}
+},
+"GasFeesDto": {
+"type": "object",
+"properties": {
+"unit": {
+"type": "string",
+"description": "Unit",
+"example": "wei"
+},
+"cryptoCurrencySymbol": {
+"type": "string",
+"description": "Cryptocurrency symbol",
+"example": "MATIC"
+},
+"maxFeePerGas": {
+"type": "string",
+"description": "Max Fee per Gas in hexadecimal",
+"example": "0x4331ac"
+},
+"maxPriorityFeePerGas": {
+"type": "string",
+"description": "Max priority fee per Gas in hexadecimal",
+"example": "0x4331ac"
+},
+"txType": {
+"type": "string",
+"description": "Transaction type. legacy: type 0, eip1559: type 2",
+"enum": [
+"legacy",
+"eip1559"
+],
+"example": "eip1559"
+}
+}
+},
+"PendingTransactionDto": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string",
+"description": "The id of pending transaction in web3-ats-match-service",
+"example": "aa7521da-9f10-11ec-b909-0242ac120002"
+}
+},
+"required": [
+"id"
+]
+}
+}
+},
+"paths": {
+"/health": {
+"get": {
+"operationId": "HealthController_check",
+"parameters": [],
+"responses": {
+"200": {
+"description": "The Health Check is successful",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"properties": {
+"status": {
+"type": "string",
+"example": "ok"
+},
+"info": {
+"type": "object",
+"example": {
+"database": {
+"status": "up"
+}
+},
+"additionalProperties": {
+"type": "object",
+"properties": {
+"status": {
+"type": "string"
+}
+},
+"additionalProperties": {
+"type": "string"
+}
+},
+"nullable": true
+},
+"error": {
+"type": "object",
+"example": {},
+"additionalProperties": {
+"type": "object",
+"properties": {
+"status": {
+"type": "string"
+}
+},
+"additionalProperties": {
+"type": "string"
+}
+},
+"nullable": true
+},
+"details": {
+"type": "object",
+"example": {
+"database": {
+"status": "up"
+}
+},
+"additionalProperties": {
+"type": "object",
+"properties": {
+"status": {
+"type": "string"
+}
+},
+"additionalProperties": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+}
+},
+"503": {
+"description": "The Health Check is not successful",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"properties": {
+"status": {
+"type": "string",
+"example": "error"
+},
+"info": {
+"type": "object",
+"example": {
+"database": {
+"status": "up"
+}
+},
+"additionalProperties": {
+"type": "object",
+"properties": {
+"status": {
+"type": "string"
+}
+},
+"additionalProperties": {
+"type": "string"
+}
+},
+"nullable": true
+},
+"error": {
+"type": "object",
+"example": {
+"redis": {
+"status": "down",
+"message": "Could not connect"
+}
+},
+"additionalProperties": {
+"type": "object",
+"properties": {
+"status": {
+"type": "string"
+}
+},
+"additionalProperties": {
+"type": "string"
+}
+},
+"nullable": true
+},
+"details": {
+"type": "object",
+"example": {
+"database": {
+"status": "up"
+},
+"redis": {
+"status": "down",
+"message": "Could not connect"
+}
+},
+"additionalProperties": {
+"type": "object",
+"properties": {
+"status": {
+"type": "string"
+}
+},
+"additionalProperties": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+}
+}
+},
+"tags": [
+"Health"
+]
+}
+},
+"/connect/v1/partners/{partnerId}/attestation": {
+"get": {
+"operationId": "ConnectPartnersController_attestation",
+"summary": "Returns the attestation for an user of a DEFI service",
+"parameters": [
+{
+"name": "partnerId",
+"required": true,
+"in": "path",
+"description": "Partner identifier",
+"example": "55bba60d-6e6c-4143-89a5-19051e1c6b0a",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/AttestationDto"
+}
+}
+}
+}
+},
+"tags": [
+"Connect-Attestation"
+]
+}
+},
+"/v1/partners/{partnerId}": {
+"get": {
+"operationId": "AttestationController_getPartner",
+"summary": "Returns a Partner for the given ID",
+"parameters": [
+{
+"name": "partnerId",
+"required": true,
+"in": "path",
+"description": "Partner identifier",
+"example": "55bba60d-6e6c-4143-89a5-19051e1c6b0a",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PartnerDto"
+}
+}
+}
+}
+},
+"tags": [
+"Attestation"
+]
+}
+},
+"/v1/partners": {
+"post": {
+"operationId": "AttestationController_createPartner",
+"summary": "Creates a new Partner",
+"parameters": [],
+"requestBody": {
+"required": true,
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PartnerCreate"
+}
+}
+}
+},
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PartnerDto"
+}
+}
+}
+}
+},
+"tags": [
+"Attestation"
+]
+}
+},
+"/v1/partners/{partnerId}/rules": {
+"post": {
+"operationId": "AttestationController_createPartnerRules",
+"summary": "Creates Partner Rules",
+"parameters": [
+{
+"name": "partnerId",
+"required": true,
+"in": "path",
+"description": "Partner identifier",
+"example": "55bba60d-6e6c-4143-89a5-19051e1c6b0a",
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"required": true,
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PartnerCreateRules"
+}
+}
+}
+},
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PartnerDto"
+}
+}
+}
+}
+},
+"tags": [
+"Attestation"
+]
+}
+},
+"/connect/v1/partners/{partnerId}/wallets/{walletAddress}/whitelist": {
+"get": {
+"operationId": "ConnectDefiTransactionController_whitelist",
+"summary": "Returns the defi transaction",
+"parameters": [
+{
+"name": "partnerId",
+"required": true,
+"in": "path",
+"description": "Partner identifier",
+"example": "702d717074041c001ae0fdc9",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "walletAddress",
+"required": true,
+"in": "path",
+"description": "Wallet to be registered",
+"example": "0x7D088307B0ae7f810eA2AD692c0198Aa38e490f8",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/DefiTransactionDto"
+}
+}
+}
+}
+},
+"tags": [
+"Connect-Defi-Transaction"
+]
+}
+},
+"/v1/deployments/{deploymentId}/swap": {
+"post": {
+"operationId": "AbstractionLayerController_securitizeSwap",
+"summary": "Create transaction to swap Holder tokens and registry a new investor if required",
+"parameters": [
+{
+"name": "deploymentId",
+"required": true,
+"in": "path",
+"description": "Deployment ID",
+"example": "38bb8237-422b-4241-9c13-ec72a7419104",
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"required": true,
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/SwapRequestDTO"
+}
+}
+}
+},
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/SwapResponseDTO"
+}
+}
+}
+},
+"400": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"description": "Error method",
+"properties": {
+"message": {
+"type": "string"
+},
+"code": {
+"type": "string"
+},
+"extraData": {
+"type": "string"
+}
+}
+}
+}
+}
+},
+"500": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"description": "Error method",
+"properties": {
+"message": {
+"type": "string"
+},
+"code": {
+"type": "string"
+},
+"extraData": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+},
+"tags": [
+"Abstraction-Layer"
+]
+},
+"get": {
+"operationId": "AbstractionLayerController_getSwapContract",
+"summary": "Return the Swap Contract Address for the received deployment token ID",
+"parameters": [
+{
+"name": "deploymentId",
+"required": true,
+"in": "path",
+"description": "Deployment ID",
+"example": "38bb8237-422b-4241-9c13-ec72a7419104",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ContractSwapResponseDTO"
+}
+}
+}
+},
+"400": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"description": "Error method",
+"properties": {
+"message": {
+"type": "string"
+},
+"code": {
+"type": "string"
+},
+"extraData": {
+"type": "string"
+}
+}
+}
+}
+}
+},
+"500": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"description": "Error method",
+"properties": {
+"message": {
+"type": "string"
+},
+"code": {
+"type": "string"
+},
+"extraData": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+},
+"tags": [
+"Abstraction-Layer"
+]
+}
+},
+"/v1/deployments/{deploymentId}/deployment-logs": {
+"get": {
+"operationId": "AbstractionLayerController_getDeploymentLogs",
+"summary": "Return the deployment logs given an abstraction-layer deploymentId",
+"parameters": [
+{
+"name": "deploymentId",
+"required": true,
+"in": "path",
+"description": "Deployment ID",
+"example": "38bb8237-422b-4241-9c13-ec72a7419104",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/DeploymentLogsResponseDTO"
+}
+}
+}
+}
+},
+"400": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"description": "Error method",
+"properties": {
+"message": {
+"type": "string"
+},
+"code": {
+"type": "string"
+},
+"extraData": {
+"type": "string"
+}
+}
+}
+}
+}
+},
+"500": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"description": "Error method",
+"properties": {
+"message": {
+"type": "string"
+},
+"code": {
+"type": "string"
+},
+"extraData": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+},
+"tags": [
+"Abstraction-Layer"
+]
+}
+},
+"/v1/deployments/{deploymentId}/wallets/{address}/transferable-tokens": {
+"get": {
+"operationId": "AbstractionLayerController_getTransferableTokensByWallet",
+"summary": "Return the transferable token balance of a specific investor given one of its wallets. It checks locks",
+"parameters": [
+{
+"name": "deploymentId",
+"required": true,
+"in": "path",
+"description": "Deployment ID",
+"example": "38bb8237-422b-4241-9c13-ec72a7419104",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "address",
+"required": true,
+"in": "path",
+"description": "The wallet to check check transferable tokens",
+"example": "0x6C103f707A9c56a22770B628Bd99F434943f3395",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "timeInSeconds",
+"required": false,
+"in": "query",
+"description": "Time to check transferable-tokens. 0 to use current time",
+"example": "0",
+"schema": {
+"default": "0",
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/TransferableTokensResponseDTO"
+}
+}
+}
+},
+"400": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"description": "Error method",
+"properties": {
+"message": {
+"type": "string"
+},
+"code": {
+"type": "string"
+},
+"extraData": {
+"type": "string"
+}
+}
+}
+}
+}
+},
+"500": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"description": "Error method",
+"properties": {
+"message": {
+"type": "string"
+},
+"code": {
+"type": "string"
+},
+"extraData": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+},
+"tags": [
+"Abstraction-Layer"
+]
+}
+},
+"/v1/deployments/{deploymentId}/holders/{holderId}/transferable-tokens": {
+"get": {
+"operationId": "AbstractionLayerController_getTransferableTokensByInvestor",
+"summary": "Return the transferable token balance of an investor checking locks",
+"parameters": [
+{
+"name": "deploymentId",
+"required": true,
+"in": "path",
+"description": "Deployment ID",
+"example": "933357cd-5203-4310-aa6d-e7da5d4c91c8",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "holderId",
+"required": true,
+"in": "path",
+"description": "The holderId of an investor. It is also known as blockchainId in control-panel",
+"example": "789238cbb8914c52a3cc2eede05d0f70",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "timeInSeconds",
+"required": false,
+"in": "query",
+"description": "Time to check transferable-tokens. 0 to use current time",
+"example": "0",
+"schema": {
+"default": "0",
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/TransferableTokensResponseDTO"
+}
+}
+}
+},
+"400": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"description": "Error method",
+"properties": {
+"message": {
+"type": "string"
+},
+"code": {
+"type": "string"
+},
+"extraData": {
+"type": "string"
+}
+}
+}
+}
+}
+},
+"500": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"description": "Error method",
+"properties": {
+"message": {
+"type": "string"
+},
+"code": {
+"type": "string"
+},
+"extraData": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+},
+"tags": [
+"Abstraction-Layer"
+]
+}
+},
+"/v1/providers/{provider}/erc20/{address}/balance/{wallet}": {
+"get": {
+"operationId": "AbstractionLayerController_getErc20Balance",
+"summary": "Gets the balance of an erc20 token for an specific wallet",
+"parameters": [
+{
+"name": "provider",
+"required": true,
+"in": "path",
+"description": "Provider where erc20 is deployed",
+"example": "polygon",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "address",
+"required": true,
+"in": "path",
+"description": "The address of ERC20 token",
+"example": "0x73d42610068FABDfbFe4CB1f1E649eD8328Cca9b",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "wallet",
+"required": true,
+"in": "path",
+"description": "The wallet to check check balance",
+"example": "0x4baD557BE00259b27B3a31B28F91319EC92A9E45",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/GetErc20BalanceResponseDTO"
+}
+}
+}
+},
+"400": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"description": "Error method",
+"properties": {
+"message": {
+"type": "string"
+},
+"code": {
+"type": "string"
+},
+"extraData": {
+"type": "string"
+}
+}
+}
+}
+}
+},
+"500": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"description": "Error method",
+"properties": {
+"message": {
+"type": "string"
+},
+"code": {
+"type": "string"
+},
+"extraData": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+},
+"tags": [
+"Abstraction-Layer"
+]
+}
+},
+"/v1/providers/{provider}/erc20/{address}/allowance/{wallet}": {
+"get": {
+"operationId": "AbstractionLayerController_getErc20Allowance",
+"summary": "Gets the allowance of an erc20 token for an specific wallet and spender",
+"parameters": [
+{
+"name": "provider",
+"required": true,
+"in": "path",
+"description": "Provider where erc20 is deployed",
+"example": "polygon",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "address",
+"required": true,
+"in": "path",
+"description": "The address of ERC20 token",
+"example": "0x73d42610068FABDfbFe4CB1f1E649eD8328Cca9b",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "wallet",
+"required": true,
+"in": "path",
+"description": "The wallet to check check balance",
+"example": "0x4baD557BE00259b27B3a31B28F91319EC92A9E45",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "spender",
+"required": true,
+"in": "query",
+"example": "0x0b2e7e0e9492cc5c5090c50d2db94c1c5c6accc1",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/GetErc20AllowanceResponseDTO"
+}
+}
+}
+},
+"400": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"description": "Error method",
+"properties": {
+"message": {
+"type": "string"
+},
+"code": {
+"type": "string"
+},
+"extraData": {
+"type": "string"
+}
+}
+}
+}
+}
+},
+"500": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"description": "Error method",
+"properties": {
+"message": {
+"type": "string"
+},
+"code": {
+"type": "string"
+},
+"extraData": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+},
+"tags": [
+"Abstraction-Layer"
+]
+}
+},
+"/v1/providers/{provider}/erc20/{address}/info": {
+"get": {
+"operationId": "AbstractionLayerController_getErc20Info",
+"summary": "Gets the info of an erc20 token",
+"parameters": [
+{
+"name": "provider",
+"required": true,
+"in": "path",
+"description": "Provider where erc20 is deployed",
+"example": "polygon",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "address",
+"required": true,
+"in": "path",
+"description": "The address of ERC20 token",
+"example": "0x73d42610068FABDfbFe4CB1f1E649eD8328Cca9b",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/GetErc20InfoResponseDTO"
+}
+}
+}
+},
+"400": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"description": "Error method",
+"properties": {
+"message": {
+"type": "string"
+},
+"code": {
+"type": "string"
+},
+"extraData": {
+"type": "string"
+}
+}
+}
+}
+}
+},
+"500": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"description": "Error method",
+"properties": {
+"message": {
+"type": "string"
+},
+"code": {
+"type": "string"
+},
+"extraData": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+},
+"tags": [
+"Abstraction-Layer"
+]
+}
+},
+"/v1/providers/{provider}/deployer-wallet": {
+"get": {
+"operationId": "AbstractionLayerController_getDeployerAccount",
+"summary": "Gets the address and the balance of the deployer account",
+"parameters": [
+{
+"name": "provider",
+"required": true,
+"in": "path",
+"description": "Provider",
+"example": "polygon",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/GetDeployerWalletResponseDTO"
+}
+}
+}
+},
+"400": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"description": "Error method",
+"properties": {
+"message": {
+"type": "string"
+},
+"code": {
+"type": "string"
+},
+"extraData": {
+"type": "string"
+}
+}
+}
+}
+}
+},
+"500": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"description": "Error method",
+"properties": {
+"message": {
+"type": "string"
+},
+"code": {
+"type": "string"
+},
+"extraData": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+},
+"tags": [
+"Abstraction-Layer"
+]
+}
+},
+"/v1/issuers/{issuerId}/deployments/{deploymentId}": {
+"get": {
+"operationId": "DeploymentsManagementController_getIssuerDeployment",
+"summary": "Return the information for an issuer deployment",
+"parameters": [
+{
+"name": "issuerId",
+"required": true,
+"in": "path",
+"description": "Issuer ID",
+"example": "787521da-9f10-11ec-b909-0242ac120002",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "deploymentId",
+"required": true,
+"in": "path",
+"description": "Deployment ID",
+"example": "787521da-9f10-11ec-b909-0242ac120002",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/DeploymentInfoDto"
+}
+}
+}
+}
+},
+"tags": [
+"Deployments-Management"
+]
+}
+},
+"/v1/providers/{providerId}/stable-coins": {
+"get": {
+"operationId": "DeploymentsManagementController_getStableCoinsByProvider",
+"summary": "Return Stable Coin list by provider",
+"parameters": [
+{
+"name": "providerId",
+"required": true,
+"in": "path",
+"description": "Provider Id",
+"example": "avalanche",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/StableCoinDto"
+}
+}
+}
+}
+},
+"tags": [
+"Deployments-Management"
+]
+}
+},
+"/v1/deployments/{deploymentId}/transaction-signatures": {
+"get": {
+"operationId": "getTransactionSignaturesList",
+"summary": "Retrieves a list of transactions",
+"parameters": [
+{
+"name": "deploymentId",
+"required": true,
+"in": "path",
+"description": "Deployment ID",
+"example": "38bb8237-422b-4241-9c13-ec72a7419104",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/TransactionsSignatureListDTO"
+}
+}
+}
+},
+"400": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"description": "Error method",
+"properties": {
+"message": {
+"type": "string"
+},
+"code": {
+"type": "string"
+},
+"extraData": {
+"type": "string"
+}
+}
+}
+}
+}
+},
+"500": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"description": "Error method",
+"properties": {
+"message": {
+"type": "string"
+},
+"code": {
+"type": "string"
+},
+"extraData": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+},
+"tags": [
+"Signatures-Service"
+]
+}
+},
+"/connect/v1/partners/{partnerId}/borrow": {
+"post": {
+"operationId": "ConnectPrestoTransactionsServiceController_borrow",
+"summary": "Returns a borrow loan transaction",
+"parameters": [
+{
+"name": "partnerId",
+"required": true,
+"in": "path",
+"description": "Partner identifier. Token Address",
+"example": "0x73d42610068FABDfbFe4CB1f1E649eD8328Cca9b",
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"required": true,
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/BorrowingDto"
+}
+}
+}
+},
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PrestoTransactionDto"
+}
+}
+}
+}
+},
+"tags": [
+"Connect-Presto-Transactions"
+]
+}
+},
+"/v1/deployments/{deploymentId}/match-order": {
+"post": {
+"operationId": "Web3AtsMatchServiceController_matchOrder",
+"summary": "Sign and send an on-chain match transaction between buyer and seller investor",
+"description": "It signs the match transaction with HSM and sends transaction to blockchain. If investor does not exist, it is added on RegistryService",
+"parameters": [
+{
+"name": "deploymentId",
+"required": true,
+"in": "path",
+"description": "AbstractionLayer Deployment ID",
+"example": "6bee483e-49c4-4b43-aae8-30de6beb3ebd",
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"required": true,
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/MatchRequestBodyDto"
+}
+}
+}
+},
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/TransactionHashDto"
+}
+}
+}
+}
+},
+"tags": [
+"Web3-ATS-Match-Service"
+]
+}
+},
+"/v1/deployments/{deploymentId}/match-handler": {
+"get": {
+"operationId": "Web3AtsMatchServiceController_getMatchHandlerContract",
+"summary": "Returns the address of the MatchHandler contract. It is the spender of ERC20.approve() transaction",
+"description": "Returns the address of the MatchHandler contract. It is the spender of ERC20.approve() transaction",
+"parameters": [
+{
+"name": "deploymentId",
+"required": true,
+"in": "path",
+"description": "AbstractionLayer Deployment ID",
+"example": "6bee483e-49c4-4b43-aae8-30de6beb3ebd",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/MatchHandlerResponseDto"
+}
+}
+}
+}
+},
+"tags": [
+"Web3-ATS-Match-Service"
+]
+}
+},
+"/v1/deployments/{deploymentId}/securitize-id": {
+"post": {
+"operationId": "registerSecuitizeIdInvestor",
+"summary": "Gets an investor using securitizeId and copies information into an specific issuer and creates blockchain-id in a specific token",
+"description": "Checks if investor with securitizeId already exist in issuer's deployment. If not, then it copies the investor information into the issuer and creates a blockchain-id for the token",
+"parameters": [
+{
+"name": "deploymentId",
+"required": true,
+"in": "path",
+"description": "AbstractionLayer deploymentId",
+"example": "3e28c31f-5956-4c7e-8f6b-5f82bead8db5",
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"required": true,
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/RegisterInvestorRequestBodyDto"
+}
+}
+}
+},
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/InvestorDetailsDto"
+}
+}
+}
+}
+},
+"tags": [
+"Investor-Creation-Service"
+]
+}
+},
+"/v1/providers/{provider}/gas-price": {
+"get": {
+"operationId": "getBlockchainGasServiceGasPrice",
+"summary": "Get the current gas price for an specific provider from blockchain-gas-service",
+"parameters": [
+{
+"name": "provider",
+"required": true,
+"in": "path",
+"description": "Provider from deployment-management-service networks",
+"example": "polygon",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/GasPriceDto"
+}
+}
+}
+},
+"400": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"description": "Error method",
+"properties": {
+"message": {
+"type": "string"
+},
+"code": {
+"type": "string"
+},
+"extraData": {
+"type": "string"
+}
+}
+}
+}
+}
+},
+"500": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"description": "Error method",
+"properties": {
+"message": {
+"type": "string"
+},
+"code": {
+"type": "string"
+},
+"extraData": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+},
+"tags": [
+"Blockchain-Gas-Service"
+]
+}
+},
+"/v1/providers/{provider}/gas-fees": {
+"get": {
+"operationId": "getBlockchainGasServiceGasFees",
+"summary": "Get the current gas fees for an specific provider from blockchain-gas-service",
+"parameters": [
+{
+"name": "provider",
+"required": true,
+"in": "path",
+"description": "Provider from deployment-management-service networks",
+"example": "polygon",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/GasFeesDto"
+}
+}
+}
+},
+"400": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"description": "Error method",
+"properties": {
+"message": {
+"type": "string"
+},
+"code": {
+"type": "string"
+},
+"extraData": {
+"type": "string"
+}
+}
+}
+}
+}
+},
+"500": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"description": "Error method",
+"properties": {
+"message": {
+"type": "string"
+},
+"code": {
+"type": "string"
+},
+"extraData": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+},
+"tags": [
+"Blockchain-Gas-Service"
+]
+}
+},
+"/v2/deployments/{deploymentId}/match-order": {
+"post": {
+"operationId": "Web3AtsMatchServiceV2Controller_matchOrder",
+"summary": "Sign and send an on-chain match transaction between buyer and seller investor",
+"description": "It signs the match transaction with HSM and sends transaction to blockchain. If investor does not exist, it is added on RegistryService",
+"parameters": [
+{
+"name": "deploymentId",
+"required": true,
+"in": "path",
+"description": "AbstractionLayer Deployment ID",
+"example": "6bee483e-49c4-4b43-aae8-30de6beb3ebd",
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"required": true,
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/MatchRequestBodyDto"
+}
+}
+}
+},
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PendingTransactionDto"
+}
+}
+}
+}
+},
+"tags": [
+"Web3-ATS-Match-Service"
+]
+}
+}
+}
+}

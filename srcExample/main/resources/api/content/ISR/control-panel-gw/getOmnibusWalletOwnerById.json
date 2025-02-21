@@ -1,0 +1,14 @@
+{
+  "pathParams": {
+    "issuerId": "fd69957d-7d2d-4f2f-8dd0-3cc4661ae62c",
+    "tokenId": "9162eb5f-2ded-4241-ae54-a549b30613bb",
+    "omnibusWalletOwnerId": "35"
+  },
+  "sandbox": {
+    "pathParams": {
+      "issuerId": "ceea1d43-e2ae-49d0-bdff-0bef48f991bd",
+      "tokenId": "f043bc0f-53d1-443b-83f3-ac57da5acd67",
+      "omnibusWalletOwnerId": "4"
+    }
+  }
+}

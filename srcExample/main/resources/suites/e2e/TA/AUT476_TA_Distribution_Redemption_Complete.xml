@@ -1,0 +1,7 @@
+<suite name="AUT476_TA_Distribution_Redemption_Complete" verbose="1">
+    <test name="AUT476_TA_Distribution_Redemption_Complete">
+        <classes>
+            <class name="io.securitize.tests.transferAgent.AUT476_TA_Distribution_Redemption_Complete"/>
+        </classes>
+    </test>
+</suite>

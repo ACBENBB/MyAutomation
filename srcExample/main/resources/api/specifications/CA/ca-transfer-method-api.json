@@ -1,0 +1,2564 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/v1/stable-coins": {
+      "post": {
+        "operationId": "AccountTransferMethodsController_createStableCoinTransferMethod",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateStableCoinTransferMethodDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Create stable coin transfer method if it does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StableCoinTransferMethod"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StableCoinTransferMethod"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateStableCoinTransferMethodNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transfer Methods"
+        ]
+      }
+    },
+    "/v1/transfer-methods": {
+      "post": {
+        "operationId": "AccountTransferMethodsController_postUserTransferMethods",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTransferMethodsRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Post Investor's Transfer Methods",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeprecatedTransferMethodsResponseDto"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FundTransferMethod"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateTransferMethodBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateTransferMethodNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transfer Methods"
+        ]
+      }
+    },
+    "/v1/crypto-wallets": {
+      "get": {
+        "operationId": "AccountTransferMethodsController_getUserWallets",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get User Wallets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Wallets"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transfer Methods"
+        ]
+      }
+    },
+    "/v1/investors/{investorId}/deposit-instructions": {
+      "get": {
+        "operationId": "InvestorTransferMethodsController_getInvestorDepositInstructionsV1",
+        "summary": "",
+        "deprecated": true,
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get deposit instructions for an investor - DEPRECATED",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeprecatedUsdAccountDepositInstructions"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDepositInstructionsNotFoundExceptionDtoV1"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Errors caused by the cash account or system account not having the correct status.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDepositInstructionsInternalServerErrorExceptionDtoV1"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transfer Methods - Investors"
+        ]
+      }
+    },
+    "/v2/investors/{investorId}/deposit-instructions": {
+      "get": {
+        "operationId": "InvestorTransferMethodsController_getInvestorDepositInstructions",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "currency",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "USD",
+                "EUR"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get deposit instructions for an investor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountDepositInstructions"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDepositInstructionsNotFoundExceptionDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Errors caused by the cash account or system account not having the correct status.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDepositInstructionsInternalServerErrorExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transfer Methods - Investors"
+        ]
+      }
+    },
+    "/v1/investors/{investorId}/transfer-methods": {
+      "get": {
+        "operationId": "InvestorTransferMethodsController_getTransferMethods",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "method",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "ACH",
+                "WIRE_DOMESTIC",
+                "WIRE_INTERNATIONAL",
+                "CREDIT_CARD"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get transfer methods for an investor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTransferMethodsResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTransferMethodsNotFoundExceptionDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTransferMethodsInternalServerErrorExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transfer Methods - Investors"
+        ]
+      }
+    },
+    "/v1/investors/{investorId}/transfer-methods/{transferMethodId}": {
+      "delete": {
+        "operationId": "InvestorTransferMethodsController_deleteTransferMethod",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "transferMethodId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete transfer methods for an investor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransferMethod"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteTransferMethodsNotFoundExceptionDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteTransferMethodsInternalServerErrorExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transfer Methods - Investors"
+        ]
+      }
+    },
+    "/v1/cash-accounts/{cashAccountId}/deposit-instructions": {
+      "get": {
+        "operationId": "CashAccountTransferMethodsController_getCashAccountDepositInstructions",
+        "summary": "",
+        "deprecated": true,
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cashAccountId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get deposit instructions for a cash account - DEPRECATED",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeprecatedUsdAccountDepositInstructions"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDepositInstructionsNotFoundExceptionDtoV1"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Errors caused by the cash account or system account not having the correct status.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDepositInstructionsInternalServerErrorExceptionDtoV1"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transfer Methods - Cash Account"
+        ]
+      }
+    },
+    "/v2/cash-accounts/{cashAccountId}/deposit-instructions": {
+      "get": {
+        "operationId": "CashAccountTransferMethodsController_getInvestorDepositInstructions",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cashAccountId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "currency",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "USD",
+                "EUR"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get deposit instructions for a cash account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsdAccountDepositInstructions"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDepositInstructionsNotFoundExceptionDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Errors caused by the cash account or system account not having the correct status.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDepositInstructionsInternalServerErrorExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transfer Methods - Cash Account"
+        ]
+      }
+    },
+    "/v1/cash-accounts/{cashAccountId}/transfer-methods": {
+      "get": {
+        "operationId": "CashAccountTransferMethodsController_getTransferMethods",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cashAccountId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "method",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "ACH",
+                "WIRE_DOMESTIC",
+                "WIRE_INTERNATIONAL",
+                "CREDIT_CARD"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get transfer methods for a cash account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTransferMethodsResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTransferMethodsNotFoundExceptionDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTransferMethodsInternalServerErrorExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transfer Methods - Cash Account"
+        ]
+      }
+    },
+    "/v1/cash-accounts/{cashAccountId}/transfer-methods/{transferMethodId}": {
+      "delete": {
+        "operationId": "CashAccountTransferMethodsController_deleteTransferMethod",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cashAccountId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "transferMethodId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete transfer methods for an investor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransferMethod"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteTransferMethodsNotFoundExceptionDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteTransferMethodsInternalServerErrorExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transfer Methods - Cash Account"
+        ]
+      }
+    },
+    "/v1/cards": {
+      "post": {
+        "operationId": "CardsController_createCardMethod",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCardTransferMethodRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Create Card",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransferMethod"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransferMethod"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCardTransferMethodNotFoundExceptionDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCardTransferMethodInternalServerErrorExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Cards"
+        ]
+      }
+    },
+    "/v1/plaid-accounts": {
+      "post": {
+        "operationId": "PlaidController_createPlaidAccount",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePlaidAccountRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create ACH Transfer method using Plaid"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePlaidAccountBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePlaidAccountNotFoundExceptionDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePlaidAccountInternalServerErrorExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Plaid"
+        ]
+      }
+    },
+    "/v1/plaid-accounts/link-token": {
+      "post": {
+        "operationId": "PlaidController_createPlaidLinkToken",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePlaidLinkTokenRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePlaidLinkTokenResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Plaid"
+        ]
+      }
+    },
+    "/api/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "CA Transfer Method Api",
+    "description": "API to interact with CA Transfer Methods",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "ForbiddenException": {
+        "type": "object",
+        "properties": {}
+      },
+      "CreateStableCoinTransferMethodDto": {
+        "type": "object",
+        "properties": {
+          "stableCoin": {
+            "type": "string",
+            "enum": [
+              "USDC"
+            ]
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "incoming",
+              "outgoing"
+            ]
+          },
+          "walletAddress": {
+            "type": "string"
+          },
+          "investorId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "stableCoin",
+          "direction",
+          "investorId"
+        ]
+      },
+      "StableCoin": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "unitName": {
+            "type": "string"
+          },
+          "maxDecimalPrecision": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "label",
+          "unitName",
+          "maxDecimalPrecision"
+        ]
+      },
+      "StableCoinTransferMethod": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "transferType": {
+            "type": "string"
+          },
+          "direction": {
+            "enum": [
+              "incoming",
+              "outgoing"
+            ],
+            "type": "string"
+          },
+          "walletAddress": {
+            "type": "string"
+          },
+          "stableCoin": {
+            "$ref": "#/components/schemas/StableCoin"
+          }
+        },
+        "required": [
+          "id",
+          "transferType",
+          "direction",
+          "walletAddress",
+          "stableCoin"
+        ]
+      },
+      "CreateStableCoinTransferMethodNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CreateTransferMethodsRequestDto": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "wire",
+              "wire_international"
+            ],
+            "type": "number",
+            "example": "wire"
+          },
+          "accountNumber": {
+            "type": "string",
+            "example": "1235674342"
+          },
+          "routingNumber": {
+            "type": "string",
+            "example": "026009593"
+          },
+          "swiftCode": {
+            "type": "string",
+            "example": "SWIFT1234"
+          },
+          "provider": {
+            "enum": [
+              "SYNAPSE"
+            ],
+            "type": "number",
+            "example": "SYNAPSE"
+          },
+          "investorId": {
+            "type": "string",
+            "example": "63336633b91fc20013601771"
+          }
+        },
+        "required": [
+          "type",
+          "accountNumber",
+          "routingNumber",
+          "swiftCode",
+          "provider",
+          "investorId"
+        ]
+      },
+      "FundTransferMethod": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "bankAccountName": {
+            "type": "string"
+          },
+          "bankAccountType": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "routingNumber": {
+            "type": "string"
+          },
+          "swiftCode": {
+            "type": "string"
+          },
+          "mask": {
+            "type": "string"
+          },
+          "fundTransferType": {
+            "type": "string"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "bank": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "required": true,
+                "type": "string"
+              },
+              "name": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "isPlaidLinked": {
+            "type": "boolean"
+          },
+          "card": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "required": true,
+                "type": "string"
+              },
+              "holdersName": {
+                "required": true,
+                "type": "string"
+              },
+              "type": {
+                "required": true,
+                "type": "string"
+              },
+              "expirationDate": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "provider": {
+            "enum": [
+              "BBVA",
+              "PAXOS",
+              "SYNAPSE",
+              "PRIMETRUST",
+              "ZEROHASH"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "bankAccountName",
+          "bankAccountType",
+          "bankName",
+          "routingNumber",
+          "swiftCode",
+          "mask",
+          "fundTransferType",
+          "active",
+          "bank",
+          "isPlaidLinked",
+          "card",
+          "provider"
+        ]
+      },
+      "DeprecatedTransferMethodsResponseDto": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "type": "object",
+            "properties": {
+              "length": {
+                "required": true,
+                "type": "number"
+              }
+            }
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FundTransferMethod"
+            }
+          }
+        },
+        "required": [
+          "meta",
+          "data"
+        ]
+      },
+      "CreateTransferMethodBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "INVALID_ACCOUNT_STATUS",
+            "enum": [
+              "INVALID_ACCOUNT_STATUS",
+              "INVALID_PROVIDER_ACCOUNT_STATUS"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CreateTransferMethodNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND",
+              "SYSTEM_ACCOUNT_PROVIDER_NOT_FOUND",
+              "FUND_TRANSFER_METHOD_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "Wallet": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "walletTitle": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "network": {
+            "type": "string",
+            "enum": [
+              "ETH"
+            ]
+          },
+          "creationDate": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "walletTitle",
+          "address",
+          "network",
+          "creationDate"
+        ]
+      },
+      "Wallets": {
+        "type": "object",
+        "properties": {
+          "wallets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Wallet"
+            }
+          }
+        },
+        "required": [
+          "wallets"
+        ]
+      },
+      "GetAccountNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "DeprecatedSpecificInstructions": {
+        "type": "object",
+        "properties": {
+          "routingNumber": {
+            "type": "string"
+          },
+          "bankCode": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "bankAddress": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "routingNumber",
+          "bankCode",
+          "bankName",
+          "bankAddress",
+          "name"
+        ]
+      },
+      "DeprecatedWireInstructions": {
+        "type": "object",
+        "properties": {
+          "routingNumber": {
+            "type": "string"
+          },
+          "bankCode": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "bankAddress": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "additionalInstructions": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "routingNumber",
+          "bankCode",
+          "bankName",
+          "bankAddress",
+          "name",
+          "additionalInstructions"
+        ]
+      },
+      "DeprecatedInternationalInstructions": {
+        "type": "object",
+        "properties": {
+          "routingNumber": {
+            "type": "string"
+          },
+          "bankCode": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "bankAddress": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "additionalInstructions": {
+            "type": "string"
+          },
+          "ABARoutingNumber": {
+            "type": "string"
+          },
+          "intermediaryBank": {
+            "type": "object",
+            "properties": {
+              "bankName": {
+                "required": true,
+                "type": "string"
+              },
+              "routingNumber": {
+                "required": true,
+                "type": "string"
+              },
+              "swiftCode": {
+                "required": true,
+                "type": "string"
+              },
+              "bankAddress": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "routingNumber",
+          "bankCode",
+          "bankName",
+          "bankAddress",
+          "name",
+          "additionalInstructions",
+          "ABARoutingNumber",
+          "intermediaryBank"
+        ]
+      },
+      "DeprecatedUsdAccountDepositInstructions": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "accountType": {
+            "enum": [
+              "CHECKING",
+              "SAVINGS",
+              "CARD"
+            ],
+            "type": "string"
+          },
+          "accountNumber": {
+            "type": "string"
+          },
+          "achInstructions": {
+            "$ref": "#/components/schemas/DeprecatedSpecificInstructions"
+          },
+          "wireDomesticInstructions": {
+            "$ref": "#/components/schemas/DeprecatedWireInstructions"
+          },
+          "wireInternationalInstructions": {
+            "$ref": "#/components/schemas/DeprecatedInternationalInstructions"
+          },
+          "recipient": {
+            "type": "string"
+          },
+          "recipientAddress": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "ACTIVE",
+              "TERMINATED",
+              "INACTIVE"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "accountType",
+          "accountNumber",
+          "achInstructions",
+          "wireDomesticInstructions",
+          "wireInternationalInstructions",
+          "recipient",
+          "recipientAddress",
+          "status"
+        ]
+      },
+      "GetDepositInstructionsNotFoundExceptionDtoV1": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND",
+              "SYSTEM_ACCOUNT_PROVIDER_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "GetDepositInstructionsInternalServerErrorExceptionDtoV1": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "INVALID_ACCOUNT_STATUS",
+            "enum": [
+              "INVALID_ACCOUNT_STATUS",
+              "INVALID_PROVIDER_ACCOUNT_STATUS"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "DepositLimits": {
+        "type": "object",
+        "properties": {
+          "daily": {
+            "type": "number"
+          },
+          "monthly": {
+            "type": "number"
+          },
+          "yearly": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "daily",
+          "monthly",
+          "yearly"
+        ]
+      },
+      "SpecificInstructions": {
+        "type": "object",
+        "properties": {
+          "routingNumber": {
+            "type": "string"
+          },
+          "bankCode": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "bankAddress": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "config": {
+            "type": "object",
+            "properties": {
+              "fee": {
+                "required": true,
+                "type": "number"
+              },
+              "limits": {
+                "required": false,
+                "$ref": "#/components/schemas/DepositLimits"
+              }
+            }
+          }
+        },
+        "required": [
+          "routingNumber",
+          "bankCode",
+          "bankName",
+          "bankAddress",
+          "name",
+          "config"
+        ]
+      },
+      "WireInstructions": {
+        "type": "object",
+        "properties": {
+          "routingNumber": {
+            "type": "string"
+          },
+          "bankCode": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "bankAddress": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "config": {
+            "type": "object",
+            "properties": {
+              "fee": {
+                "required": true,
+                "type": "number"
+              },
+              "limits": {
+                "required": false,
+                "$ref": "#/components/schemas/DepositLimits"
+              }
+            }
+          },
+          "additionalInstructions": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "routingNumber",
+          "bankCode",
+          "bankName",
+          "bankAddress",
+          "name",
+          "config",
+          "additionalInstructions"
+        ]
+      },
+      "InternationalInstructions": {
+        "type": "object",
+        "properties": {
+          "routingNumber": {
+            "type": "string"
+          },
+          "bankCode": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "bankAddress": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "config": {
+            "type": "object",
+            "properties": {
+              "fee": {
+                "required": true,
+                "type": "number"
+              },
+              "limits": {
+                "required": false,
+                "$ref": "#/components/schemas/DepositLimits"
+              }
+            }
+          },
+          "additionalInstructions": {
+            "type": "string"
+          },
+          "ABARoutingNumber": {
+            "type": "string"
+          },
+          "intermediaryBank": {
+            "type": "object",
+            "properties": {
+              "bankName": {
+                "required": true,
+                "type": "string"
+              },
+              "routingNumber": {
+                "required": true,
+                "type": "string"
+              },
+              "swiftCode": {
+                "required": true,
+                "type": "string"
+              },
+              "bankAddress": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "routingNumber",
+          "bankCode",
+          "bankName",
+          "bankAddress",
+          "name",
+          "config",
+          "additionalInstructions",
+          "ABARoutingNumber",
+          "intermediaryBank"
+        ]
+      },
+      "USDCInstructions": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "number"
+          },
+          "token": {
+            "type": "string"
+          },
+          "network": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "address",
+          "createdAt",
+          "token",
+          "network"
+        ]
+      },
+      "UsdAccountDepositInstructions": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "accountType": {
+            "type": "string"
+          },
+          "accountHolderName": {
+            "type": "string"
+          },
+          "accountNumber": {
+            "type": "string"
+          },
+          "achInstructions": {
+            "$ref": "#/components/schemas/SpecificInstructions"
+          },
+          "wireDomesticInstructions": {
+            "$ref": "#/components/schemas/WireInstructions"
+          },
+          "wireInternationalInstructions": {
+            "$ref": "#/components/schemas/InternationalInstructions"
+          },
+          "usdc": {
+            "$ref": "#/components/schemas/USDCInstructions"
+          },
+          "recipient": {
+            "type": "string"
+          },
+          "recipientAddress": {
+            "type": "object"
+          },
+          "status": {
+            "enum": [
+              "ACTIVE",
+              "TERMINATED",
+              "INACTIVE"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "accountType",
+          "accountNumber",
+          "wireDomesticInstructions",
+          "wireInternationalInstructions",
+          "recipient",
+          "recipientAddress",
+          "status"
+        ]
+      },
+      "SepaInstructions": {
+        "type": "object",
+        "properties": {
+          "iban": {
+            "type": "string"
+          },
+          "recipient": {
+            "type": "string"
+          },
+          "reference": {
+            "type": "string"
+          },
+          "config": {
+            "type": "object",
+            "properties": {
+              "fee": {
+                "required": true,
+                "type": "number"
+              },
+              "limits": {
+                "required": false,
+                "$ref": "#/components/schemas/DepositLimits"
+              }
+            }
+          }
+        },
+        "required": [
+          "iban",
+          "recipient",
+          "reference",
+          "config"
+        ]
+      },
+      "EurWireInternationalInstructions": {
+        "type": "object",
+        "properties": {
+          "iban": {
+            "type": "string"
+          },
+          "swiftCodeBic": {
+            "type": "string"
+          },
+          "recipient": {
+            "type": "string"
+          },
+          "reference": {
+            "type": "string"
+          },
+          "config": {
+            "type": "object",
+            "properties": {
+              "fee": {
+                "required": true,
+                "type": "number"
+              },
+              "limits": {
+                "required": false,
+                "$ref": "#/components/schemas/DepositLimits"
+              }
+            }
+          }
+        },
+        "required": [
+          "iban",
+          "swiftCodeBic",
+          "recipient",
+          "reference",
+          "config"
+        ]
+      },
+      "EurAccountDepositInstructions": {
+        "type": "object",
+        "properties": {
+          "sepaInstructions": {
+            "$ref": "#/components/schemas/SepaInstructions"
+          },
+          "wireInternationalInstructions": {
+            "$ref": "#/components/schemas/EurWireInternationalInstructions"
+          }
+        },
+        "required": [
+          "sepaInstructions",
+          "wireInternationalInstructions"
+        ]
+      },
+      "AccountDepositInstructions": {
+        "type": "object",
+        "properties": {
+          "usd": {
+            "$ref": "#/components/schemas/UsdAccountDepositInstructions"
+          },
+          "eur": {
+            "$ref": "#/components/schemas/EurAccountDepositInstructions"
+          }
+        }
+      },
+      "GetDepositInstructionsNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "GetDepositInstructionsInternalServerErrorExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "INVALID_ACCOUNT_STATUS",
+            "enum": [
+              "INVALID_ACCOUNT_STATUS"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "TransferMethod": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "method": {
+            "enum": [
+              "ASSET",
+              "WIRE_DOMESTIC",
+              "WIRE_INTERNATIONAL",
+              "ACH",
+              "CREDIT_CARD"
+            ],
+            "type": "string"
+          },
+          "currency": {
+            "enum": [
+              "USD",
+              "EUR"
+            ],
+            "type": "string"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "accountNumberMask": {
+            "type": "string"
+          },
+          "routingNumberMask": {
+            "type": "string"
+          },
+          "swiftCode": {
+            "type": "string"
+          },
+          "bank": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "required": true,
+                "type": "string"
+              },
+              "longName": {
+                "required": true,
+                "type": "string"
+              },
+              "address": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "achClass": {
+            "enum": [
+              "CHECKING",
+              "SAVINGS"
+            ],
+            "type": "string"
+          },
+          "cardMask": {
+            "type": "string"
+          },
+          "cardExpirationDate": {
+            "type": "string"
+          },
+          "cardNetwork": {
+            "type": "string"
+          },
+          "cashAccountId": {
+            "type": "string"
+          },
+          "investorId": {
+            "type": "string"
+          },
+          "provider": {
+            "enum": [
+              "BBVA",
+              "PAXOS",
+              "SYNAPSE",
+              "PRIMETRUST",
+              "ZEROHASH"
+            ],
+            "type": "string"
+          },
+          "providerId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "method",
+          "currency",
+          "isActive",
+          "accountNumberMask",
+          "bank",
+          "cashAccountId",
+          "provider",
+          "providerId"
+        ]
+      },
+      "GetTransferMethodsResponseDto": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "type": "object",
+            "properties": {
+              "total": {
+                "required": true,
+                "type": "number"
+              }
+            }
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TransferMethod"
+            }
+          }
+        },
+        "required": [
+          "meta",
+          "data"
+        ]
+      },
+      "GetTransferMethodsNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "GetTransferMethodsInternalServerErrorExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "SYSTEM_ACCOUNT_NOT_FOUND",
+            "enum": [
+              "SYSTEM_ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "DeleteTransferMethodsNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "DeleteTransferMethodsInternalServerErrorExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "SYSTEM_ACCOUNT_NOT_FOUND",
+            "enum": [
+              "SYSTEM_ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CreateCardTransferMethodRequestDto": {
+        "type": "object",
+        "properties": {
+          "cardNumber": {
+            "type": "string",
+            "description": "Encrypted card number"
+          },
+          "expirationDate": {
+            "type": "string",
+            "description": "Encrypted expiration date"
+          },
+          "securityCode": {
+            "type": "string",
+            "description": "Encrypted security code"
+          },
+          "investorId": {
+            "type": "string"
+          },
+          "cashAccountId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "cardNumber",
+          "expirationDate",
+          "securityCode"
+        ]
+      },
+      "CreateCardTransferMethodNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CreateCardTransferMethodInternalServerErrorExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "SYSTEM_ACCOUNT_NOT_FOUND",
+            "enum": [
+              "SYSTEM_ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CreatePlaidAccountRequestDto": {
+        "type": "object",
+        "properties": {
+          "plaidPublicToken": {
+            "type": "string"
+          },
+          "plaidAccountId": {
+            "type": "string"
+          },
+          "investorId": {
+            "type": "string"
+          },
+          "cashAccountId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "plaidPublicToken",
+          "plaidAccountId"
+        ]
+      },
+      "CreatePlaidAccountBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "INVALID_PLAID_ACCOUNT",
+            "enum": [
+              "INVALID_PLAID_ACCOUNT"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CreatePlaidAccountNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CreatePlaidAccountInternalServerErrorExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "SYSTEM_ACCOUNT_NOT_FOUND",
+            "enum": [
+              "SYSTEM_ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CreatePlaidLinkTokenRequestDto": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "string"
+          },
+          "cashAccountId": {
+            "type": "string"
+          }
+        }
+      },
+      "CreatePlaidLinkTokenResponseDto": {
+        "type": "object",
+        "properties": {
+          "linkToken": {
+            "type": "string"
+          },
+          "requestId": {
+            "type": "string"
+          },
+          "expiration": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "linkToken",
+          "requestId",
+          "expiration"
+        ]
+      }
+    }
+  }
+}

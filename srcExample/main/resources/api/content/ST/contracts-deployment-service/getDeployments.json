@@ -1,0 +1,10 @@
+{
+  "pathParams": {
+    "id": "bb8ef3f8-a748-4200-a664-a9eaf3b4ba5a"
+  },
+  "expectedResponse": {
+    "statusCode": 200,
+    "body": {
+    }
+  }
+}

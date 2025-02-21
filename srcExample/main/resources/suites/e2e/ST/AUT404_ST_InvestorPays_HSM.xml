@@ -1,0 +1,7 @@
+<suite name="AUT404_ST_InvestorPays_HSM" verbose="1">
+    <test name="AUT404_ST_InvestorPays_HSM">
+        <classes>
+            <class name="io.securitize.tests.blockchain.AUT404_ST_InvestorPays_HSM" />
+        </classes>
+    </test>
+</suite>

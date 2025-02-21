@@ -1,0 +1,7 @@
+<suite name="AUT488_CA_WireTransfer_Withdraw_US" verbose="1">
+    <test name="AUT488_CA_WireTransfer_Withdraw_US">
+        <classes>
+            <class name="io.securitize.tests.ca.AUT488_CA_WireTransfer_Withdraw_US" />
+        </classes>
+    </test>
+</suite>

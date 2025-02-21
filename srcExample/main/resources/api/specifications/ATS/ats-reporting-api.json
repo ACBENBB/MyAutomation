@@ -1,0 +1,999 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/v1/cais-reports/preview": {
+      "get": {
+        "operationId": "CAISReportsController_getPreview",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Preview CAIS Report",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CAISReport"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "CAIS Reports"
+        ]
+      }
+    },
+    "/v1/cais-reports": {
+      "post": {
+        "operationId": "CAISReportsController_generate",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateCAISReportRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Generate and Store CAIS Report",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenerateCAISReportResponseDto"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenerateCAISReportResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "CAIS Reports"
+        ]
+      }
+    },
+    "/v1/trade-history": {
+      "get": {
+        "operationId": "TradeHistoryController_getAllDeprecated",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "security",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "startDate",
+            "required": false,
+            "in": "query",
+            "example": 1519188992919,
+            "schema": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "endDate",
+            "required": false,
+            "in": "query",
+            "example": 1689251364680,
+            "schema": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pierMatchId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get trade history DEPRECATED",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TradeHistory"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TradeHistory"
+        ]
+      }
+    },
+    "/v2/trade-history": {
+      "get": {
+        "operationId": "TradeHistoryController_getAll",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "security",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "startDate",
+            "required": false,
+            "in": "query",
+            "example": 1519188992919,
+            "schema": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "endDate",
+            "required": false,
+            "in": "query",
+            "example": 1689251364680,
+            "schema": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pierMatchId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get trade history",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetTradeHistoryResponseDto"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TradeHistory"
+        ]
+      }
+    },
+    "/v2/trade-history/summary": {
+      "get": {
+        "operationId": "TradeHistoryController_getSummary",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "security",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "startDate",
+            "required": false,
+            "in": "query",
+            "example": 1519188992919,
+            "schema": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "endDate",
+            "required": false,
+            "in": "query",
+            "example": 1689251364680,
+            "schema": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "timeScale",
+            "required": false,
+            "in": "query",
+            "description": "Expressed in minutes",
+            "example": 30,
+            "schema": {
+              "minimum": 0,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get trade history summary v2. Can filter and return by deploymentId",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TradeSummary"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TradeHistory"
+        ]
+      }
+    },
+    "/metrics": {
+      "get": {
+        "operationId": "PrometheusController_index",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "info": {
+    "title": "ATS Reporting Api",
+    "description": "API to interact with ATS Reporting",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "ForbiddenException": {
+        "type": "object",
+        "properties": {}
+      },
+      "Address": {
+        "type": "object",
+        "properties": {}
+      },
+      "LargeTrader": {
+        "type": "object",
+        "properties": {
+          "largeTraderRecordID": {
+            "type": "number"
+          },
+          "largeTraderID": {
+            "type": "string"
+          },
+          "ltidEffectiveDate": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "largeTraderRecordID",
+          "largeTraderID",
+          "ltidEffectiveDate"
+        ]
+      },
+      "FDIDCustomer": {
+        "type": "object",
+        "properties": {
+          "customerRecordID": {
+            "type": "number"
+          },
+          "role": {
+            "type": "object"
+          },
+          "roleStartDate": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "customerRecordID",
+          "role",
+          "roleStartDate"
+        ]
+      },
+      "FDIDRecord": {
+        "type": "object",
+        "properties": {
+          "fdidRecordID": {
+            "type": "number"
+          },
+          "firmDesignatedID": {
+            "type": "string"
+          },
+          "fdidType": {
+            "type": "object"
+          },
+          "accountType": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "AVERAGE",
+                "DVP/RVP",
+                "EDUCATION",
+                "ENTITYID",
+                "ERROR",
+                "FIRM",
+                "INSTITUTION",
+                "MARKET",
+                "MARGIN",
+                "OPTION",
+                "OTHER",
+                "RELATIONSHIP",
+                "RETIREMENT",
+                "UGMA/UTMA"
+              ]
+            }
+          },
+          "accountName": {
+            "type": "string"
+          },
+          "fdidDate": {
+            "type": "number"
+          },
+          "addressList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Address"
+            }
+          },
+          "largeTraderList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LargeTrader"
+            }
+          },
+          "fdidCustomerList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FDIDCustomer"
+            }
+          }
+        },
+        "required": [
+          "fdidRecordID",
+          "firmDesignatedID",
+          "fdidType",
+          "accountType",
+          "accountName",
+          "fdidDate",
+          "addressList",
+          "fdidCustomerList"
+        ]
+      },
+      "NaturalPersonCustomer": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "yearOfBirth": {
+            "type": "number"
+          },
+          "customerRecordID": {
+            "type": "number"
+          },
+          "addressList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Address"
+            }
+          },
+          "customerType": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACCREDITED",
+                "ADVISER",
+                "CP",
+                "EMPLOYEE",
+                "FOREIGN",
+                "NOTAPPLICABLE",
+                "OTHBKR",
+                "TRUST"
+              ]
+            }
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName",
+          "yearOfBirth",
+          "customerRecordID",
+          "addressList",
+          "customerType"
+        ]
+      },
+      "LegalEntityCustomer": {
+        "type": "object",
+        "properties": {
+          "legalName": {
+            "type": "string"
+          },
+          "ein": {
+            "type": "string"
+          },
+          "customerRecordID": {
+            "type": "number"
+          },
+          "addressList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Address"
+            }
+          },
+          "customerType": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACCREDITED",
+                "ADVISER",
+                "CP",
+                "EMPLOYEE",
+                "FOREIGN",
+                "NOTAPPLICABLE",
+                "OTHBKR",
+                "TRUST"
+              ]
+            }
+          }
+        },
+        "required": [
+          "legalName",
+          "ein",
+          "customerRecordID",
+          "addressList",
+          "customerType"
+        ]
+      },
+      "CAISDocument": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string"
+          },
+          "catReporterCRD": {
+            "type": "number"
+          },
+          "catSubmitterID": {
+            "type": "number"
+          },
+          "correspondentCRD": {
+            "type": "number"
+          },
+          "fdidRecordCount": {
+            "type": "number"
+          },
+          "naturalPersonCustomerRecordCount": {
+            "type": "number"
+          },
+          "legalEntityCustomerRecordCount": {
+            "type": "number"
+          },
+          "fdidRecordList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FDIDRecord"
+            }
+          },
+          "naturalPersonCustomerList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NaturalPersonCustomer"
+            }
+          },
+          "legalEntityCustomerList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LegalEntityCustomer"
+            }
+          }
+        },
+        "required": [
+          "version",
+          "catReporterCRD",
+          "catSubmitterID",
+          "fdidRecordCount",
+          "naturalPersonCustomerRecordCount",
+          "legalEntityCustomerRecordCount",
+          "fdidRecordList",
+          "naturalPersonCustomerList",
+          "legalEntityCustomerList"
+        ]
+      },
+      "TIDDocument": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string"
+          },
+          "tidRecordCount": {
+            "type": "number"
+          },
+          "tidRecordList": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "version",
+          "tidRecordCount",
+          "tidRecordList"
+        ]
+      },
+      "CAISReport": {
+        "type": "object",
+        "properties": {
+          "CAIS": {
+            "$ref": "#/components/schemas/CAISDocument"
+          },
+          "TID": {
+            "$ref": "#/components/schemas/TIDDocument"
+          }
+        },
+        "required": [
+          "CAIS",
+          "TID"
+        ]
+      },
+      "GenerateCAISReportRequestDto": {
+        "type": "object",
+        "properties": {
+          "overrideLastReport": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "CAISReportLog": {
+        "type": "object",
+        "properties": {
+          "createdDate": {
+            "type": "number"
+          },
+          "updatedDate": {
+            "type": "number"
+          },
+          "fromDate": {
+            "type": "number"
+          },
+          "toDate": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "SUCCESS",
+              "ERROR"
+            ]
+          },
+          "step": {
+            "type": "string",
+            "enum": [
+              "STARTED",
+              "BUILT",
+              "STORED",
+              "SENT"
+            ]
+          },
+          "fileNumber": {
+            "type": "number"
+          },
+          "fileDate": {
+            "type": "number"
+          },
+          "fdidRecordCount": {
+            "type": "number"
+          },
+          "tidRecordCount": {
+            "type": "number"
+          },
+          "errorLog": {
+            "type": "string"
+          },
+          "bucket": {
+            "type": "string"
+          },
+          "caisFileName": {
+            "type": "string"
+          },
+          "tidFileName": {
+            "type": "string"
+          },
+          "creationMode": {
+            "type": "string",
+            "enum": [
+              "MANUALLY",
+              "DAILY_EVENT"
+            ]
+          }
+        },
+        "required": [
+          "createdDate",
+          "updatedDate",
+          "fromDate",
+          "toDate",
+          "status",
+          "step",
+          "creationMode"
+        ]
+      },
+      "GenerateCAISReportResponseDto": {
+        "type": "object",
+        "properties": {
+          "log": {
+            "$ref": "#/components/schemas/CAISReportLog"
+          },
+          "report": {
+            "$ref": "#/components/schemas/CAISReport"
+          },
+          "info": {
+            "type": "string"
+          }
+        }
+      },
+      "TradeHistory": {
+        "type": "object",
+        "properties": {
+          "tradeId": {
+            "type": "string"
+          },
+          "pierMatchId": {
+            "type": "string"
+          },
+          "exchangeType": {
+            "type": "string",
+            "enum": [
+              "TRADITIONAL",
+              "WEB3"
+            ]
+          },
+          "clearingInstrument": {
+            "type": "string"
+          },
+          "security": {
+            "type": "string"
+          },
+          "date": {
+            "type": "number"
+          },
+          "quantity": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          },
+          "sellOrderId": {
+            "type": "string"
+          },
+          "sellOrderFee": {
+            "type": "string"
+          },
+          "buyOrderId": {
+            "type": "string"
+          },
+          "buyOrderFee": {
+            "type": "string"
+          },
+          "deploymentId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "tradeId",
+          "clearingInstrument",
+          "security",
+          "date",
+          "quantity",
+          "price",
+          "sellOrderId",
+          "buyOrderId",
+          "deploymentId"
+        ]
+      },
+      "GetTradeHistoryResponseDto": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "type": "object",
+            "properties": {
+              "total": {
+                "required": true,
+                "type": "number"
+              },
+              "offset": {
+                "required": true,
+                "type": "number"
+              },
+              "limit": {
+                "required": true,
+                "type": "number"
+              },
+              "length": {
+                "required": true,
+                "type": "number"
+              }
+            }
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TradeHistory"
+            }
+          }
+        },
+        "required": [
+          "meta",
+          "data"
+        ]
+      },
+      "TradeSummary": {
+        "type": "object",
+        "properties": {
+          "security": {
+            "type": "string"
+          },
+          "volume": {
+            "type": "string"
+          },
+          "high": {
+            "type": "string"
+          },
+          "low": {
+            "type": "string"
+          },
+          "numberOfTrades": {
+            "type": "number"
+          },
+          "lastPrice": {
+            "type": "string"
+          },
+          "date": {
+            "type": "number"
+          },
+          "deploymentId": {
+            "type": "string"
+          },
+          "volumeByPrice": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "security",
+          "volume",
+          "high",
+          "low",
+          "numberOfTrades",
+          "lastPrice",
+          "volumeByPrice"
+        ]
+      }
+    }
+  }
+}

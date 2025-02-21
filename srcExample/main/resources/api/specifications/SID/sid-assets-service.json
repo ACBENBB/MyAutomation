@@ -1,0 +1,495 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/v1/assets/{investorId}/investment-requests": {
+      "get": {
+        "operationId": "AssetsController_getInvestmentRequests",
+        "parameters": [
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Investor Investment Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetPendingIssuanceResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/api/v1/assets/{investorId}/investment-requests/{id}": {
+      "delete": {
+        "operationId": "AssetsController_deleteInvestmentRequest",
+        "parameters": [
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cancel Investor Investment Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteInvestmentRequestResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/api/v1/assets/{investorId}/pending-issuance": {
+      "get": {
+        "operationId": "AssetsController_getAllPendingIssuanceAssets",
+        "parameters": [
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Investor Assets for Issuance Pending",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetPendingIssuanceResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/api/v1/assets/{investorId}/issued": {
+      "get": {
+        "operationId": "AssetsController_getAllIssuedAssets",
+        "parameters": [
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Investor Issued Assets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetIssuedAssetsResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/api/v1/token-wallets/{investorId}": {
+      "get": {
+        "operationId": "TokenWalletsController_getInvestmentRequests",
+        "parameters": [
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Token Wallets By InvestorId",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetTokenWalletByInvestorId"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Token / Wallets"
+        ]
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "HealthController_checkHealth",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Health Check",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/api/v1/issuers/{issuerId}": {
+      "get": {
+        "operationId": "IssuersController_getIssuer",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Issuer By Issuer ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetIssuerByIssuerId"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Issuers"
+        ]
+      }
+    },
+    "/api/v1/investors/{investorId}/issuers": {
+      "get": {
+        "operationId": "InvestorsController_getInvestorIssuers",
+        "parameters": [
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Issuers By Investor ID"
+          }
+        },
+        "tags": [
+          "Investors"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "SID Assets Service",
+    "description": "",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "GetPendingIssuanceResponseDto": {
+        "type": "object",
+        "properties": {
+          "issuerId": {
+            "type": "string"
+          },
+          "issuerLogo": {
+            "type": "string"
+          },
+          "issuerName": {
+            "type": "string"
+          },
+          "issuerMainCurrency": {
+            "type": "string"
+          },
+          "dashboardUrl": {
+            "type": "string"
+          },
+          "tokenName": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "totalUnits": {
+            "type": "number"
+          },
+          "tokenIcon": {
+            "type": "string"
+          },
+          "navPrice": {
+            "type": "string"
+          },
+          "atsPrice": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "issuerId",
+          "issuerLogo",
+          "issuerName",
+          "issuerMainCurrency",
+          "dashboardUrl",
+          "tokenName",
+          "tokenId",
+          "totalUnits",
+          "tokenIcon",
+          "navPrice",
+          "atsPrice"
+        ]
+      },
+      "DeleteInvestmentRequestResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "GetIssuedAssetsResponseDto": {
+        "type": "object",
+        "properties": {
+          "issuerId": {
+            "type": "string"
+          },
+          "issuerLogo": {
+            "type": "string"
+          },
+          "issuerName": {
+            "type": "string"
+          },
+          "dashboardUrl": {
+            "type": "string"
+          },
+          "tokenLogoUrl": {
+            "type": "string"
+          },
+          "tokenName": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "deploymentId": {
+            "type": "string"
+          },
+          "network": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "symbol": {
+            "type": "string"
+          },
+          "blockchain": {
+            "type": "string"
+          },
+          "tradingEnabled": {
+            "type": "boolean"
+          },
+          "issuerMainCurrency": {
+            "type": "string"
+          },
+          "navPrice": {
+            "type": "string"
+          },
+          "atsPrice": {
+            "type": "string"
+          },
+          "dailyChange": {
+            "type": "string"
+          },
+          "TBEWalletAddress": {
+            "type": "string"
+          },
+          "walletsBalance": {
+            "type": "number"
+          },
+          "accountBalance": {
+            "type": "number"
+          },
+          "totalUnits": {
+            "type": "number"
+          },
+          "showTBEWallet": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "issuerId",
+          "issuerLogo",
+          "issuerName",
+          "dashboardUrl",
+          "tokenLogoUrl",
+          "tokenName",
+          "tokenId",
+          "deploymentId",
+          "network",
+          "url",
+          "symbol",
+          "blockchain",
+          "tradingEnabled",
+          "issuerMainCurrency",
+          "navPrice",
+          "atsPrice",
+          "dailyChange",
+          "TBEWalletAddress",
+          "walletsBalance",
+          "accountBalance",
+          "totalUnits",
+          "showTBEWallet"
+        ]
+      },
+      "GetTokenWalletByInvestorId": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "walletId": {
+            "type": "number"
+          },
+          "address": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "securitizeIdProfileId": {
+            "type": "string"
+          },
+          "tokensHeld": {
+            "type": "string"
+          },
+          "blockchain": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "investorId",
+          "name",
+          "walletId",
+          "address",
+          "status",
+          "issuerId",
+          "tokenId",
+          "securitizeIdProfileId",
+          "tokensHeld",
+          "blockchain"
+        ]
+      },
+      "HealthDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "up",
+              "down"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "GetIssuerByIssuerId": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "dashboardUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "dashboardUrl"
+        ]
+      }
+    }
+  }
+}

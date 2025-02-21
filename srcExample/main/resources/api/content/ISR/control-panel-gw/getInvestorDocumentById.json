@@ -1,0 +1,12 @@
+{
+  "pathParams": {
+    "entityInvestorId": "63d7a05237a34cd5b5f36e30",
+    "securitizeDocumentId": "63d7a083ae4b81d3effe6a45"
+  },
+  "sandbox": {
+    "pathParams": {
+      "entityInvestorId": "63cec07ba14d4c3bd263e9cd",
+      "securitizeDocumentId": "63cec099a14d4c3bd263ebd2"
+    }
+  }
+}

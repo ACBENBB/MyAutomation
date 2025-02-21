@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT545_ATS_HoldingIcon" verbose="1">
+    <test name="AUT545_ATS_HoldingIcon">
+        <classes>
+            <class name="io.securitize.tests.ats.sanity.AUT545_ATS_HoldingIcon" />
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT539_FT_NieInvest_CashAccount_AccreditationFirst" verbose="1">
+    <test name="AUT539_FT_NieInvest_CashAccount_AccreditationFirst">
+        <classes>
+            <class name="io.securitize.tests.fundraise.AUT539_FT_NieInvest_CashAccount_AccreditationFirst"/>
+        </classes>
+    </test>
+</suite>

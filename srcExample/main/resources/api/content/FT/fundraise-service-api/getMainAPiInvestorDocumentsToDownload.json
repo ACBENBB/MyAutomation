@@ -1,0 +1,7 @@
+{
+  "pathParams" : {
+    "issuerId" : "#ISSUER_ID#",
+    "investorId" : "#INVESTOR_ID#",
+    "documentId" : "106070-f"
+  }
+}

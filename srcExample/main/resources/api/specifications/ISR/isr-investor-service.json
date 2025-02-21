@@ -1,0 +1,620 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/v1/investors/{id}": {
+      "get": {
+        "operationId": "InvestorsController_getById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Investor By Id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvestorDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntitiyNotFoundException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investors"
+        ]
+      }
+    },
+    "/v1/investors": {
+      "get": {
+        "operationId": "InvestorsController_getInvestors",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {}
+            }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {}
+            }
+          },
+          {
+            "name": "externalId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {}
+            }
+          },
+          {
+            "name": "orderDirection",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": null,
+              "enum": [
+                "ASC",
+                "DESC"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderField",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": null,
+              "enum": [
+                "id",
+                "createdAt",
+                "updatedAt"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "default": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "default": 50,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Investors By Filters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetInvestorsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investors"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "ISR Investor Service",
+    "description": "Service to interact with Investor Issuers",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "InvestorDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "incorporationDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "middleName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "birthdate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "male",
+              "female",
+              ""
+            ]
+          },
+          "externalId": {
+            "type": "string"
+          },
+          "securitizeIdProfileId": {
+            "type": "string"
+          },
+          "address1": {
+            "type": "string"
+          },
+          "address2": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "zipCode": {
+            "type": "string"
+          },
+          "countryCode": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "fullAddress": {
+            "type": "string"
+          },
+          "identityDocumentNumber": {
+            "type": "string"
+          },
+          "countryOfBirth": {
+            "type": "string"
+          },
+          "cityOfBirth": {
+            "type": "string"
+          },
+          "kycStatus": {
+            "type": "string",
+            "enum": [
+              "none",
+              "processing",
+              "updates-required",
+              "manual-review",
+              "verified",
+              "rejected",
+              "expired"
+            ]
+          },
+          "kycProvider": {
+            "type": "string",
+            "enum": [
+              "internal",
+              "securitize-id",
+              "brokerdealer"
+            ]
+          },
+          "accreditedStatus": {
+            "type": "string",
+            "enum": [
+              "none",
+              "pending",
+              "confirmed",
+              "rejected",
+              "no",
+              "no_accepted",
+              "expired",
+              "updates_required",
+              "processing",
+              "not-accredited"
+            ]
+          },
+          "investorType": {
+            "type": "string",
+            "enum": [
+              "individual",
+              "entity",
+              "fbo-individual",
+              "fbo-entity",
+              "none"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "entityName": {
+            "type": "string"
+          },
+          "entityDba": {
+            "type": "string"
+          },
+          "entityLeiCode": {
+            "type": "string"
+          },
+          "taxId": {
+            "type": "string"
+          },
+          "taxId2": {
+            "type": "string"
+          },
+          "taxId3": {
+            "type": "string"
+          },
+          "taxCountryCode": {
+            "type": "string"
+          },
+          "taxCountryCode2": {
+            "type": "string"
+          },
+          "taxCountryCode3": {
+            "type": "string"
+          },
+          "taxFormType": {
+            "type": "string",
+            "enum": [
+              "W-9",
+              "W-8BEN",
+              "W-8BENE",
+              "1042-S",
+              "1099-B",
+              "1099-DIV",
+              "1099-INT",
+              "1099-K",
+              "1099-MISC"
+            ]
+          },
+          "taxFormCountry": {
+            "type": "string"
+          },
+          "is2FaEnabled": {
+            "type": "boolean"
+          },
+          "jsonPrivate": {
+            "type": "string"
+          },
+          "jsonOpen": {
+            "type": "string"
+          },
+          "fboInvestorId": {
+            "type": "number"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "isAccredited": {
+            "type": "boolean"
+          },
+          "isKycStarted": {
+            "type": "boolean"
+          },
+          "isFboInvestor": {
+            "type": "boolean"
+          },
+          "isEntity": {
+            "type": "boolean"
+          },
+          "isIndividual": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "incorporationDate",
+          "firstName",
+          "middleName",
+          "lastName",
+          "email",
+          "birthdate",
+          "gender",
+          "externalId",
+          "address1",
+          "address2",
+          "state",
+          "city",
+          "zipCode",
+          "countryCode",
+          "phoneNumber",
+          "fullAddress",
+          "countryOfBirth",
+          "kycStatus",
+          "kycProvider",
+          "accreditedStatus",
+          "investorType",
+          "name",
+          "entityName",
+          "taxId",
+          "taxCountryCode",
+          "is2FaEnabled",
+          "jsonPrivate",
+          "jsonOpen",
+          "issuerId",
+          "isAccredited",
+          "isKycStarted",
+          "isFboInvestor",
+          "isEntity",
+          "isIndividual"
+        ]
+      },
+      "EntitiyNotFoundException": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "default": 404
+          },
+          "error": {
+            "type": "string",
+            "default": "NOT_FOUND_ERROR"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "statusCode",
+          "error",
+          "message",
+          "data"
+        ]
+      },
+      "GetInvestorsResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InvestorDto"
+            }
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "total": {
+                "required": true,
+                "type": "number"
+              },
+              "offset": {
+                "required": false,
+                "type": "number"
+              },
+              "limit": {
+                "required": false,
+                "type": "number"
+              },
+              "length": {
+                "required": true,
+                "type": "number"
+              }
+            }
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ]
+      }
+    }
+  }
+}

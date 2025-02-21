@@ -1,0 +1,7 @@
+<suite name="AUT444_SID_Individual_Flow_Sanity" verbose="1">
+    <test name="AUT444_SID_Individual_Flow_Sanity">
+        <classes>
+            <class name="io.securitize.tests.securitizeId.AUT444_SID_Individual_Flow_Sanity" />
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,8 @@
+{
+  "headers": {
+    // "authorization": "#SID_AUTHORIZATION#"
+    //"cookie": "#SID_COOKIE#"
+  },
+  "rc": {},
+  "sandbox": {}
+}

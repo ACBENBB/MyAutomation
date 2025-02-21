@@ -1,0 +1,8 @@
+name,url,tags,ignoreList
+ISR - control panel gw api,https://cp.rc.securitize.io/api/v2/health-check?force=true,rc
+TA - Endpoint for payout api,https://api-payouts.rc.securitize.io/api/v1/health-check,notNightly
+TA - Accreditaion service,https://accreditationapi.rc.securitize.io/api/v1/health-check,notNightly
+ATS - ATS main API,https://atsmainapi.dev.securitize.io/api/health,notNightly
+ATS - ATS Bank API,http://atsbankapi.dev.securitize.io/health,notNightly,info;error;details
+ATS - ATS public gateway,https://ats-public-gw.rc.securitize.io/health,notNightly,info;error;details
+ATS - ATS rtgw service,https://ats-gw.rc.securitize.io/health,notNightly,info;error;details

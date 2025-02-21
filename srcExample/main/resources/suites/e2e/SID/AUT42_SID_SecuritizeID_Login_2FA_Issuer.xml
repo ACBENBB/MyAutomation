@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT42_SID_SecuritizeID_Login_2FA" verbose="1">
+    <test name="AUT42_SID_SecuritizeID_Login_2FA">
+        <classes>
+            <class name="io.securitize.tests.securitizeId.AUT42_SID_SecuritizeID_Login_2FA_Issuer" />
+        </classes>
+    </test>
+</suite>

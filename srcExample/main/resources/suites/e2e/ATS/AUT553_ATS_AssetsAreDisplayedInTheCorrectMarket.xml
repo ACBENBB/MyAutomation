@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT553_ATS_AssetsAreDisplayedInTheCorrectMarket" verbose="1">
+    <test name="AUT553_ATS_AssetsAreDisplayedInTheCorrectMarket">
+        <classes>
+            <class name="io.securitize.tests.ats.AUT553_ATS_AssetsAreDisplayedInTheCorrectMarket" />
+        </classes>
+    </test>
+</suite>

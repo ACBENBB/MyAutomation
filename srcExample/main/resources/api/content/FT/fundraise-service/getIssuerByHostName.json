@@ -1,0 +1,15 @@
+{
+    "skips": {
+        "entireTest": false,
+        "skipReason": "TEST TEST",
+        "statusCodeCheck": false,
+        "bodySchemaCheck": false,
+        "bodyContentCheck": false
+    },
+    "expectedResponse": {
+        "statusCode": 200
+    },
+    "queryParams": {
+        "hostname": "https://automation-issuer.invest.rc.securitize.io"
+    }
+}

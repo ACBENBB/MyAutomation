@@ -1,0 +1,12 @@
+{
+  "pathParams": {
+    "issuerId": "#ISSUER_ID#",
+    "userId": "142080"
+  },
+  "sandbox": {
+    "pathParams": {
+      "issuerId": "#ISSUER_ID#",
+      "userId": "495905"
+    }
+  }
+}

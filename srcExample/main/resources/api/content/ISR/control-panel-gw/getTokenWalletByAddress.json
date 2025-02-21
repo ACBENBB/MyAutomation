@@ -1,0 +1,10 @@
+{
+  "skips": {
+    "entireTest": false
+  },
+  "sandbox": {
+    "pathParams": {
+      "address": "0x1095623a7a720e8a9acda8b41d8c614e4616efd3"
+    }
+  }
+}

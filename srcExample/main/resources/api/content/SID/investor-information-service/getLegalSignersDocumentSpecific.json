@@ -1,0 +1,15 @@
+{
+  "pathParams": {
+    "investorId": "#SID_INVESTOR_ID#",
+    "legalSignerId": "#SID_LEGAL_SIGNER_ID#",
+    "documentId": "#SID_LEGAL_SIGNER_DOCUMENT_ID#"
+  },
+  "rc": {},
+  "sandbox": {},
+  "production": {
+    "skips": {
+      "entireTest": true,
+      "skipReason": "Test skipped since param's 'apiSidLegalSignerDocumentId' value has to be filled"
+    }
+  }
+}

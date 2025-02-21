@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT66_SID_SecuritizeID_SumSub_KYC_Regression_US" verbose="1">
+    <test name="AUT66_SID_SecuritizeID_SumSub_KYC_Regression_US">
+        <classes>
+            <class name="io.securitize.tests.securitizeId.AUT66_SID_SecuritizeID_SumSub_KYC_Regression_US" />
+        </classes>
+    </test>
+</suite>

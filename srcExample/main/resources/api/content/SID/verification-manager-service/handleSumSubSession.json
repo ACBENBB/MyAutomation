@@ -1,0 +1,8 @@
+{
+  "pathParams": {
+    "type": "#SID_TYPE#",
+    "investorId": "#SID_INVESTOR_ID#"
+  },
+  "rc": {},
+  "sandbox": {}
+}

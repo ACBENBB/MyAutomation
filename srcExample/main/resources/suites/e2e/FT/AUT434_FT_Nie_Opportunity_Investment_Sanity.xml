@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT434_FT_Nie_Opportunity_Investment_Sanity" verbose="1" parallel="classes" thread-count="3">
+    <test name="AUT434_FT_Nie_Opportunity_Investment_Sanity">
+        <classes>
+            <class name="io.securitize.tests.fundraise.AUT434_FT_Nie_Opportunity_Investment_Sanity" >
+                <methods>
+                    <include name="AUT434_FT_Nie_Opportunity_Investment_Sanity"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

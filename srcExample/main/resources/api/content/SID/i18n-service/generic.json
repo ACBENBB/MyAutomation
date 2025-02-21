@@ -1,0 +1,9 @@
+{
+  "system": "#SID_SYSTEM#",          //"system": "securitize-id"
+  "language": "#SID_LANGUAGE#",      // "language": "EN"
+  "name": "#SID_NAME#",              //"name": "registration-email-template"
+  "key": "#SID_KEY#",                //"key": "test_API_key" db i18n collection translations, rc: ObjectId("619cba612da7e2f373cbaf41") sandbox: ObjectId("6362c93b0f228114ce79991b")
+  "rc": {},
+  "sandbox": {},
+  "production": {}
+}

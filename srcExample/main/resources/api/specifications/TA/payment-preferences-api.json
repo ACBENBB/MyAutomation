@@ -1,0 +1,571 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/api/v1/payment-preferences": {
+      "get": {
+        "operationId": "PaymentPreferencesController_getPaymentPreferences",
+        "parameters": [
+          {
+            "name": "order-direction",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "desc",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "securitizeIdProfileId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "controlPanelProfileId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PaymentPreferenceResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Payment Preferences"
+        ]
+      }
+    },
+    "/api/v1/payment-preferences/distributions": {
+      "get": {
+        "operationId": "PaymentPreferencesController_getDistributionsPayoutMethod",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "controlPanelProfileId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "isDripEnabled",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "isCashAccountEnabled",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": true,
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PayoutMethodResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Payment Preferences"
+        ]
+      }
+    },
+    "/api/v1/token-preferences": {
+      "get": {
+        "operationId": "TokenPreferencesController_getTokenPreferences",
+        "parameters": [
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TokenPreferenceResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Token Preferences"
+        ]
+      },
+      "post": {
+        "operationId": "TokenPreferencesController_createTokenPreferences",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenPreferencesCreatePayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenPreferenceResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Token Preferences"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Payment Preferences Api",
+    "description": "Endpoints for Payment Preferences",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "PaymentPreferenceResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "securitizeIdProfileId": {
+            "type": "string"
+          },
+          "controlPanelProfileId": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "crypto",
+              "bank-transfer",
+              "treasury",
+              "escrow",
+              "check",
+              "digital-asset",
+              "cash-account",
+              "reinvest",
+              "other"
+            ]
+          },
+          "walletId": {
+            "type": "string"
+          },
+          "walletAddress": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "accountNum": {
+            "type": "string"
+          },
+          "emailAddress": {
+            "type": "string"
+          },
+          "iban": {
+            "type": "string"
+          },
+          "accountHolderName": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "bankId": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "branchId": {
+            "type": "string"
+          },
+          "bankPostalCode": {
+            "type": "string"
+          },
+          "bankRegionCode": {
+            "type": "string"
+          },
+          "bankCity": {
+            "type": "string"
+          },
+          "bankAddress": {
+            "type": "string"
+          },
+          "bankTransferType": {
+            "type": "string"
+          },
+          "routeType": {
+            "type": "string"
+          },
+          "swiftBic": {
+            "type": "string"
+          },
+          "active": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ]
+      },
+      "PayoutMethodResponseDto": {
+        "type": "object",
+        "properties": {
+          "controlPanelProfileId": {
+            "type": "number"
+          },
+          "securitizeIdProfileId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "crypto",
+              "bank-transfer",
+              "treasury",
+              "escrow",
+              "check",
+              "digital-asset",
+              "cash-account",
+              "reinvest",
+              "other"
+            ]
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "TokenPreferenceResponseDto": {
+        "type": "object",
+        "properties": {
+          "securitizeIdProfileId": {
+            "type": "string"
+          },
+          "controlPanelProfileId": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "method": {
+            "enum": [
+              "drip",
+              "check",
+              "none"
+            ],
+            "type": "string"
+          },
+          "updatedBy": {
+            "enum": [
+              "operator",
+              "investor",
+              "system"
+            ],
+            "type": "string"
+          },
+          "updatedByOperatorId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "issuerId",
+          "tokenId",
+          "method",
+          "updatedBy"
+        ]
+      },
+      "TokenPreferencesCreatePayloadDto": {
+        "type": "object",
+        "properties": {
+          "issuerId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "controlPanelProfileId": {
+            "type": "number"
+          },
+          "securitizeIdProfileId": {
+            "type": "string"
+          },
+          "method": {
+            "enum": [
+              "drip",
+              "check",
+              "none"
+            ],
+            "type": "string"
+          },
+          "updatedByOperatorId": {
+            "type": "string"
+          },
+          "updatedBy": {
+            "enum": [
+              "operator",
+              "investor",
+              "system"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "issuerId",
+          "tokenId",
+          "method"
+        ]
+      }
+    }
+  }
+}

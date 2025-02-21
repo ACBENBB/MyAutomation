@@ -1,0 +1,7 @@
+<suite name="AUT641_CreateCashAccount" verbose="1">
+    <test name="AUT641_CreateCashAccount">
+        <classes>
+            <class name="io.securitize.scripts.AUT641_CreateCashAccount" />
+        </classes>
+    </test>
+</suite>

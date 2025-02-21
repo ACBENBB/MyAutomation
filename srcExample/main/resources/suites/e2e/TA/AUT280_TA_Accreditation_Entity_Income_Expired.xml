@@ -1,0 +1,7 @@
+<suite name="AUT280_TA_Accreditation_Entity_Income_Expired" verbose="1">
+    <test name="AUT280_TA_Accreditation_Entity_Income_Expired">
+        <classes>
+            <class name="io.securitize.tests.transferAgent.AUT280_TA_Accreditation_Entity_Income_Expired" />
+        </classes>
+    </test>
+</suite>

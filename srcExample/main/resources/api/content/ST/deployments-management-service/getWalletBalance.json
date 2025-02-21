@@ -1,0 +1,11 @@
+{
+  "pathParams": {
+    "id": "9ee32322-5f9a-4c56-92cb-58aee3e1ee84",
+    "address": "0x13863b4f87854cbf7a466b73b92dcc691d7ab280"
+  },
+  "expectedResponse": {
+    "statusCode": 200,
+    "body": {
+    }
+  }
+}

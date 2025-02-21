@@ -1,0 +1,22 @@
+{
+  "skips": {
+    "entireTest": false,
+    "skipReason": "TEST TEST",
+    "statusCodeCheck": false,
+    "bodySchemaCheck": false,
+    "bodyContentCheck": false
+  },
+  "rc": {
+    "pathParams": {
+      "accreditationId": "41116aa7-53b8-4018-9fe4-2c50defbeae7"
+    }
+  },
+  "sandbox": {
+    "pathParams": {
+      "accreditationId": "ebab02f8-dca2-4f43-af63-1362e856bece"
+    }
+  },
+  "expectedResponse": {
+    "statusCode": 200
+  }
+}

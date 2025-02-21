@@ -1,0 +1,14 @@
+{
+  "queryParams": {
+    "deploymentId": "#ATS_DEPLOYMENT_ID#"
+  },
+  "headers": {
+    "x-api-key": "#ATS_REPORTING_API_KEY#"
+  },
+  "rc": {
+   //"deploymentId": "7fabbcfb-1ef4-47bd-ab45-f249034feb79"
+  },
+  "sandbox": {
+   //"deploymentId": "4bbc7df5-a8d9-435e-a78d-500c4631260c"
+  }
+}

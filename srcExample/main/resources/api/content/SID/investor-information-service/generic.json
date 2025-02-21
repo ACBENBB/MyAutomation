@@ -1,0 +1,42 @@
+{
+   "investorId": "#SID_INVESTOR_ID#",
+   "legalSignerId": "#SID_LEGAL_SIGNER_ID#",
+   "documentId": "#SID_DOCUMENT_ID#",
+
+  "rc": {
+      // "investorId": "631940478ae6ef001304e311",
+      // "legalSignerId": "631940878ae6ef001304e5f2",
+      // "documentId": "6319407c14b5cf001386a51a"
+      // path param "documentId" also exists in 2 methods:
+      // (1.'getInvestorConfidentialDocumentView' 2.'getLegalSignersDocumentSpecific')
+      // with another content of a confidential document id & a signer document id accordingly;
+      // 1.'getInvestorConfidentialDocumentView'
+      // "documentId": "#SID_CONFIDENTIAl_DOCUMENT_ID#"  //"documentId": "6319a1dd8ae6ef001305a96f"
+      // 2.'getLegalSignersDocumentSpecific'
+      // "documentId": "#SID_LEGAL_SIGNER_DOCUMENT_ID#"  //"documentId": "631940888ae6ef001304e5f4"
+  },
+  "sandbox": {
+      // "investorId": "62d457f30b28f5001311c39f",
+      // "legalSignerId": "62d4582557dd990016f46f3d",
+      // "documentId": "62d4581a57dd990016f46dbc"
+      // path param "documentId" also exists in 2 methods:
+      // (1.'getInvestorConfidentialDocumentView' 2.'getLegalSignersDocumentSpecific')
+      // with another content of a confidential document id & a signer document id accordingly;
+      // 1.'getInvestorConfidentialDocumentView'
+      // "documentId": "#SID_CONFIDENTIAl_DOCUMENT_ID#"  //"documentId": "6370b8fee8f32e0013ce27d5"
+      // 2.'getLegalSignersDocumentSpecific'
+      // "documentId": "#SID_LEGAL_SIGNER_DOCUMENT_ID#"  //"documentId": "62d4582557dd990016f46f3f"
+  },
+  "production": {
+      // "investorId": "63b44aba88502ffd2cce527b"
+      // "legalSignerId": "63b44d760352753a1b6cf61c",
+      // "documentId": "63b44e3d88502ffd2cce6736"
+      // path param "documentId" also exists in 2 methods:
+      // (1.'getInvestorConfidentialDocumentView' 2.'getLegalSignersDocumentSpecific')
+      // with another content of a confidential document id & a signer document id accordingly;
+      // 1.'getInvestorConfidentialDocumentView'
+      // "documentId": "#SID_CONFIDENTIAl_DOCUMENT_ID#"  //"documentId": "63b44e7a88502ffd2cce6890"
+      // 2.'getLegalSignersDocumentSpecific'
+      // "documentId": "#SID_LEGAL_SIGNER_DOCUMENT_ID#"  //"documentId": "fill_value"
+  }
+}

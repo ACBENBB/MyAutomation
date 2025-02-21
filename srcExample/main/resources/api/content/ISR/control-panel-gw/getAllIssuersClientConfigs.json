@@ -1,0 +1,12 @@
+{
+  "queryParams":
+  {
+    "page": "0",
+    "limit": "25",
+    "order-field": "created-at",
+    "order-direction": "desc"
+  },
+  "skips": {
+    "entireTest": false
+  }
+}

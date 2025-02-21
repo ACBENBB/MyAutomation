@@ -1,0 +1,13 @@
+{
+  "pathParams": {
+    "investorId": "#SID_INVESTOR_ID#",
+    "id": "#SID_TFA_REQUEST_ID#"
+  },
+  "rc": {},
+  "sandbox": {
+    "skips": {
+      "entireTest": true,
+      "skipReason": "Entire test was skipped due to an existing bug - https://securitize.atlassian.net/browse/ID-1150"
+    }
+  }
+}

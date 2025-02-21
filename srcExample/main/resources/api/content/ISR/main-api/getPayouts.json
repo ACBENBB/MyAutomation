@@ -1,0 +1,10 @@
+{
+  "pathParams":
+  {
+    "issuerId": "#ISSUER_ID#",
+    "userId": "#INVESTOR_ID#"
+  },
+  "skips": {
+    "entireTest": false
+  }
+}

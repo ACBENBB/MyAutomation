@@ -1,0 +1,988 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "PIER API",
+    "description": "The PIER API description",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "BalanceDto": {
+        "type": "object",
+        "properties": {
+          "deploymentId": {
+            "type": "string",
+            "description": "Deployment Identifier",
+            "example": "052e61a6-5f28-11eb-ae93-0242ac130002"
+          },
+          "total": {
+            "type": "string",
+            "description": "Total Balance",
+            "example": "100"
+          },
+          "available": {
+            "type": "string",
+            "description": "Total Available",
+            "example": "100"
+          }
+        },
+        "required": [
+          "deploymentId",
+          "total",
+          "available"
+        ]
+      },
+      "OrderRequestDto": {
+        "type": "object",
+        "properties": {
+          "deploymentId": {
+            "type": "string",
+            "description": "Deployment Identifier",
+            "example": "3219f04c-5f26-11eb-ae93-0242ac130002"
+          },
+          "type": {
+            "type": "number",
+            "description": "Order type",
+            "enum": [
+              {
+                "SELL_ORDER": "sellOrder",
+                "BUY_ORDER": "buyOrder"
+              }
+            ],
+            "example": "buyOrder"
+          },
+          "amount": {
+            "type": "string",
+            "description": "Amount of the order received",
+            "example": 100
+          }
+        },
+        "required": [
+          "deploymentId",
+          "type",
+          "amount"
+        ]
+      },
+      "OrderDto": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string",
+            "example": "c76506d2-5f26-11eb-ae93-0242ac130002",
+            "description": "Order Identifier"
+          },
+          "orderStatus": {
+            "type": "number",
+            "example": "done",
+            "description": "Status of requested Order",
+            "enum": [
+              {
+                "ORDER_DONE": "done",
+                "ORDER_IN_PROGRESS": "inProgress",
+                "ORDER_CANCEL": "cancel",
+                "ORDER_FAILURE": "failure",
+                "ORDER_EXPIRED": "expired"
+              }
+            ]
+          }
+        },
+        "required": [
+          "orderId",
+          "orderStatus"
+        ]
+      },
+      "RemoveOrderDto": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "number",
+            "description": "Reason why order has been removed",
+            "enum": [
+              {
+                "CANCELLED": "cancelled",
+                "EXPIRED": "expired"
+              }
+            ],
+            "example": "expired"
+          }
+        },
+        "required": [
+          "reason"
+        ]
+      },
+      "OrderAuthorizationDto": {
+        "type": "object",
+        "properties": {
+          "isAuthorized": {
+            "type": "boolean",
+            "description": "User authorization to buy order",
+            "example": false
+          },
+          "reason": {
+            "type": "number",
+            "description": "Order cancel buy authorization reason",
+            "enum": [
+              {
+                "0": "AUTHORIZED",
+                "15": "NOT_ENOUGH_TOKENS_FOR_SENDER",
+                "25": "FLOWBACK",
+                "26": "DESTINATION_JURISDICTION_RESTRICTED",
+                "32": "HOLD_UP_PERIOD_1Y",
+                "40": "MAX_INVESTORS_IN_CATEGORY",
+                "50": "ONLY_FULL_TRANSFER",
+                "51": "MIN_TOKENS_FOR_INVESTOR",
+                "52": "MAX_TOKENS_FOR_INVESTOR",
+                "61": "FORCE_ACCREDITATION",
+                "AUTHORIZED": 0,
+                "NOT_ENOUGH_TOKENS_FOR_SENDER": 15,
+                "FLOWBACK": 25,
+                "DESTINATION_JURISDICTION_RESTRICTED": 26,
+                "HOLD_UP_PERIOD_1Y": 32,
+                "MAX_INVESTORS_IN_CATEGORY": 40,
+                "ONLY_FULL_TRANSFER": 50,
+                "MIN_TOKENS_FOR_INVESTOR": 51,
+                "MAX_TOKENS_FOR_INVESTOR": 52,
+                "FORCE_ACCREDITATION": 61
+              }
+            ],
+            "example": [
+              40,
+              0
+            ]
+          }
+        },
+        "required": [
+          "isAuthorized",
+          "reason"
+        ]
+      },
+      "OrderMatchDto": {
+        "type": "object",
+        "properties": {
+          "sellOrderId": {
+            "type": "string",
+            "description": "Sell Order Id",
+            "example": "08c28f99-9b91-45d9-9c3d-1f4b326ec879"
+          },
+          "buyOrderId": {
+            "type": "string",
+            "description": "Buy Order Id",
+            "example": "654dbe37-0b22-4550-8410-ca5801307ef8"
+          },
+          "amount": {
+            "type": "string",
+            "description": "Amount matched",
+            "example": "100"
+          },
+          "matchId": {
+            "type": "string",
+            "description": "Match Id from the ATS",
+            "example": "Abasdqw43"
+          }
+        },
+        "required": [
+          "sellOrderId",
+          "buyOrderId",
+          "amount",
+          "matchId"
+        ]
+      },
+      "OrderMatchResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "42ba73ed-2f69-418c-b392-2c4b5af80891",
+            "description": "Internal generated Id from Pier Api"
+          },
+          "sellOrderId": {
+            "type": "string",
+            "example": "c76506d2-5f26-11eb-ae93-0242ac130002",
+            "description": "Sell Order Identifier"
+          },
+          "matchId": {
+            "type": "string",
+            "example": "c76506d2-5f26-11eb-ae93-0242ac130002",
+            "description": "Match Id from the ATS"
+          },
+          "orderStatus": {
+            "type": "number",
+            "example": "done",
+            "description": "Status of requested Order",
+            "enum": [
+              {
+                "ORDER_DONE": "done",
+                "ORDER_IN_PROGRESS": "inProgress",
+                "ORDER_CANCEL": "cancel",
+                "ORDER_FAILURE": "failure",
+                "ORDER_EXPIRED": "expired"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "sellOrderId",
+          "matchId",
+          "orderStatus"
+        ]
+      },
+      "RegisterAtsDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of ATS",
+            "example": "Lehner Brothers"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "TbeAddressDto": {
+        "type": "object",
+        "properties": {
+          "deploymentId": {
+            "type": "string",
+            "description": "Deployment identifier",
+            "example": "2130e1de-6b1d-11eb-9439-0242ac130002"
+          },
+          "omnibusTBEAddress": {
+            "type": "string",
+            "example": "0xB7B5F80A649e9F7961a3102A46e734a6225BA7de",
+            "description": "Omnibus TBE Address"
+          }
+        },
+        "required": [
+          "deploymentId",
+          "omnibusTBEAddress"
+        ]
+      },
+      "CountersDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "AssetsDto": {
+        "type": "object",
+        "properties": {
+          "deploymentId": {
+            "type": "string",
+            "description": "Deployment identifier",
+            "example": "2130e1de-6b1d-11eb-9439-0242ac130002"
+          },
+          "tokenId": {
+            "type": "string",
+            "description": "Token identifier",
+            "example": "3219f04c-5f26-11eb-ae93-0242ac130002"
+          },
+          "rules": {
+            "description": "Asset Rules",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "usForbiddenStates": {
+            "description": "Asset Rules",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "deploymentId",
+          "tokenId",
+          "rules",
+          "usForbiddenStates"
+        ]
+      }
+    }
+  },
+  "paths": {
+    "/v1/users/{securitizeId}/balances": {
+      "get": {
+        "operationId": "BalancesController_getBalances",
+        "summary": "Returns the User's Balances",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "Secret Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "securitizeId",
+            "required": true,
+            "in": "path",
+            "description": "Issuer identifier",
+            "example": "602d717074041c001ae0fdc8",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BalanceDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Balances"
+        ]
+      }
+    },
+    "/v1/users/{securitizeId}/orders": {
+      "post": {
+        "operationId": "OrdersController_addOrder",
+        "summary": "Adds a new order",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "Secret Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "securitizeId",
+            "required": true,
+            "in": "path",
+            "description": "Issuer identifier",
+            "example": "602d717074041c001ae0fdc8",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/v1/users/{securitizeId}/orders/{orderId}/cancel": {
+      "post": {
+        "operationId": "OrdersController_removeSellOrder",
+        "summary": "Remove an existing order",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "Secret Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "securitizeId",
+            "required": true,
+            "in": "path",
+            "description": "Issuer identifier",
+            "example": "602d717074041c001ae0fdc8",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderId",
+            "required": true,
+            "in": "path",
+            "description": "Order identifier",
+            "example": "2130e1de-6b1d-11eb-9439-0242ac130002",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemoveOrderDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/v1/users/{securitizeId}/orders/{orderId}/status": {
+      "get": {
+        "operationId": "OrdersController_orderStatus",
+        "summary": "Check order status",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "Secret Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "securitizeId",
+            "required": true,
+            "in": "path",
+            "description": "Issuer identifier",
+            "example": "602d717074041c001ae0fdc8",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderId",
+            "required": true,
+            "in": "path",
+            "description": "Order identifier",
+            "example": "2130e1de-6b1d-11eb-9439-0242ac130002",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/v1/users/{securitizeId}/orders/canBuy": {
+      "get": {
+        "operationId": "OrdersController_canBuy",
+        "summary": "Check if user can place an order",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "Secret Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "securitizeId",
+            "required": true,
+            "in": "path",
+            "description": "Issuer identifier",
+            "example": "602d717074041c001ae0fdc8",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "query",
+            "description": "Deployment identifier",
+            "example": "2130e1de-6b1d-11eb-9439-0242ac130002",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderAuthorizationDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/v1/matches": {
+      "post": {
+        "operationId": "MatchesController_matchOrder",
+        "summary": "Reports a match between two orders",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "Secret Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderMatchDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderMatchResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Matches"
+        ]
+      }
+    },
+    "/v1/ats/{atsId}": {
+      "get": {
+        "operationId": "AtsController_getAtsDetails",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "Secret Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "atsId",
+            "required": true,
+            "in": "path",
+            "description": "ATS Identifier",
+            "example": "3219f04c-5f26-11eb-ae93-0242ac130002",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "ATS"
+        ]
+      }
+    },
+    "/v1/ats": {
+      "post": {
+        "operationId": "AtsController_registerAts",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "Secret Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterAtsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "ATS"
+        ]
+      }
+    },
+    "/v1/ats/{atsId}/access-tokens": {
+      "post": {
+        "operationId": "AtsController_createAccessTokens",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "Secret Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "atsId",
+            "required": true,
+            "in": "path",
+            "description": "ATS identifier",
+            "example": "33d719f4-5f27-11eb-ae93-0242ac130002",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "ATS"
+        ]
+      }
+    },
+    "/v1/deployments/{deploymentId}/tbe-address": {
+      "get": {
+        "operationId": "DeploymentsController_getDeploymentTBEAddress",
+        "summary": "Gets deployment TBE Address",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "Secret Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "description": "Deployment identifier",
+            "example": "2130e1de-6b1d-11eb-9439-0242ac130002",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TbeAddressDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Deployments"
+        ]
+      }
+    },
+    "/v1/deployments/{deploymentId}/counters": {
+      "get": {
+        "operationId": "DeploymentsController_getDeploymentCounters",
+        "summary": "Gets deployment counters information",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "Secret Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "description": "Deployment identifier",
+            "example": "2130e1de-6b1d-11eb-9439-0242ac130002",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CountersDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Deployments"
+        ]
+      }
+    },
+    "/v1/assets/{deploymentId}": {
+      "get": {
+        "operationId": "AssetsController_getAssetRules",
+        "summary": "Gets Asset Deployment Compliance",
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "description": "Deployment identifier",
+            "example": "2130e1de-6b1d-11eb-9439-0242ac130002",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetsDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    }
+  }
+}

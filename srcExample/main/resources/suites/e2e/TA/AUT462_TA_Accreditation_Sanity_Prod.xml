@@ -1,0 +1,7 @@
+<suite name="AUT462_TA_Accreditation_Sanity_Prod" verbose="1">
+    <test name="AUT462_TA_Accreditation_Sanity_Prod">
+        <classes>
+            <class name="io.securitize.tests.transferAgent.AUT462_TA_Accreditation_Sanity_Prod"/>
+        </classes>
+    </test>
+</suite>

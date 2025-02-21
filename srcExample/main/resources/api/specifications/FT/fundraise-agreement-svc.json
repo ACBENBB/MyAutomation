@@ -1,0 +1,711 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/v1/web3-agreement": {
+      "post": {
+        "operationId": "AgreementsController_createWeb3Agreement",
+        "parameters": [
+
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Web3AgreementPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Create a Web3 Agreement PDF",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Web3AgreementResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/web3-agreement-completion": {
+      "post": {
+        "operationId": "AgreementsController_createWeb3CompleteAgreement",
+        "parameters": [
+
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Web3CompleteAgreementPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Merge Web3 agreement and completion document",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Web3AgreementResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/docusign-agreement": {
+      "post": {
+        "operationId": "AgreementsController_createDocusignAgreement",
+        "parameters": [
+
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocusignAgreementPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocusignAgreementResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/standard-amendment": {
+      "post": {
+        "operationId": "AgreementsController_createStandardAmendment",
+        "parameters": [
+
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StandardDocumentPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Create a Standard Amendment PDF",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StandardDocumentResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/standard-agreement": {
+      "post": {
+        "operationId": "AgreementsController_createStandardAgreement",
+        "parameters": [
+
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StandardDocumentPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Create a Standard Agreement PDF",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StandardDocumentResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/docusign-agreement": {
+      "post": {
+        "operationId": "AgreementsControllerV2_createDocusignAgreement",
+        "parameters": [
+
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocusignAgreementPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Create a Docusign Agreement",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocusignAgreementV2Response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/standard-amendment": {
+      "post": {
+        "operationId": "AgreementsControllerV2_createStandardAmendment",
+        "parameters": [
+
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StandardDocumentPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Create a Standard Amendment PDF",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StandardDocumentV2Response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/standard-agreement": {
+      "post": {
+        "operationId": "AgreementsControllerV2_createStandardAgreement",
+        "parameters": [
+
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StandardDocumentPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Create a Standard Agreement PDF",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StandardDocumentV2Response"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "info": {
+    "title": "Fundraise Agreement Service",
+    "description": "Service to generate PDF agreement documents",
+    "version": "1.0",
+    "contact": {
+
+    }
+  },
+  "tags": [
+
+  ],
+  "servers": [
+
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "Web3AgreementPayload": {
+        "type": "object",
+        "properties": {
+          "legalSignerName": {
+            "type": "string"
+          },
+          "investorId": {
+            "type": "string"
+          },
+          "opportunityId": {
+            "type": "string"
+          },
+          "investmentAmount": {
+            "type": "number"
+          },
+          "investmentCurrency": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "investorId",
+          "opportunityId",
+          "investmentAmount",
+          "investmentCurrency"
+        ]
+      },
+      "Web3AgreementResponse": {
+        "type": "object",
+        "properties": {
+          "hash": {
+            "type": "string"
+          },
+          "bucket": {
+            "type": "string"
+          },
+          "fileKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "hash",
+          "bucket",
+          "fileKey"
+        ]
+      },
+      "S3Path": {
+        "type": "object",
+        "properties": {
+          "bucket": {
+            "type": "string"
+          },
+          "fileKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "bucket",
+          "fileKey"
+        ]
+      },
+      "Web3CompleteAgreementPayload": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "string"
+          },
+          "opportunityId": {
+            "type": "string"
+          },
+          "initialAgreement": {
+            "$ref": "#/components/schemas/S3Path"
+          }
+        },
+        "required": [
+          "investorId",
+          "opportunityId",
+          "initialAgreement"
+        ]
+      },
+      "DocusignAgreementPayload": {
+        "type": "object",
+        "properties": {
+          "investmentId": {
+            "type": "string"
+          },
+          "investorId": {
+            "type": "string"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "agreement": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "investmentId",
+          "investorId",
+          "issuerId",
+          "tokenId",
+          "agreement"
+        ]
+      },
+      "DocusignAgreementResponse": {
+        "type": "object",
+        "properties": {
+          "bucket": {
+            "type": "string"
+          },
+          "fileKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "bucket",
+          "fileKey"
+        ]
+      },
+      "StandardDocumentPayload": {
+        "type": "object",
+        "properties": {
+          "legalSignerName": {
+            "type": "string"
+          },
+          "additionalData": {
+            "type": "object"
+          },
+          "investorIp": {
+            "type": "string"
+          },
+          "signatureDate": {
+            "type": "string"
+          },
+          "investorId": {
+            "type": "string"
+          },
+          "opportunityId": {
+            "type": "string"
+          },
+          "investmentAmount": {
+            "type": "number"
+          },
+          "investmentCurrency": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "investorId",
+          "opportunityId",
+          "investmentAmount",
+          "investmentCurrency"
+        ]
+      },
+      "StandardDocumentResponse": {
+        "type": "object",
+        "properties": {
+          "bucket": {
+            "type": "string"
+          },
+          "fileKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "bucket",
+          "fileKey"
+        ]
+      },
+      "DocusignAgreementV2Response": {
+        "type": "object",
+        "properties": {
+          "bucket": {
+            "type": "string"
+          },
+          "fileKey": {
+            "type": "string"
+          },
+          "hash": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "bucket",
+          "fileKey",
+          "hash"
+        ]
+      },
+      "StandardDocumentV2Response": {
+        "type": "object",
+        "properties": {
+          "bucket": {
+            "type": "string"
+          },
+          "fileKey": {
+            "type": "string"
+          },
+          "hash": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "bucket",
+          "fileKey",
+          "hash"
+        ]
+      }
+    }
+  }
+}

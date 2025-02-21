@@ -1,0 +1,5080 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Deployments management service API",
+    "version": "1.0.0"
+  },
+  "components": {},
+  "tags": [
+    {
+      "name": "deployments"
+    },
+    {
+      "name": "compliance"
+    },
+    {
+      "name": "permissions"
+    },
+    {
+      "name": "transactions"
+    }
+  ],
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "paths": {
+    "/v1/issuers/{id}/deployments": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "issuerId": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "symbol": {
+                        "type": "string"
+                      },
+                      "decimals": {
+                        "type": "integer"
+                      },
+                      "provider": {
+                        "type": "string"
+                      },
+                      "url": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "metadataHash": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "tokenType": {
+                        "type": "string",
+                        "enum": [
+                          "standard",
+                          "partitioned"
+                        ]
+                      },
+                      "totalSupply": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      },
+                      "owners": {
+                        "type": "object",
+                        "properties": {
+                          "tokenOwner": {
+                            "type": "string"
+                          },
+                          "omnibusTBEAddress": {
+                            "type": "string"
+                          },
+                          "walletRegistrarOwner": {
+                            "type": "string"
+                          },
+                          "walletRegistrarPrivateKey": {
+                            "type": "string"
+                          },
+                          "walletRegistrarOwnerBalance": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "roles": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "address": {
+                              "type": "string"
+                            },
+                            "role": {
+                              "type": "string",
+                              "enum": [
+                                "none",
+                                "master",
+                                "issuer",
+                                "exchange"
+                              ]
+                            },
+                            "comment": {
+                              "type": "string"
+                            },
+                            "ownership": {
+                              "type": "string",
+                              "enum": [
+                                "single",
+                                "multisig",
+                                "hsm"
+                              ],
+                              "default": "single"
+                            }
+                          }
+                        },
+                        "minItems": 1
+                      },
+                      "complianceRules": {
+                        "type": "object",
+                        "properties": {
+                          "totalInvestorsLimit": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "integer"
+                              },
+                              "comment": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "value"
+                            ]
+                          },
+                          "minUSTokens": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "string",
+                                "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                              },
+                              "comment": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "value"
+                            ]
+                          },
+                          "minEUTokens": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "string",
+                                "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                              },
+                              "comment": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "value"
+                            ]
+                          },
+                          "usInvestorsLimit": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "integer"
+                              },
+                              "comment": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "value"
+                            ]
+                          },
+                          "usAccreditedInvestorsLimit": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "integer"
+                              },
+                              "comment": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "value"
+                            ]
+                          },
+                          "nonAccreditedInvestorsLimit": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "integer"
+                              },
+                              "comment": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "value"
+                            ]
+                          },
+                          "euRetailInvestorsLimit": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "integer"
+                              },
+                              "comment": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "value"
+                            ]
+                          },
+                          "jpInvestorsLimit": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "integer"
+                              },
+                              "comment": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "value"
+                            ]
+                          },
+                          "maxUSInvestorsPercentage": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "integer"
+                              },
+                              "comment": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "value"
+                            ]
+                          },
+                          "blockFlowbackEndTime": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "integer"
+                              },
+                              "comment": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "value"
+                            ]
+                          },
+                          "nonUSLockPeriod": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "integer"
+                              },
+                              "comment": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "value"
+                            ]
+                          },
+                          "minimumTotalInvestors": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "integer"
+                              },
+                              "comment": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "value"
+                            ]
+                          },
+                          "minimumHoldingsPerInvestor": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "string",
+                                "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                              },
+                              "comment": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "value"
+                            ]
+                          },
+                          "maximumHoldingsPerInvestor": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "string",
+                                "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                              },
+                              "comment": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "value"
+                            ]
+                          },
+                          "usLockPeriod": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "integer"
+                              },
+                              "comment": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "value"
+                            ]
+                          },
+                          "authorizedSecurities": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "string",
+                                "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                              },
+                              "comment": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "value"
+                            ]
+                          },
+                          "forceFullTransfer": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "boolean"
+                              },
+                              "comment": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "value"
+                            ]
+                          },
+                          "forceAccredited": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "boolean"
+                              },
+                              "comment": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "value"
+                            ]
+                          },
+                          "forceAccreditedUS": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "boolean"
+                              },
+                              "comment": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "value"
+                            ]
+                          },
+                          "worldWideForceFullTransfer": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "boolean"
+                              },
+                              "comment": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "value"
+                            ]
+                          }
+                        }
+                      },
+                      "countriesComplianceStatuses": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "countryName": {
+                              "type": "string",
+                              "format": "countryCode"
+                            },
+                            "complianceStatus": {
+                              "type": "string",
+                              "enum": [
+                                "none",
+                                "us",
+                                "eu",
+                                "jp",
+                                "forbidden"
+                              ]
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "countryName",
+                            "complianceStatus"
+                          ]
+                        }
+                      },
+                      "status": {
+                        "type": "string",
+                        "enum": [
+                          "initial",
+                          "pending",
+                          "inProgress",
+                          "success",
+                          "failure"
+                        ]
+                      },
+                      "tokenAddress": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "abstractionLayerDeploymentId": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "complianceType": {
+                        "type": "string",
+                        "enum": [
+                          "notRegulated",
+                          "whitelisted",
+                          "regulated",
+                          "partitioned"
+                        ]
+                      },
+                      "lockManagerType": {
+                        "type": "string",
+                        "enum": [
+                          "wallet",
+                          "investor",
+                          "partitioned"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Return all the issuer deployments",
+        "tags": [
+          "deployments"
+        ],
+        "operationId": "getDeployments",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "post": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create the initial deployment data which includes the token description",
+        "tags": [
+          "deployments"
+        ],
+        "operationId": "createDeployment",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "symbol": {
+                    "type": "string"
+                  },
+                  "decimals": {
+                    "type": "integer"
+                  },
+                  "provider": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "metadataHash": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "tokenType": {
+                    "type": "string",
+                    "enum": [
+                      "standard",
+                      "partitioned"
+                    ]
+                  },
+                  "totalSupply": {
+                    "type": "number",
+                    "nullable": true
+                  },
+                  "deploymentId": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "symbol",
+                  "decimals",
+                  "provider",
+                  "deploymentId"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/issuers/{id}/deployments-basic-info": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "issuerId": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "symbol": {
+                        "type": "string"
+                      },
+                      "decimals": {
+                        "type": "integer"
+                      },
+                      "provider": {
+                        "type": "string"
+                      },
+                      "url": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "metadataHash": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "tokenType": {
+                        "type": "string",
+                        "enum": [
+                          "standard",
+                          "partitioned"
+                        ]
+                      },
+                      "totalSupply": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      },
+                      "status": {
+                        "type": "string",
+                        "enum": [
+                          "initial",
+                          "pending",
+                          "inProgress",
+                          "success",
+                          "failure"
+                        ]
+                      },
+                      "tokenAddress": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "abstractionLayerDeploymentId": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Return the basic information for all the issuer deployments",
+        "tags": [
+          "deployments"
+        ],
+        "operationId": "getDeploymentsBasicInfo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/issuers/{id}/deployments/{deploymentId}/basic-info": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "issuerId": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "symbol": {
+                      "type": "string"
+                    },
+                    "decimals": {
+                      "type": "integer"
+                    },
+                    "provider": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "metadataHash": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "tokenType": {
+                      "type": "string",
+                      "enum": [
+                        "standard",
+                        "partitioned"
+                      ]
+                    },
+                    "totalSupply": {
+                      "type": "number",
+                      "nullable": true
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "initial",
+                        "pending",
+                        "inProgress",
+                        "success",
+                        "failure"
+                      ]
+                    },
+                    "tokenAddress": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "abstractionLayerDeploymentId": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Return the basic information for an issuer deployment",
+        "tags": [
+          "deployments"
+        ],
+        "operationId": "getIssuerDeploymentBasicInfo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/issuers/{id}/deployments/{deploymentId}": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "issuerId": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "symbol": {
+                      "type": "string"
+                    },
+                    "decimals": {
+                      "type": "integer"
+                    },
+                    "provider": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "metadataHash": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "tokenType": {
+                      "type": "string",
+                      "enum": [
+                        "standard",
+                        "partitioned"
+                      ]
+                    },
+                    "totalSupply": {
+                      "type": "number",
+                      "nullable": true
+                    },
+                    "owners": {
+                      "type": "object",
+                      "properties": {
+                        "tokenOwner": {
+                          "type": "string"
+                        },
+                        "omnibusTBEAddress": {
+                          "type": "string"
+                        },
+                        "walletRegistrarOwner": {
+                          "type": "string"
+                        },
+                        "walletRegistrarPrivateKey": {
+                          "type": "string"
+                        },
+                        "walletRegistrarOwnerBalance": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "roles": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "address": {
+                            "type": "string"
+                          },
+                          "role": {
+                            "type": "string",
+                            "enum": [
+                              "none",
+                              "master",
+                              "issuer",
+                              "exchange"
+                            ]
+                          },
+                          "comment": {
+                            "type": "string"
+                          },
+                          "ownership": {
+                            "type": "string",
+                            "enum": [
+                              "single",
+                              "multisig",
+                              "hsm"
+                            ],
+                            "default": "single"
+                          }
+                        }
+                      },
+                      "minItems": 1
+                    },
+                    "complianceRules": {
+                      "type": "object",
+                      "properties": {
+                        "totalInvestorsLimit": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "minUSTokens": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "string",
+                              "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "minEUTokens": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "string",
+                              "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "usInvestorsLimit": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "usAccreditedInvestorsLimit": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "nonAccreditedInvestorsLimit": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "euRetailInvestorsLimit": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "jpInvestorsLimit": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "maxUSInvestorsPercentage": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "blockFlowbackEndTime": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "nonUSLockPeriod": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "minimumTotalInvestors": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "minimumHoldingsPerInvestor": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "string",
+                              "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "maximumHoldingsPerInvestor": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "string",
+                              "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "usLockPeriod": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "authorizedSecurities": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "string",
+                              "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "forceFullTransfer": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "boolean"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "forceAccredited": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "boolean"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "forceAccreditedUS": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "boolean"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "worldWideForceFullTransfer": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "boolean"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    },
+                    "countriesComplianceStatuses": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "countryName": {
+                            "type": "string",
+                            "format": "countryCode"
+                          },
+                          "complianceStatus": {
+                            "type": "string",
+                            "enum": [
+                              "none",
+                              "us",
+                              "eu",
+                              "jp",
+                              "forbidden"
+                            ]
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "countryName",
+                          "complianceStatus"
+                        ]
+                      }
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "initial",
+                        "pending",
+                        "inProgress",
+                        "success",
+                        "failure"
+                      ]
+                    },
+                    "tokenAddress": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "abstractionLayerDeploymentId": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "complianceType": {
+                      "type": "string",
+                      "enum": [
+                        "notRegulated",
+                        "whitelisted",
+                        "regulated",
+                        "partitioned"
+                      ]
+                    },
+                    "lockManagerType": {
+                      "type": "string",
+                      "enum": [
+                        "wallet",
+                        "investor",
+                        "partitioned"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Return the information for an issuer deployment",
+        "tags": [
+          "deployments"
+        ],
+        "operationId": "getIssuerDeploymentInfo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "issuerId": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "symbol": {
+                      "type": "string"
+                    },
+                    "decimals": {
+                      "type": "integer"
+                    },
+                    "provider": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "metadataHash": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "tokenType": {
+                      "type": "string",
+                      "enum": [
+                        "standard",
+                        "partitioned"
+                      ]
+                    },
+                    "totalSupply": {
+                      "type": "number",
+                      "nullable": true
+                    },
+                    "owners": {
+                      "type": "object",
+                      "properties": {
+                        "tokenOwner": {
+                          "type": "string"
+                        },
+                        "omnibusTBEAddress": {
+                          "type": "string"
+                        },
+                        "walletRegistrarOwner": {
+                          "type": "string"
+                        },
+                        "walletRegistrarPrivateKey": {
+                          "type": "string"
+                        },
+                        "walletRegistrarOwnerBalance": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "roles": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "address": {
+                            "type": "string"
+                          },
+                          "role": {
+                            "type": "string",
+                            "enum": [
+                              "none",
+                              "master",
+                              "issuer",
+                              "exchange"
+                            ]
+                          },
+                          "comment": {
+                            "type": "string"
+                          },
+                          "ownership": {
+                            "type": "string",
+                            "enum": [
+                              "single",
+                              "multisig",
+                              "hsm"
+                            ],
+                            "default": "single"
+                          }
+                        }
+                      },
+                      "minItems": 1
+                    },
+                    "complianceRules": {
+                      "type": "object",
+                      "properties": {
+                        "totalInvestorsLimit": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "minUSTokens": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "string",
+                              "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "minEUTokens": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "string",
+                              "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "usInvestorsLimit": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "usAccreditedInvestorsLimit": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "nonAccreditedInvestorsLimit": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "euRetailInvestorsLimit": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "jpInvestorsLimit": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "maxUSInvestorsPercentage": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "blockFlowbackEndTime": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "nonUSLockPeriod": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "minimumTotalInvestors": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "minimumHoldingsPerInvestor": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "string",
+                              "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "maximumHoldingsPerInvestor": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "string",
+                              "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "usLockPeriod": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "authorizedSecurities": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "string",
+                              "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "forceFullTransfer": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "boolean"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "forceAccredited": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "boolean"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "forceAccreditedUS": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "boolean"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "worldWideForceFullTransfer": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "boolean"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    },
+                    "countriesComplianceStatuses": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "countryName": {
+                            "type": "string",
+                            "format": "countryCode"
+                          },
+                          "complianceStatus": {
+                            "type": "string",
+                            "enum": [
+                              "none",
+                              "us",
+                              "eu",
+                              "jp",
+                              "forbidden"
+                            ]
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "countryName",
+                          "complianceStatus"
+                        ]
+                      }
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "initial",
+                        "pending",
+                        "inProgress",
+                        "success",
+                        "failure"
+                      ]
+                    },
+                    "tokenAddress": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "abstractionLayerDeploymentId": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "complianceType": {
+                      "type": "string",
+                      "enum": [
+                        "notRegulated",
+                        "whitelisted",
+                        "regulated",
+                        "partitioned"
+                      ]
+                    },
+                    "lockManagerType": {
+                      "type": "string",
+                      "enum": [
+                        "wallet",
+                        "investor",
+                        "partitioned"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Return an issuer deployment",
+        "tags": [
+          "deployments"
+        ],
+        "operationId": "getDeployment",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{id}/wallet/{address}/balance": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "wallet": {
+                      "type": "string"
+                    },
+                    "balance": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Return the balance of the registrar owner",
+        "tags": [
+          "deployments"
+        ],
+        "operationId": "getWalletBalance",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{id}/description": {
+      "put": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Update the token description (can only be done before deploying the token)",
+        "tags": [
+          "deployments"
+        ],
+        "operationId": "updateDeploymentDescription",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "symbol": {
+                    "type": "string"
+                  },
+                  "decimals": {
+                    "type": "integer"
+                  },
+                  "provider": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "metadataHash": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "tokenType": {
+                    "type": "string",
+                    "enum": [
+                      "standard",
+                      "partitioned"
+                    ]
+                  },
+                  "totalSupply": {
+                    "type": "number",
+                    "nullable": true
+                  }
+                },
+                "minProperties": 1
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{id}/compliance-type": {
+      "put": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Update the complianceType (can only be done before deploying the token)",
+        "tags": [
+          "deployments"
+        ],
+        "operationId": "updateDeploymentComplianceType",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "complianceType": {
+                    "type": "string",
+                    "enum": [
+                      "notRegulated",
+                      "whitelisted",
+                      "regulated",
+                      "partitioned"
+                    ],
+                    "default": "regulated"
+                  }
+                },
+                "minProperties": 1
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{id}/compliance": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "complianceRules": {
+                      "type": "object",
+                      "properties": {
+                        "totalInvestorsLimit": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "minUSTokens": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "string",
+                              "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "minEUTokens": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "string",
+                              "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "usInvestorsLimit": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "usAccreditedInvestorsLimit": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "nonAccreditedInvestorsLimit": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "euRetailInvestorsLimit": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "jpInvestorsLimit": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "maxUSInvestorsPercentage": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "blockFlowbackEndTime": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "nonUSLockPeriod": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "minimumTotalInvestors": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "minimumHoldingsPerInvestor": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "string",
+                              "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "maximumHoldingsPerInvestor": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "string",
+                              "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "usLockPeriod": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "authorizedSecurities": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "string",
+                              "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "forceFullTransfer": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "boolean"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "forceAccredited": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "boolean"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "forceAccreditedUS": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "boolean"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        "worldWideForceFullTransfer": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "boolean"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    },
+                    "countriesComplianceStatuses": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "countryName": {
+                            "type": "string",
+                            "format": "countryCode"
+                          },
+                          "complianceStatus": {
+                            "type": "string",
+                            "enum": [
+                              "none",
+                              "us",
+                              "eu",
+                              "jp",
+                              "forbidden"
+                            ]
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "countryName",
+                          "complianceStatus"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Return the compliance rules and countries compliance statuses of the deployment, either before the deployment has been actually deployed or from the blockchain",
+        "tags": [
+          "compliance"
+        ],
+        "operationId": "getCompliance",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "post": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create the initial deployment compliance rules and countries compliance statuses (can only be done before deploying the token)",
+        "tags": [
+          "compliance"
+        ],
+        "operationId": "createCompliance",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "complianceRules": {
+                    "type": "object",
+                    "properties": {
+                      "totalInvestorsLimit": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "minUSTokens": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string",
+                            "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "minEUTokens": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string",
+                            "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "usInvestorsLimit": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "usAccreditedInvestorsLimit": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "nonAccreditedInvestorsLimit": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "euRetailInvestorsLimit": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "jpInvestorsLimit": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "maxUSInvestorsPercentage": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "blockFlowbackEndTime": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "nonUSLockPeriod": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "minimumTotalInvestors": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "minimumHoldingsPerInvestor": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string",
+                            "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "maximumHoldingsPerInvestor": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string",
+                            "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "usLockPeriod": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "authorizedSecurities": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string",
+                            "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "forceFullTransfer": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "boolean"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "forceAccredited": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "boolean"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "forceAccreditedUS": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "boolean"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "worldWideForceFullTransfer": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "boolean"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      }
+                    }
+                  },
+                  "countriesComplianceStatuses": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "countryName": {
+                          "type": "string",
+                          "format": "countryCode"
+                        },
+                        "complianceStatus": {
+                          "type": "string",
+                          "enum": [
+                            "none",
+                            "us",
+                            "eu",
+                            "jp",
+                            "forbidden"
+                          ]
+                        },
+                        "comment": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "countryName",
+                        "complianceStatus"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "complianceRules",
+                  "countriesComplianceStatuses"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create transactions templates that, when executed, will modify the compliance rules and countries compliance statuses",
+        "tags": [
+          "compliance"
+        ],
+        "operationId": "updateCompliance",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "complianceRules": {
+                    "type": "object",
+                    "properties": {
+                      "totalInvestorsLimit": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "minUSTokens": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string",
+                            "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "minEUTokens": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string",
+                            "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "usInvestorsLimit": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "usAccreditedInvestorsLimit": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "nonAccreditedInvestorsLimit": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "euRetailInvestorsLimit": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "jpInvestorsLimit": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "maxUSInvestorsPercentage": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "blockFlowbackEndTime": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "nonUSLockPeriod": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "minimumTotalInvestors": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "minimumHoldingsPerInvestor": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string",
+                            "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "maximumHoldingsPerInvestor": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string",
+                            "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "usLockPeriod": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "authorizedSecurities": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string",
+                            "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "forceFullTransfer": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "boolean"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "forceAccredited": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "boolean"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "forceAccreditedUS": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "boolean"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      "worldWideForceFullTransfer": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "boolean"
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      }
+                    }
+                  },
+                  "countriesComplianceStatuses": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "countryName": {
+                          "type": "string",
+                          "format": "countryCode"
+                        },
+                        "complianceStatus": {
+                          "type": "string",
+                          "enum": [
+                            "none",
+                            "us",
+                            "eu",
+                            "jp",
+                            "forbidden"
+                          ]
+                        },
+                        "comment": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "countryName",
+                        "complianceStatus"
+                      ]
+                    }
+                  }
+                },
+                "minProperties": 1
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{id}/compliance/counters": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "euRetailInvestorsCounts": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "countryCode": {
+                            "type": "string"
+                          },
+                          "count": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    },
+                    "usInvestorsCount": {
+                      "type": "integer"
+                    },
+                    "totalInvestorsCount": {
+                      "type": "integer"
+                    },
+                    "accreditedInvestorsCount": {
+                      "type": "integer"
+                    },
+                    "usAccreditedInvestorsCount": {
+                      "type": "integer"
+                    },
+                    "jpInvestorsCount": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Return the current compliance holders counters and countries of the deployment",
+        "tags": [
+          "compliance",
+          "counters"
+        ],
+        "operationId": "getComplianceCounters",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{id}/permissions": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "owners": {
+                      "type": "object",
+                      "properties": {
+                        "tokenOwner": {
+                          "type": "string"
+                        },
+                        "omnibusTBEAddress": {
+                          "type": "string"
+                        },
+                        "walletRegistrarOwner": {
+                          "type": "string"
+                        },
+                        "walletRegistrarPrivateKey": {
+                          "type": "string"
+                        },
+                        "walletRegistrarOwnerBalance": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "roles": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "address": {
+                            "type": "string"
+                          },
+                          "role": {
+                            "type": "string",
+                            "enum": [
+                              "none",
+                              "master",
+                              "issuer",
+                              "exchange"
+                            ]
+                          },
+                          "comment": {
+                            "type": "string"
+                          },
+                          "ownership": {
+                            "type": "string",
+                            "enum": [
+                              "single",
+                              "multisig",
+                              "hsm"
+                            ],
+                            "default": "single"
+                          }
+                        }
+                      },
+                      "minItems": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Return the owners and roles of the deployment, either before the deployment has been actually deployed or from the blockchain",
+        "tags": [
+          "permissions"
+        ],
+        "operationId": "getPermissions",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "post": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create the initial deployment owners and roles (can only be done before deploying the token)",
+        "tags": [
+          "permissions"
+        ],
+        "operationId": "createPermissions",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "owners": {
+                    "type": "object",
+                    "properties": {
+                      "tokenOwner": {
+                        "type": "string"
+                      },
+                      "omnibusTBEAddress": {
+                        "type": "string"
+                      },
+                      "walletRegistrarOwner": {
+                        "type": "string"
+                      },
+                      "walletRegistrarPrivateKey": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "tokenOwner",
+                      "walletRegistrarOwner",
+                      "walletRegistrarPrivateKey"
+                    ]
+                  },
+                  "roles": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "address": {
+                          "type": "string"
+                        },
+                        "role": {
+                          "type": "string",
+                          "enum": [
+                            "none",
+                            "master",
+                            "issuer",
+                            "exchange"
+                          ]
+                        },
+                        "comment": {
+                          "type": "string"
+                        },
+                        "ownership": {
+                          "type": "string",
+                          "enum": [
+                            "single",
+                            "multisig",
+                            "hsm"
+                          ],
+                          "default": "single"
+                        }
+                      }
+                    },
+                    "minItems": 1,
+                    "required": [
+                      "address",
+                      "role"
+                    ]
+                  }
+                },
+                "required": [
+                  "owners",
+                  "roles"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create transactions templates that, when executed, will modify the roles",
+        "tags": [
+          "permissions"
+        ],
+        "operationId": "updatePermissions",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "roles": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "address": {
+                          "type": "string"
+                        },
+                        "role": {
+                          "type": "string",
+                          "enum": [
+                            "none",
+                            "master",
+                            "issuer",
+                            "exchange"
+                          ]
+                        },
+                        "comment": {
+                          "type": "string"
+                        },
+                        "ownership": {
+                          "type": "string",
+                          "enum": [
+                            "single",
+                            "multisig",
+                            "hsm"
+                          ],
+                          "default": "single"
+                        }
+                      }
+                    },
+                    "minItems": 1,
+                    "required": [
+                      "address",
+                      "role"
+                    ]
+                  }
+                },
+                "required": [
+                  "roles"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{id}/transactions": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "issuerId": {
+                        "type": "string"
+                      },
+                      "deploymentId": {
+                        "type": "string"
+                      },
+                      "transactionProviderId": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "externalTransactionId": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "blockNumber": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ]
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "complianceRules",
+                          "countryComplianceStatus",
+                          "role",
+                          "createAsset"
+                        ]
+                      },
+                      "data": {
+                        "type": "object",
+                        "additionalProperties": true
+                      },
+                      "status": {
+                        "type": "string",
+                        "enum": [
+                          "initialDeployment",
+                          "pending",
+                          "signed",
+                          "sent",
+                          "success",
+                          "failure"
+                        ]
+                      },
+                      "createdAt": {
+                        "type": "integer"
+                      },
+                      "updatedAt": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Return transactions by statuses and/or type",
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "getTransactions",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "initialDeployment",
+                "pending",
+                "signed",
+                "sent",
+                "success",
+                "failure"
+              ]
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "complianceRules",
+                "countryComplianceStatus",
+                "role",
+                "createAsset"
+              ]
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/transactions/external-id/{externalTransactionId}": {
+      "delete": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Deletes a pending transaction using externalId",
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "deletePendingTransactionByExternalId",
+        "parameters": [
+          {
+            "name": "externalTransactionId",
+            "in": "path",
+            "required": true,
+            "description": "External Id. For example signatures-service id",
+            "schema": {
+              "type": "string",
+              "description": "External Id. For example signatures-service id"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{id}/deploy": {
+      "post": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Deploy the token",
+        "tags": [
+          "deployments"
+        ],
+        "operationId": "deployToken",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "priority": "high",
+                "gasPrice": "211000000000"
+              },
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "priority": {
+                    "type": "string",
+                    "enum": [
+                      "high",
+                      "medium",
+                      "low"
+                    ]
+                  },
+                  "gasPrice": {
+                    "type": "string",
+                    "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/health-check": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "OK",
+                        "ALARM"
+                      ]
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "service": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Checks provider service health",
+        "tags": [
+          "deployments"
+        ],
+        "operationId": "getHealthCheck"
+      }
+    },
+    "/v1/deployments/available-networks": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "sort_order": {
+                        "type": "number"
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Gets available networks for deploying a token",
+        "tags": [
+          "deployments"
+        ],
+        "operationId": "getAvailable Networks"
+      }
+    },
+    "/v1/deployments/deployment-cost-estimation/{networkId}": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "gasPrice": {
+                      "type": "string"
+                    },
+                    "estimatedDeploymentGas": {
+                      "type": "string"
+                    },
+                    "deploymentEstimations": {
+                      "type": "object",
+                      "properties": {
+                        "complianceServiceWhitelisted": {
+                          "type": "string"
+                        },
+                        "complianceServicePartitioned": {
+                          "type": "string"
+                        },
+                        "complianceServiceRegulated": {
+                          "type": "string"
+                        },
+                        "complianceServiceNotRegulated": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Gets the estimation of the the token deployment given a networkId",
+        "tags": [
+          "deployments"
+        ],
+        "operationId": "getDeploymentCostEstimation",
+        "parameters": [
+          {
+            "name": "networkId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{id}/multisig_wallets": {
+      "post": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Creates new Multi Signature wallet",
+        "tags": [
+          "multisig-wallet"
+        ],
+        "operationId": "createMultiSigWallet",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "wallet": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "walletName": {
+                        "type": "string"
+                      },
+                      "walletAddress": {
+                        "type": "string"
+                      },
+                      "deploymentId": {
+                        "type": "string"
+                      },
+                      "deploymentStatus": {
+                        "type": "string"
+                      },
+                      "threshold": {
+                        "type": "number"
+                      },
+                      "owners": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "address": {
+                              "type": "string"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "address"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "walletName",
+                  "owners",
+                  "threshold"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Creates new Multi Signature wallet",
+        "tags": [
+          "multisig-wallet"
+        ],
+        "operationId": "createMultiSigWallet",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "wallet": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "walletName": {
+                        "type": "string"
+                      },
+                      "walletAddress": {
+                        "type": "string"
+                      },
+                      "deploymentId": {
+                        "type": "string"
+                      },
+                      "deploymentStatus": {
+                        "type": "string"
+                      },
+                      "threshold": {
+                        "type": "number"
+                      },
+                      "owners": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "address": {
+                              "type": "string"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "address"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "walletName",
+                  "owners",
+                  "threshold"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "get": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "walletName": {
+                        "type": "string"
+                      },
+                      "walletAddress": {
+                        "type": "string"
+                      },
+                      "deploymentId": {
+                        "type": "string"
+                      },
+                      "deploymentStatus": {
+                        "type": "string"
+                      },
+                      "threshold": {
+                        "type": "number"
+                      },
+                      "owners": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "address": {
+                              "type": "string"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "address"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "List all multisig-wallets",
+        "tags": [
+          "multisig-wallet"
+        ],
+        "operationId": "getAllMultiSigWallets",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{id}/multisig_wallets/post-deployment": {
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Deploy a list of multisig-wallets from specified deployment",
+        "tags": [
+          "deployments"
+        ],
+        "operationId": "postDeployMultiSigWallets",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/deployments/{id}/retry": {
+      "post": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Id": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "INITIAL",
+                        "PENDING",
+                        "IN_PROGRESS",
+                        "SUCCESS",
+                        "FAILURE"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Retry deployment",
+        "tags": [
+          "deployments"
+        ],
+        "operationId": "retryDeployment",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

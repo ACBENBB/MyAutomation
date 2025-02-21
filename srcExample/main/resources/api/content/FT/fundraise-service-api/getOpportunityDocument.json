@@ -1,0 +1,15 @@
+{
+    "skips": {
+        "entireTest": true,
+        "skipReason": "TEST TEST",
+        "statusCodeCheck": false,
+        "bodySchemaCheck": false,
+        "bodyContentCheck": false
+    },
+    "pathParams":
+    {
+        "issuerId": "#ISSUER_ID#",
+        "opportunityId": "#OPPORTUNITY_ID#",
+        "opportunityDocumentId": "106070-f"
+    }
+}

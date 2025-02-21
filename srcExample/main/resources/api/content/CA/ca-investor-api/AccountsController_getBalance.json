@@ -1,0 +1,19 @@
+{
+  "rc": {
+    "headers": {
+      "x-api-key": "#CA_INVESTOR_X_API_KEY#"
+    },
+    "pathParams": {
+      "investorId": "#CA_INVESTOR_ID#"
+    }
+  },
+  "sandbox": {
+    "headers": {
+      "x-api-key": "#CA_INVESTOR_X_API_KEY#"
+    },
+    "pathParams": {
+      "investorId": "#CA_INVESTOR_ID#"
+    }
+  }
+
+}

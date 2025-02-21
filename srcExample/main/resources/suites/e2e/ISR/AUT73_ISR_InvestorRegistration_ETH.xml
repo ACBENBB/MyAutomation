@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT73_ISR_InvestorRegistration_ETH" verbose="1">
+    <test name="AUT73_ISR_InvestorRegistration_ETH">
+        <classes>
+            <class name="io.securitize.tests.controlPanel.AUT73_ISR_Investor_Registration_ETH" />
+        </classes>
+    </test>
+</suite>

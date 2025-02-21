@@ -1,0 +1,699 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/v2/info": {
+      "get": {
+        "operationId": "ConfigController_getInfo_Deprecated",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get all info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetConfigDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Config"
+        ]
+      }
+    },
+    "/v1/info": {
+      "get": {
+        "operationId": "ConfigController_getInfo",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get all info with markets by region",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetConfigWithRegionsDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Config"
+        ]
+      }
+    },
+    "/v2/market": {
+      "get": {
+        "operationId": "ConfigController_getMarket_Deprecated",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get market availability",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MarketAvailableDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Config"
+        ]
+      }
+    },
+    "/v1/market": {
+      "get": {
+        "operationId": "ConfigController_getMarket",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "region",
+            "required": false,
+            "in": "query",
+            "description": "Region identifier",
+            "schema": {
+              "enum": [
+                "us",
+                "eu"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get market availability by region",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MarketAvailableByRegionDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Config"
+        ]
+      }
+    },
+    "/v1/health": {
+      "get": {
+        "operationId": "ConfigController_getHealth",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get health",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Config"
+        ]
+      }
+    },
+    "/metrics": {
+      "get": {
+        "operationId": "PrometheusController_index",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "ATS Config Api",
+    "description": "API to interact with ATS Configuration",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "ForbiddenException": {
+        "type": "object",
+        "properties": {}
+      },
+      "MarketAvailableDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "OPEN",
+              "PRE_MARKET",
+              "NOT_AVAILABLE"
+            ],
+            "type": "string"
+          },
+          "isAvailable": {
+            "type": "boolean"
+          },
+          "statusReason": {
+            "enum": [
+              "HOLIDAY",
+              "NOT_OPEN_HOURS",
+              "NOT_AVAILABLE_HOURS",
+              "WEEKEND"
+            ],
+            "type": "string"
+          },
+          "openStartTime": {
+            "type": "string"
+          },
+          "openEndTime": {
+            "type": "string"
+          },
+          "availableStartTime": {
+            "type": "string"
+          },
+          "availableEndTime": {
+            "type": "string"
+          },
+          "lastOpenEndDate": {
+            "type": "number"
+          },
+          "timeZone": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "isAvailable",
+          "openStartTime",
+          "openEndTime",
+          "availableStartTime",
+          "availableEndTime",
+          "timeZone"
+        ]
+      },
+      "SystemDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "UP",
+              "MAINTENANCE"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "SYSTEM"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "Config": {
+        "type": "object",
+        "properties": {
+          "tobPercentage": {
+            "type": "string"
+          },
+          "restrictedJurisdictions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "creditCardFeePercentage": {
+            "type": "string"
+          },
+          "orderFeePercentages": {
+            "type": "object",
+            "properties": {
+              "sell": {
+                "required": true,
+                "type": "string"
+              },
+              "buy": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "tobPercentage",
+          "restrictedJurisdictions",
+          "creditCardFeePercentage",
+          "orderFeePercentages"
+        ]
+      },
+      "HealthIndicator": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "UP",
+              "DOWN"
+            ]
+          },
+          "lastTimeAlive": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "status",
+          "lastTimeAlive"
+        ]
+      },
+      "HealthDto": {
+        "type": "object",
+        "properties": {
+          "fi": {
+            "$ref": "#/components/schemas/HealthIndicator"
+          }
+        },
+        "required": [
+          "fi"
+        ]
+      },
+      "GetConfigDto": {
+        "type": "object",
+        "properties": {
+          "market": {
+            "$ref": "#/components/schemas/MarketAvailableDto"
+          },
+          "system": {
+            "$ref": "#/components/schemas/SystemDto"
+          },
+          "featureFlags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "config": {
+            "$ref": "#/components/schemas/Config"
+          },
+          "health": {
+            "$ref": "#/components/schemas/HealthDto"
+          },
+          "cashAccountLockedStates": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "market",
+          "system",
+          "featureFlags",
+          "config",
+          "health",
+          "cashAccountLockedStates"
+        ]
+      },
+      "MarketAvailableByRegionDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "OPEN",
+              "PRE_MARKET",
+              "NOT_AVAILABLE"
+            ],
+            "type": "string"
+          },
+          "isAvailable": {
+            "type": "boolean"
+          },
+          "statusReason": {
+            "enum": [
+              "HOLIDAY",
+              "NOT_OPEN_HOURS",
+              "NOT_AVAILABLE_HOURS",
+              "WEEKEND"
+            ],
+            "type": "string"
+          },
+          "openStartTime": {
+            "type": "string"
+          },
+          "openEndTime": {
+            "type": "string"
+          },
+          "availableStartTime": {
+            "type": "string"
+          },
+          "availableEndTime": {
+            "type": "string"
+          },
+          "lastOpenEndDate": {
+            "type": "number"
+          },
+          "timeZone": {
+            "type": "string"
+          },
+          "identifier": {
+            "enum": [
+              "us",
+              "eu"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "isAvailable",
+          "openStartTime",
+          "openEndTime",
+          "availableStartTime",
+          "availableEndTime",
+          "timeZone",
+          "identifier"
+        ]
+      },
+      "MarketInfoListByRegionDto": {
+        "type": "object",
+        "properties": {
+          "regions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MarketAvailableByRegionDto"
+            }
+          }
+        },
+        "required": [
+          "regions"
+        ]
+      },
+      "GetConfigWithRegionsDto": {
+        "type": "object",
+        "properties": {
+          "market": {
+            "$ref": "#/components/schemas/MarketInfoListByRegionDto"
+          },
+          "system": {
+            "$ref": "#/components/schemas/SystemDto"
+          },
+          "featureFlags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "config": {
+            "$ref": "#/components/schemas/Config"
+          },
+          "health": {
+            "$ref": "#/components/schemas/HealthDto"
+          },
+          "cashAccountLockedStates": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "market",
+          "system",
+          "featureFlags",
+          "config",
+          "health",
+          "cashAccountLockedStates"
+        ]
+      }
+    }
+  }
+}

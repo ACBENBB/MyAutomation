@@ -1,0 +1,6 @@
+{
+  "pathParams" : {
+    "issuerId" : "#ISSUER_ID#",
+    "opportunityId" : "#OPPORTUNITY_ID#"
+  }
+}

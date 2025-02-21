@@ -1,0 +1,7 @@
+<suite name="AUT714_ST_IssueTokens_ToTbe" verbose="1">
+    <test name="AUT714_ST_IssueTokens_ToTbe">
+        <classes>
+            <class name="io.securitize.tests.blockchain.AUT714_ST_IssueTokens_ToTbe" />
+        </classes>
+    </test>
+</suite>

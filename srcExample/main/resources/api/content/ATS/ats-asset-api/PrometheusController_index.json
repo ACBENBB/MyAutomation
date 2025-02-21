@@ -1,0 +1,8 @@
+{
+  "skips": {
+    "bodySchemaCheck": true,
+    "skipReason": "Body schema was skipped due to lack of schema"
+  },
+  "rc": {},
+  "sandbox": {}
+}

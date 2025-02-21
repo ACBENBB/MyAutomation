@@ -1,0 +1,1519 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/v1/hooks/sqs": {
+      "post": {
+        "operationId": "HooksController_sqs",
+        "parameters": [
+
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QueueMessage"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Hooks"
+        ]
+      }
+    },
+    "/v1/transactions": {
+      "post": {
+        "operationId": "TransactionsController_prepareTransaction",
+        "parameters": [
+
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionPayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Transactions"
+        ]
+      }
+    },
+    "/v1/transactions/{transactionId}": {
+      "patch": {
+        "operationId": "TransactionsController_patchTransaction",
+        "parameters": [
+          {
+            "name": "transactionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchTransactionPayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Transactions"
+        ]
+      }
+    },
+    "/v2/transactions": {
+      "post": {
+        "operationId": "TransactionsV2Controller_prepareTransaction",
+        "parameters": [
+
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionPayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Transactions"
+        ]
+      }
+    },
+    "/v1/investments": {
+      "get": {
+        "operationId": "InvestmentsController_getInvestments",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "onlyActiveRound",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "current",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "additionalFields",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "agreements",
+                  "Investor"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investments"
+        ]
+      },
+      "post": {
+        "operationId": "InvestmentsController_createInvestment",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostInvestmentResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investments"
+        ]
+      }
+    },
+    "/v1/investments/{investmentId}": {
+      "get": {
+        "operationId": "InvestmentsController_getInvestmentById",
+        "parameters": [
+          {
+            "name": "investmentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetInvestmentResponseDtoV1"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investments"
+        ]
+      },
+      "patch": {
+        "operationId": "InvestmentsController_patchInvestment",
+        "parameters": [
+          {
+            "name": "investmentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatchInvestmentResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investments"
+        ]
+      },
+      "put": {
+        "operationId": "InvestmentsController_putInvestment",
+        "parameters": [
+          {
+            "name": "investmentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PutInvestmentResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investments"
+        ]
+      }
+    },
+    "/v1/investments/{investmentId}/payment": {
+      "post": {
+        "operationId": "InvestmentsController_createPayment",
+        "parameters": [
+          {
+            "name": "investmentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentPayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExternalPaymentResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investments"
+        ]
+      }
+    },
+    "/v1/investments/{investmentId}/documents": {
+      "post": {
+        "operationId": "InvestmentsController_createDocument",
+        "parameters": [
+          {
+            "name": "investmentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvestmentDocumentResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investments"
+        ]
+      }
+    },
+    "/v1/investments/investment-rounds/{investmentRoundId}/currencies": {
+      "get": {
+        "operationId": "InvestmentsController_getInvestmentCurrencies",
+        "parameters": [
+          {
+            "name": "investmentRoundId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetInvestmentCurrenciesResponseDto"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetInvestmentCurrenciesResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investments"
+        ]
+      }
+    },
+    "/v2/investments": {
+      "get": {
+        "operationId": "InvestmentsV2Controller_getInvestments",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "onlyActiveRound",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "current",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "additionalFields",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "agreements",
+                  "Investor"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Investments"
+        ]
+      },
+      "post": {
+        "operationId": "InvestmentsV2Controller_createInvestment",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostInvestmentResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investments"
+        ]
+      }
+    },
+    "/v2/investments/{investmentId}": {
+      "get": {
+        "operationId": "InvestmentsV2Controller_getInvestmentById",
+        "parameters": [
+          {
+            "name": "investmentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetInvestmentResponseDtoV2"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investments"
+        ]
+      },
+      "patch": {
+        "operationId": "InvestmentsV2Controller_patchInvestment",
+        "parameters": [
+          {
+            "name": "investmentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatchInvestmentResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investments"
+        ]
+      }
+    },
+    "/v2/investments/{investmentId}/documents": {
+      "post": {
+        "operationId": "InvestmentsV2Controller_createDocument",
+        "parameters": [
+          {
+            "name": "investmentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvestmentDocumentResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investments"
+        ]
+      }
+    },
+    "/v2/investments/{investmentId}/payment": {
+      "post": {
+        "operationId": "InvestmentsV2Controller_createPayment",
+        "parameters": [
+          {
+            "name": "investmentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentPayloadV2Dto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExternalPaymentResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investments"
+        ]
+      }
+    },
+    "/v3/investments/{investmentId}": {
+      "patch": {
+        "operationId": "InvestmentsV3Controller_patchInvestment",
+        "parameters": [
+          {
+            "name": "investmentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatchInvestmentResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investments"
+        ]
+      }
+    },
+    "/v1/ach/accounts/{investorId}": {
+      "get": {
+        "operationId": "AchController_getAccount",
+        "parameters": [
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAchAccountResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ACH"
+        ]
+      }
+    },
+    "/v1/ach/transaction-status": {
+      "post": {
+        "operationId": "AchController_transactionStatusUpdate",
+        "parameters": [
+
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "ACH"
+        ]
+      }
+    },
+    "/v1/migration/docusign": {
+      "post": {
+        "operationId": "MigrationController_docusignMigration",
+        "parameters": [
+
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/migration/web3-agreement": {
+      "post": {
+        "operationId": "MigrationController_web3AgreementMigration",
+        "parameters": [
+
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/triggers/web3-offering-completion": {
+      "post": {
+        "operationId": "TriggersController_web3OfferingCompletion",
+        "parameters": [
+
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Web3OfferingPayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "triggers"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Fundraise Investment Service",
+    "description": "",
+    "version": "1.0",
+    "contact": {
+
+    }
+  },
+  "tags": [
+
+  ],
+  "servers": [
+
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "QueueMessage": {
+        "type": "object",
+        "properties": {
+
+        }
+      },
+      "TransactionPayloadDto": {
+        "type": "object",
+        "properties": {
+          "wallet": {
+            "type": "string"
+          },
+          "investmentAmount": {
+            "type": "number"
+          },
+          "currencyId": {
+            "type": "number"
+          },
+          "opportunityId": {
+            "type": "number"
+          },
+          "investorId": {
+            "type": "string"
+          },
+          "legalSignerName": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "wallet",
+          "investmentAmount",
+          "currencyId",
+          "opportunityId",
+          "investorId"
+        ]
+      },
+      "PatchTransactionPayloadDto": {
+        "type": "object",
+        "properties": {
+          "transactionHash": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "transactionHash"
+        ]
+      },
+      "PledgedOrTotalFundedResponseDto": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number"
+          },
+          "currencyId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "amount",
+          "currencyId"
+        ]
+      },
+      "InvestmentRequestV1": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "number"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "investmentRoundId": {
+            "type": "number"
+          },
+          "agreement": {
+            "type": "string"
+          },
+          "roundName": {
+            "type": "string"
+          },
+          "pledged": {
+            "$ref": "#/components/schemas/PledgedOrTotalFundedResponseDto"
+          },
+          "totalFunded": {
+            "$ref": "#/components/schemas/PledgedOrTotalFundedResponseDto"
+          },
+          "bonusTokens": {
+            "type": "number"
+          },
+          "tokensAssigned": {
+            "type": "number"
+          },
+          "bonusTokensAssigned": {
+            "type": "number"
+          },
+          "tokenIssuanceId": {
+            "type": "number",
+            "nullable": true
+          },
+          "id": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "in_progress",
+              "pending",
+              "confirmed",
+              "cancelled",
+              "refunded",
+              "new_round"
+            ]
+          },
+          "subscriptionAgreementStatus": {
+            "type": "string",
+            "enum": [
+              "none",
+              "requested",
+              "sent",
+              "signed",
+              "confirmed",
+              "rejected",
+              "pre-signed"
+            ]
+          },
+          "subscriptionAgreementSignedAt": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "investorId",
+          "issuerId",
+          "tokenId",
+          "investmentRoundId",
+          "roundName",
+          "pledged",
+          "totalFunded",
+          "bonusTokens",
+          "tokensAssigned",
+          "bonusTokensAssigned",
+          "tokenIssuanceId",
+          "id",
+          "status",
+          "subscriptionAgreementStatus",
+          "subscriptionAgreementSignedAt",
+          "createdAt"
+        ]
+      },
+      "PostInvestmentResponseDto": {
+        "type": "object",
+        "properties": {
+          "investmentRequest": {
+            "$ref": "#/components/schemas/InvestmentRequestV1"
+          }
+        },
+        "required": [
+          "investmentRequest"
+        ]
+      },
+      "GetInvestmentResponseDtoV1": {
+        "type": "object",
+        "properties": {
+          "investmentRequest": {
+            "$ref": "#/components/schemas/InvestmentRequestV1"
+          }
+        },
+        "required": [
+          "investmentRequest"
+        ]
+      },
+      "PatchInvestmentResponseDto": {
+        "type": "object",
+        "properties": {
+          "investmentRequest": {
+            "$ref": "#/components/schemas/InvestmentRequestV1"
+          }
+        },
+        "required": [
+          "investmentRequest"
+        ]
+      },
+      "PutInvestmentResponseDto": {
+        "type": "object",
+        "properties": {
+          "investmentRequest": {
+            "$ref": "#/components/schemas/InvestmentRequestV1"
+          }
+        },
+        "required": [
+          "investmentRequest"
+        ]
+      },
+      "PaymentPayloadDto": {
+        "type": "object",
+        "properties": {
+          "investorSecuritizeId": {
+            "type": "string"
+          },
+          "currencyId": {
+            "type": "number",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "investorSecuritizeId",
+          "currencyId"
+        ]
+      },
+      "ExternalPaymentResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "InvestmentDocumentResponse": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "type": {
+            "type": "object"
+          },
+          "hash": {
+            "type": "string"
+          },
+          "signerUserId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "GetInvestmentCurrenciesResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "minAmount": {
+            "type": "number"
+          },
+          "value": {
+            "type": "number"
+          },
+          "tiers": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "oneShareValue": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "decimals": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "minAmount",
+          "value",
+          "oneShareValue",
+          "type",
+          "decimals"
+        ]
+      },
+      "InvestmentRequestV2": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "number"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "investmentRoundId": {
+            "type": "number"
+          },
+          "agreement": {
+            "$ref": "#/components/schemas/InvestmentDocumentResponse"
+          },
+          "roundName": {
+            "type": "string"
+          },
+          "investmentPageUrl": {
+            "type": "string"
+          },
+          "pledged": {
+            "$ref": "#/components/schemas/PledgedOrTotalFundedResponseDto"
+          },
+          "totalFunded": {
+            "$ref": "#/components/schemas/PledgedOrTotalFundedResponseDto"
+          },
+          "bonusTokens": {
+            "type": "number"
+          },
+          "tokensAssigned": {
+            "type": "number"
+          },
+          "bonusTokensAssigned": {
+            "type": "number"
+          },
+          "tokenIssuanceId": {
+            "type": "number",
+            "nullable": true
+          },
+          "id": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "in_progress",
+              "pending",
+              "confirmed",
+              "cancelled",
+              "refunded",
+              "new_round"
+            ]
+          },
+          "subscriptionAgreementStatus": {
+            "type": "string",
+            "enum": [
+              "none",
+              "requested",
+              "sent",
+              "signed",
+              "confirmed",
+              "rejected",
+              "pre-signed"
+            ]
+          },
+          "subscriptionAgreementSignedAt": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "investorId",
+          "issuerId",
+          "tokenId",
+          "investmentRoundId",
+          "agreement",
+          "roundName",
+          "investmentPageUrl",
+          "pledged",
+          "totalFunded",
+          "bonusTokens",
+          "tokensAssigned",
+          "bonusTokensAssigned",
+          "tokenIssuanceId",
+          "id",
+          "status",
+          "subscriptionAgreementStatus",
+          "subscriptionAgreementSignedAt",
+          "createdAt"
+        ]
+      },
+      "GetInvestmentResponseDtoV2": {
+        "type": "object",
+        "properties": {
+          "investmentRequest": {
+            "$ref": "#/components/schemas/InvestmentRequestV2"
+          }
+        },
+        "required": [
+          "investmentRequest"
+        ]
+      },
+      "PaymentPayloadV2Dto": {
+        "type": "object",
+        "properties": {
+          "investorSecuritizeId": {
+            "type": "string"
+          },
+          "currencyId": {
+            "type": "number",
+            "minimum": 1
+          },
+          "method": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "investorSecuritizeId",
+          "currencyId",
+          "method"
+        ]
+      },
+      "GetAchAccountResponseDto": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "string"
+          },
+          "accountId": {
+            "type": "string"
+          },
+          "externalAccountLink": {
+            "type": "string"
+          },
+          "externalAccountDetails": {
+            "type": "object",
+            "properties": {
+              "AccountName": {
+                "required": true,
+                "type": "string"
+              },
+              "AccountNickName": {
+                "required": true,
+                "type": "string"
+              },
+              "AccountRoutingNumber": {
+                "required": true,
+                "type": "string"
+              },
+              "AccountNumber": {
+                "required": true,
+                "type": "string"
+              },
+              "accountType": {
+                "required": true,
+                "type": "string"
+              },
+              "updatedDate": {
+                "required": true,
+                "type": "string"
+              },
+              "createdDate": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "investorId",
+          "accountId",
+          "externalAccountLink",
+          "externalAccountDetails"
+        ]
+      },
+      "Web3OfferingPayloadDto": {
+        "type": "object",
+        "properties": {
+          "issuerId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "roundId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "issuerId",
+          "tokenId",
+          "roundId"
+        ]
+      }
+    }
+  }
+}

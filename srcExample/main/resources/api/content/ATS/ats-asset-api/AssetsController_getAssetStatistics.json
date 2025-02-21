@@ -1,0 +1,7 @@
+{
+  "headers": {
+    "x-api-key": "#ATS_ASSET_API_KEY#"
+  },
+  "rc": {},
+  "sandbox": {}
+}

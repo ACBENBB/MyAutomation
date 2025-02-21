@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT549_ATS_AddAssetToFavorites" verbose="1">
+    <test name="AUT549_ATS_AddAssetToFavorites">
+        <classes>
+            <class name="io.securitize.tests.ats.sanity.AUT549_ATS_AddAssetToFavorites" />
+        </classes>
+    </test>
+</suite>

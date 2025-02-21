@@ -1,0 +1,7 @@
+<suite name="AUT284_TA_Accreditation_Individual_ProfessionalLicence_Verified" verbose="1">
+    <test name="AUT284_TA_Accreditation_Individual_ProfessionalLicence_Verified">
+        <classes>
+            <class name="io.securitize.tests.transferAgent.AUT284_TA_Accreditation_Individual_ProfessionalLicence_Verified" />
+        </classes>
+    </test>
+</suite>

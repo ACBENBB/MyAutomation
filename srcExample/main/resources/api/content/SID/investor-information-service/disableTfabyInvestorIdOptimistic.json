@@ -1,0 +1,12 @@
+{
+  "pathParams": {
+    "investorId": "#SID_INVESTOR_ID#"
+  },
+  "skips": {
+    "entireTest": true,
+    "skipReason": "Entire test was skipped since it returns status code 400 on second call \n (2fa already disabled & can't re enabled as there's no method for enabling)"
+  },
+  "rc": {},
+  "sandbox": {},
+  "production": {}
+}

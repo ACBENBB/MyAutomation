@@ -1,0 +1,2397 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Control Panel Auth",
+    "description": "Control Panel Auth API description",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "Auth",
+      "description": ""
+    }
+  ],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "OperatorIssuer": {
+        "type": "object",
+        "properties": {
+          "operatorId": {
+            "type": "string"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "operator": {
+            "$ref": "#/components/schemas/Operator"
+          }
+        },
+        "required": [
+          "operatorId",
+          "issuerId",
+          "createdAt",
+          "updatedAt",
+          "operator"
+        ]
+      },
+      "OperatorAuthorization": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "operatorId": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "authorization": {
+            "enum": [
+              "rfe",
+              "transfer-agent",
+              "compliance-officer",
+              "securitize-id",
+              "on-chain-manager",
+              "auto-deployment-service",
+              "investor-outreach",
+              "securitize-id-service",
+              "securitize-markets",
+              "audit-log",
+              "privacy-controller",
+              "audit-log-issuer",
+              "accreditation-lawyer",
+              "hsm-controller",
+              "new-cp-ui",
+              "allow-export",
+              "can-create-megaadmin"
+            ],
+            "type": "string"
+          },
+          "operator": {
+            "$ref": "#/components/schemas/Operator"
+          }
+        },
+        "required": [
+          "id",
+          "operatorId",
+          "createdAt",
+          "updatedAt",
+          "authorization",
+          "operator"
+        ]
+      },
+      "SessionToken": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "sessionType": {
+            "enum": [
+              "oauth-token",
+              "control-panel-oauth-token",
+              "control-panel-login-token"
+            ],
+            "type": "string"
+          },
+          "sessionToken": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "authInfo": {
+            "$ref": "#/components/schemas/AuthInfo"
+          }
+        },
+        "required": [
+          "email",
+          "sessionType",
+          "sessionToken",
+          "createdAt",
+          "updatedAt",
+          "authInfo"
+        ]
+      },
+      "AuthInfo": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "operatorId": {
+            "type": "number"
+          },
+          "externalId": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "twoFactorSecret": {
+            "type": "string"
+          },
+          "twoFactorBackupKey": {
+            "type": "string"
+          },
+          "isReady": {
+            "type": "boolean"
+          },
+          "nonce": {
+            "type": "number"
+          },
+          "lastLoginIp": {
+            "type": "string"
+          },
+          "oauthUuid": {
+            "type": "string"
+          },
+          "lastLoginAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "loginFailedCount": {
+            "type": "number"
+          },
+          "loginAttemptAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lockedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "operator": {
+            "$ref": "#/components/schemas/Operator"
+          },
+          "oauthSessions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SessionToken"
+            }
+          }
+        },
+        "required": [
+          "email",
+          "operatorId",
+          "externalId",
+          "password",
+          "twoFactorSecret",
+          "twoFactorBackupKey",
+          "isReady",
+          "nonce",
+          "lastLoginIp",
+          "oauthUuid",
+          "lastLoginAt",
+          "loginFailedCount",
+          "loginAttemptAt",
+          "lockedAt",
+          "createdAt",
+          "updatedAt",
+          "operator",
+          "oauthSessions"
+        ]
+      },
+      "OrganizationIpRange": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "fromIp": {
+            "type": "string"
+          },
+          "toIp": {
+            "type": "string"
+          },
+          "organizationId": {
+            "type": "string"
+          },
+          "organization": {
+            "$ref": "#/components/schemas/Organization"
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "fromIp",
+          "toIp",
+          "organizationId",
+          "organization"
+        ]
+      },
+      "Organization": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "operators": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Operator"
+            }
+          },
+          "organizationIpRanges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrganizationIpRange"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "name",
+          "operators",
+          "organizationIpRanges"
+        ]
+      },
+      "Operator": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "externalId": {
+            "type": "string"
+          },
+          "profilePicture": {
+            "type": "string"
+          },
+          "legacyId": {
+            "type": "number"
+          },
+          "lastLoginAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastLoginIp": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "authorizationLevel": {
+            "enum": [
+              "basic",
+              "admin",
+              "superadmin",
+              "megaadmin",
+              "brokerdealer"
+            ],
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "publicKey": {
+            "type": "string"
+          },
+          "languageCode": {
+            "type": "string"
+          },
+          "brokerDealerGroupId": {
+            "type": "number"
+          },
+          "organizationId": {
+            "type": "string"
+          },
+          "isLocalService": {
+            "type": "boolean"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "operatorIssuers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OperatorIssuer"
+            }
+          },
+          "operatorAuthorizations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OperatorAuthorization"
+            }
+          },
+          "authInfo": {
+            "$ref": "#/components/schemas/AuthInfo"
+          },
+          "operatorIssuersLazy": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OperatorIssuer"
+            }
+          },
+          "organization": {
+            "$ref": "#/components/schemas/Organization"
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "email",
+          "externalId",
+          "profilePicture",
+          "legacyId",
+          "lastLoginAt",
+          "lastLoginIp",
+          "name",
+          "password",
+          "authorizationLevel",
+          "publicKey",
+          "languageCode",
+          "createdBy",
+          "operatorIssuers",
+          "operatorAuthorizations",
+          "authInfo",
+          "operatorIssuersLazy",
+          "organization"
+        ]
+      },
+      "AuthInfoResponseDto": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string"
+          },
+          "twoFactorSecret": {
+            "type": "string"
+          },
+          "twoFactorBackupKey": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "operatorId": {
+            "type": "number"
+          },
+          "externalId": {
+            "type": "string"
+          },
+          "isReady": {
+            "type": "boolean"
+          },
+          "nonce": {
+            "type": "number"
+          },
+          "lastLoginIp": {
+            "type": "string"
+          },
+          "oauthUuid": {
+            "type": "string"
+          },
+          "lastLoginAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "loginFailedCount": {
+            "type": "number"
+          },
+          "loginAttemptAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lockedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "operator": {
+            "$ref": "#/components/schemas/Operator"
+          },
+          "oauthSessions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SessionToken"
+            }
+          }
+        },
+        "required": [
+          "password",
+          "twoFactorSecret",
+          "twoFactorBackupKey",
+          "email",
+          "operatorId",
+          "externalId",
+          "isReady",
+          "nonce",
+          "lastLoginIp",
+          "oauthUuid",
+          "lastLoginAt",
+          "loginFailedCount",
+          "loginAttemptAt",
+          "lockedAt",
+          "createdAt",
+          "updatedAt",
+          "operator",
+          "oauthSessions"
+        ]
+      },
+      "UpdateAuthInfoDto": {
+        "type": "object",
+        "properties": {
+          "ipAddress": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 30
+          }
+        },
+        "required": [
+          "ipAddress",
+          "email",
+          "password"
+        ]
+      },
+      "VerifyAuthInfoDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "CreateOrganizationDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "ipsRangeList": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "CreateOperatorDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "authorizationLevel": {
+            "enum": [
+              "basic",
+              "admin",
+              "superadmin",
+              "megaadmin",
+              "brokerdealer"
+            ],
+            "type": "string"
+          },
+          "issuerIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "brokerDealerGroupId": {
+            "type": "number"
+          },
+          "authorizations": {
+            "type": "string",
+            "items": {
+              "type": "string",
+              "enum": [
+                "rfe",
+                "transfer-agent",
+                "compliance-officer",
+                "securitize-id",
+                "on-chain-manager",
+                "auto-deployment-service",
+                "investor-outreach",
+                "securitize-id-service",
+                "securitize-markets",
+                "audit-log",
+                "privacy-controller",
+                "audit-log-issuer",
+                "accreditation-lawyer",
+                "hsm-controller",
+                "new-cp-ui",
+                "allow-export",
+                "can-create-megaadmin"
+              ]
+            },
+            "enum": [
+              "rfe",
+              "transfer-agent",
+              "compliance-officer",
+              "securitize-id",
+              "on-chain-manager",
+              "auto-deployment-service",
+              "investor-outreach",
+              "securitize-id-service",
+              "securitize-markets",
+              "audit-log",
+              "privacy-controller",
+              "audit-log-issuer",
+              "accreditation-lawyer",
+              "hsm-controller",
+              "new-cp-ui",
+              "allow-export",
+              "can-create-megaadmin"
+            ]
+          },
+          "organizationId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "email"
+        ]
+      },
+      "UpdateOperatorDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "authorizationLevel": {
+            "enum": [
+              "basic",
+              "admin",
+              "superadmin",
+              "megaadmin",
+              "brokerdealer"
+            ],
+            "type": "string"
+          },
+          "issuerIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "brokerDealerGroupId": {
+            "type": "number"
+          },
+          "authorizations": {
+            "type": "string",
+            "items": {
+              "type": "string",
+              "enum": [
+                "rfe",
+                "transfer-agent",
+                "compliance-officer",
+                "securitize-id",
+                "on-chain-manager",
+                "auto-deployment-service",
+                "investor-outreach",
+                "securitize-id-service",
+                "securitize-markets",
+                "audit-log",
+                "privacy-controller",
+                "audit-log-issuer",
+                "accreditation-lawyer",
+                "hsm-controller",
+                "new-cp-ui",
+                "allow-export",
+                "can-create-megaadmin"
+              ]
+            },
+            "enum": [
+              "rfe",
+              "transfer-agent",
+              "compliance-officer",
+              "securitize-id",
+              "on-chain-manager",
+              "auto-deployment-service",
+              "investor-outreach",
+              "securitize-id-service",
+              "securitize-markets",
+              "audit-log",
+              "privacy-controller",
+              "audit-log-issuer",
+              "accreditation-lawyer",
+              "hsm-controller",
+              "new-cp-ui",
+              "allow-export",
+              "can-create-megaadmin"
+            ]
+          },
+          "organizationId": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string",
+            "enum": [
+              "en",
+              "ja"
+            ]
+          },
+          "profilePicture": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "email",
+          "language",
+          "profilePicture"
+        ]
+      },
+      "GenerateRegisterTokenDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "operatorId": {
+            "type": "number"
+          },
+          "externalId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "operatorId",
+          "externalId"
+        ]
+      },
+      "SessionResponseDto": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          },
+          "expiresAt": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "accessToken",
+          "expiresAt"
+        ]
+      },
+      "GenerateSessionTokenDto": {
+        "type": "object",
+        "properties": {
+          "isLogin": {
+            "type": "boolean"
+          },
+          "email": {
+            "type": "string"
+          },
+          "externalId": {
+            "type": "string"
+          },
+          "ip": {
+            "type": "string"
+          },
+          "sessionType": {
+            "type": "string",
+            "enum": [
+              "oauth-token",
+              "control-panel-oauth-token",
+              "control-panel-login-token"
+            ]
+          }
+        },
+        "required": [
+          "isLogin",
+          "email",
+          "externalId",
+          "ip",
+          "sessionType"
+        ]
+      },
+      "SessionTokenResponseDto": {
+        "type": "object",
+        "properties": {
+          "accessTokenExpiredAt": {
+            "type": "number"
+          },
+          "refreshTokenExpiredAt": {
+            "type": "number"
+          },
+          "accessToken": {
+            "type": "string"
+          },
+          "refreshToken": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "accessTokenExpiredAt",
+          "refreshTokenExpiredAt",
+          "accessToken",
+          "refreshToken"
+        ]
+      },
+      "VerifySessionTokenRequestDto": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          },
+          "isRefresh": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "accessToken",
+          "isRefresh"
+        ]
+      },
+      "ClearSessionTokenRequestDto": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "accessToken"
+        ]
+      },
+      "LoginDto": {
+        "type": "object",
+        "properties": {
+          "ipAddress": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "tfaToken": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ipAddress",
+          "email",
+          "password"
+        ]
+      },
+      "TwoFactorAuthResponseDto": {
+        "type": "object",
+        "properties": {
+          "uri": {
+            "type": "string"
+          },
+          "qr": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "uri",
+          "qr"
+        ]
+      },
+      "VerifyTwoFactorAuthDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "token"
+        ]
+      },
+      "VerifyTwoFactorAuthResponseDto": {
+        "type": "object",
+        "properties": {
+          "operatorId": {
+            "type": "number"
+          },
+          "externalId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "operatorId",
+          "externalId"
+        ]
+      },
+      "LoginGoogleAuthDto": {
+        "type": "object",
+        "properties": {
+          "ipAddress": {
+            "type": "string"
+          },
+          "googleAccessToken": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ipAddress",
+          "googleAccessToken"
+        ]
+      },
+      "GoogleAuthInfo": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "picture": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "name",
+          "picture"
+        ]
+      },
+      "LocalDto": {
+        "type": "object",
+        "properties": {
+          "languageCode": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "languageCode"
+        ]
+      },
+      "CreateOperatorIssuerDto": {
+        "type": "object",
+        "properties": {
+          "issuerId": {
+            "type": "string"
+          },
+          "operatorId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "issuerId",
+          "operatorId"
+        ]
+      },
+      "OauthLoginDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "clientId": {
+            "type": "string"
+          },
+          "redirectUrl": {
+            "type": "string"
+          },
+          "tfaToken": {
+            "type": "string"
+          },
+          "ipAddress": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "password",
+          "clientId",
+          "redirectUrl",
+          "ipAddress"
+        ]
+      },
+      "ValidateOauthToken": {
+        "type": "object",
+        "properties": {
+          "clientId": {
+            "type": "string"
+          },
+          "redirectUrl": {
+            "type": "string"
+          },
+          "oauthToken": {
+            "type": "string"
+          },
+          "clientSecret": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "clientId",
+          "redirectUrl",
+          "oauthToken",
+          "clientSecret"
+        ]
+      },
+      "VerifyCpBearerInterface": {
+        "type": "object",
+        "properties": {
+          "clientId": {
+            "type": "string"
+          },
+          "redirectUrl": {
+            "type": "string"
+          },
+          "externalId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "clientId",
+          "redirectUrl",
+          "externalId"
+        ]
+      },
+      "LoginGoogleOauthDto": {
+        "type": "object",
+        "properties": {
+          "ipAddress": {
+            "type": "string"
+          },
+          "idToken": {
+            "type": "string"
+          },
+          "clientId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ipAddress",
+          "idToken",
+          "clientId"
+        ]
+      }
+    }
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "HealthController_getHealthCheck",
+        "summary": "Health Check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v2/auth-info": {
+      "get": {
+        "operationId": "AuthInfoController_find",
+        "parameters": [
+          {
+            "name": "externalIds",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AuthInfoResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/auth-info/{externalId}": {
+      "get": {
+        "operationId": "AuthInfoController_findOne",
+        "parameters": [
+          {
+            "name": "externalId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthInfoResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/auth-info/password": {
+      "put": {
+        "operationId": "AuthInfoController_updatePassword",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAuthInfoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v2/auth-info/verify": {
+      "post": {
+        "operationId": "AuthInfoController_verify",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyAuthInfoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthInfoResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/organizations": {
+      "get": {
+        "operationId": "OrganizationsController_getOorganizations",
+        "parameters": [
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order-field",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order-direction",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "default": "DESC",
+              "enum": [
+                "ASC",
+                "DESC"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "operationId": "OrganizationsController_createOrganization",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrganizationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/organizations/{organizationId}": {
+      "get": {
+        "operationId": "OrganizationsController_getOrganizationById",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "OrganizationsController_updateOrganization",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrganizationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/current-operator/{currentOperatorId}/operators": {
+      "get": {
+        "operationId": "CurrentOperatorController_getOperators",
+        "parameters": [
+          {
+            "name": "currentOperatorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order-field",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order-direction",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "default": "DESC",
+              "enum": [
+                "ASC",
+                "DESC"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "issuerId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "operatorAuthorization",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "rfe",
+                "transfer-agent",
+                "compliance-officer",
+                "securitize-id",
+                "on-chain-manager",
+                "auto-deployment-service",
+                "investor-outreach",
+                "securitize-id-service",
+                "securitize-markets",
+                "audit-log",
+                "privacy-controller",
+                "audit-log-issuer",
+                "accreditation-lawyer",
+                "hsm-controller",
+                "new-cp-ui",
+                "allow-export",
+                "can-create-megaadmin"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorizationLevel",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "rfe",
+                "transfer-agent",
+                "compliance-officer",
+                "securitize-id",
+                "on-chain-manager",
+                "auto-deployment-service",
+                "investor-outreach",
+                "securitize-id-service",
+                "securitize-markets",
+                "audit-log",
+                "privacy-controller",
+                "audit-log-issuer",
+                "accreditation-lawyer",
+                "hsm-controller",
+                "new-cp-ui",
+                "allow-export",
+                "can-create-megaadmin"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "enabled",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "operatorIds",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "operationId": "CurrentOperatorController_createOperator",
+        "parameters": [
+          {
+            "name": "currentOperatorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOperatorDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/current-operator/{currentOperatorId}/operators/{operatorId}": {
+      "get": {
+        "operationId": "CurrentOperatorController_getOperatorById",
+        "parameters": [
+          {
+            "name": "currentOperatorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "operatorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "CurrentOperatorController_updateOperator",
+        "parameters": [
+          {
+            "name": "currentOperatorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "operatorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateOperatorDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v2/current-operator/{currentOperatorId}/operators/{operatorId}/disable": {
+      "post": {
+        "operationId": "CurrentOperatorController_disableOperatorById",
+        "parameters": [
+          {
+            "name": "currentOperatorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "operatorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v2/current-operator/{currentOperatorId}/operators/{operatorId}/enable": {
+      "post": {
+        "operationId": "CurrentOperatorController_enableOperatorById",
+        "parameters": [
+          {
+            "name": "operatorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v2/current-operator/{currentOperatorId}/operators/{operatorId}/generate-key": {
+      "post": {
+        "operationId": "CurrentOperatorController_generatePrivateKey",
+        "parameters": [
+          {
+            "name": "currentOperatorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "operatorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/current-operator/{currentOperatorId}/operators/{operatorId}/key": {
+      "get": {
+        "operationId": "CurrentOperatorController_getPublicKeyById",
+        "parameters": [
+          {
+            "name": "currentOperatorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "operatorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/jwt/register-token": {
+      "post": {
+        "operationId": "JwtController_generateRegisterToken",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateRegisterTokenDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/jwt/session-token": {
+      "post": {
+        "operationId": "JwtController_generateSessionToken",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateSessionTokenDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionTokenResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/jwt/session-token/verify": {
+      "post": {
+        "operationId": "JwtController_verifySessionToken",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifySessionTokenRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/jwt/session-token/clear": {
+      "post": {
+        "operationId": "JwtController_clearSessionToken",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClearSessionTokenRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/jwt/login": {
+      "post": {
+        "operationId": "JwtController_login",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/two-factor-auth": {
+      "get": {
+        "operationId": "TwoFactorAuthController_get",
+        "parameters": [
+          {
+            "name": "email",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TwoFactorAuthResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/two-factor-auth/verify": {
+      "post": {
+        "operationId": "TwoFactorAuthController_verify",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyTwoFactorAuthDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VerifyTwoFactorAuthResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/google-auth/login": {
+      "post": {
+        "operationId": "GoogleAuthController_login",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginGoogleAuthDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GoogleAuthInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/operators": {
+      "get": {
+        "operationId": "OperatorsController_getOperators",
+        "parameters": [
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order-field",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order-direction",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "default": "DESC",
+              "enum": [
+                "ASC",
+                "DESC"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "issuerId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "rfe",
+                "transfer-agent",
+                "compliance-officer",
+                "securitize-id",
+                "on-chain-manager",
+                "auto-deployment-service",
+                "investor-outreach",
+                "securitize-id-service",
+                "securitize-markets",
+                "audit-log",
+                "privacy-controller",
+                "audit-log-issuer",
+                "accreditation-lawyer",
+                "hsm-controller",
+                "new-cp-ui",
+                "allow-export",
+                "can-create-megaadmin"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "enabled",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "operatorIds",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "OperatorsController_createOperator",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOperatorDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/operators/{operatorId}": {
+      "get": {
+        "operationId": "OperatorsController_getOperatorById",
+        "parameters": [
+          {
+            "name": "operatorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "OperatorsController_updateOperator",
+        "parameters": [
+          {
+            "name": "operatorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateOperatorDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/operators/{operatorId}/local": {
+      "put": {
+        "operationId": "OperatorsController_setLanguage",
+        "parameters": [
+          {
+            "name": "operatorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocalDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/operator-issuers": {
+      "post": {
+        "operationId": "OperatorIssuersController_createOperatorIssuer",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOperatorIssuerDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/oauth/login": {
+      "post": {
+        "operationId": "OauthController_oauthLogin",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OauthLoginDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "OAuth"
+        ]
+      }
+    },
+    "/api/v2/oauth/validate-oauth-token": {
+      "post": {
+        "operationId": "OauthController_validateOauthToken",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateOauthToken"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "OAuth"
+        ]
+      }
+    },
+    "/api/v2/oauth/validate-client-config": {
+      "get": {
+        "operationId": "OauthController_validateClientConfig",
+        "parameters": [
+          {
+            "name": "clientId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "redirectUrl",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "OAuth"
+        ]
+      }
+    },
+    "/api/v2/oauth/validate-cp-bearer": {
+      "post": {
+        "operationId": "OauthController_validateCpBearer",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyCpBearerInterface"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "OAuth"
+        ]
+      }
+    },
+    "/api/v2/oauth/google-login": {
+      "post": {
+        "operationId": "OauthController_login",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginGoogleOauthDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "OAuth"
+        ]
+      }
+    }
+  }
+}

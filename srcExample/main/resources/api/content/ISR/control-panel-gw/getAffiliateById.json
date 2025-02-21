@@ -1,0 +1,10 @@
+{
+  "skips": {
+    "entireTest": false
+  },
+  "sandbox": {
+    "pathParams": {
+      "affiliateId": "13"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "skips": {
+    "bodySchemaCheck": true
+  },
+  "pathParams": {
+    "issuerId": "#ISSUER_ID#",
+  },
+  "expectedResponse": {
+    "statusCode": 200
+  }
+}

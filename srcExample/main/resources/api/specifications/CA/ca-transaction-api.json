@@ -1,0 +1,2233 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/v1/summaries/instant-settlement": {
+      "get": {
+        "operationId": "SummariesController_getInstantSettlementSummary",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Instant Settlement Summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetInstantSettlementSummaryDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Summaries"
+        ]
+      }
+    },
+    "/v1/summaries/credit-card": {
+      "get": {
+        "operationId": "SummariesController_getCreditCardsDailySummary",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCreditCardsDailySummaryDto"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Get daily summary of credit card transactions with limits",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCreditCardsDailySummaryDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCreditCardsDailySummaryNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Summaries"
+        ]
+      }
+    },
+    "/v1/summaries/asset-withdrawals": {
+      "get": {
+        "operationId": "SummariesController_getAssetDailySummary",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "stableCoin",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "USDC"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetWithdrawalSummaryDto"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Get daily summary of asset transactions with their limits in quantity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetWithdrawalSummaryDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetTranfersSummaryNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Summaries"
+        ]
+      }
+    },
+    "/v1/internal-transfers": {
+      "post": {
+        "operationId": "InternalTransfersController_makeInternalTransfer",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInternalTransferRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create Internal Transfer",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalTransfer"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateInternalTransferBadRequestException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateInternalTransferInternalServerException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Internal Transfers"
+        ]
+      }
+    },
+    "/v1/forex": {
+      "post": {
+        "operationId": "TransactionsController_createExchangeFiat",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateExchangeFiatFilterDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Exchange fiat from one currency to the other.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateExchangeFiatResponseDto"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateExchangeFiatResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Conversion limit exceeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversionLimitExceededException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transactions"
+        ]
+      }
+    },
+    "/v2/transactions": {
+      "get": {
+        "operationId": "TransactionsController_getTransactions",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "CASH",
+                "FUND",
+                "ASSET"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "fundTransferType",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "wire",
+                "wire_international",
+                "ach",
+                "credit_card",
+                "external_payment"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "fromDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "includeFailedAndDraftTxs",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "includeSystemTransfers",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Transactions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTransactionsDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transactions"
+        ]
+      }
+    },
+    "/v1/transactions/{transactionId}": {
+      "delete": {
+        "operationId": "TransactionsController_cancelTransaction",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "transactionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelFundTransaction"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cancel Fund Transaction"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancelTransactionBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancelTransactionNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transactions"
+        ]
+      }
+    },
+    "/v1/withdrawals": {
+      "post": {
+        "operationId": "TransactionsController_createWithdraw",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Suggestion: CHECK SCHEMA instead of EXAMPLE VALUE.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWithdrawRequestExampleDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Make Withdraw",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateWithdrawResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateWithdrawBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateWithdrawNotFoundExceptionDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateWithdrawInternalServerExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transactions"
+        ]
+      }
+    },
+    "/v2/asset-withdrawals": {
+      "post": {
+        "operationId": "TransactionsController_withdrawalToWallet",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWithdrawalToWalletRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Withdraw fiat converted to USDC to a wallet"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateWithdrawToWalletBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transactions"
+        ]
+      }
+    },
+    "/v1/deposits": {
+      "post": {
+        "operationId": "TransactionsController_createDeposit",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDepositRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Make Deposit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateDepositResponseDto"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateDepositResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateDepositBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateDepositNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transactions"
+        ]
+      }
+    },
+    "/v1/external-payments": {
+      "post": {
+        "operationId": "TransactionsController_createExternalPayment",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateExternalPaymentRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Make external payment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateExternalPaymentResponseDto"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateExternalPaymentResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateExternalPaymentBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateExternalPaymentNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transactions"
+        ]
+      }
+    },
+    "/v1/settings/{investorId}": {
+      "get": {
+        "operationId": "SettingsController_getSettings",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Settings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Settings"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Settings"
+        ]
+      },
+      "patch": {
+        "operationId": "SettingsController_updateSettings",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchSettingsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update Settings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Settings"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Api Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Settings"
+        ]
+      }
+    },
+    "/api/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "CA Transaction Api",
+    "description": "API to interact with CA Transactions",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "ForbiddenException": {
+        "type": "object",
+        "properties": {}
+      },
+      "GetInstantSettlementSummaryDto": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "number"
+          },
+          "remainingLimit": {
+            "type": "number"
+          },
+          "transactions": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "investorId",
+          "limit",
+          "remainingLimit",
+          "transactions"
+        ]
+      },
+      "GetAccountNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "GetCreditCardsDailySummaryDto": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "string"
+          },
+          "dailyLimit": {
+            "type": "number"
+          },
+          "remainingDailyLimit": {
+            "type": "number"
+          },
+          "transactions": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "investorId",
+          "dailyLimit",
+          "remainingDailyLimit",
+          "transactions"
+        ]
+      },
+      "GetCreditCardsDailySummaryNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "GetAssetWithdrawalSummaryDto": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "string"
+          },
+          "withdrawalQuantityLimit": {
+            "type": "number"
+          },
+          "remainingWithdrawalsAllowed": {
+            "type": "number"
+          },
+          "withdrawalAmountLimit": {
+            "type": "number"
+          },
+          "remainingWithdrawalAmountAllowed": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "investorId",
+          "withdrawalQuantityLimit",
+          "remainingWithdrawalsAllowed",
+          "withdrawalAmountLimit",
+          "remainingWithdrawalAmountAllowed"
+        ]
+      },
+      "GetAssetTranfersSummaryNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "Side": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "string"
+          },
+          "accountId": {
+            "type": "string"
+          },
+          "fee": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateInternalTransferRequestDto": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "default": "USD",
+            "enum": [
+              "USD",
+              "EUR",
+              "USDC"
+            ],
+            "type": "string"
+          },
+          "idempotentId": {
+            "type": "string",
+            "description": "UUID to ensure idempotent when you execute the transaction"
+          },
+          "reference": {
+            "type": "string",
+            "description": "Something to identify your transaction"
+          },
+          "from": {
+            "$ref": "#/components/schemas/Side"
+          },
+          "to": {
+            "$ref": "#/components/schemas/Side"
+          },
+          "amount": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "currency",
+          "from",
+          "to",
+          "amount"
+        ]
+      },
+      "InternalTransferFeeInfo": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "string"
+          },
+          "error": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "amount"
+        ]
+      },
+      "InternalTransferSide": {
+        "type": "object",
+        "properties": {
+          "cashAccountId": {
+            "type": "string"
+          },
+          "investorId": {
+            "type": "string"
+          },
+          "transferId": {
+            "type": "string"
+          },
+          "fee": {
+            "$ref": "#/components/schemas/InternalTransferFeeInfo"
+          }
+        },
+        "required": [
+          "cashAccountId",
+          "transferId"
+        ]
+      },
+      "InternalTransfer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "PENDING",
+              "DONE",
+              "FAILED",
+              "CANCELLED",
+              "REVERSED"
+            ]
+          },
+          "from": {
+            "$ref": "#/components/schemas/InternalTransferSide"
+          },
+          "to": {
+            "$ref": "#/components/schemas/InternalTransferSide"
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "USD",
+              "EUR",
+              "USDC"
+            ]
+          },
+          "amount": {
+            "type": "string"
+          },
+          "reference": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "from",
+          "to",
+          "currency",
+          "amount"
+        ]
+      },
+      "CreateInternalTransferBadRequestException": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND",
+              "INVALID_ACCOUNT_STATUS",
+              "NOT_ENOUGH_CASH_FOR_SENDER"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CreateInternalTransferInternalServerException": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "SYSTEM_ACCOUNT_NOT_FOUND",
+            "enum": [
+              "SYSTEM_ACCOUNT_NOT_FOUND",
+              "INVALID_STATUS_CREATED_TRANSFER"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CreateExchangeFiatFilterDto": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "enum": [
+              "EUR",
+              "USD"
+            ],
+            "type": "string",
+            "example": "USD"
+          },
+          "to": {
+            "enum": [
+              "EUR",
+              "USD"
+            ],
+            "type": "string",
+            "example": "EUR"
+          },
+          "investorId": {
+            "type": "string"
+          },
+          "amountToConvert": {
+            "type": "number"
+          },
+          "conversionRate": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "from",
+          "to",
+          "investorId",
+          "amountToConvert",
+          "conversionRate"
+        ]
+      },
+      "CreateExchangeFiatResponseDto": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "enum": [
+              "USD",
+              "EUR",
+              "USDC"
+            ],
+            "type": "string"
+          },
+          "to": {
+            "enum": [
+              "USD",
+              "EUR",
+              "USDC"
+            ],
+            "type": "string"
+          },
+          "investorId": {
+            "type": "string"
+          },
+          "conversionRate": {
+            "type": "number"
+          },
+          "exchangeFee": {
+            "type": "object",
+            "properties": {
+              "currency": {
+                "required": true,
+                "type": "number",
+                "enum": []
+              },
+              "value": {
+                "required": true,
+                "type": "number"
+              }
+            }
+          },
+          "transactionId": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "number"
+          },
+          "amountToConvert": {
+            "type": "number"
+          },
+          "amountConvertedMinusFee": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "from",
+          "to",
+          "investorId",
+          "conversionRate",
+          "exchangeFee",
+          "transactionId",
+          "timestamp",
+          "amountToConvert",
+          "amountConvertedMinusFee"
+        ]
+      },
+      "ConversionLimitExceededException": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "CONVERSION_LIMIT_EXCEEDED",
+            "enum": [
+              "CONVERSION_LIMIT_EXCEEDED"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "GetTransactionsDto": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "type": "object",
+            "properties": {
+              "total": {
+                "required": true,
+                "type": "number"
+              },
+              "length": {
+                "required": true,
+                "type": "number"
+              },
+              "offset": {
+                "required": true,
+                "type": "number"
+              },
+              "limit": {
+                "required": true,
+                "type": "number"
+              },
+              "fromDate": {
+                "required": false,
+                "type": "number"
+              },
+              "fundTransferType": {
+                "required": false,
+                "enum": [
+                  "wire",
+                  "wire_international",
+                  "ach",
+                  "credit_card",
+                  "external_payment"
+                ],
+                "type": "string"
+              }
+            }
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "meta",
+          "data"
+        ]
+      },
+      "CancelFundTransaction": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "string"
+          },
+          "cashAccountId": {
+            "type": "string"
+          }
+        }
+      },
+      "CancelTransactionBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "INVALID_CANCEL_FUND_TRANSACTION",
+            "enum": [
+              "INVALID_CANCEL_FUND_TRANSACTION",
+              "INVALID_ACCOUNT_STATUS",
+              "SYSTEM_TRANSFER_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CancelTransactionNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "FUND_TRANSACTION_NOT_FOUND",
+            "enum": [
+              "FUND_TRANSACTION_NOT_FOUND",
+              "ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "BankAddress": {
+        "type": "object",
+        "properties": {
+          "country": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "province": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "country",
+          "address",
+          "city",
+          "province"
+        ]
+      },
+      "IntermediaryBankData": {
+        "type": "object",
+        "properties": {
+          "bankName": {
+            "type": "string"
+          },
+          "routingNumber": {
+            "type": "string"
+          },
+          "bankAddress": {
+            "$ref": "#/components/schemas/BankAddress"
+          }
+        },
+        "required": [
+          "bankName",
+          "routingNumber",
+          "bankAddress"
+        ]
+      },
+      "WithdrawalUSDTransferData": {
+        "type": "object",
+        "properties": {
+          "isInternational": {
+            "type": "boolean"
+          },
+          "swiftCode": {
+            "type": "string"
+          },
+          "accountNumber": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "bankAccountName": {
+            "type": "string"
+          },
+          "routingNumber": {
+            "type": "string"
+          },
+          "bankAddress": {
+            "$ref": "#/components/schemas/BankAddress"
+          },
+          "intermediaryBank": {
+            "$ref": "#/components/schemas/IntermediaryBankData"
+          }
+        },
+        "required": [
+          "isInternational",
+          "swiftCode",
+          "accountNumber",
+          "bankName",
+          "bankAccountName"
+        ]
+      },
+      "WithdrawalEURTransferData": {
+        "type": "object",
+        "properties": {
+          "isInternational": {
+            "type": "boolean"
+          },
+          "iban": {
+            "type": "string"
+          },
+          "beneficiaryFullName": {
+            "type": "string"
+          },
+          "beneficiaryAddress": {
+            "type": "string"
+          },
+          "swiftCode": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "isInternational",
+          "beneficiaryFullName",
+          "beneficiaryAddress"
+        ]
+      },
+      "FundTransferMethodExample": {
+        "type": "object",
+        "properties": {
+          "isInternational": {
+            "type": "boolean"
+          },
+          "swiftCode": {
+            "type": "string"
+          },
+          "accountNumber": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "bankAccountName": {
+            "type": "string"
+          },
+          "routingNumber": {
+            "type": "string"
+          },
+          "iban": {
+            "type": "string"
+          },
+          "beneficiaryFullName": {
+            "type": "string"
+          },
+          "beneficiaryAddress": {
+            "type": "string"
+          },
+          "intermediaryBank": {
+            "$ref": "#/components/schemas/IntermediaryBankData"
+          }
+        },
+        "required": [
+          "isInternational"
+        ]
+      },
+      "CreateWithdrawRequestExampleDto": {
+        "type": "object",
+        "properties": {
+          "fundTransferMethod": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/WithdrawalUSDTransferData"
+              },
+              {
+                "$ref": "#/components/schemas/WithdrawalEURTransferData"
+              }
+            ],
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FundTransferMethodExample"
+              }
+            ]
+          },
+          "amount": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "fundTransferType": {
+            "type": "string"
+          },
+          "fundTransferMethodId": {
+            "type": "string"
+          },
+          "investorId": {
+            "type": "string"
+          },
+          "reference": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "fundTransferMethod",
+          "amount",
+          "currency",
+          "fundTransferType",
+          "investorId"
+        ]
+      },
+      "CreateWithdrawResponseDto": {
+        "type": "object",
+        "properties": {
+          "withdrawalId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "withdrawalId"
+        ]
+      },
+      "CreateWithdrawBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "AMOUNT_EXCEEDS_LIMIT",
+            "enum": [
+              "AMOUNT_EXCEEDS_LIMIT",
+              "NOT_ENOUGH_FUNDS",
+              "BANK_KYC_NOT_COMPLETED",
+              "INVALID_CURRENCY",
+              "TRANSFER_METHOD_NOT_IMPLEMENTED"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CreateWithdrawNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CreateWithdrawInternalServerExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "SYSTEM_ACCOUNT_NOT_FOUND",
+            "enum": [
+              "SYSTEM_ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CreateWithdrawalToWalletRequest": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "minimum": 1,
+            "description": "Amount in USD"
+          },
+          "walletId": {
+            "type": "string"
+          },
+          "stableCoin": {
+            "type": "string",
+            "enum": [
+              "USDC"
+            ]
+          },
+          "investorId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "amount",
+          "walletId",
+          "stableCoin",
+          "investorId"
+        ]
+      },
+      "CreateWithdrawToWalletBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "MAX_WITHDRAWAL_LIMIT_EXCEEDED",
+            "enum": [
+              "AMOUNT_EXCEEDS_LIMIT",
+              "MAX_WITHDRAWAL_LIMIT_EXCEEDED",
+              "NOT_ENOUGH_FUNDS",
+              "WALLET_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CreateDepositRequestDto": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "default": "USD",
+            "enum": [
+              "USD",
+              "EUR",
+              "USDC"
+            ],
+            "type": "string"
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 1
+          },
+          "fundTransferMethodId": {
+            "type": "string"
+          },
+          "transferMethodId": {
+            "type": "string"
+          },
+          "investorId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "currency",
+          "amount",
+          "fundTransferMethodId",
+          "transferMethodId",
+          "investorId"
+        ]
+      },
+      "CreateDepositResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "isInstantSettlement": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "isInstantSettlement"
+        ]
+      },
+      "CreateDepositBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "AMOUNT_EXCEEDS_LIMIT",
+            "enum": [
+              "AMOUNT_EXCEEDS_LIMIT",
+              "NOT_ENOUGH_FUNDS",
+              "INVALID_INVESTOR_FOR_TRANSFER_METHOD"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CreateDepositNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND",
+              "TRANSFER_METHOD_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CreateExternalPaymentRequestDto": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "enum": [
+              "USD",
+              "EUR",
+              "USDC"
+            ],
+            "type": "string"
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 1
+          },
+          "investorId": {
+            "type": "string"
+          },
+          "toCashAccountId": {
+            "type": "string"
+          },
+          "reference": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "currency",
+          "amount",
+          "investorId",
+          "toCashAccountId"
+        ]
+      },
+      "CreateExternalPaymentResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "CreateExternalPaymentBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "INVALID_ACCOUNT_STATUS",
+            "enum": [
+              "NOT_ENOUGH_CASH_FOR_SENDER",
+              "INVALID_ACCOUNT_STATUS",
+              "INVALID_ACCOUNT_TYPE"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CreateExternalPaymentNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "Settings": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "string"
+          },
+          "instantSettlementDailyLimit": {
+            "type": "number"
+          },
+          "updatedDate": {
+            "type": "number"
+          },
+          "usedCurrencies": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "USD",
+                "EUR",
+                "USDC"
+              ]
+            }
+          }
+        },
+        "required": [
+          "investorId",
+          "updatedDate",
+          "usedCurrencies"
+        ]
+      },
+      "PatchSettingsDto": {
+        "type": "object",
+        "properties": {
+          "instantSettlementDailyLimit": {
+            "type": "number"
+          },
+          "usedCurrencies": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "USD",
+                "EUR",
+                "USDC"
+              ]
+            }
+          }
+        },
+        "required": [
+          "usedCurrencies"
+        ]
+      }
+    }
+  }
+}

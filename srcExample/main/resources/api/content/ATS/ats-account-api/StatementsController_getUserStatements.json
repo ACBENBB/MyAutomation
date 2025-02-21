@@ -1,0 +1,10 @@
+{
+  "pathParams": {
+    "investorId": "#ATS_INVESTOR_ID#"
+  },
+  "headers": {
+    "x-api-key": "#ATS_ACCOUNT_API_KEY#"
+  },
+  "rc": {},
+  "sandbox": {}
+}

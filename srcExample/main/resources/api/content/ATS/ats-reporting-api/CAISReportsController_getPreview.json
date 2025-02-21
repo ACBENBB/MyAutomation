@@ -1,0 +1,7 @@
+{
+  "headers": {
+    "x-api-key": "#ATS_REPORTING_API_KEY#"
+  },
+  "rc": {},
+  "sandbox": {}
+}

@@ -1,0 +1,7 @@
+<suite name="AUT477_CA_Holdings_Btn_Create_Account" verbose="1">
+    <test name="AUT477_CA_Holdings_Btn_Create_Account">
+        <classes>
+            <class name="io.securitize.tests.ca.AUT477_CA_Holdings_Btn_Create_Account" />
+        </classes>
+    </test>
+</suite>

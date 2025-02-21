@@ -1,0 +1,5 @@
+    @Test()
+    public void #TEST_FUNCTION_NAME#() {
+        testRequest(Method.#METHOD#, "#ENDPOINT#", "#OPERATION_ID#", #LOGIN_AS#, "#RESOURCE_PATH#", "#RESPONSE_SCHEMA#");
+    }
+

@@ -1,0 +1,11 @@
+{
+  "skips": {
+    "bodySchemaCheck": true,
+    "bodyContentCheck": true
+  },
+  "pathParams":
+  {
+    "issuerId": "#ISSUER_ID#",
+    "userId": "#INVESTOR_ID#"
+  }
+}

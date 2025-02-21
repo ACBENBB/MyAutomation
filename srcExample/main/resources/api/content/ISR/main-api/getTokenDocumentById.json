@@ -1,0 +1,14 @@
+{
+  "pathParams": {
+    "tokenId": "#TOKEN_ID#",
+    "issuerId": "#ISSUER_ID#",
+    "tokenDocumentId": "83"
+  },
+  "sandbox": {
+    "pathParams": {
+      "tokenId": "#TOKEN_ID#",
+      "issuerId": "#ISSUER_ID#",
+      "tokenDocumentId": "45"
+    }
+  }
+}

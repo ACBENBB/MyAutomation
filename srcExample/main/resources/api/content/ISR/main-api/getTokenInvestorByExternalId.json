@@ -1,0 +1,12 @@
+{
+  "pathParams": {
+    "issuerId": "#ISSUER_ID#",
+    "tokenId": "#TOKEN_ID#",
+    "userExternalId": "9931887366"
+  },
+  "sandbox": {
+    "pathParams": {
+      "userExternalId": "2585333571"
+    }
+  }
+}

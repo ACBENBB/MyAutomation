@@ -1,0 +1,3061 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/v1/issuers/{issuerId}/tokens/{tokenId}/investment-rounds/{investmentRoundId}/investors/{investorId}/investment-requests": {
+      "get": {
+        "operationId": "InvestmentRequestController_getInvestorInvestmentRequestsPerRound",
+        "summary": "Get investment requests per round",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investmentRoundId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetInvestmentRequestResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investment Requests"
+        ]
+      },
+      "post": {
+        "operationId": "InvestmentRequestController_createInvestmentRequest",
+        "summary": "Create investment request",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investmentRoundId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInvestmentRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateInvestmentRequestResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investment Requests"
+        ]
+      }
+    },
+    "/api/v1/issuers/{issuerId}/tokens/{tokenId}/investment-rounds/{investmentRoundId}/investors/{investorId}/investment-requests/{investmentRequestId}": {
+      "get": {
+        "operationId": "InvestmentRequestController_getInvestmentRequestById",
+        "summary": "Get investment request by id",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investmentRoundId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "investmentRequestId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetInvestmentRequestResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investment Requests"
+        ]
+      },
+      "patch": {
+        "operationId": "InvestmentRequestController_updateInvestmentRequest",
+        "summary": "Update investment request",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investmentRoundId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "investmentRequestId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInvestmentRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateInvestmentRequestResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investment Requests"
+        ]
+      }
+    },
+    "/api/v1/issuers/{issuerId}/tokens/{tokenId}/investment-rounds/{investmentRoundId}/investors/{investorId}/investment-requests/set-bonus": {
+      "patch": {
+        "operationId": "InvestmentRequestController_setBonusInvestmentRequest",
+        "summary": "Set bonus to investment request",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investmentRoundId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetBonusInvestmentRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateInvestmentRequestResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investment Requests"
+        ]
+      }
+    },
+    "/api/v1/issuers/{issuerId}/investors/{investorId}": {
+      "delete": {
+        "operationId": "InvestmentRequestController_deleteInvestmentRequestsByInvestorId",
+        "summary": "delete all investment requests by investor",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Investment Requests"
+        ]
+      }
+    },
+    "/api/v1/issuers/{issuerId}/investors/{investorId}/investment-requests": {
+      "get": {
+        "operationId": "InvestmentRequestController_getInvestmentRequestsForTokensAndWallets",
+        "summary": "Get investment requests for tokens and wallets",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetInvestmentRequestsForTokensAndWalletsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investment Requests"
+        ]
+      }
+    },
+    "/api/v1/issuers/{issuerId}/tokens/{tokenId}/investment-rounds/{investmentRoundId}/investment-requests": {
+      "post": {
+        "operationId": "InvestmentRequestController_getInvestmentRequestsDataForIssuance",
+        "summary": "Get investment requests for issuance",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetBulkInvestmentRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Investment Requests"
+        ]
+      }
+    },
+    "/api/v1/issuers/{issuerId}/tokens/{tokenId}/investment-rounds/{investmentRoundId}/investment-requests/clear-tokens-assigned": {
+      "patch": {
+        "operationId": "InvestmentRequestController_clearTokensAssigned",
+        "summary": "Patch clear investment request assigned tokens",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investmentRoundId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClearTokensAssignedDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Investment Requests"
+        ]
+      }
+    },
+    "/api/v1/issuers/{issuerId}/tokens/{tokenId}/investment-rounds/{investmentRoundId}/investment-requests/token-issuance-ids": {
+      "patch": {
+        "operationId": "InvestmentRequestController_updateTokenIssuanceIds",
+        "summary": "Patch investment requests with token issuance ids",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTokenIssuanceIdsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Investment Requests"
+        ]
+      }
+    },
+    "/api/v1/issuers/{issuerId}/investors/{investorId}/webhook-from-docusign": {
+      "put": {
+        "operationId": "InvestmentRequestController_checkAndConfirmInvestmentRequest",
+        "summary": "Check and confirm investment request",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvestmentRequestCheckAndConfirmBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvestmentRequest"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investment Requests"
+        ]
+      }
+    },
+    "/api/v1/issuers/{issuerId}/tokens/{tokenId}/investment-requests": {
+      "get": {
+        "operationId": "InvestmentRequestController_getInvestmentRequestsByTokenId",
+        "summary": "get investment requests by token id",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Investment Requests"
+        ]
+      }
+    },
+    "/api/v1/issuers/{issuerId}/tokens/{tokenId}/investment-rounds/{investmentRoundId}/investors/{investorId}/investment-requests/{investmentRequestId}/finalize": {
+      "post": {
+        "operationId": "InvestmentRequestController_finalizeInvestmentRequest",
+        "summary": "finalize investment request",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investmentRoundId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "investmentRequestId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Investment Requests"
+        ]
+      }
+    },
+    "/api/v1/issuers/{issuerId}/tokens/{tokenId}/investment-rounds/{investmentRoundId}/bulk-issuance-info": {
+      "post": {
+        "operationId": "InvestmentRequestController_getBulkIssuanceInfo",
+        "summary": "get usersIds with tokens assigned",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetBulkIssuanceInfoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Investment Requests"
+        ]
+      }
+    },
+    "/api/v1/issuers/{issuerId}/tokens/{tokenId}/investment-rounds/{investmentRoundId}/investors/{investorId}/investment-requests/{investmentRequestId}/subscription-agreement-status-logs": {
+      "get": {
+        "operationId": "SubscriptionAgreementStatusLogsController_getInvestorInvestmentRequestSubscriptionAgreementStatusLogs",
+        "summary": "Get investment request subscription agreement status logs",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investmentRoundId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "investmentRequestId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetInvestmentRequestResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investment Requests"
+        ]
+      }
+    },
+    "/api/v1/issuers/{issuerId}/tokens/{tokenId}/investors/{investorId}/deposit-wallets": {
+      "get": {
+        "operationId": "DepositWalletController_getDepositWallets",
+        "summary": "Get investor's deposit wallets",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepositWalletResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Deposit Wallets"
+        ]
+      },
+      "post": {
+        "operationId": "DepositWalletController_createDepositWallet",
+        "summary": "Create deposit wallet",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDepositWalletDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepositWalletResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Deposit Wallets"
+        ]
+      },
+      "delete": {
+        "operationId": "DepositWalletController_deleteInvestorDepositWalletsByTokenId",
+        "summary": "Delete deposit wallet",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Deposit Wallets"
+        ]
+      }
+    },
+    "/api/v1/issuers/{issuerId}/tokens/{tokenId}/investors/{investorId}/deposit-wallets/{depositWalletId}": {
+      "get": {
+        "operationId": "DepositWalletController_getDepositWalletById",
+        "summary": "Get deposit wallet by id",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "depositWalletId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepositWalletResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Deposit Wallets"
+        ]
+      },
+      "patch": {
+        "operationId": "DepositWalletController_updateDepositWallet",
+        "summary": "Update deposit wallet",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "depositWalletId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDepositWalletDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepositWalletResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Deposit Wallets"
+        ]
+      }
+    },
+    "/api/v1/issuers/{issuerId}/investors/{investorId}/deposit-wallets": {
+      "delete": {
+        "operationId": "DepositWalletController_deleteInvestorDepositWallets",
+        "summary": "Delete deposit wallet",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Deposit Wallets"
+        ]
+      },
+      "get": {
+        "operationId": "DepositWalletController_getDepositWalletsByInvestorId",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Deposit Wallets"
+        ]
+      }
+    },
+    "/api/v1/issuers/{issuerId}/tokens/{tokenId}/investment-rounds": {
+      "get": {
+        "operationId": "InvestmentRoundController_getInvestmentRounds",
+        "summary": "Get token's investment rounds",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order-field",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "created-at",
+              "type": "string"
+            }
+          },
+          {
+            "name": "order-direction",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "DESC",
+              "enum": [
+                "ASC",
+                "DESC"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "isEvergreenRound",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "hasCustodianDocuSignIdAccess",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Investment Rounds"
+        ]
+      },
+      "post": {
+        "operationId": "InvestmentRoundController_createInvestmentRound",
+        "summary": "Create investment round",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInvestmentRoundDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvestmentRoundResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investment Rounds"
+        ]
+      }
+    },
+    "/api/v1/issuers/{issuerId}/tokens/{tokenId}/investment-rounds/{investmentRoundId}": {
+      "get": {
+        "operationId": "InvestmentRoundController_getInvestmentRoundById",
+        "summary": "Get investment round by id",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investmentRoundId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "hasCustodianDocuSignIdAccess",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvestmentRoundResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investment Rounds"
+        ]
+      },
+      "patch": {
+        "operationId": "InvestmentRoundController_updateInvestmentRoundById",
+        "summary": "Update investment round by id",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investmentRoundId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInvestmentRoundDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvestmentRoundResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Investment Rounds"
+        ]
+      },
+      "delete": {
+        "operationId": "InvestmentRoundController_deleteInvestmentRoundById",
+        "summary": "Update investment round by id",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investmentRoundId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Investment Rounds"
+        ]
+      }
+    },
+    "/api/v1/issuers/{issuerId}/tokens/{tokenId}/investment-rounds/{investmentRoundId}/investors/{investorId}/deposit-wallets/{depositWalletId}/deposit-transactions": {
+      "get": {
+        "operationId": "DepositTransactionController_getDepositTransactionsByWalletId",
+        "summary": "Get deposit transactions for investor & wallet",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investmentRoundId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "depositWalletId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepositTransactionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Deposit Transactions"
+        ]
+      }
+    },
+    "/api/v1/issuers/{issuerId}/tokens/{tokenId}/deposit-transactions": {
+      "get": {
+        "operationId": "DepositTransactionController_getDepositTransactionsByTokenId",
+        "summary": "Get deposit transactions for issuer & token",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fromDate",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepositTransactionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Deposit Transactions"
+        ]
+      }
+    },
+    "/api/v1/issuers/{issuerId}/tokens/{tokenId}/investors/{investorId}/deposit-wallets/{depositWalletId}/deposit-transactions": {
+      "post": {
+        "operationId": "DepositTransactionController_createDepositTransaction",
+        "summary": "Create a deposit transaction",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "depositWalletId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDepositTransactionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateDepositTransactionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Deposit Transactions"
+        ]
+      }
+    },
+    "/api/v1/issuers/{issuerId}/tokens/{tokenId}/investors/{investorId}/deposit-wallets/{depositWalletId}/deposit-transactions/{depositTransactionId}": {
+      "patch": {
+        "operationId": "DepositTransactionController_updateDepositTransaction",
+        "summary": "Update a deposit transaction by id",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "depositWalletId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "depositTransactionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDepositTransactionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepositTransactionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Deposit Transactions"
+        ]
+      },
+      "delete": {
+        "operationId": "DepositTransactionController_deleteDepositTransaction",
+        "summary": "Delete a deposit transaction by id",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "depositWalletId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "depositTransactionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Deposit Transactions"
+        ]
+      }
+    },
+    "/api/v1/issuers/{issuerId}/investors/{investorId}/deposit-transactions": {
+      "get": {
+        "operationId": "DepositTransactionController_getDepositTransactionsByInvestorId",
+        "summary": "Get all investor's transactions",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "investment-round-id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "token-id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "direction",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepositTransactionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Deposit Transactions"
+        ]
+      }
+    },
+    "/api/v1/issuers/{issuerId}/tokens/{tokenId}/import-investments": {
+      "post": {
+        "operationId": "ImportInvestmentsController_importInvestments",
+        "summary": "Import investments",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "update",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "triggerInvestmentEmail",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportInvestmentsBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Investment Import"
+        ]
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "HealthCheckController_checkDatabaseConnection",
+        "summary": "checks for db connection",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Health Check"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "ISR - Investment Service",
+    "description": "ISR - Investment Service",
+    "version": "2.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "PledgedOrTotalFundedResponseDto": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number"
+          },
+          "currencyId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "amount",
+          "currencyId"
+        ]
+      },
+      "GetInvestmentRequestResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "pledged": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PledgedOrTotalFundedResponseDto"
+              }
+            ]
+          },
+          "totalFunded": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PledgedOrTotalFundedResponseDto"
+              }
+            ]
+          },
+          "status": {
+            "type": "string"
+          },
+          "bonusTokens": {
+            "type": "number"
+          },
+          "tokensAssigned": {
+            "type": "number"
+          },
+          "bonusTokensAssigned": {
+            "type": "number"
+          },
+          "subscriptionAgreementStatus": {
+            "type": "string",
+            "enum": [
+              "none",
+              "requested",
+              "sent",
+              "signed",
+              "confirmed",
+              "rejected",
+              "pre-signed"
+            ]
+          },
+          "subscriptionAgreementSignedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "pledgeDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "pledgeInitiator": {
+            "type": "text"
+          },
+          "tokenIssuanceId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "pledged",
+          "totalFunded",
+          "status",
+          "bonusTokens",
+          "tokensAssigned",
+          "bonusTokensAssigned",
+          "subscriptionAgreementStatus",
+          "subscriptionAgreementSignedAt",
+          "createdAt",
+          "pledgeDate",
+          "pledgeInitiator",
+          "tokenIssuanceId"
+        ]
+      },
+      "CreateInvestmentRequestDto": {
+        "type": "object",
+        "properties": {
+          "investorData": {
+            "type": "string"
+          },
+          "currencyId": {
+            "type": "number"
+          },
+          "subscriptionAgreementStatus": {
+            "type": "string",
+            "enum": [
+              "none",
+              "requested",
+              "sent",
+              "signed",
+              "confirmed",
+              "rejected",
+              "pre-signed"
+            ]
+          },
+          "pledgeAmount": {
+            "type": "string"
+          },
+          "subscriptionAgreementSignedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "pledgeDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "pledgeInitiator": {
+            "type": "string",
+            "default": "API"
+          },
+          "investmentType": {
+            "type": "string",
+            "default": "other"
+          }
+        },
+        "required": [
+          "currencyId"
+        ]
+      },
+      "InvestmentRequestReponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "crypto",
+              "fiat"
+            ]
+          },
+          "currencyId": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "in_progress",
+              "pending",
+              "confirmed",
+              "cancelled",
+              "refunded",
+              "new_round"
+            ]
+          },
+          "investmentRoundId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "currencyId",
+          "status",
+          "investmentRoundId"
+        ]
+      },
+      "DepositWalletResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "investorId": {
+            "type": "number"
+          },
+          "brokerDealerGroupId": {
+            "type": "number"
+          },
+          "address": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "crypto",
+              "fiat"
+            ]
+          },
+          "currencyId": {
+            "type": "number"
+          },
+          "bankAccountName": {
+            "type": "string"
+          },
+          "addressSignature": {
+            "type": "string"
+          },
+          "investorData": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "issuerId",
+          "tokenId",
+          "investorId",
+          "brokerDealerGroupId",
+          "address",
+          "type",
+          "currencyId",
+          "bankAccountName",
+          "addressSignature",
+          "investorData",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "CreateInvestmentRequestResponseDto": {
+        "type": "object",
+        "properties": {
+          "investmentRequest": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InvestmentRequestReponseDto"
+              }
+            ]
+          },
+          "depositWallet": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DepositWalletResponseDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "investmentRequest",
+          "depositWallet"
+        ]
+      },
+      "SetBonusInvestmentRequestDto": {
+        "type": "object",
+        "properties": {
+          "operatorId": {
+            "type": "number"
+          },
+          "isOperatorTransferAgent": {
+            "type": "boolean"
+          },
+          "tokensAssigned": {
+            "type": "number"
+          },
+          "bonusTokensAssigned": {
+            "type": "number"
+          },
+          "bonusTokens": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "operatorId",
+          "isOperatorTransferAgent"
+        ]
+      },
+      "UpdateInvestmentRequestResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "investorId": {
+            "type": "number"
+          },
+          "currencyId": {
+            "type": "number"
+          },
+          "investmentRoundId": {
+            "type": "number"
+          },
+          "tokenIssuanceId": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "crypto",
+              "fiat"
+            ]
+          },
+          "amountPledged": {
+            "type": "number"
+          },
+          "tokensAssigned": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "in_progress",
+              "pending",
+              "confirmed",
+              "cancelled",
+              "refunded",
+              "new_round"
+            ]
+          },
+          "comments": {
+            "type": "string"
+          },
+          "receiveWallet": {
+            "type": "string"
+          },
+          "bonusTokens": {
+            "type": "number"
+          },
+          "subscriptionAgreementStatus": {
+            "type": "string",
+            "enum": [
+              "none",
+              "requested",
+              "sent",
+              "signed",
+              "confirmed",
+              "rejected",
+              "pre-signed"
+            ]
+          },
+          "subscriptionAgreementSignedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "subscriptionAgreementSignedText": {
+            "type": "string"
+          },
+          "issuerData": {
+            "type": "object"
+          },
+          "bonusTokensAssigned": {
+            "type": "number"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "pledgeDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "pledgeInitiator": {
+            "type": "text"
+          }
+        },
+        "required": [
+          "id",
+          "issuerId",
+          "tokenId",
+          "investorId",
+          "currencyId",
+          "investmentRoundId",
+          "tokenIssuanceId",
+          "type",
+          "amountPledged",
+          "tokensAssigned",
+          "status",
+          "comments",
+          "receiveWallet",
+          "bonusTokens",
+          "subscriptionAgreementStatus",
+          "subscriptionAgreementSignedAt",
+          "subscriptionAgreementSignedText",
+          "issuerData",
+          "bonusTokensAssigned",
+          "createdAt",
+          "updatedAt",
+          "pledgeDate",
+          "pledgeInitiator"
+        ]
+      },
+      "UpdateInvestmentRequestPledgedDto": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number"
+          },
+          "currencyId": {
+            "type": "number"
+          },
+          "date": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "initiator": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "amount",
+          "currencyId"
+        ]
+      },
+      "UpdateInvestmentRequestDto": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "number"
+          },
+          "operatorId": {
+            "type": "number"
+          },
+          "pledged": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UpdateInvestmentRequestPledgedDto"
+              }
+            ]
+          },
+          "subscriptionAgreementStatus": {
+            "type": "string",
+            "enum": [
+              "none",
+              "requested",
+              "sent",
+              "signed",
+              "confirmed",
+              "rejected",
+              "pre-signed"
+            ]
+          },
+          "subscriptionAgreementSignedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "bonusTokens": {
+            "type": "number"
+          },
+          "isOperatorTransferAgent": {
+            "type": "boolean",
+            "default": false
+          },
+          "IsNumber": {
+            "type": "number"
+          },
+          "tokenIssuanceId": {
+            "type": "number"
+          },
+          "subscriptionAgreementDocusignId": {
+            "type": "string"
+          },
+          "addTokensAssigned": {
+            "type": "string",
+            "description": "Optionally add a given amount of tokens to the existing tokensAssigned value"
+          }
+        },
+        "required": [
+          "operatorId",
+          "pledged",
+          "subscriptionAgreementDocusignId"
+        ]
+      },
+      "GetInvestmentRequestsForTokensAndWalletsResponseDto": {
+        "type": "object",
+        "properties": {
+          "investmentRequest": {
+            "type": "object"
+          },
+          "investmentRound": {
+            "type": "object"
+          },
+          "tokensAssignedInCents": {
+            "type": "number"
+          },
+          "bonusTokensInCents": {
+            "type": "number"
+          },
+          "hasInvestmentRequests": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "investmentRequest",
+          "investmentRound",
+          "tokensAssignedInCents",
+          "bonusTokensInCents",
+          "hasInvestmentRequests"
+        ]
+      },
+      "GetBulkInvestmentRequestDto": {
+        "type": "object",
+        "properties": {
+          "investorIds": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "isSingleIssuance": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "investorIds"
+        ]
+      },
+      "ClearTokensAssignedDto": {
+        "type": "object",
+        "properties": {
+          "investmentRequestIds": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "shouldClearBonusTokens": {
+            "type": "boolean"
+          },
+          "clearAmount": {
+            "type": "string",
+            "description": "optionally clear exactly this amount"
+          }
+        },
+        "required": [
+          "investmentRequestIds"
+        ]
+      },
+      "UpdateTokenIssuanceIdsParams": {
+        "type": "object",
+        "properties": {
+          "investmentRequestId": {
+            "type": "number"
+          },
+          "tokenIssuanceId": {
+            "type": "number"
+          },
+          "addTokensAssigned": {
+            "type": "string",
+            "description": "Optionally add a given amount of tokens to the existing tokensAssigned value"
+          }
+        },
+        "required": [
+          "investmentRequestId",
+          "tokenIssuanceId"
+        ]
+      },
+      "UpdateTokenIssuanceIdsDto": {
+        "type": "object",
+        "properties": {
+          "investmentRequests": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UpdateTokenIssuanceIdsParams"
+            }
+          }
+        },
+        "required": [
+          "investmentRequests"
+        ]
+      },
+      "InvestmentRequestCheckAndConfirmBodyDto": {
+        "type": "object",
+        "properties": {
+          "investor": {
+            "type": "object"
+          },
+          "envelopeInformation": {
+            "type": "object"
+          },
+          "investmentRoundId": {
+            "type": "number"
+          }
+        }
+      },
+      "InvestmentRequest": {
+        "type": "object",
+        "properties": {}
+      },
+      "GetBulkIssuanceInfoDto": {
+        "type": "object",
+        "properties": {
+          "investorIds": {
+            "type": "number"
+          },
+          "totalsOnly": {
+            "type": "boolean"
+          },
+          "ignoreTokensAssigned": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "totalsOnly",
+          "ignoreTokensAssigned"
+        ]
+      },
+      "CreateDepositWalletDto": {
+        "type": "object",
+        "properties": {
+          "currencyId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "currencyId"
+        ]
+      },
+      "UpdateDepositWalletDto": {
+        "type": "object",
+        "properties": {
+          "investorData": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "investorData"
+        ]
+      },
+      "CreateInvestmentRoundDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "startsAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "endsAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "planned",
+              "active",
+              "done"
+            ]
+          },
+          "issuanceDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "minInvestmentFiat": {
+            "type": "number"
+          },
+          "minInvestmentCrypto": {
+            "type": "number"
+          },
+          "investmentTermsAndConditions": {
+            "type": "string"
+          },
+          "subscriptionAgreementDocusignId": {
+            "type": "string"
+          },
+          "subscriptionAgreementCustodianDocusignId": {
+            "type": "string"
+          },
+          "isTokenCalculatorVisible": {
+            "type": "boolean"
+          },
+          "tokenCalculatorData": {
+            "type": "object"
+          },
+          "jurisdictionalExceptionsData": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "json": {
+            "type": "string"
+          },
+          "isEvergreenRound": {
+            "type": "boolean"
+          },
+          "hasCustodianDocusignIdAccess": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "startsAt",
+          "status",
+          "minInvestmentFiat",
+          "minInvestmentCrypto",
+          "investmentTermsAndConditions",
+          "tokenCalculatorData",
+          "jurisdictionalExceptionsData",
+          "hasCustodianDocusignIdAccess"
+        ]
+      },
+      "InvestmentRoundResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "startsAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "endsAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "planned",
+              "active",
+              "done"
+            ]
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "minInvestmentCrypto": {
+            "type": "number"
+          },
+          "minInvestmentFiat": {
+            "type": "number"
+          },
+          "investmentTermsAndConditions": {
+            "type": "string"
+          },
+          "investmentSubscriptionAgreement": {
+            "type": "string"
+          },
+          "issuanceDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "subscriptionAgreementDocusignId": {
+            "type": "string"
+          },
+          "subscriptionAgreementCustodianDocusignId": {
+            "type": "string"
+          },
+          "tokenCalculatorType": {
+            "type": "string",
+            "enum": [
+              "bonus-tiers-by-amount"
+            ]
+          },
+          "tokenCalculatorData": {
+            "type": "object"
+          },
+          "isTokenCalculatorVisible": {
+            "type": "boolean"
+          },
+          "isEvergreenRound": {
+            "type": "boolean"
+          },
+          "json": {
+            "type": "string"
+          },
+          "minSubsequentInvestmentFiat": {
+            "type": "number"
+          },
+          "minSubsequentInvestmentCrypto": {
+            "type": "number"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "startsAt",
+          "endsAt",
+          "name",
+          "status",
+          "issuerId",
+          "tokenId",
+          "minInvestmentCrypto",
+          "minInvestmentFiat",
+          "investmentTermsAndConditions",
+          "investmentSubscriptionAgreement",
+          "issuanceDate",
+          "subscriptionAgreementDocusignId",
+          "subscriptionAgreementCustodianDocusignId",
+          "tokenCalculatorType",
+          "tokenCalculatorData",
+          "isTokenCalculatorVisible",
+          "isEvergreenRound",
+          "json",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "UpdateInvestmentRoundDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "startsAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "endsAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "planned",
+              "active",
+              "done"
+            ]
+          },
+          "issuanceDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "minInvestmentFiat": {
+            "type": "number"
+          },
+          "minInvestmentCrypto": {
+            "type": "number"
+          },
+          "investmentTermsAndConditions": {
+            "type": "string"
+          },
+          "subscriptionAgreementDocusignId": {
+            "type": "string"
+          },
+          "subscriptionAgreementCustodianDocusignId": {
+            "type": "string"
+          },
+          "isTokenCalculatorVisible": {
+            "type": "boolean"
+          },
+          "tokenCalculatorData": {
+            "type": "object"
+          },
+          "jurisdictionalExceptionsData": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "json": {
+            "type": "string"
+          },
+          "isEvergreenRound": {
+            "type": "boolean"
+          },
+          "hasCustodianDocusignIdAccess": {
+            "type": "boolean"
+          },
+          "minSubsequentInvestmentFiat": {
+            "type": "number"
+          },
+          "minSubsequentInvestmentCrypto": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "tokenCalculatorData",
+          "jurisdictionalExceptionsData"
+        ]
+      },
+      "DepositTransactionResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "investmentRoundId": {
+            "type": "number"
+          },
+          "investmentRequestId": {
+            "type": "number"
+          },
+          "tokenIssuanceId": {
+            "type": "number"
+          },
+          "investorId": {
+            "type": "number"
+          },
+          "brokerDealerGroupId": {
+            "type": "number"
+          },
+          "walletId": {
+            "type": "number"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "deposit",
+              "withdraw",
+              "liquidation",
+              "refund"
+            ]
+          },
+          "transactionTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "transactionCost": {
+            "type": "number"
+          },
+          "blockNumber": {
+            "type": "number"
+          },
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "mainCurrencyWorth": {
+            "type": "number"
+          },
+          "data": {
+            "type": "string"
+          },
+          "confirmations": {
+            "type": "number"
+          },
+          "confirmed": {
+            "type": "number"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "automated",
+              "manual"
+            ]
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "issuerId",
+          "tokenId",
+          "investmentRoundId",
+          "investmentRequestId",
+          "tokenIssuanceId",
+          "investorId",
+          "brokerDealerGroupId",
+          "walletId",
+          "direction",
+          "transactionTime",
+          "transactionCost",
+          "blockNumber",
+          "from",
+          "to",
+          "mainCurrencyWorth",
+          "data",
+          "confirmations",
+          "confirmed",
+          "source",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "BigNumber": {
+        "type": "object",
+        "properties": {}
+      },
+      "CreateDepositTransactionDto": {
+        "type": "object",
+        "properties": {
+          "currencyId": {
+            "type": "number"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "deposit",
+              "withdraw",
+              "liquidation",
+              "refund"
+            ]
+          },
+          "amount": {
+            "type": "number"
+          },
+          "externalTransactionConfirmation": {
+            "type": "string"
+          },
+          "transactionTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "investmentRoundId": {
+            "type": "number"
+          },
+          "investmentRequestId": {
+            "type": "number"
+          },
+          "mainCurrencyWorth": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BigNumber"
+              }
+            ]
+          },
+          "usdWorth": {
+            "type": "number"
+          },
+          "triggerInvestmentEmail": {
+            "type": "boolean"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "automated",
+              "manual"
+            ]
+          },
+          "isSwap": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "currencyId",
+          "direction",
+          "amount",
+          "externalTransactionConfirmation",
+          "investmentRoundId",
+          "investmentRequestId",
+          "source",
+          "isSwap"
+        ]
+      },
+      "CreateDepositTransactionResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "transactionTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "deposit",
+              "withdraw",
+              "liquidation",
+              "refund"
+            ]
+          },
+          "amount": {
+            "type": "number"
+          },
+          "externalTransactionConfirmation": {
+            "type": "string"
+          },
+          "usdWorth": {
+            "type": "number"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "automated",
+              "manual"
+            ]
+          },
+          "currencyId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "transactionTime",
+          "direction",
+          "amount",
+          "externalTransactionConfirmation",
+          "usdWorth",
+          "source",
+          "currencyId"
+        ]
+      },
+      "UpdateDepositTransactionDto": {
+        "type": "object",
+        "properties": {
+          "direction": {
+            "type": "string",
+            "enum": [
+              "deposit",
+              "withdraw",
+              "liquidation",
+              "refund"
+            ]
+          },
+          "amount": {
+            "type": "number"
+          },
+          "usdWorth": {
+            "type": "number"
+          },
+          "externalTransactionConfirmation": {
+            "type": "string"
+          }
+        }
+      },
+      "DepositWallet": {
+        "type": "object",
+        "properties": {}
+      },
+      "AddressInterfaceDto": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "bankAccountName": {
+            "type": "string"
+          },
+          "addressSignature": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "address",
+          "bankAccountName",
+          "addressSignature"
+        ]
+      },
+      "ImportInvestmentsBodyDto": {
+        "type": "object",
+        "properties": {
+          "depositDetails": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DepositWallet"
+              }
+            ]
+          },
+          "investmentRequest": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InvestmentRequest"
+              }
+            ]
+          },
+          "investor": {
+            "type": "object"
+          },
+          "address": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AddressInterfaceDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "address"
+        ]
+      }
+    }
+  }
+}

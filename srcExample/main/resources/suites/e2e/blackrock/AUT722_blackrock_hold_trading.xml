@@ -1,0 +1,7 @@
+<suite name="AUT722_blackrock_hold_trading" verbose="1">
+    <test name="AUT722_blackrock_hold_trading">
+        <classes>
+            <class name="io.securitize.tests.blackrock.AUT722_blackrock_hold_trading" />
+        </classes>
+    </test>
+</suite>

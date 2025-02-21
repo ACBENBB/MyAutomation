@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT547_ISR_Add_Edit_Delete_Rounds" verbose="1">
+    <test name="AUT547_ISR_Add_Edit_Delete_Rounds">
+        <classes>
+            <class name="io.securitize.tests.controlPanel.AUT547_ISR_Add_Edit_Delete_Rounds" />
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT485_ATS_Partial_Match_Order_Buy_Side" verbose="10" parallel="methods" thread-count="1">
+    <test name="AUT485_ATS_Partial_Match_Order_Buy_Side">
+        <classes>
+            <class name="io.securitize.tests.apiTests.ats.gateway.orders.AUT485_ATS_Partial_Match_Order_Buy_Side"></class>
+        </classes>
+    </test>
+</suite>

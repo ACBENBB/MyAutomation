@@ -1,0 +1,10 @@
+[
+  {
+    "rc": [
+      "AbstractionLayerController_getErc20Info"
+    ],
+    "sandbox": [
+      "AbstractionLayerController_getErc20Info"
+    ]
+  }
+]

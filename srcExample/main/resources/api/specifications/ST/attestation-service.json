@@ -1,0 +1,492 @@
+{
+"openapi": "3.0.0",
+"info": {
+"title": "Attestation Service",
+"description": "The Attestation Service description",
+"version": "1.0",
+"contact": {}
+},
+"tags": [],
+"servers": [],
+"components": {
+"schemas": {
+"AttestationDto": {
+"type": "object",
+"properties": {
+"status": {
+"type": "string",
+"example": "passed"
+}
+},
+"required": [
+"status"
+]
+},
+"PartnerRequirementDto": {
+"type": "object",
+"properties": {
+"kyc": {
+"type": "boolean",
+"description": "Partner kyc",
+"example": true
+},
+"accredited": {
+"type": "boolean",
+"description": "Partner kyc",
+"example": false
+}
+},
+"required": [
+"kyc",
+"accredited"
+]
+},
+"PartnerDto": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string",
+"description": "Partner id"
+},
+"name": {
+"type": "string",
+"description": "Partner name"
+},
+"requirements": {
+"description": "Partner requirements",
+"allOf": [
+{
+"$ref": "#/components/schemas/PartnerRequirementDto"
+}
+]
+},
+"countries": {
+"description": "Partner countries rules",
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"states": {
+"description": "Partner states rules",
+"type": "array",
+"items": {
+"type": "string"
+}
+}
+},
+"required": [
+"id",
+"name",
+"requirements",
+"countries",
+"states"
+]
+},
+"PartnerCreate": {
+"type": "object",
+"properties": {
+"name": {
+"type": "string",
+"description": "Partner name",
+"example": "Uniswap"
+},
+"id": {
+"type": "string",
+"description": "Issuer identifier",
+"example": "a61fdb3a-0b00-4b27-a2ea-8b426103a7e2"
+}
+},
+"required": [
+"name",
+"id"
+]
+},
+"PartnerCountryDto": {
+"type": "object",
+"properties": {
+"countryId": {
+"type": "string",
+"description": "Country ID",
+"example": "US"
+},
+"forbidden": {
+"type": "boolean",
+"description": "Country forbidden flag",
+"example": false
+}
+},
+"required": [
+"countryId",
+"forbidden"
+]
+},
+"PartnerStateDto": {
+"type": "object",
+"properties": {
+"stateId": {
+"type": "string",
+"description": "State ID",
+"example": "NY"
+},
+"forbidden": {
+"type": "boolean",
+"description": "State forbidden flag",
+"example": false
+}
+},
+"required": [
+"stateId",
+"forbidden"
+]
+},
+"PartnerCreateRules": {
+"type": "object",
+"properties": {
+"requirements": {
+"description": "Partner requirements",
+"allOf": [
+{
+"$ref": "#/components/schemas/PartnerRequirementDto"
+}
+]
+},
+"countries": {
+"description": "Partner countries",
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/PartnerCountryDto"
+}
+},
+"states": {
+"description": "Partner states",
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/PartnerStateDto"
+}
+}
+},
+"required": [
+"requirements",
+"countries",
+"states"
+]
+}
+}
+},
+"paths": {
+"/api/v1/partners/{partnerId}/users/{securitizeId}/attestation": {
+"get": {
+"operationId": "UsersController_attestation",
+"summary": "Returns the attestation for an user of a DEFI service",
+"parameters": [
+{
+"name": "partnerId",
+"required": true,
+"in": "path",
+"description": "Partner identifier",
+"example": "702d717074041c001ae0fdc9",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "securitizeId",
+"required": true,
+"in": "path",
+"description": "Issuer identifier",
+"example": "602d717074041c001ae0fdc8",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/AttestationDto"
+}
+}
+}
+}
+},
+"tags": [
+"Users"
+]
+}
+},
+"/api/v1/partners/{partnerId}": {
+"get": {
+"operationId": "UsersController_getPartner",
+"summary": "Returns a Partner for the given ID",
+"parameters": [
+{
+"name": "partnerId",
+"required": true,
+"in": "path",
+"description": "Partner identifier",
+"example": "702d717074041c001ae0fdc9",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PartnerDto"
+}
+}
+}
+}
+},
+"tags": [
+"Users"
+]
+}
+},
+"/api/v1/partners": {
+"post": {
+"operationId": "UsersController_createPartner",
+"summary": "Creates a new Partner",
+"parameters": [],
+"requestBody": {
+"required": true,
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PartnerCreate"
+}
+}
+}
+},
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PartnerDto"
+}
+}
+}
+}
+},
+"tags": [
+"Users"
+]
+}
+},
+"/api/v1/partners/{partnerId}/rules": {
+"post": {
+"operationId": "UsersController_createPartnerRules",
+"summary": "Creates Partner Rules",
+"parameters": [
+{
+"name": "partnerId",
+"required": true,
+"in": "path",
+"description": "Partner identifier",
+"example": "702d717074041c001ae0fdc9",
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"required": true,
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PartnerCreateRules"
+}
+}
+}
+},
+"responses": {
+"200": {
+"description": "",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PartnerDto"
+}
+}
+}
+}
+},
+"tags": [
+"Users"
+]
+}
+},
+"/health": {
+"get": {
+"operationId": "HealthController_check",
+"parameters": [],
+"responses": {
+"200": {
+"description": "The Health Check is successful",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"properties": {
+"status": {
+"type": "string",
+"example": "ok"
+},
+"info": {
+"type": "object",
+"example": {
+"database": {
+"status": "up"
+}
+},
+"additionalProperties": {
+"type": "object",
+"properties": {
+"status": {
+"type": "string"
+}
+},
+"additionalProperties": {
+"type": "string"
+}
+},
+"nullable": true
+},
+"error": {
+"type": "object",
+"example": {},
+"additionalProperties": {
+"type": "object",
+"properties": {
+"status": {
+"type": "string"
+}
+},
+"additionalProperties": {
+"type": "string"
+}
+},
+"nullable": true
+},
+"details": {
+"type": "object",
+"example": {
+"database": {
+"status": "up"
+}
+},
+"additionalProperties": {
+"type": "object",
+"properties": {
+"status": {
+"type": "string"
+}
+},
+"additionalProperties": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+}
+},
+"503": {
+"description": "The Health Check is not successful",
+"content": {
+"application/json": {
+"schema": {
+"type": "object",
+"properties": {
+"status": {
+"type": "string",
+"example": "error"
+},
+"info": {
+"type": "object",
+"example": {
+"database": {
+"status": "up"
+}
+},
+"additionalProperties": {
+"type": "object",
+"properties": {
+"status": {
+"type": "string"
+}
+},
+"additionalProperties": {
+"type": "string"
+}
+},
+"nullable": true
+},
+"error": {
+"type": "object",
+"example": {
+"redis": {
+"status": "down",
+"message": "Could not connect"
+}
+},
+"additionalProperties": {
+"type": "object",
+"properties": {
+"status": {
+"type": "string"
+}
+},
+"additionalProperties": {
+"type": "string"
+}
+},
+"nullable": true
+},
+"details": {
+"type": "object",
+"example": {
+"database": {
+"status": "up"
+},
+"redis": {
+"status": "down",
+"message": "Could not connect"
+}
+},
+"additionalProperties": {
+"type": "object",
+"properties": {
+"status": {
+"type": "string"
+}
+},
+"additionalProperties": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+}
+}
+},
+"tags": [
+"Health"
+]
+}
+}
+}
+}

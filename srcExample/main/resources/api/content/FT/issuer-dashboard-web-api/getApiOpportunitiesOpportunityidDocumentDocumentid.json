@@ -1,0 +1,10 @@
+{
+    "skips": {
+        "bodySchemaCheck": false
+    },
+    "pathParams":
+    {
+        "opportunityId": "#OPPORTUNITY_ID#",
+        "documentId": "100"
+    }
+}

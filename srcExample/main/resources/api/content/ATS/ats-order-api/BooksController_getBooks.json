@@ -1,0 +1,10 @@
+{
+  "queryParams": {
+    "security": "#ATS_SECURITY#"
+  },
+  "headers": {
+    "x-api-key": "#ATS_ORDER_API_KEY#"
+  },
+  "rc": {},
+  "sandbox": {}
+}

@@ -1,0 +1,83 @@
+{
+  "skips": {
+    "entireTest": true,
+    "skipReason": "Test was skipped due to known product issue - AUT1234",
+    "statusCodeCheck": false,
+    "bodySchemaCheck": false,
+    "bodyContentCheck": false
+  },
+  "queryParams": {
+    "q": "automation",
+    "page": 0,
+    "limit": 50,
+    "email": "#email#"
+  },
+  "pathParams": {
+    "SomePathParameter": "123456",
+    "issuerId": "#ISSUER_ID#"
+  },
+  "body": {
+    "email": "#email#",
+    "question": "My Question",
+    "answer": "My Answer",
+    "section": "My Section",
+    "position": 0
+  },
+  "expectedResponse": {
+    "statusCode": 200,
+    "body": {
+      "message": "PrivacyControlIssuerOperator already exists",
+      "data": "PrivacyControlIssuerOperator",
+      "id": "#id#"
+    }
+  },
+  "headers": {
+    "authorization": "#SID_AUTHORIZATION#",
+    "cookie": "#SID_COOKIE#"
+  },
+  "rc": {
+    "a": "foo",
+    "skips": {
+      "entireTest": "foo",
+      "skipReason": "foo",
+      "statusCodeCheck": "foo",
+      "bodySchemaCheck": "foo",
+      "bodyContentCheck": "foo"
+    },
+    "queryParams": {
+      "q": "foo",
+      "page": "foo",
+      "limit": "foo",
+      "email": "foo"
+    },
+    "pathParams": {
+      "SomePathParameter": "foo",
+      "issuerId": "foo"
+    },
+    "body": {
+      "email": "foo",
+      "question": "foo",
+      "answer": "foo",
+      "section": "foo",
+      "position": "foo"
+    },
+    "expectedResponse": {
+      "statusCode": "foo",
+      "body": {
+        "message": "foo",
+        "data": "foo",
+        "id": "foo"
+      }
+    },
+    "headers": {
+      "authorization": "foo",
+      "cookie": "foo"
+    }
+  },
+  "sandbox": {
+    "headers": {
+      "authorization": "boo",
+      "cookie": "boo"
+    }
+  }
+}

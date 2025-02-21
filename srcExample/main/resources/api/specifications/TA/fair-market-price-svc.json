@@ -1,0 +1,591 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/api/v1/fair-market-price/latest": {
+      "get": {
+        "operationId": "FairMarketPriceController_getLastFairMarketPrice",
+        "summary": "Get fair market price",
+        "parameters": [
+          {
+            "name": "tokenId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "issuerId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FairMarketPriceDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Fair Market Price"
+        ]
+      }
+    },
+    "/api/v2/fair-market-price/latest": {
+      "get": {
+        "operationId": "FairMarketPriceControllerV2_getLatestFairMarketPrice",
+        "summary": "Get latest fair market price list",
+        "parameters": [
+          {
+            "name": "tokenId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "issuerId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FairMarketPriceLatestResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Fair Market Price V2"
+        ]
+      }
+    },
+    "/api/v2/fair-market-price": {
+      "get": {
+        "operationId": "FairMarketPriceControllerV2_getDailyFairMarketPrice",
+        "summary": "Get fair market price filtered by date, update type and source",
+        "parameters": [
+          {
+            "name": "token-id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "date",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "name": "update-type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "manual",
+                "automatic"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "price-source",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "exchange-rate",
+                "token-default-value",
+                "trade"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FairMarketPriceDailyResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Fair Market Price V2"
+        ]
+      }
+    },
+    "/api/v2/fair-market-price/values": {
+      "get": {
+        "operationId": "FairMarketPriceControllerV2_getFairMarketPriceValues",
+        "summary": "Get fair market prices filtered by date, date range, update type and source",
+        "parameters": [
+          {
+            "name": "token-id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "date",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "name": "update-type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "manual",
+                "automatic"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "price-source",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "exchange-rate",
+                "token-default-value",
+                "trade"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "start-date",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "name": "end-date",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FairMarketPriceDailyResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Fair Market Price V2"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Fair Market Price SVC",
+    "description": "Endpoints for FMP",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "FairMarketPriceValueDto": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "type": "string",
+            "enum": [
+              "USD",
+              "EUR"
+            ]
+          },
+          "value": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "exchange-rate",
+              "token-default-value",
+              "trade"
+            ]
+          },
+          "date": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "currency",
+          "value",
+          "source",
+          "date"
+        ]
+      },
+      "FairMarketPriceDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "deploymentId": {
+            "type": "string"
+          },
+          "updateType": {
+            "type": "string",
+            "enum": [
+              "manual",
+              "automatic"
+            ]
+          },
+          "date": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FairMarketPriceValueDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "issuerId",
+          "tokenId",
+          "deploymentId",
+          "updateType",
+          "date",
+          "values"
+        ]
+      },
+      "FairMarketPriceLatestResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FairMarketPriceDto"
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "FairMarketPriceDailyDto": {
+        "type": "object",
+        "properties": {
+          "tokenId": {
+            "type": "string"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "deploymentId": {
+            "type": "string"
+          },
+          "updateType": {
+            "type": "string",
+            "enum": [
+              "manual",
+              "automatic"
+            ]
+          },
+          "date": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "USD",
+              "EUR"
+            ]
+          },
+          "value": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "exchange-rate",
+              "token-default-value",
+              "trade"
+            ]
+          }
+        },
+        "required": [
+          "tokenId",
+          "issuerId",
+          "deploymentId",
+          "updateType",
+          "date",
+          "currency",
+          "value",
+          "source"
+        ]
+      },
+      "FairMarketPriceDailyResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FairMarketPriceDailyDto"
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+<suite name="AUT490_TA_Accreditation_Entity_OwnersOfEquity_Rejected" verbose="1">
+    <test name="AUT490_TA_Accreditation_Entity_OwnersOfEquity_Rejected">
+        <classes>
+            <class name="io.securitize.tests.transferAgent.AUT490_TA_Accreditation_Entity_OwnersOfEquity_Rejected"/>
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,11 @@
+[
+// test skipped on production only: 1 -(see elaboration in production section)
+
+  {
+    "rc": [],
+    "sandbox": [],
+    "production": [
+    "//getInvestorArchive"
+    ]
+  }
+]

@@ -1,0 +1,7 @@
+{
+  "pathParams" : {
+    "issuerId" : "#ISSUER_ID#",
+    "tokenId" : "#TOKEN_ID#",
+    "countryCode" : "US"
+  }
+}

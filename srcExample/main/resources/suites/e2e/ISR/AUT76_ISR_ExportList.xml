@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT76_ISR_ExportList" verbose="1">
+    <test name="AUT76_ISR_ExportList">
+        <classes>
+            <class name="io.securitize.tests.controlPanel.AUT76_ISR_ExportList" />
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,9 @@
+{
+  "pathParams": {
+    "investorId": "#INVESTOR_ID#"
+  },
+  "queryParams": {
+    "tokenId": "#TOKEN_ID#",
+    "type": "issuance"
+  }
+}

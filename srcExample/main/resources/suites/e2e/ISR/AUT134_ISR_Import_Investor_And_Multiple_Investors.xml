@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT134_ISR_Import_Investor_And_Multiple_Investors" verbose="1">
+    <test name="AUT134_ISR_Import_Investor_And_Multiple_Investors">
+        <classes>
+            <class name="io.securitize.tests.controlPanel.AUT134_ISR_Import_Investor_And_Multiple_Investors" />
+        </classes>
+    </test>
+</suite>

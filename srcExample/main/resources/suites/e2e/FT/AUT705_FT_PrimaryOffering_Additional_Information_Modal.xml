@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT705_FT_PrimaryOffering_Additional_Information_Modal" verbose="1">
+    <test name="AUT705_FT_PrimaryOffering_Additional_Information_Modal">
+        <classes>
+            <class name="io.securitize.tests.fundraise.AUT705_FT_PrimaryOffering_Additional_Information_Modal">
+            </class>
+        </classes>
+    </test>
+</suite>

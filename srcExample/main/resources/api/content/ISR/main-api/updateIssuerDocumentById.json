@@ -1,0 +1,10 @@
+{
+  "skips": {
+    "entireTest": false
+  },
+  "pathParams":
+  {
+    "issuerId": "#ISSUER_ID#",
+    "issuerDocumentId": "100166"
+  }
+}

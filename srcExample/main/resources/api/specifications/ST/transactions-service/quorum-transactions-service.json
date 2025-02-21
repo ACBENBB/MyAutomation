@@ -1,0 +1,2116 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Transactions service API",
+    "version": "1.0.0"
+  },
+  "components": {},
+  "tags": [
+    {
+      "name": "transactions"
+    },
+    {
+      "name": "multisig"
+    },
+    {
+      "name": "config"
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://tsq.rc.securitize.io/"
+    }
+  ],
+  "paths": {
+    "/v1/transactions/new": {
+      "post": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "transactionData": {
+                      "type": "string"
+                    },
+                    "additionalData": {
+                      "type": "object",
+                      "properties": {
+                        "networkId": {
+                          "type": "integer"
+                        },
+                        "networkType": {
+                          "type": "string"
+                        },
+                        "chainId": {
+                          "type": "integer"
+                        },
+                        "txType": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create a general transaction template",
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "createTransaction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "from": "0xD6aE8250b8348C94847280928c79fb3b63cA453e",
+                "payload": {
+                  "to": "0x648fC6c064d96ca6671a627D7a62C11C6CEff594",
+                  "data": "0x7f7465737432000000000000000000000000000000000000000000000000000000600057",
+                  "value": "1000000000000000"
+                }
+              },
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "type": "string",
+                    "pattern": "(0x)[0-9a-fA-F]*$"
+                  },
+                  "manualParams": {
+                    "type": "object",
+                    "properties": {
+                      "nonce": {
+                        "type": "integer"
+                      },
+                      "gasPrice": {
+                        "type": "string"
+                      },
+                      "gasLimit": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "payload": {
+                    "type": "object",
+                    "properties": {
+                      "to": {
+                        "type": "string",
+                        "pattern": "(0x)[0-9a-fA-F]*$"
+                      },
+                      "data": {
+                        "type": "string",
+                        "pattern": "(0x)[0-9a-fA-F]*$"
+                      },
+                      "value": {
+                        "type": "string",
+                        "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                      }
+                    },
+                    "required": [
+                      "to",
+                      "data",
+                      "value"
+                    ]
+                  }
+                },
+                "required": [
+                  "payload",
+                  "from"
+                ]
+              }
+            }
+          },
+          "required": true
+        }
+      }
+    },
+    "/v1/transactions": {
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "The transaction hash",
+                  "type": "object",
+                  "properties": {
+                    "hash": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "The transaction hash"
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Executes blockchain transaction. If successfull will return the transaction hash. When serializing the transaction, all the transaction values should be in hex format",
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "executeTransaction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "transactionData": "f889808609184e72a00082271094000000000000000000000000000000000000000080a47f74657374320000000000000000000000000000000000000000000000000000006000571ca08a8bbf888cfa37bbf0bb965423625641fc956967b81d12e23709cead01446075a01ce999b56a8a88504be365442ea61239198e23d1fce7d00fcfc5cd3b44b7215f"
+              },
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "transactionData": {
+                    "type": "string",
+                    "pattern": "(0x)[0-9a-fA-F]*$"
+                  }
+                },
+                "required": [
+                  "transactionData"
+                ]
+              }
+            }
+          },
+          "required": true
+        }
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "hash": {
+                        "type": "string"
+                      },
+                      "blockNumber": {
+                        "type": "integer"
+                      },
+                      "index": {
+                        "type": "integer"
+                      },
+                      "timestamp": {
+                        "type": "integer"
+                      },
+                      "nonce": {
+                        "type": "integer"
+                      },
+                      "from": {
+                        "type": "string"
+                      },
+                      "to": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "string"
+                      },
+                      "gasPrice": {
+                        "type": "string"
+                      },
+                      "gasLimit": {
+                        "type": "integer"
+                      },
+                      "data": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "finalized": {
+                        "type": "boolean"
+                      },
+                      "maxFeePerGas": {
+                        "type": "string"
+                      },
+                      "maxPriorityFeePerGas": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Retrieves the data of a transaction",
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "getTransactions",
+        "parameters": [
+          {
+            "name": "address",
+            "in": "query",
+            "required": true,
+            "description": "Address of contract",
+            "schema": {
+              "description": "Address of contract",
+              "type": "string",
+              "pattern": "(0x)[0-9a-fA-F]*$"
+            }
+          },
+          {
+            "name": "fromBlock",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "toBlock",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "sent",
+                "success",
+                "failure"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "/v1/transactions/{hash}/speedup": {
+      "post": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "transactionData": {
+                      "type": "string"
+                    },
+                    "additionalData": {
+                      "type": "object",
+                      "properties": {
+                        "networkId": {
+                          "type": "integer"
+                        },
+                        "networkType": {
+                          "type": "string"
+                        },
+                        "chainId": {
+                          "type": "integer"
+                        },
+                        "txType": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Return a transaction to be signed with higher chances of being successful. If gasPrices is not specified, it will call gasStation with HIGHER priority.",
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "speedupTransaction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "transactionData": "0xf9014a0b850525433d008307b41e9447a5e047dc679",
+                "manualParams": {
+                  "gasPrice": "1500000000000000"
+                }
+              },
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "transactionData": {
+                    "type": "string",
+                    "pattern": "(0x)[0-9a-fA-F]*$"
+                  },
+                  "manualParams": {
+                    "type": "object",
+                    "properties": {
+                      "gasPrice": {
+                        "type": "string",
+                        "description": "The new gasPrice to speedUp transaction",
+                        "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                      }
+                    },
+                    "required": [
+                      "gasPrice"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "hash",
+            "in": "path",
+            "required": true,
+            "description": "The transaction hash",
+            "schema": {
+              "type": "string",
+              "description": "The transaction hash"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/transactions/{hash}/cancel": {
+      "post": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "transactionData": {
+                      "type": "string"
+                    },
+                    "additionalData": {
+                      "type": "object",
+                      "properties": {
+                        "networkId": {
+                          "type": "integer"
+                        },
+                        "networkType": {
+                          "type": "string"
+                        },
+                        "chainId": {
+                          "type": "integer"
+                        },
+                        "txType": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Return a transaction to be signed which if succeeds will cancel non-mined transaction",
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "cancelTransaction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "transactionData": "0xf9014a0b850525433d008307b41e9447a5e047dc679"
+              },
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "transactionData": {
+                    "type": "string",
+                    "pattern": "(0x)[0-9a-fA-F]*$"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "hash",
+            "in": "path",
+            "required": true,
+            "description": "The transaction hash",
+            "schema": {
+              "type": "string",
+              "description": "The transaction hash"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/transactions/decode": {
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "hash": {
+                      "type": "string"
+                    },
+                    "blockNumber": {
+                      "type": "integer"
+                    },
+                    "index": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "type": "integer"
+                    },
+                    "nonce": {
+                      "type": "integer"
+                    },
+                    "from": {
+                      "type": "string"
+                    },
+                    "to": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    },
+                    "gasPrice": {
+                      "type": "string"
+                    },
+                    "gasLimit": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "finalized": {
+                      "type": "boolean"
+                    },
+                    "maxFeePerGas": {
+                      "type": "string"
+                    },
+                    "maxPriorityFeePerGas": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Decodes raw transaction data and returns parsed transaction",
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "decodeTransaction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "transactionData": "0xf9014a0b850525433d008307b41e9447a5e047dc679"
+              },
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "transactionData": {
+                    "type": "string",
+                    "pattern": "(0x)[0-9a-fA-F]*$"
+                  }
+                },
+                "required": [
+                  "transactionData"
+                ]
+              }
+            }
+          },
+          "required": true
+        }
+      }
+    },
+    "/v1/transactions/{hash}": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "hash": {
+                      "type": "string"
+                    },
+                    "blockNumber": {
+                      "type": "integer"
+                    },
+                    "index": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "type": "integer"
+                    },
+                    "nonce": {
+                      "type": "integer"
+                    },
+                    "from": {
+                      "type": "string"
+                    },
+                    "to": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    },
+                    "gasPrice": {
+                      "type": "string"
+                    },
+                    "gasLimit": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "finalized": {
+                      "type": "boolean"
+                    },
+                    "maxFeePerGas": {
+                      "type": "string"
+                    },
+                    "maxPriorityFeePerGas": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Retrieves the data of a transaction",
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "getTransaction",
+        "parameters": [
+          {
+            "name": "hash",
+            "in": "path",
+            "required": true,
+            "description": "The transaction hash",
+            "schema": {
+              "type": "string",
+              "description": "The transaction hash"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/multisig-wallets/{address}/transactions/new": {
+      "post": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "The created transaction object 'multisigId' representing \n    the created multisig transaction in the contract \n    and 'transactionData' is the created transaction data",
+                  "type": "object",
+                  "properties": {
+                    "multisigId": {
+                      "type": "string"
+                    },
+                    "transactionData": {
+                      "type": "string"
+                    },
+                    "additionalData": {
+                      "type": "object",
+                      "properties": {
+                        "networkId": {
+                          "type": "integer"
+                        },
+                        "networkType": {
+                          "type": "string"
+                        },
+                        "chainId": {
+                          "type": "integer"
+                        },
+                        "txType": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "The created transaction object 'multisigId' representing \n    the created multisig transaction in the contract \n    and 'transactionData' is the created transaction data"
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Creates a multisig transaction template that upon signing and broadcasting will create an initial multisig transaction on the blockchain",
+        "tags": [
+          "multisig"
+        ],
+        "operationId": "createMultisigTransaction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "from": "0xD6aE8250b8348C94847280928c79fb3b63cA453e",
+                "payload": {
+                  "to": "0x648fC6c064d96ca6671a627D7a62C11C6CEff594",
+                  "data": "0x7f7465737432000000000000000000000000000000000000000000000000000000600057",
+                  "value": "1000000000000000"
+                }
+              },
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "type": "string",
+                    "pattern": "(0x)[0-9a-fA-F]*$"
+                  },
+                  "manualParams": {
+                    "type": "object",
+                    "properties": {
+                      "nonce": {
+                        "type": "integer"
+                      },
+                      "gasPrice": {
+                        "type": "string"
+                      },
+                      "gasLimit": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "payload": {
+                    "type": "object",
+                    "properties": {
+                      "to": {
+                        "type": "string",
+                        "pattern": "(0x)[0-9a-fA-F]*$"
+                      },
+                      "data": {
+                        "type": "string",
+                        "pattern": "(0x)[0-9a-fA-F]*$"
+                      },
+                      "value": {
+                        "type": "string",
+                        "pattern": "^0$|[1-9]$|[1-9][0-9]+$"
+                      }
+                    },
+                    "required": [
+                      "to",
+                      "data",
+                      "value"
+                    ]
+                  }
+                },
+                "required": [
+                  "payload",
+                  "from"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "description": "The wallet contract address",
+            "schema": {
+              "description": "The wallet contract address",
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/multisig-wallets/{address}/transactions/{id}/signatures": {
+      "post": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "The created transaction object 'multisigId' representing \n    the created multisig transaction in the contract \n    and 'transactionData' is the created transaction data",
+                  "type": "object",
+                  "properties": {
+                    "multisigId": {
+                      "type": "string"
+                    },
+                    "transactionData": {
+                      "type": "string"
+                    },
+                    "additionalData": {
+                      "type": "object",
+                      "properties": {
+                        "networkId": {
+                          "type": "integer"
+                        },
+                        "networkType": {
+                          "type": "string"
+                        },
+                        "chainId": {
+                          "type": "integer"
+                        },
+                        "txType": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "The created transaction object 'multisigId' representing \n    the created multisig transaction in the contract \n    and 'transactionData' is the created transaction data"
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Creates a transaction template that upon signing and sending will add a confirmation to an existing multisig transaction",
+        "tags": [
+          "multisig"
+        ],
+        "operationId": "confirmMultisigTransaction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "from": "0xD6aE8250b8348C94847280928c79fb3b63cA453e"
+              },
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "type": "string",
+                    "pattern": "(0x)[0-9a-fA-F]*$"
+                  }
+                },
+                "required": [
+                  "from"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "description": "The wallet contract address",
+            "schema": {
+              "description": "The wallet contract address",
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The multisig transaction id",
+            "schema": {
+              "type": "string",
+              "description": "The multisig transaction id"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/multisig-wallets/{address}/transactions/{id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Transaction data",
+                  "type": "object",
+                  "properties": {
+                    "currentSignatures": {
+                      "type": "integer"
+                    },
+                    "requiredSignatures": {
+                      "type": "integer"
+                    },
+                    "owners": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confirmations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Transaction data"
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Retrieves the data of a multisig wallet transaction",
+        "tags": [
+          "multisig"
+        ],
+        "operationId": "getMultisigTransaction",
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "description": "The wallet contract address",
+            "schema": {
+              "description": "The wallet contract address",
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The multisig transaction id",
+            "schema": {
+              "type": "string",
+              "description": "The multisig transaction id"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/multisig-wallets/{address}/owners": {
+      "post": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "The created transaction object 'multisigId' representing \n    the created multisig transaction in the contract \n    and 'transactionData' is the created transaction data",
+                  "type": "object",
+                  "properties": {
+                    "multisigId": {
+                      "type": "string"
+                    },
+                    "transactionData": {
+                      "type": "string"
+                    },
+                    "additionalData": {
+                      "type": "object",
+                      "properties": {
+                        "networkId": {
+                          "type": "integer"
+                        },
+                        "networkType": {
+                          "type": "string"
+                        },
+                        "chainId": {
+                          "type": "integer"
+                        },
+                        "txType": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "The created transaction object 'multisigId' representing \n    the created multisig transaction in the contract \n    and 'transactionData' is the created transaction data"
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Add an owner to the wallet",
+        "tags": [
+          "multisig"
+        ],
+        "operationId": "addOwner",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "from": "0xD6aE8250b8348C94847280928c79fb3b63cA453e",
+                "owner": "0xaD31838727b53D62E387D2E4e48ce4B4F0eCb780"
+              },
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "type": "string",
+                    "pattern": "(0x)[0-9a-fA-F]*$"
+                  },
+                  "owner": {
+                    "type": "string",
+                    "pattern": "(0x)[0-9a-fA-F]*$"
+                  }
+                },
+                "required": [
+                  "from",
+                  "owner"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "description": "The wallet contract address",
+            "schema": {
+              "description": "The wallet contract address",
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "The created transaction object 'multisigId' representing \n    the created multisig transaction in the contract \n    and 'transactionData' is the created transaction data",
+                  "type": "object",
+                  "properties": {
+                    "multisigId": {
+                      "type": "string"
+                    },
+                    "transactionData": {
+                      "type": "string"
+                    },
+                    "additionalData": {
+                      "type": "object",
+                      "properties": {
+                        "networkId": {
+                          "type": "integer"
+                        },
+                        "networkType": {
+                          "type": "string"
+                        },
+                        "chainId": {
+                          "type": "integer"
+                        },
+                        "txType": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "The created transaction object 'multisigId' representing \n    the created multisig transaction in the contract \n    and 'transactionData' is the created transaction data"
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Replace an existing owner with a new one",
+        "tags": [
+          "multisig"
+        ],
+        "operationId": "replaceOwner",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "from": "0xD6aE8250b8348C94847280928c79fb3b63cA453e",
+                "owner": "0xaD31838727b53D62E387D2E4e48ce4B4F0eCb780",
+                "newOwner": "0x648fC6c064d96ca6671a627D7a62C11C6CEff594"
+              },
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "type": "string",
+                    "pattern": "(0x)[0-9a-fA-F]*$"
+                  },
+                  "owner": {
+                    "type": "string",
+                    "pattern": "(0x)[0-9a-fA-F]*$"
+                  },
+                  "newOwner": {
+                    "type": "string",
+                    "pattern": "(0x)[0-9a-fA-F]*$"
+                  }
+                },
+                "required": [
+                  "from",
+                  "owner",
+                  "newOwner"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "description": "The wallet contract address",
+            "schema": {
+              "description": "The wallet contract address",
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/multisig-wallets/{address}/owners/{owner}": {
+      "delete": {
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "The created transaction object 'multisigId' representing \n    the created multisig transaction in the contract \n    and 'transactionData' is the created transaction data",
+                  "type": "object",
+                  "properties": {
+                    "multisigId": {
+                      "type": "string"
+                    },
+                    "transactionData": {
+                      "type": "string"
+                    },
+                    "additionalData": {
+                      "type": "object",
+                      "properties": {
+                        "networkId": {
+                          "type": "integer"
+                        },
+                        "networkType": {
+                          "type": "string"
+                        },
+                        "chainId": {
+                          "type": "integer"
+                        },
+                        "txType": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "The created transaction object 'multisigId' representing \n    the created multisig transaction in the contract \n    and 'transactionData' is the created transaction data"
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Remove an owner from the wallet",
+        "tags": [
+          "multisig"
+        ],
+        "operationId": "removeOwner",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "from": "0xD6aE8250b8348C94847280928c79fb3b63cA453e"
+              },
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "type": "string",
+                    "pattern": "(0x)[0-9a-fA-F]*$"
+                  }
+                },
+                "required": [
+                  "from"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "description": "The wallet contract address",
+            "schema": {
+              "description": "The wallet contract address",
+              "type": "string"
+            }
+          },
+          {
+            "name": "owner",
+            "in": "path",
+            "required": true,
+            "description": "The address of the owner to remove",
+            "schema": {
+              "type": "string",
+              "description": "The address of the owner to remove"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/required_confirmations": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "requiredConfirmations": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Return the required confirmations amount for a transaction to be considered 'finalized'",
+        "tags": [
+          "config"
+        ],
+        "operationId": "getRequiredConfirmations"
+      }
+    },
+    "/v1/gas_price": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "gasPrice": {
+                      "type": "string",
+                      "description": "Current proposed gas price to use the network"
+                    },
+                    "gasPriceUnit": {
+                      "type": "string",
+                      "description": "Gas price unit. Default: wei"
+                    },
+                    "cryptoCurrencySymbol": {
+                      "type": "string",
+                      "description": "Cryptocurrency symbol. Default: ETH"
+                    },
+                    "minAllowedGasPrice": {
+                      "type": "string",
+                      "description": "Min gas price allowed expressed in gasPriceUnit"
+                    },
+                    "maxAllowedGasPrice": {
+                      "type": "string",
+                      "description": "Max gas price allowed expressed in gasPriceUnit"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Return the recommended gas price - in wei - according to priority",
+        "tags": [
+          "config"
+        ],
+        "operationId": "getGasPrice",
+        "parameters": [
+          {
+            "name": "priority",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "high",
+                "medium",
+                "low"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "/v1/reset_nonce": {
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Resets nonce by account",
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "resetCounter",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "account": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "account"
+                ]
+              }
+            }
+          },
+          "required": true
+        }
+      }
+    },
+    "/v1/health-check": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "service": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Checks provider server health",
+        "tags": [
+          "provider"
+        ],
+        "operationId": "getCheckHealth"
+      }
+    },
+    "/v1/hsm-signature/eip-712": {
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Signature vectors and data",
+                  "type": "object",
+                  "properties": {
+                    "r": {
+                      "type": "string"
+                    },
+                    "s": {
+                      "type": "string"
+                    },
+                    "v": {
+                      "type": "number"
+                    },
+                    "data": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Signature vectors and data"
+          },
+          "4xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5xx": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "extraData": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Signs a EIP-712 message for pre-approval using HSM",
+        "tags": [
+          "hsm"
+        ],
+        "operationId": "signWithHsmEIP712",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "transactionDataHash": "0xf889808609184e72a00082271094000000000000000000000000000000000000000080a47f74657374320000000000000000000000000000000000000000000000000000006000571ca08a8bbf888cfa37bbf0bb965423625641fc956967b81d12e23709cead01446075a01ce999b56a8a88504be365442ea61239198e23d1fce7d00fcfc5cd3b44b7215f",
+                "deploymentId": "013f15c8-b84c-456f-a149-6ed775d8f4b5",
+                "contractName": "securitizeSwap",
+                "contractVersion": 1,
+                "verifyingContractAddress": "0xC643473dd8dCeB8035abB8a1D3c52e2723130Eb8",
+                "verifyingContractNonce": 0,
+                "blockLimit": 0
+              },
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "transactionDataHash": {
+                    "type": "string",
+                    "pattern": "(0x)[0-9a-fA-F]*$"
+                  },
+                  "deploymentId": {
+                    "type": "string"
+                  },
+                  "contractName": {
+                    "type": "string"
+                  },
+                  "contractVersion": {
+                    "type": "number"
+                  },
+                  "verifyingContractAddress": {
+                    "type": "string"
+                  },
+                  "verifyingContractNonce": {
+                    "type": "number"
+                  },
+                  "blockLimit": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "transactionDataHash"
+                ]
+              }
+            }
+          },
+          "required": true
+        }
+      }
+    }
+  }
+}

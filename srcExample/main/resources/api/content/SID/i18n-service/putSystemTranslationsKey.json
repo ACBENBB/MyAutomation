@@ -1,0 +1,20 @@
+{
+  "pathParams": {
+    "system": "#SID_SYSTEM#",
+    "key": "#SID_KEY#"
+  },
+  "body": {
+    "values": [
+      {
+        "language": "ES",
+        "content": "test API content update"
+      }
+    ]
+  },
+  "skips": {
+    "bodySchemaCheck": true,
+    "skipReason": "Body schema was skipped due to lack of schema (model instead of schema)"
+  },
+  "rc": {},
+  "sandbox": {}
+}

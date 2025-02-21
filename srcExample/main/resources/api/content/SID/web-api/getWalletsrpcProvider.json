@@ -1,0 +1,15 @@
+{
+  "pathParams": {
+    "provider": "#SID_WALLETS_RPC_PROVIDER#"
+  },
+  "headers": {
+    "authorization": "#SID_AUTHORIZATION#",
+    "cookie": "#SID_COOKIE#"
+  },
+  "skips": {
+       "bodySchemaCheck": true,
+       "skipReason": "Body schema was skipped due to lack of schema (model instead of schema)"
+     },
+  "rc": {},
+  "sandbox": {}
+  }

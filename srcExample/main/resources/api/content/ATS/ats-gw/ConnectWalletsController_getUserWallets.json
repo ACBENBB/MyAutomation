@@ -1,0 +1,8 @@
+{
+  "headers": {
+    "x-api-key": "#ATS_GW_CONNECT_API_KEY#",
+    "access-token": "#SID_ACCESS_TOKEN#"
+  },
+  "rc": {},
+  "sandbox": {}
+}

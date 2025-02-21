@@ -1,0 +1,7 @@
+<suite name="AUT171_CA_Deposit_US_Account_InternationalWire" verbose="1">
+    <test name="AUT171_CA_Deposit_US_Account_InternationalWire">
+        <classes>
+            <class name="io.securitize.tests.ca.AUT171_CA_Deposit_US_Account_InternationalWire" />
+        </classes>
+    </test>
+</suite>

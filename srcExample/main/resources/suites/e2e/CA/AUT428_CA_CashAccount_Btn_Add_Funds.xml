@@ -1,0 +1,7 @@
+<suite name="AUT428_CA_CashAccount_Btn_Add_Funds" verbose="1">
+    <test name="AUT428_CA_CashAccount_Btn_Add_Funds">
+        <classes>
+            <class name="io.securitize.tests.ca.AUT428_CA_CashAccount_Btn_Add_Funds" />
+        </classes>
+    </test>
+</suite>

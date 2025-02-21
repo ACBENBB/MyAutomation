@@ -1,0 +1,12 @@
+{
+  "skips": {
+    "entireTest": false,
+    "bodySchemaCheck": true,
+    "bodyContentCheck": true
+  },
+  "pathParams":
+  {
+    "issuerId": "#ISSUER_ID#",
+    "tokenId": "#TOKEN_ID#"
+  }
+}

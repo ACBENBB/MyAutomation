@@ -1,0 +1,6 @@
+{
+  "skips": {
+    "entireTest": true,
+    "skipReason": "If i deactivate the transfer method, other test will fail"
+  }
+}

@@ -1,0 +1,544 @@
+{
+  "swagger": "2.0",
+  "host": "i18n-service:5018",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "info": {
+    "title": "Translation API Documentation",
+    "version": "1.0.1"
+  },
+  "tags": [
+    {
+      "name": "api",
+      "description": "This is the basic api"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Import translations from CSV",
+        "operationId": "getHealth",
+        "description": "Imports translations form CSV file",
+        "tags": [
+          "api"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/translations": {
+      "get": {
+        "summary": "Get translations for all languages all systems",
+        "operationId": "getTranslations",
+        "description": "Returns array of translations",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "search",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "default": "key",
+            "enum": [
+              "key"
+            ],
+            "name": "sort",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "default": "asc",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "name": "order",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "default": 0,
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "default": 25,
+            "name": "limit",
+            "in": "query"
+          }
+        ],
+        "tags": [
+          "api"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model3"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/{system}/languages": {
+      "get": {
+        "summary": "Get supported languages",
+        "operationId": "getSystemLanguages",
+        "description": "Returns array of supported languages",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "system",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "api"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/languagesList"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/{system}/translations": {
+      "get": {
+        "summary": "Get filtered translations for all languages",
+        "operationId": "getSystemTranslations",
+        "description": "Returns array of translations",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "system",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "search",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "default": "key",
+            "enum": [
+              "key"
+            ],
+            "name": "sort",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "default": "asc",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "name": "order",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "default": 0,
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "default": 25,
+            "name": "limit",
+            "in": "query"
+          }
+        ],
+        "tags": [
+          "api"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model3"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/{system}/translations/{language}": {
+      "get": {
+        "summary": "Get language translations hash-map",
+        "operationId": "getSystemTranslationsLanguage",
+        "description": "Returns hash-map of translations for selected language ( with auto fill to default language )",
+        "parameters": [
+          {
+            "type": "string",
+            "enum": [
+              "EN",
+              "en",
+              "ES",
+              "es"
+            ],
+            "name": "language",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "system",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "names",
+            "in": "query",
+            "required": false
+          }
+        ],
+        "tags": [
+          "api"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "string": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/{system}/templates/{language}/{name}": {
+      "get": {
+        "summary": "Get translated template by name",
+        "operationId": "getSystemTemplatesLanguageName",
+        "description": "Returns translated email template",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "name",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 5,
+            "name": "language",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "system",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "api"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/templateResponse"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/{system}/translations/{key}": {
+      "put": {
+        "summary": "Update translation for all languages by key",
+        "operationId": "putSystemTranslationsKey",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "system",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "key",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/updateTranslationByKeyPayloadModel"
+            }
+          }
+        ],
+        "tags": [
+          "api"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model6"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/{system}/import": {
+      "post": {
+        "summary": "Import translations from CSV",
+        "operationId": "postSystemImport",
+        "description": "Imports translations form CSV file",
+        "parameters": [
+          {
+            "type": "string",
+            "enum": [
+              "investor-experience",
+              "securitize-id",
+              "securitize-id-emails",
+              "instant-access",
+              "payouts-platform",
+              "accreditation-platform",
+              "trading-platform",
+              "domain-investor-dashboard",
+              "primary-market-fe",
+              "account-fe",
+              "redemption-fe",
+              "fr-investment-fe",
+              "drip-investor-platform",
+              "notifications",
+              "transaction-investor-platform",
+              "distribution-investor-platform",
+              "fr-nie"
+            ],
+            "name": "system",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "enum": [
+              "insert-only",
+              "insert-update-all",
+              "insert-update-unedited"
+            ],
+            "name": "importType",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "file",
+            "description": "csv file",
+            "x-meta": {
+              "swaggerType": "file"
+            },
+            "in": "formData",
+            "name": "file"
+          }
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "tags": [
+          "api"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/importResults"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Model1": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "system": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "edited": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "content",
+        "system",
+        "language"
+      ]
+    },
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model1"
+      }
+    },
+    "Model2": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "values": {
+          "$ref": "#/definitions/values"
+        }
+      },
+      "required": [
+        "key",
+        "values"
+      ]
+    },
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model2"
+      }
+    },
+    "Model3": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/data"
+        },
+        "totalItems": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "totalItems"
+      ]
+    },
+    "language": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "language",
+        "label"
+      ]
+    },
+    "languagesList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/language"
+      }
+    },
+    "templateResponse": {
+      "type": "object",
+      "properties": {
+        "subject": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "subject",
+        "content"
+      ]
+    },
+    "Model4": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "language",
+        "content"
+      ]
+    },
+    "Model5": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model4"
+      }
+    },
+    "updateTranslationByKeyPayloadModel": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "$ref": "#/definitions/Model5"
+        }
+      },
+      "required": [
+        "values"
+      ]
+    },
+    "Model6": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "success"
+      ]
+    },
+    "importResults": {
+      "type": "object",
+      "properties": {
+        "inserted": {
+          "type": "number"
+        },
+        "updated": {
+          "type": "number"
+        },
+        "errors": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "inserted",
+        "updated",
+        "errors"
+      ]
+    }
+  }
+}

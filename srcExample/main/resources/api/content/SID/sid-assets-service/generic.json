@@ -1,0 +1,16 @@
+{
+  "issuerId": "#ISSUER_ID#",
+  "investorId": "#SID_INVESTOR_ID#",
+  "rc": {
+    // "issuerId": "42c97798-78e3-4c96-9f66-884863446817",
+    // "investorId": "631940478ae6ef001304e311"
+  },
+  "sandbox": {
+    // "issuerId": "b038cd1f-91bc-44f1-ae84-c1051710d698",
+    // "investorId": "62d457f30b28f5001311c39f"
+  },
+  "production": {
+    // "issuerId": "b9dda86d-c280-4a8a-bed2-6b1e0a28ccb5",
+    // "investorId": "63b44aba88502ffd2cce527b"
+  }
+}

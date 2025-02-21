@@ -1,0 +1,7 @@
+<suite name="AAUT663_blackrock_accrued_dividend" verbose="1">
+    <test name="AUT663_blackrock_accrued_dividend">
+        <classes>
+            <class name="io.securitize.tests.blackrock.AUT663_blackrock_accrued_dividend" />
+        </classes>
+    </test>
+</suite>

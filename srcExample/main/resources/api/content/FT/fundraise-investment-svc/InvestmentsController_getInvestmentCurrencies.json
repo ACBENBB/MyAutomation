@@ -1,0 +1,16 @@
+{
+  "sandbox" : {
+    "pathParams" : {
+      "investmentRoundId" : "201364"
+    }
+  },
+  "rc" : {
+    "pathParams" : {
+      "investmentRoundId" : "100837"
+    }
+  },
+  "queryParams" : {
+    "issuerId" : "#ISSUER_ID#",
+    "tokenId" : "#TOKEN_ID#"
+  }
+}

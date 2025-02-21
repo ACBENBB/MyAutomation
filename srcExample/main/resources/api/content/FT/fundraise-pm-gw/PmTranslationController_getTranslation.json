@@ -1,0 +1,6 @@
+{
+  "pathParams" : {
+    "language" : "#SID_LANGUAGE#",
+    "system" : "#SID_SYSTEM#"
+  }
+}

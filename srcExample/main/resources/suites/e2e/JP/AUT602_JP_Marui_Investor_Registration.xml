@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT602_JP_Marui_Investor_Registration" verbose="1">
+    <test name="AUT602_JP_Marui_Investor_Registration">
+        <classes>
+            <class name="io.securitize.tests.jp.AUT602_JP_Marui_Investor_Registration" />
+        </classes>
+    </test>
+</suite>

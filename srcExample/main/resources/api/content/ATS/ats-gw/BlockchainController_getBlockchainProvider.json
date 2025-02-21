@@ -1,0 +1,11 @@
+{
+  "pathParams": {
+    "providerName": "#ATS_PROVIDER_NAME#"
+  },
+  "headers": {
+    // "authorization": "#SID_AUTHORIZATION#"
+    //"cookie": "#SID_COOKIE#"
+  },
+  "rc": {},
+  "sandbox": {}
+}

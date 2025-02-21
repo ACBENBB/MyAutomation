@@ -1,0 +1,14 @@
+{
+  "language": "#SID_LANGUAGE#",
+  "name": "#SID_NAME#",
+  "key": "#SID_KEY#",
+  "rc": {
+    "system": "system_rc"
+  },
+  "sandbox": {
+    "system": "system_sandbox"
+  },
+  "production": {
+    "system": "system_production"
+  }
+}

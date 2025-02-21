@@ -1,0 +1,15 @@
+{
+  "skips": {
+    "entireTest": false
+  },
+  "pathParams":
+  {
+    "issuerId": "#ISSUER_ID#",
+    "prerenderedAddressId": "71"
+  },
+  "sandbox": {
+    "pathParams": {
+      "prerenderedAddressId": "7"
+    }
+  }
+}

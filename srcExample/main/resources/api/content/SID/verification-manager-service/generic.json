@@ -1,0 +1,18 @@
+{
+  "type": "#SID_TYPE#", //"type": "fileUpload"
+  "investorId": "#SID_INVESTOR_ID#",
+  // on method 'getInvestorLiveness', param "investorId" is set to "#SID_LIVENESS_INVESTOR_ID#":
+  //"investorId": "#SID_LIVENESS_INVESTOR_ID#"
+
+  "id": "#SID_TFA_REQUEST_ID#",
+  "rc": {
+    // "investorId": "631940478ae6ef001304e311" ("#SID_INVESTOR_ID#"),
+    // "investorId": "655c9326ff8148d162ccdc5f" ("SID_LIVENESS_INVESTOR_ID#"),
+    // "id": "63721512716477fcf8b549d1"
+  },
+  "sandbox":{
+  	// "investorId": "62d457f30b28f5001311c39f" ("#SID_INVESTOR_ID#"),
+    // "investorId": "655ca0cb3a8cf10e052adaae" ("SID_LIVENESS_INVESTOR_ID#"),
+    // "id": "63721546e0aee10d19dde6db"
+  }
+}

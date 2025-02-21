@@ -1,0 +1,24 @@
+[
+  {
+    "rc": [
+      "getInvestmentFromToken",
+      "getInvestment",
+      "getInvestorSecuritizeIdWallets",
+      "getIssuerBlockchainTransactionsSpecific",
+      "getIssuerByHostName",
+      "getListOfAllConnectWalletsToTokens",
+      "getTokenCountriesSettings"
+    ],
+    "sandbox": [
+      "getInvestmentDeposits",
+      "getInvestmentFromToken",
+      "getInvestment",
+      "getInvestorSecuritizeIdWallets",
+      "getIssuerBlockchainTransactionsSpecific",
+      "getIssuerByHostName",
+      "getListOfAllConnectWalletsToTokens",
+      "getMainAPiInvestorDocumentsToDownload",
+      "getOpportunity"
+    ]
+  }
+]

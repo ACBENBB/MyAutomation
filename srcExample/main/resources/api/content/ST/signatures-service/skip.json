@@ -1,0 +1,19 @@
+[
+  {
+    "rc": [
+      "getCheckHealth",
+      "getCheckHealth"
+    ],
+    "sandbox": [
+      "getCheckHealth",
+      "getCheckHealth",
+      "getGasPrice",
+      "getMultiSigTransactionStatusSchema",
+      "getMultisigWallets",
+      "getProviderTransactionDetail",
+      "getSingleMultiSigWallet",
+      "getTransaction",
+      "getTransactions"
+    ]
+  }
+]

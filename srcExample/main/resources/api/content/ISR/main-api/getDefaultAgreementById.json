@@ -1,0 +1,10 @@
+{
+  "pathParams": {
+    "agreementId": "64"
+  },
+  "sandbox": {
+    "pathParams": {
+      "agreementId": "65"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+<suite name="AUT562_TA_TransactionHistory_IssuanceDisplayed" verbose="1">
+    <test name="AUT562_TA_TransactionHistory_IssuanceDisplayed">
+        <classes>
+            <class name="io.securitize.tests.transferAgent.AUT562_TA_TransactionHistory_IssuanceDisplayed"/>
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,51 @@
+name,url,tags
+NIE Investor Platform URL (CP settings),https://automation-issuer.invest.rc.securitize.io,rc
+Issuer Landing Page URL (CP settings),https://automation-issuer.lp.rc.securitize.io,rc
+SecuritizeID login (SID),https://id.rc.securitize.io/#/login,rc
+SecuritizeID Reset Password (SID),https://id.rc.securitize.io/#/reset-password,rc
+SecuritizeID Registration (SID),https://id.rc.securitize.io/#/registration,rc
+SecuritizeID Privacy Policy (SID),https://id.rc.securitize.io/#/registration/privacy-policy,rc
+SecuritizeID Terms Conditions (SID),https://id.rc.securitize.io/#/registration/terms-conditions,rc
+SecuritizeID Verify Email (SID),https://id.rc.securitize.io/#/registration/verify-email,rc
+SecuritizeID Settings (SID),https://id.rc.securitize.io/#/settings,rc
+SecuritizeID Settings>>Account (SID),https://id.rc.securitize.io/#/profile/account,rc
+SecuritizeID Settings>>Security (SID),https://id.rc.securitize.io/#/profile/security,rc
+SecuritizeID Holdings (SID),https://id.rc.securitize.io/#/holdings,rc
+SecuritizeID Markets (SID),https://id.rc.securitize.io/#/market,rc
+SecuritizeID Traiding (ATS),https://id.rc.securitize.io/secondary-market/#/dashboard,rc
+SecuritizeID Wallets (SID),https://id.rc.securitize.io/#/wallets,rc
+SecuritizeID Profile (SID),https://id.rc.securitize.io/#/profile,rc
+SecuritizeID Profile>>Payouts (TA),https://id.rc.securitize.io/payouts/#/,rc
+SecuritizeID Profile>>Accreditation (ATS),https://id.rc.securitize.io/#/profile/accreditation,rc
+SecuritizeID Investor Details>>Investor type,https://id.rc.securitize.io/#/profile/verification/type,rc
+SecuritizeID Investor Details>>Personal information (indvidual),https://id.rc.securitize.io/#/profile/verification/personal-information,rc
+SecuritizeID Investor Details>>Identity verification (indvidual),https://id.rc.securitize.io/#/profile/verification/identity-verification,rc
+SecuritizeID Investor Details>>Liveness check (indvidual),https://id.rc.securitize.io/#/profile/verification/liveness,rc
+SecuritizeID Investor Details>>Address information (indvidual),https://id.rc.securitize.io/#/profile/verification/address-info,rc
+SecuritizeID Investor Details>>Legal information (indvidual),https://id.rc.securitize.io/#/profile/verification/legal-information,rc
+SecuritizeID Investor Details>>Does this look ok? (indvidual),https://id.rc.securitize.io/#/profile/verification/check,rc
+SecuritizeID Investor Details>>Entity information (Entity),https://id.rc.securitize.io/#/profile/verification/entity-information,rc
+SecuritizeID Investor Details>>Address (Entity),https://id.rc.securitize.io/#/profile/verification/address-info,rc
+SecuritizeID Investor Details>>Entity documents (Entity),https://id.rc.securitize.io/#/profile/verification/entity-documents,rc
+SecuritizeID Investor Details>>Legal signers (Entity),https://id.rc.securitize.io/#/profile/verification/legal-signers,rc
+SecuritizeID Investor Details>>Legal signers (individual)>>Indivdual Address (Entity),https://id.rc.securitize.io/#/profile/verification/legal-signers/individual-address,rc
+SecuritizeID Investor Details>>Legal signers (individual)>>Indivdual Documents (Entity),https://id.rc.securitize.io/#/profile/verification/legal-signers/individual-documents,rc
+SecuritizeID Investor Details>>Legal signers (individual)>>Indivdual Check (Entity),https://id.rc.securitize.io/#/profile/verification/legal-signers/individual-check,rc
+SecuritizeID Investor Details>>Legal signers (Entity)>>Entity documents (Entity),https://id.rc.securitize.io/#/profile/verification/legal-signers/entity-documents,rc
+SecuritizeID Investor Details>>Legal signers (Entity)>>Entity documents (Entity),https://id.rc.securitize.io/#/profile/verification/legal-signers/entity-documents,rc
+NIE Login,https://automation-issuer.invest.rc.securitize.io/#/login,rc
+NIE Dashboard,https://automation-issuer.invest.rc.securitize.io/#/home,rc
+NIE Opportunities,https://automation-issuer.invest.rc.securitize.io/#/opportunities,rc
+NIE Portfolio,https://automation-issuer.invest.rc.securitize.io/#/portfolio,rc
+NIE Portfilio>Wallets,https://automation-issuer.invest.rc.securitize.io/#/portfolio?tab=wallets,rc
+NIE Portfilio>Investment Requests,https://automation-issuer.invest.rc.securitize.io/#/portfolio?tab=investment-requests,rc
+NIE Portfilio>Pending Assets,https://automation-issuer.invest.rc.securitize.io/#/portfolio?tab=pending-assets,rc
+NIE Portfilio>Owned Assets,https://automation-issuer.invest.rc.securitize.io/#/portfolio?tab=owned-assets,rc
+NIE Documents,https://automation-issuer.invest.rc.securitize.io/#/documents,rc
+NIE FAQ,https://automation-issuer.invest.rc.securitize.io/#/faq,rc
+NIE Automation Opportunity Blue,https://automation-issuer.invest.rc.securitize.io/#/opportunity/50,rc
+NIE Automation Opportunity Blue Investment,https://automation-issuer.invest.rc.securitize.io/#/opportunity/50/investment/agreement,rc
+NIE Automation Opportunity Blue Payment,https://automation-issuer.invest.rc.securitize.io/#/opportunity/50/investment/payment,rc
+NIE Automation Opportunity Opp from markets,https://automation-issuer.invest.rc.securitize.io/#/opportunity/85?fromMarkets=true,rc
+NIE Automation Suitability from Opp from markets first screen,https://id.rc.securitize.io/#/profile/suitability/investor-information?redirect=https%3A%2F%2Fautomation-issuer.invest.rc.securitize.io%2F%23%2Fopportunity%2F85%3FfromMarkets%3Dtrue&issuerId=aad37943-4e47-4829-ae1b-a1e5e15e9cd2&issuerName=Automation%20Issuer,rc
+NIE Automation Suitability from Opp from markets second screen,https://id.rc.securitize.io/#/profile/suitability/submit-application?redirect=https%3A%2F%2Fautomation-issuer.invest.rc.securitize.io%2F%23%2Fopportunity%2F85%3FfromMarkets%3Dtrue&issuerId=aad37943-4e47-4829-ae1b-a1e5e15e9cd2&issuerName=Automation%20Issuer,rc

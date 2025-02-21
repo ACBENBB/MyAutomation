@@ -1,0 +1,7 @@
+<suite name="AUT205_TA_TaxForm_Autocomplete_Individual_US" verbose="1">
+    <test name="AUT205_TA_TaxForm_Autocomplete_Individual_US">
+        <classes>
+            <class name="io.securitize.tests.transferAgent.AUT205_TA_TaxForm_Autocomplete_Individual_US"/>
+        </classes>
+    </test>
+</suite>

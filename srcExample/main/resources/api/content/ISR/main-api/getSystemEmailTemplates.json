@@ -1,0 +1,11 @@
+{
+  "skips": {
+    "entireTest": false
+  },
+  "sandbox": {
+    "skips": {
+      "bodySchemaCheck": true,
+      "bodyContentCheck": true
+    }
+  }
+}

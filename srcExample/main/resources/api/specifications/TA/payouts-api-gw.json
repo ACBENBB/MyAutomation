@@ -1,0 +1,330 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/v1/health-check": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/api/v1/info/wallets": {
+      "get": {
+        "operationId": "InfoController_getInvestorWallets",
+        "summary": "GET wallets",
+        "tags": [
+          "Info"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/info/investor": {
+      "get": {
+        "operationId": "InfoController_getInvestorInformation",
+        "summary": "GET investor information with masked tax id",
+        "tags": [
+          "Info"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/payment-histories": {
+      "get": {
+        "operationId": "PaymentHistoryController_getPaymentHistory",
+        "summary": "GET payment history",
+        "tags": [
+          "Payment History"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/payment-preferences/crypto": {
+      "post": {
+        "operationId": "PaymentPreferencesController_addCryptoPaymentPreference",
+        "summary": "POST Crypto payment preference",
+        "tags": [
+          "Tax forms"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CryptoPreferencePayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/payment-preferences": {
+      "get": {
+        "operationId": "PaymentPreferencesController_getPaymentPreferences",
+        "summary": "GET payment preferences",
+        "tags": [
+          "Tax forms"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "operationId": "PaymentPreferencesController_activePayoutMethodPreference",
+        "summary": "PATCH active payment preference type",
+        "tags": [
+          "Tax forms"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PayoutMethodPreferencePayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/tax-forms/w8ben-e/upload": {
+      "get": {
+        "operationId": "TaxFormsController_getUploadUrl",
+        "summary": "GET w8-ben-e upload url",
+        "tags": [
+          "Tax forms"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/tax-forms/w9": {
+      "post": {
+        "operationId": "TaxFormsController_addW9TaxForm",
+        "summary": "POST w9",
+        "tags": [
+          "Tax forms"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/W9TaxFormPayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/tax-forms/w8ben-e": {
+      "post": {
+        "operationId": "TaxFormsController_addW8beneTaxForm",
+        "summary": "POST w8-ben-e",
+        "tags": [
+          "Tax forms"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/W8beneTaxFormPayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      },
+      "get": {
+        "operationId": "TaxFormsController_getW8BENEFormTemplate",
+        "summary": "GET w8-ben-e template",
+        "tags": [
+          "Tax forms"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/tax-forms/w8ben": {
+      "post": {
+        "operationId": "TaxFormsController_addW8benTaxForm",
+        "summary": "POST w8ben",
+        "tags": [
+          "Tax forms"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/W8benTaxFormPayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/tax-forms": {
+      "get": {
+        "operationId": "TaxFormsController_getInvestorTaxForms",
+        "summary": "GET investor tax forms",
+        "tags": [
+          "Tax forms"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/tax-forms/{formId}": {
+      "get": {
+        "operationId": "TaxFormsController_getDownloadTaxFormLink",
+        "summary": "GET tax form download link",
+        "tags": [
+          "Tax forms"
+        ],
+        "parameters": [
+          {
+            "name": "formId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "operationId": "TaxFormsController_deleteTaxForm",
+        "summary": "DELETE tax form",
+        "tags": [
+          "Tax forms"
+        ],
+        "parameters": [
+          {
+            "name": "formId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "info": {
+    "title": "Payouts GW Api",
+    "description": "Endpoints for Payouts",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "CryptoPreferencePayloadDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "PayoutMethodPreferencePayloadDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "W9TaxFormPayloadDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "W8beneTaxFormPayloadDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "W8benTaxFormPayloadDto": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "pathParams": {
+    "campaignId": "111",
+    "issuerId": "#ISSUER_ID#"
+  },
+  "sandbox": {
+    "pathParams": {
+      "campaignId": "9"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+<suite name="AUT505_SID_Redirect_Back_To_PrimaryMarket_From_KYC_Return_To_Button" verbose="1">
+    <test name="AUT505_SID_Redirect_Back_To_PrimaryMarket_From_KYC_Return_To_Button">
+        <classes>
+            <class name="io.securitize.tests.securitizeId.AUT505_SID_Redirect_Back_To_PrimaryMarket_From_KYC_Return_To_Button" />
+        </classes>
+    </test>
+</suite>

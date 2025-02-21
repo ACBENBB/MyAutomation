@@ -1,0 +1,5 @@
+{
+  "issuerId": "#ISSUER_ID#",
+  "userId": "#INVESTOR_ID#",
+  "tokenId": "#TOKEN_ID#"
+}

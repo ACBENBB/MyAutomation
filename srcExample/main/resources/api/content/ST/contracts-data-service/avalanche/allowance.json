@@ -1,0 +1,7 @@
+{
+  "pathParams": {
+    "address": "0x607C651a130545b447b02Ce95D05cf456a41ce6Aw",
+    "holder": "0x9e8cc3f39203f7d8f42b510e640faac0878f16b8",
+    "spender": "0x9e8cc3f39203f7d8f42b510e640faac0878f16b8"
+  }
+}

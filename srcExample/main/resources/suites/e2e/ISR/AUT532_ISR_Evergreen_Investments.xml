@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT532_ISR_Evergreen_Investments" verbose="1">
+    <test name="AUT532_ISR_Evergreen_Investments">
+        <classes>
+            <class name="io.securitize.tests.controlPanel.AUT532_ISR_Evergreen_Investments" />
+        </classes>
+    </test>
+</suite>

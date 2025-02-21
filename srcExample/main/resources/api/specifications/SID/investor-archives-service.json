@@ -1,0 +1,47 @@
+{
+  "swagger": "2.0",
+  "host": "investor-archives-service.internal.rc.securitize.io",
+  "basePath": "/",
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "info": {
+    "title": "Securitize iD API Documentation",
+    "version": "1.0.0"
+  },
+  "tags": [],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "health check",
+        "operationId": "getHealth",
+        "description": "health check",
+        "tags": [
+          "Login"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model1"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Model1": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "result"
+      ]
+    }
+  }
+}

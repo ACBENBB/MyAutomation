@@ -1,0 +1,16 @@
+{
+  "skips": {
+    "bodySchemaCheck": true
+  },
+  "pathParams": {
+    "issuerId": "#ISSUER_ID#"
+  },
+  "queryParams": {
+    "email": "#email#"
+  },
+  "expectedResponse": {
+    "body": {
+      "id": "#id#"
+    }
+  }
+}

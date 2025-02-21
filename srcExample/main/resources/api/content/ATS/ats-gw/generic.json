@@ -1,0 +1,16 @@
+{
+  "deploymentId": "#ATS_DEPLOYMENT_ID#",
+  "slug": "#ATS_DEPLOYMENT_ID#",
+  "security": "#ATS_SECURITY#",
+  "providerName": "#ATS_PROVIDER_NAME#",      //"providerName": "avalanche"
+  "rc":{
+   //"deploymentId": "7fabbcfb-1ef4-47bd-ab45-f249034feb79"
+   //"slug": "7fabbcfb-1ef4-47bd-ab45-f249034feb79"
+   //"security": "algo-qa"
+  },
+  "sandbox": {
+   //"deploymentId": "4bbc7df5-a8d9-435e-a78d-500c4631260c"
+   //"slug": "4bbc7df5-a8d9-435e-a78d-500c4631260c"
+   //"security": "ATS1"
+  }
+}

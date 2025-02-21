@@ -1,0 +1,15 @@
+[
+  "skipInAllEnvironments1",
+  "skipInAllEnvironments2",
+  {
+    "rc": [
+      "testToSkipInRC1",
+      "testToSkipInRC2"
+    ],
+    "sandbox": [
+      "testToSkipInSandbox1",
+      "testToSkipInSandbox2",
+      "testToSkipInSandbox3"
+    ]
+  }
+]

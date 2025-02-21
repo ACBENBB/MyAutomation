@@ -1,0 +1,7 @@
+<suite name="AUT503_TA_Accreditation_Individual_NetWorth_UpdatesRequired" verbose="1">
+    <test name="AUT503_TA_Accreditation_Individual_NetWorth_UpdatesRequired">
+        <classes>
+            <class name="io.securitize.tests.transferAgent.AUT503_TA_Accreditation_Individual_NetWorth_UpdatesRequired" />
+        </classes>
+    </test>
+</suite>

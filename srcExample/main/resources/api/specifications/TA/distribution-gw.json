@@ -1,0 +1,911 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/distributions/api": {
+      "get": {
+        "operationId": "AppController_getHello",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/distributions/api/tax-forms/{investorId}/latest": {
+      "get": {
+        "operationId": "TaxFormsController_getLatestInvestorTaxFormDownloadLink",
+        "summary": "Get latest investor submitted tax form download url",
+        "parameters": [
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "401": {
+            "description": "Control Panel Role Unauthorized"
+          }
+        },
+        "tags": [
+          "GW: Transfer Agent Tax Forms"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/distributions/api/tax-forms/{taxFormId}/download": {
+      "get": {
+        "operationId": "TaxFormsController_getTaxFormSignedUrl",
+        "summary": "Get tax form presigned url",
+        "parameters": [
+          {
+            "name": "taxFormId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "401": {
+            "description": "Control Panel Role Unauthorized"
+          }
+        },
+        "tags": [
+          "GW: Transfer Agent Tax Forms"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/distributions/api/tax-forms/{taxFormId}": {
+      "put": {
+        "operationId": "TaxFormsController_UpdateTaxForm",
+        "summary": "Update tax form",
+        "parameters": [
+          {
+            "name": "taxFormId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaxFormEditPayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "401": {
+            "description": "Control Panel Role Unauthorized"
+          }
+        },
+        "tags": [
+          "GW: Transfer Agent Tax Forms"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/distributions/api/distributions/snapshots": {
+      "get": {
+        "operationId": "DistributionController_getSnapshots",
+        "summary": "Get snapshots by date",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "401": {
+            "description": "Control Panel Role Unauthorized"
+          }
+        },
+        "tags": [
+          "GW: Transfer Agent Distributions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/distributions/api/distributions/{issuerId}/{tokenId}/investors": {
+      "get": {
+        "operationId": "DistributionController_getDistributionInvestors",
+        "summary": "Get distribution investor data by issuer token",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "401": {
+            "description": "Control Panel Role Unauthorized"
+          }
+        },
+        "tags": [
+          "GW: Transfer Agent Distributions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/distributions/api/distributions/{issuerId}/{tokenId}/download": {
+      "get": {
+        "operationId": "DistributionController_getDistributionDownloadUrl",
+        "summary": "Get distribution download url",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "401": {
+            "description": "Control Panel Role Unauthorized"
+          }
+        },
+        "tags": [
+          "GW: Transfer Agent Distributions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/distributions/api/distributions": {
+      "post": {
+        "operationId": "DistributionController_createDistribution",
+        "summary": "Create distribution",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDistributionGwPayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "401": {
+            "description": "Control Panel Role Unauthorized"
+          }
+        },
+        "tags": [
+          "GW: Transfer Agent Distributions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "DistributionController_getDistributions",
+        "summary": "Get distributions",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "401": {
+            "description": "Control Panel Role Unauthorized"
+          }
+        },
+        "tags": [
+          "GW: Transfer Agent Distributions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/distributions/api/distributions/{distributionId}": {
+      "get": {
+        "operationId": "DistributionController_getDistribution",
+        "summary": "Get distribution by id",
+        "parameters": [
+          {
+            "name": "distributionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "401": {
+            "description": "Control Panel Role Unauthorized"
+          }
+        },
+        "tags": [
+          "GW: Transfer Agent Distributions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "DistributionController_deleteDistribution",
+        "summary": "Delete a distribution",
+        "parameters": [
+          {
+            "name": "distributionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "401": {
+            "description": "Control Panel Role Unauthorized"
+          }
+        },
+        "tags": [
+          "GW: Transfer Agent Distributions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/distributions/api/distributions/{distributionId}/download": {
+      "get": {
+        "operationId": "DistributionController_getDistributionPresignedUrl",
+        "summary": "Get distribution presigned download url by id",
+        "parameters": [
+          {
+            "name": "distributionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "401": {
+            "description": "Control Panel Role Unauthorized"
+          }
+        },
+        "tags": [
+          "GW: Transfer Agent Distributions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/distributions/api/distributions/{distributionId}/investors": {
+      "get": {
+        "operationId": "DistributionController_getInvestors",
+        "summary": "Get investors by distribution id",
+        "parameters": [
+          {
+            "name": "distributionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "401": {
+            "description": "Control Panel Role Unauthorized"
+          }
+        },
+        "tags": [
+          "GW: Transfer Agent Distributions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/distributions/api/distributions/{distributionId}/confirm": {
+      "post": {
+        "operationId": "DistributionController_confirmDistribution",
+        "summary": "Confirm distribution by id",
+        "parameters": [
+          {
+            "name": "distributionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "401": {
+            "description": "Control Panel Role Unauthorized"
+          }
+        },
+        "tags": [
+          "GW: Transfer Agent Distributions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/distributions/api/distributions/{distributionId}/upload": {
+      "get": {
+        "operationId": "DistributionController_getCsvPresignedPost",
+        "summary": "Get csv presigned url",
+        "parameters": [
+          {
+            "name": "distributionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "401": {
+            "description": "Control Panel Role Unauthorized"
+          }
+        },
+        "tags": [
+          "GW: Transfer Agent Distributions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/distributions/api/distributions/{distributionId}/upload/confirm": {
+      "post": {
+        "operationId": "DistributionController_confirmUploadCsv",
+        "summary": "Start distribution update by csv",
+        "parameters": [
+          {
+            "name": "distributionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDistributionByCsvPayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "401": {
+            "description": "Control Panel Role Unauthorized"
+          }
+        },
+        "tags": [
+          "GW: Transfer Agent Distributions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/distributions/api/distributions/investors/{investorId}": {
+      "patch": {
+        "operationId": "DistributionController_updateInvestor",
+        "summary": "Update investor payout method by ID",
+        "parameters": [
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "401": {
+            "description": "Control Panel Role Unauthorized"
+          }
+        },
+        "tags": [
+          "GW: Transfer Agent Distributions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/distributions/api/distributions/{distributionId}/stop": {
+      "patch": {
+        "operationId": "DistributionController_stopDistribution",
+        "summary": "stop distribution - redemption evergreen",
+        "parameters": [
+          {
+            "name": "distributionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "401": {
+            "description": "Control Panel Role Unauthorized"
+          }
+        },
+        "tags": [
+          "GW: Transfer Agent Distributions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/distributions/api/issuers/{id}/info": {
+      "get": {
+        "operationId": "IssuerController_getIssuerInfo",
+        "summary": "Return info from a issuer",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "401": {
+            "description": "Control Panel Role Unauthorized"
+          }
+        },
+        "tags": [
+          "GW: Transfer Agent Issuers"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "CP Distributions GW Api",
+    "description": "Endpoints for Distributions MFE",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "TaxFormEditPayloadDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "CreateDistributionGwPayloadDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "issuerSecId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "snapshotId": {
+            "type": "number"
+          },
+          "distributionType": {
+            "type": "string",
+            "enum": [
+              "accrued-dividend",
+              "dividend",
+              "redemption",
+              "redemption-tbe",
+              "redemption-evergreen",
+              "interest",
+              "buy-back",
+              "rescission",
+              "other"
+            ]
+          },
+          "distributionModel": {
+            "type": "string",
+            "enum": [
+              "total-amount",
+              "amount-per-token"
+            ]
+          },
+          "amount": {
+            "type": "number"
+          },
+          "withholdTaxes": {
+            "type": "boolean"
+          },
+          "startDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "endDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "issuerId",
+          "issuerSecId",
+          "tokenId",
+          "snapshotId",
+          "distributionType",
+          "distributionModel",
+          "amount",
+          "withholdTaxes",
+          "startDate",
+          "endDate",
+          "limitations"
+        ]
+      },
+      "UpdateDistributionByCsvPayloadDto": {
+        "type": "object",
+        "properties": {
+          "fileKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "fileKey"
+        ]
+      }
+    }
+  }
+}

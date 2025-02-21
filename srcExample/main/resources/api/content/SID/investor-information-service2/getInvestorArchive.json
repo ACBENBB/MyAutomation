@@ -1,0 +1,13 @@
+{
+  "pathParams": {
+    "investorId": "#SID_INVESTOR_ID#"
+  },
+  "rc": {},
+  "sandbox": {},
+  "production": {
+     "skips": {
+       "entireTest": true,
+       "skipReason": "Test skipped since there's no archive to test investorId"
+     }
+   }
+ }

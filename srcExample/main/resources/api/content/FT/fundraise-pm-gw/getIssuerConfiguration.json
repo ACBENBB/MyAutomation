@@ -1,0 +1,13 @@
+{
+  "skips": {
+    "entireTest": false,
+    "skipReason": "TEST TEST",
+    "statusCodeCheck": false,
+    "bodySchemaCheck": false,
+    "bodyContentCheck": false
+  },
+  "pathParams":
+  {
+    "issuerId": "15b91de8-b613-4566-8f81-1104b4b2ee9d"
+  }
+}

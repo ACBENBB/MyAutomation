@@ -1,0 +1,5668 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/v2/account/agreements": {
+      "post": {
+        "operationId": "AccountController_createAgreement",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Create Account Agreement",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAgreementsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Account"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/account/agreements/acceptance": {
+      "post": {
+        "operationId": "AccountController_acceptAgreements",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AcceptAgreementsRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Accept Agreements",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AcceptAgreementsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Account"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/account/plaid-account": {
+      "post": {
+        "operationId": "AccountController_createPlaidAccount",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePlaidAccountRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create account with Plaid"
+          }
+        },
+        "tags": [
+          "Account"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/account/plaid-link-token": {
+      "post": {
+        "operationId": "AccountController_createPlaidLinkToken",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Create plaid link token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePlaidLinkTokenDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Account"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/account/linked": {
+      "get": {
+        "operationId": "AccountController_getLinkedAccount",
+        "summary": "",
+        "deprecated": true,
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get Linked Account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTransferMethodDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Account"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/account/credit-cards/limit": {
+      "get": {
+        "operationId": "AccountController_getCreditCardsLimit",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get Cards limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCreditCardsLimitDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Account"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v2/account/balance": {
+      "get": {
+        "operationId": "BalanceController_getUserBalance",
+        "parameters": [
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "instant-settlement"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "currency",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "USD",
+                "EUR"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get User Balance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCashBalanceDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Account"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/account/transactions": {
+      "get": {
+        "operationId": "TransactionsController_getAccountTransactions",
+        "parameters": [
+          {
+            "name": "pageNumber",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Transactions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTransactionsDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transactions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/account/withdrawal": {
+      "post": {
+        "operationId": "TransactionsController_createWithdrawal",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "description": "Suggestion: CHECK SCHEMA instead of EXAMPLE VALUE.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWithdrawalWithFundTransferMethodInfoRequestExampleDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Make a withdrawal",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateWithdrawalResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateWithdrawalBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateWithdrawalNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transactions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/account/deposits": {
+      "post": {
+        "operationId": "TransactionsController_createDeposit",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDepositRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Make a deposit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateDepositResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateDepositBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateDepositNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transactions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/account/deposits/token": {
+      "post": {
+        "operationId": "TransactionsController_createDepositToken",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDepositRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create deposit token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateDepositTokenResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateDepositTokenBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateDepositNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transactions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/account/transactions/{transactionId}/cancel": {
+      "post": {
+        "operationId": "TransactionsController_cancelFundTransaction",
+        "parameters": [
+          {
+            "name": "transactionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Cancel Fund Transaction"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancelTransactionBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancelTransactionNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transactions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/account/transactions/instant-settlements/limit": {
+      "get": {
+        "operationId": "TransactionsController_getInstantSettlementLimit",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get Instant Settlement Limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetInstantSettlementLimitDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetInstantSettlementLimitNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transactions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v2/account/withdrawal-to-wallet": {
+      "post": {
+        "operationId": "TransactionsController_convertAndWithdrawToWallet",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAssetWithdrawalRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Make an asset withdrawal to a wallet",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAssetWithdrawalResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAssetWithdrawalBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAssetWithdrawalNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transactions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/account/transactions/asset-withdrawal/limit": {
+      "get": {
+        "operationId": "TransactionsController_getAssetWithdrawalLimit",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get Asset Withdrawals Limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetWithdrawalsLimitDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetWithdrawalsLimitNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transactions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/account/transfer-methods": {
+      "get": {
+        "operationId": "TransferMethodsController_getFundTransferMethods",
+        "summary": "",
+        "deprecated": true,
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get Fund Transfer Methods",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountFundTransferMethodsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transfer Methods"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/account/transfer-methods/cards": {
+      "post": {
+        "operationId": "TransferMethodsController_createCard",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCardTransferMethodRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Create Card Transfer Method",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransferMethodDto"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransferMethodDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transfer Methods"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/account/transfer-methods/{fundTransferMethodId}/withdrawals": {
+      "post": {
+        "operationId": "TransferMethodsController_withdraw",
+        "parameters": [
+          {
+            "name": "fundTransferMethodId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWithdrawalWithFundTransferMethodIdRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Make Withdrawal Using Existing Fund Transfer Method",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateWithdrawalResponseDto"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateWithdrawalResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateWithdrawalBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateWithdrawalNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transfer Methods"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/account/transfer-methods/{transferMethodId}/deactivate": {
+      "post": {
+        "operationId": "TransferMethodsController_deactivateTransferMethod",
+        "parameters": [
+          {
+            "name": "transferMethodId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deactivate transfer method",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransferMethodDto"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransferMethodDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeactivateTransferMethodNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transfer Methods"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/account/transfer-methods/deposit-instructions": {
+      "get": {
+        "operationId": "TransferMethodsController_getDepositInstructionsV1",
+        "summary": "",
+        "deprecated": true,
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get deposit instructions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeprecatedGetUSDDepositInstructions"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepositInstructionsExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transfer Methods"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v2/account/transfer-methods": {
+      "get": {
+        "operationId": "TransferMethodsControllerV2_getFundTransferMethods",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get Fund Transfer Methods",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTransferMethodsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transfer Methods"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v2/account/transfer-methods/deposit-instructions": {
+      "get": {
+        "operationId": "TransferMethodsControllerV2_getDepositInstructions",
+        "parameters": [
+          {
+            "name": "currency",
+            "required": false,
+            "in": "query",
+            "example": "USD",
+            "schema": {
+              "enum": [
+                "EUR",
+                "USD"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get deposit instructions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountDepositInstructionsDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepositInstructionsExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transfer Methods"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/account/stable-coins/{stableCoin}/deposit-instructions": {
+      "post": {
+        "operationId": "StableCoinsController_generateStableCoinDepositInstructions",
+        "parameters": [
+          {
+            "name": "stableCoin",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Generate stable coin deposit instructions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetStableCoinDepositInstructionsDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Stable Coins"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/account/stable-coins/{stableCoin}/withdrawal-instructions": {
+      "post": {
+        "operationId": "StableCoinsController_generateStableCoinWithdrawalInstructions",
+        "parameters": [
+          {
+            "name": "stableCoin",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Generate stable coin withdrawal instructions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetStableCoinWithdrawalInstructionsDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Stable Coins"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/account/wallets": {
+      "get": {
+        "operationId": "WalletsController_getUserWallets",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get Wallets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetWalletsDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetWalletsNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Wallets"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/connect/v2/account/agreements": {
+      "post": {
+        "operationId": "ConnectAccountController_createAgreements",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create Account Agreements",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAgreementsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Account"
+        ]
+      }
+    },
+    "/connect/v1/account/agreements/acceptance": {
+      "post": {
+        "operationId": "ConnectAccountController_acceptAgreements",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AcceptAgreementsRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Accept Agreements",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AcceptAgreementsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Account"
+        ]
+      }
+    },
+    "/connect/v1/account/plaid-account": {
+      "post": {
+        "operationId": "ConnectAccountController_createPlaidAccount",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePlaidAccountRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create account with Plaid"
+          }
+        },
+        "tags": [
+          "Connect - Account"
+        ]
+      }
+    },
+    "/connect/v1/account/plaid-link-token": {
+      "post": {
+        "operationId": "ConnectAccountController_createPlaidLinkToken",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create plaid link token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePlaidLinkTokenDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Account"
+        ]
+      }
+    },
+    "/connect/v1/account/linked": {
+      "get": {
+        "operationId": "ConnectAccountController_getLinkedAccount",
+        "summary": "",
+        "deprecated": true,
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Linked Account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTransferMethodDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Account"
+        ]
+      }
+    },
+    "/connect/v1/account/credit-cards/limit": {
+      "get": {
+        "operationId": "ConnectAccountController_getCreditCardsLimit",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Cards limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCreditCardsLimitDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Account"
+        ]
+      }
+    },
+    "/connect/v1/account/transactions": {
+      "get": {
+        "operationId": "ConnectTransactionsController_getAccountTransactions",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNumber",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Transactions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTransactionsDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Transactions"
+        ]
+      }
+    },
+    "/connect/v1/account/withdrawal": {
+      "post": {
+        "operationId": "ConnectTransactionsController_createWithdrawal",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWithdrawalWithFundTransferMethodInfoRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Make a withdrawal",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateWithdrawalResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateWithdrawalBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateWithdrawalNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Transactions"
+        ]
+      }
+    },
+    "/connect/v1/account/deposits": {
+      "post": {
+        "operationId": "ConnectTransactionsController_createDeposit",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDepositRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Make a deposit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateDepositResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateDepositBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateDepositNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Transactions"
+        ]
+      }
+    },
+    "/connect/v1/account/deposits/token": {
+      "post": {
+        "operationId": "ConnectTransactionsController_createDepositToken",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDepositRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create deposit token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateDepositTokenResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateDepositTokenBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateDepositNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Transactions"
+        ]
+      }
+    },
+    "/connect/v1/account/transactions/{transactionId}/cancel": {
+      "post": {
+        "operationId": "ConnectTransactionsController_cancelFundTransaction",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "transactionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Cancel Fund Transaction"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancelTransactionBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancelTransactionNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Transactions"
+        ]
+      }
+    },
+    "/connect/v1/account/transactions/instant-settlements/limit": {
+      "get": {
+        "operationId": "ConnectTransactionsController_getInstantSettlementLimit",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Instant Settlement Limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetInstantSettlementLimitDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetInstantSettlementLimitNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Transactions"
+        ]
+      }
+    },
+    "/connect/v1/account/transactions/asset-withdrawal/limit": {
+      "get": {
+        "operationId": "ConnectTransactionsController_getAssetWithdrawalLimit",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Asset Withdrawal Limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetWithdrawalsLimitDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAssetWithdrawalsLimitNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Transactions"
+        ]
+      }
+    },
+    "/connect/v1/account/transfer-methods": {
+      "get": {
+        "operationId": "ConnectTransferMethodsController_getFundTransferMethods",
+        "summary": "",
+        "deprecated": true,
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Fund Transfer Methods",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountFundTransferMethodsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Transfer Methods"
+        ]
+      }
+    },
+    "/connect/v1/account/transfer-methods/cards": {
+      "post": {
+        "operationId": "ConnectTransferMethodsController_createCard",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCardTransferMethodRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Create Card Transfer Method",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransferMethodDto"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransferMethodDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Transfer Methods"
+        ]
+      }
+    },
+    "/connect/v1/account/transfer-methods/{fundTransferMethodId}/withdrawals": {
+      "post": {
+        "operationId": "ConnectTransferMethodsController_withdraw",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fundTransferMethodId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWithdrawalWithFundTransferMethodIdRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Make Withdrawal Using Existing Fund Transfer Method",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateWithdrawalResponseDto"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateWithdrawalResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateWithdrawalBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateWithdrawalNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Transfer Methods"
+        ]
+      }
+    },
+    "/connect/v1/account/transfer-methods/{fundTransferMethodId}/deactivate": {
+      "post": {
+        "operationId": "ConnectTransferMethodsController_deactivateTransferMethod",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fundTransferMethodId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deactivate transfer method",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransferMethodDto"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransferMethodDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeactivateTransferMethodNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Transfer Methods"
+        ]
+      }
+    },
+    "/connect/v1/account/transfer-methods/deposit-instructions": {
+      "get": {
+        "operationId": "ConnectTransferMethodsController_getDepositInstructionsV1",
+        "summary": "",
+        "deprecated": true,
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get deposit instructions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountWireTransferInstructionsDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepositInstructionsExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Transfer Methods"
+        ]
+      }
+    },
+    "/connect/v2/account/transfer-methods": {
+      "get": {
+        "operationId": "ConnectTransferMethodsControllerV2_getTransferMethods",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Fund Transfer Methods",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTransferMethodsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Transfer Methods"
+        ]
+      }
+    },
+    "/connect/v2/account/transfer-methods/deposit-instructions": {
+      "get": {
+        "operationId": "ConnectTransferMethodsControllerV2_getDepositInstructions",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "currency",
+            "required": false,
+            "in": "query",
+            "example": "USD",
+            "schema": {
+              "enum": [
+                "EUR",
+                "USD"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get deposit instructions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountDepositInstructionsDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepositInstructionsExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Transfer Methods"
+        ]
+      }
+    },
+    "/connect/v2/account/balance": {
+      "get": {
+        "operationId": "ConnectBalanceController_getUserBalance",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "instant-settlement"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "currency",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "USD",
+                "EUR"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get User Balance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCashBalanceDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Account"
+        ]
+      }
+    },
+    "/connect/v1/account/stable-coins/{stableCoin}/deposit-instructions": {
+      "post": {
+        "operationId": "ConnectStableCoinsController_generateStableCoinDepositInstructions",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "stableCoin",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Generate stable coin deposit instructions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetStableCoinDepositInstructionsDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Stable Coins"
+        ]
+      }
+    },
+    "/connect/v1/account/stable-coins/{stableCoin}/withdrawal-instructions": {
+      "post": {
+        "operationId": "ConnectStableCoinsController_generateStableCoinWithdrawalInstructions",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "stableCoin",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Generate stable coin withdrawal instructions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetStableCoinWithdrawalInstructionsDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Stable Coins"
+        ]
+      }
+    },
+    "/connect/v1/account/wallets": {
+      "get": {
+        "operationId": "ConnectWalletsController_getUserWallets",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Wallets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetWalletsDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetWalletsNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Wallets"
+        ]
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/api/v1/account-summary": {
+      "get": {
+        "operationId": "AccountSummaryController_getUserAccountSummaryV1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get Account - DEPRECATED",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountSummaryDtoV1"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountSummaryNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Account Summary"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v2/account-summary": {
+      "get": {
+        "operationId": "AccountSummaryController_getUserAccountSummary",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get Account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountSummaryDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountSummaryNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Account Summary"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/connect/v1/account-summary": {
+      "get": {
+        "operationId": "ConnectAccountSummaryController_getUserAccountSummaryV1",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Account Summary - DEPRECATED",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountSummaryDtoV1"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountSummaryNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Account Summary"
+        ]
+      }
+    },
+    "/connect/v2/account-summary": {
+      "get": {
+        "operationId": "ConnectAccountSummaryController_getUserAccountSummary",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Account Summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountSummaryDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountSummaryNotFoundExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Account Summary"
+        ]
+      }
+    },
+    "/api/v1/config": {
+      "get": {
+        "operationId": "ConfigController_getConfig",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get Config",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetConfigResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Config"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/connect/v1/config": {
+      "get": {
+        "operationId": "ConnectConfigController_getConfig",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Config",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetConfigResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Config"
+        ]
+      }
+    },
+    "/api/v1/forex": {
+      "get": {
+        "operationId": "ExchangeController_getLastQuote",
+        "parameters": [
+          {
+            "name": "from",
+            "required": true,
+            "in": "query",
+            "example": "USD",
+            "schema": {
+              "enum": [
+                "EUR",
+                "USD"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "required": true,
+            "in": "query",
+            "example": "EUR",
+            "schema": {
+              "enum": [
+                "EUR",
+                "USD"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetLastQuoteResponseDto"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Get last quote for a pair of currencies conversion.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetLastQuoteResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Currency Quotes for conversion."
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "ExchangeController_createExchangeFiatTransaction",
+        "summary": "It is recommended to test this endpoint using the response of the get endpoint.",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateExchangeFiatRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create exchange fiat transaction.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateExchangeFiatResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Check that two possible errors can be thrown. Go to \"Schema\" next to \"Example value\" to check both of them.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "description": "Conversion limit exceeded.",
+                      "$ref": "#/components/schemas/ConversionLimitExceededExceptionDto"
+                    },
+                    {
+                      "description": "Hash is not matching with given quote.",
+                      "$ref": "#/components/schemas/FakeQuoteHashBadRequestExceptionDto"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "Timestamp has exceeded maximum amount of time.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExpiredExchangeQuoteBadRequestExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Currency Quotes for conversion."
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/connect/v1/forex": {
+      "get": {
+        "operationId": "ConnectExchangeController_getLastQuote",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "required": true,
+            "in": "query",
+            "example": "USD",
+            "schema": {
+              "enum": [
+                "EUR",
+                "USD"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "required": true,
+            "in": "query",
+            "example": "EUR",
+            "schema": {
+              "enum": [
+                "EUR",
+                "USD"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetLastQuoteResponseDto"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Get last quote for a pair of currencies conversion.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetLastQuoteResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Currency Quotes for conversion."
+        ]
+      },
+      "post": {
+        "operationId": "ConnectExchangeController_createExchangeFiatTransaction",
+        "summary": "It is recommended to test this endpoint using the response of the get endpoint.",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Investor Access Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateExchangeFiatRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create exchange fiat transaction.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateExchangeFiatResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Hash is not matching with given quote.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FakeQuoteHashBadRequestExceptionDto"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "Timestamp has exceeded maximum amount of time.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExpiredExchangeQuoteBadRequestExceptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Connect - Currency Quotes for conversion."
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Account Gateway",
+    "description": "API to interact with Account Site",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "Agreement": {
+        "type": "object",
+        "properties": {
+          "agreementContent": {
+            "type": "string"
+          },
+          "providerType": {
+            "type": "string",
+            "enum": [
+              "PRIMETRUST",
+              "SYNAPSE",
+              "BBVA",
+              "PAXOS"
+            ]
+          }
+        },
+        "required": [
+          "agreementContent",
+          "providerType"
+        ]
+      },
+      "CreateAgreementsResponseDto": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "string"
+          },
+          "agreements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Agreement"
+            }
+          }
+        },
+        "required": [
+          "investorId",
+          "agreements"
+        ]
+      },
+      "AcceptAgreementsRequestDto": {
+        "type": "object",
+        "properties": {
+          "providerType": {
+            "enum": [
+              "PRIMETRUST",
+              "SYNAPSE",
+              "BBVA",
+              "PAXOS"
+            ],
+            "type": "string"
+          },
+          "signature": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "providerType",
+          "signature"
+        ]
+      },
+      "AcceptAgreementsResponseDto": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "string"
+          },
+          "cashAccountId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "investorId",
+          "cashAccountId"
+        ]
+      },
+      "CreatePlaidAccountRequestDto": {
+        "type": "object",
+        "properties": {
+          "plaidPublicToken": {
+            "type": "string"
+          },
+          "plaidAccountId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "plaidPublicToken",
+          "plaidAccountId"
+        ]
+      },
+      "CreatePlaidLinkTokenDto": {
+        "type": "object",
+        "properties": {
+          "linkToken": {
+            "type": "string"
+          },
+          "requestId": {
+            "type": "string"
+          },
+          "expiration": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "linkToken",
+          "requestId",
+          "expiration"
+        ]
+      },
+      "GetTransferMethodDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "bankAccountName": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "mask": {
+            "type": "string"
+          },
+          "bankAccountType": {
+            "type": "string"
+          },
+          "fundTransferType": {
+            "type": "string"
+          },
+          "bank": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "required": true,
+                "type": "string"
+              },
+              "name": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "id",
+          "bankAccountName",
+          "bankName",
+          "mask",
+          "bankAccountType",
+          "fundTransferType",
+          "bank"
+        ]
+      },
+      "GetCreditCardsLimitDto": {
+        "type": "object",
+        "properties": {
+          "dailyLimit": {
+            "type": "number"
+          },
+          "remainingDailyLimit": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "dailyLimit",
+          "remainingDailyLimit"
+        ]
+      },
+      "CashBalance": {
+        "type": "object",
+        "properties": {
+          "available": {
+            "type": "number"
+          },
+          "total": {
+            "type": "number"
+          },
+          "locked": {
+            "type": "number"
+          },
+          "instantSettlementLocked": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "USD",
+              "EUR"
+            ]
+          }
+        },
+        "required": [
+          "available",
+          "total",
+          "locked",
+          "currency"
+        ]
+      },
+      "GetCashBalanceDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "balance": {
+                "required": true,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CashBalance"
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "GetTransactionsDataDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "date": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "total": {
+            "type": "number"
+          },
+          "value": {
+            "type": "number"
+          },
+          "fee": {
+            "type": "number"
+          },
+          "fundTransferMethod": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "status",
+          "date",
+          "currency",
+          "total",
+          "value"
+        ]
+      },
+      "GetTransactionsDto": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "type": "object",
+            "properties": {
+              "currentPage": {
+                "required": true,
+                "type": "number"
+              },
+              "pageSize": {
+                "required": true,
+                "type": "number"
+              },
+              "totalPages": {
+                "required": true,
+                "type": "number"
+              },
+              "totalItems": {
+                "required": true,
+                "type": "number"
+              }
+            }
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetTransactionsDataDto"
+            }
+          }
+        },
+        "required": [
+          "meta",
+          "data"
+        ]
+      },
+      "BankAddress": {
+        "type": "object",
+        "properties": {
+          "country": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "province": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "country",
+          "address",
+          "city",
+          "province"
+        ]
+      },
+      "IntermediaryBankData": {
+        "type": "object",
+        "properties": {
+          "bankName": {
+            "type": "string"
+          },
+          "routingNumber": {
+            "type": "string"
+          },
+          "bankAddress": {
+            "$ref": "#/components/schemas/BankAddress"
+          }
+        },
+        "required": [
+          "bankName",
+          "routingNumber",
+          "bankAddress"
+        ]
+      },
+      "FundTransferMethodExample": {
+        "type": "object",
+        "properties": {
+          "isInternational": {
+            "type": "boolean"
+          },
+          "swiftCode": {
+            "type": "string"
+          },
+          "accountNumber": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "bankAccountName": {
+            "type": "string"
+          },
+          "routingNumber": {
+            "type": "string"
+          },
+          "iban": {
+            "type": "string"
+          },
+          "beneficiaryFullName": {
+            "type": "string"
+          },
+          "beneficiaryAddress": {
+            "type": "string"
+          },
+          "intermediaryBank": {
+            "$ref": "#/components/schemas/IntermediaryBankData"
+          }
+        },
+        "required": [
+          "isInternational"
+        ]
+      },
+      "CreateWithdrawalWithFundTransferMethodInfoRequestExampleDto": {
+        "type": "object",
+        "properties": {
+          "fundTransferMethod": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/WithdrawalUSDTransferData"
+              },
+              {
+                "$ref": "#/components/schemas/WithdrawalEURTransferData"
+              }
+            ],
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FundTransferMethodExample"
+              }
+            ]
+          },
+          "amount": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "fundTransferType": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "fundTransferMethod",
+          "amount",
+          "currency",
+          "fundTransferType"
+        ]
+      },
+      "CreateWithdrawalResponseDto": {
+        "type": "object",
+        "properties": {
+          "withdrawalId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "withdrawalId"
+        ]
+      },
+      "CreateWithdrawalBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "AMOUNT_EXCEEDS_LIMIT",
+            "enum": [
+              "AMOUNT_EXCEEDS_LIMIT",
+              "NOT_ENOUGH_FUNDS",
+              "BANK_KYC_NOT_COMPLETED"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CreateWithdrawalNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CreateDepositRequestDto": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "minimum": 1
+          },
+          "fundTransferMethodId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "amount",
+          "fundTransferMethodId"
+        ]
+      },
+      "CreateDepositResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "isInstantSettlement": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "isInstantSettlement"
+        ]
+      },
+      "CreateDepositBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "AMOUNT_EXCEEDS_LIMIT",
+            "enum": [
+              "AMOUNT_EXCEEDS_LIMIT",
+              "NOT_ENOUGH_FUNDS"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CreateDepositNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "FUNDS_TRANSFER_METHOD_NOT_FOUND",
+            "enum": [
+              "FUNDS_TRANSFER_METHOD_NOT_FOUND",
+              "ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CreateDepositTokenResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          },
+          "fee": {
+            "type": "number"
+          },
+          "amountPlusFee": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "token",
+          "fee",
+          "amountPlusFee"
+        ]
+      },
+      "CreateDepositTokenBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "AMOUNT_EXCEEDS_LIMIT",
+            "enum": [
+              "AMOUNT_EXCEEDS_LIMIT"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CancelTransactionBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "INVALID_CANCEL_FUND_TRANSACTION",
+            "enum": [
+              "INVALID_CANCEL_FUND_TRANSACTION"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CancelTransactionNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "FUND_TRANSACTION_NOT_FOUND",
+            "enum": [
+              "FUND_TRANSACTION_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "GetInstantSettlementLimitDto": {
+        "type": "object",
+        "properties": {
+          "dailyLimit": {
+            "type": "number"
+          },
+          "remainingDailyLimit": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "dailyLimit",
+          "remainingDailyLimit"
+        ]
+      },
+      "GetInstantSettlementLimitNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CreateAssetWithdrawalRequestDto": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "minimum": 1
+          },
+          "stableCoin": {
+            "type": "string",
+            "enum": [
+              "USDC"
+            ]
+          },
+          "walletId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "amount",
+          "stableCoin",
+          "walletId"
+        ]
+      },
+      "CreateAssetWithdrawalResponseDto": {
+        "type": "object",
+        "properties": {
+          "withdrawalId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "withdrawalId"
+        ]
+      },
+      "CreateAssetWithdrawalBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "AMOUNT_EXCEEDS_LIMIT",
+            "enum": [
+              "AMOUNT_EXCEEDS_LIMIT",
+              "NOT_ENOUGH_FUNDS",
+              "WALLET_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CreateAssetWithdrawalNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "GetAssetWithdrawalsLimitDto": {
+        "type": "object",
+        "properties": {
+          "remainingWithdrawalsAllowed": {
+            "type": "number"
+          },
+          "withdrawalAmountLimit": {
+            "type": "number"
+          },
+          "remainingWithdrawalAmountAllowed": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "remainingWithdrawalsAllowed",
+          "withdrawalAmountLimit",
+          "remainingWithdrawalAmountAllowed"
+        ]
+      },
+      "GetAssetWithdrawalsLimitNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "ACHTransferMethod": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "bankAccountName": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "mask": {
+            "type": "string"
+          },
+          "bankAccountType": {
+            "type": "string"
+          },
+          "bank": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "required": true,
+                "type": "string"
+              },
+              "name": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "id",
+          "bankAccountName",
+          "bankName",
+          "mask",
+          "bankAccountType",
+          "bank"
+        ]
+      },
+      "CreditCardTransferMethod": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "cardId": {
+            "type": "string"
+          },
+          "cardName": {
+            "type": "string"
+          },
+          "cardType": {
+            "type": "string"
+          },
+          "mask": {
+            "type": "string"
+          },
+          "cardExpirationDate": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "cardId",
+          "cardName",
+          "cardType",
+          "mask",
+          "cardExpirationDate"
+        ]
+      },
+      "GetAccountFundTransferMethodsResponseDto": {
+        "type": "object",
+        "properties": {
+          "ach": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ACHTransferMethod"
+            }
+          },
+          "creditCard": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreditCardTransferMethod"
+            }
+          }
+        },
+        "required": [
+          "ach",
+          "creditCard"
+        ]
+      },
+      "CreateCardTransferMethodRequestDto": {
+        "type": "object",
+        "properties": {
+          "cardNumber": {
+            "type": "string",
+            "description": "Encrypted card number"
+          },
+          "expirationDate": {
+            "type": "string",
+            "description": "Encrypted expiration date - Format: YYYYMM"
+          },
+          "securityCode": {
+            "type": "string",
+            "description": "Encrypted security code"
+          }
+        },
+        "required": [
+          "cardNumber",
+          "expirationDate",
+          "securityCode"
+        ]
+      },
+      "TransferMethodDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "method": {
+            "enum": [
+              "ASSET",
+              "WIRE_DOMESTIC",
+              "WIRE_INTERNATIONAL",
+              "ACH",
+              "CREDIT_CARD"
+            ],
+            "type": "string"
+          },
+          "currency": {
+            "enum": [
+              "USD",
+              "EUR"
+            ],
+            "type": "string"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "accountNumberMask": {
+            "type": "string"
+          },
+          "routingNumberMask": {
+            "type": "string"
+          },
+          "swiftCode": {
+            "type": "string"
+          },
+          "bank": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "required": true,
+                "type": "string"
+              },
+              "longName": {
+                "required": true,
+                "type": "string"
+              },
+              "address": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "achClass": {
+            "enum": [
+              "CHECKING",
+              "SAVINGS"
+            ],
+            "type": "string"
+          },
+          "cardMask": {
+            "type": "string"
+          },
+          "cardExpirationDate": {
+            "type": "string"
+          },
+          "cardNetwork": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "method",
+          "currency",
+          "isActive",
+          "accountNumberMask",
+          "bank"
+        ]
+      },
+      "CreateWithdrawalWithFundTransferMethodIdRequestDto": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "minimum": 1
+          },
+          "currency": {
+            "enum": [
+              "USD",
+              "EUR"
+            ],
+            "type": "string"
+          },
+          "fundTransferType": {
+            "type": "string",
+            "enum": [
+              "wire",
+              "wire_international",
+              "ach"
+            ]
+          }
+        },
+        "required": [
+          "amount",
+          "fundTransferType"
+        ]
+      },
+      "DeactivateTransferMethodNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND",
+              "FUNDS_TRANSFER_METHOD_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "DeprecatedSpecificInstructions": {
+        "type": "object",
+        "properties": {
+          "routingNumber": {
+            "type": "string"
+          },
+          "bankCode": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "bankAddress": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "routingNumber",
+          "bankCode",
+          "bankName",
+          "bankAddress",
+          "name"
+        ]
+      },
+      "DeprecatedWireInstructions": {
+        "type": "object",
+        "properties": {
+          "routingNumber": {
+            "type": "string"
+          },
+          "bankCode": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "bankAddress": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "additionalInstructions": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "routingNumber",
+          "bankCode",
+          "bankName",
+          "bankAddress",
+          "name",
+          "additionalInstructions"
+        ]
+      },
+      "DeprecatedInternationalInstructions": {
+        "type": "object",
+        "properties": {
+          "routingNumber": {
+            "type": "string"
+          },
+          "bankCode": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "bankAddress": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "additionalInstructions": {
+            "type": "string"
+          },
+          "ABARoutingNumber": {
+            "type": "string"
+          },
+          "intermediaryBank": {
+            "type": "object",
+            "properties": {
+              "bankName": {
+                "required": true,
+                "type": "string"
+              },
+              "routingNumber": {
+                "required": true,
+                "type": "string"
+              },
+              "swiftCode": {
+                "required": true,
+                "type": "string"
+              },
+              "bankAddress": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "routingNumber",
+          "bankCode",
+          "bankName",
+          "bankAddress",
+          "name",
+          "additionalInstructions",
+          "ABARoutingNumber",
+          "intermediaryBank"
+        ]
+      },
+      "DeprecatedGetUSDDepositInstructions": {
+        "type": "object",
+        "properties": {
+          "accountType": {
+            "type": "string",
+            "enum": [
+              "CHECKING",
+              "SAVINGS",
+              "CARD"
+            ]
+          },
+          "accountNumber": {
+            "type": "string"
+          },
+          "achInstructions": {
+            "$ref": "#/components/schemas/DeprecatedSpecificInstructions"
+          },
+          "wireDomesticInstructions": {
+            "$ref": "#/components/schemas/DeprecatedWireInstructions"
+          },
+          "wireInternationalInstructions": {
+            "$ref": "#/components/schemas/DeprecatedInternationalInstructions"
+          },
+          "recipient": {
+            "type": "string"
+          },
+          "recipientAddress": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "accountType",
+          "accountNumber",
+          "achInstructions",
+          "wireDomesticInstructions",
+          "wireInternationalInstructions",
+          "recipient",
+          "recipientAddress"
+        ]
+      },
+      "DepositInstructionsExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND",
+              "DEPOSIT_INSTRUCTIONS_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "GetTransferMethodsResponseDto": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "type": "object",
+            "properties": {
+              "total": {
+                "required": true,
+                "type": "number"
+              }
+            }
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TransferMethodDto"
+            }
+          }
+        },
+        "required": [
+          "meta",
+          "data"
+        ]
+      },
+      "DepositLimits": {
+        "type": "object",
+        "properties": {
+          "daily": {
+            "type": "number"
+          },
+          "monthly": {
+            "type": "number"
+          },
+          "yearly": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "daily",
+          "monthly",
+          "yearly"
+        ]
+      },
+      "SpecificInstructions": {
+        "type": "object",
+        "properties": {
+          "routingNumber": {
+            "type": "string"
+          },
+          "bankCode": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "bankAddress": {
+            "type": "object"
+          },
+          "bankAddressLines": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "name": {
+            "type": "string"
+          },
+          "config": {
+            "type": "object",
+            "properties": {
+              "fee": {
+                "required": true,
+                "type": "number"
+              },
+              "limits": {
+                "required": false,
+                "$ref": "#/components/schemas/DepositLimits"
+              }
+            }
+          }
+        },
+        "required": [
+          "routingNumber",
+          "bankCode",
+          "bankName",
+          "bankAddress",
+          "bankAddressLines",
+          "name",
+          "config"
+        ]
+      },
+      "WireInstructions": {
+        "type": "object",
+        "properties": {
+          "routingNumber": {
+            "type": "string"
+          },
+          "bankCode": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "bankAddress": {
+            "type": "object"
+          },
+          "bankAddressLines": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "name": {
+            "type": "string"
+          },
+          "config": {
+            "type": "object",
+            "properties": {
+              "fee": {
+                "required": true,
+                "type": "number"
+              },
+              "limits": {
+                "required": false,
+                "$ref": "#/components/schemas/DepositLimits"
+              }
+            }
+          },
+          "additionalInstructions": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "routingNumber",
+          "bankCode",
+          "bankName",
+          "bankAddress",
+          "bankAddressLines",
+          "name",
+          "config",
+          "additionalInstructions"
+        ]
+      },
+      "InternationalInstructions": {
+        "type": "object",
+        "properties": {
+          "routingNumber": {
+            "type": "string"
+          },
+          "bankCode": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "bankAddress": {
+            "type": "object"
+          },
+          "bankAddressLines": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "name": {
+            "type": "string"
+          },
+          "config": {
+            "type": "object",
+            "properties": {
+              "fee": {
+                "required": true,
+                "type": "number"
+              },
+              "limits": {
+                "required": false,
+                "$ref": "#/components/schemas/DepositLimits"
+              }
+            }
+          },
+          "additionalInstructions": {
+            "type": "string"
+          },
+          "ABARoutingNumber": {
+            "type": "string"
+          },
+          "intermediaryBank": {
+            "type": "object",
+            "properties": {
+              "bankName": {
+                "required": true,
+                "type": "string"
+              },
+              "routingNumber": {
+                "required": true,
+                "type": "string"
+              },
+              "swiftCode": {
+                "required": true,
+                "type": "string"
+              },
+              "bankAddress": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "routingNumber",
+          "bankCode",
+          "bankName",
+          "bankAddress",
+          "bankAddressLines",
+          "name",
+          "config",
+          "additionalInstructions",
+          "ABARoutingNumber",
+          "intermediaryBank"
+        ]
+      },
+      "USDInstructions": {
+        "type": "object",
+        "properties": {
+          "accountHolderName": {
+            "type": "string"
+          },
+          "accountType": {
+            "type": "string",
+            "enum": [
+              "CHECKING",
+              "SAVINGS",
+              "CARD"
+            ]
+          },
+          "accountNumber": {
+            "type": "string"
+          },
+          "achInstructions": {
+            "$ref": "#/components/schemas/SpecificInstructions"
+          },
+          "wireDomesticInstructions": {
+            "$ref": "#/components/schemas/WireInstructions"
+          },
+          "wireInternationalInstructions": {
+            "$ref": "#/components/schemas/InternationalInstructions"
+          },
+          "recipient": {
+            "type": "string"
+          },
+          "recipientAddress": {
+            "type": "object"
+          },
+          "recipientAddressLines": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "accountType",
+          "accountNumber",
+          "achInstructions",
+          "wireDomesticInstructions",
+          "wireInternationalInstructions",
+          "recipient",
+          "recipientAddress",
+          "recipientAddressLines"
+        ]
+      },
+      "SEPAInstructions": {
+        "type": "object",
+        "properties": {
+          "iban": {
+            "type": "string"
+          },
+          "recipient": {
+            "type": "string"
+          },
+          "reference": {
+            "type": "string"
+          },
+          "config": {
+            "type": "object",
+            "properties": {
+              "fee": {
+                "required": true,
+                "type": "number"
+              },
+              "limits": {
+                "required": false,
+                "$ref": "#/components/schemas/DepositLimits"
+              }
+            }
+          }
+        },
+        "required": [
+          "iban",
+          "recipient",
+          "reference",
+          "config"
+        ]
+      },
+      "EURWireInternationalInstructions": {
+        "type": "object",
+        "properties": {
+          "iban": {
+            "type": "string"
+          },
+          "swiftCode": {
+            "type": "string"
+          },
+          "recipient": {
+            "type": "string"
+          },
+          "reference": {
+            "type": "string"
+          },
+          "config": {
+            "type": "object",
+            "properties": {
+              "fee": {
+                "required": true,
+                "type": "number"
+              },
+              "limits": {
+                "required": false,
+                "$ref": "#/components/schemas/DepositLimits"
+              }
+            }
+          }
+        },
+        "required": [
+          "iban",
+          "swiftCode",
+          "recipient",
+          "reference",
+          "config"
+        ]
+      },
+      "EURInstructions": {
+        "type": "object",
+        "properties": {
+          "sepaInstructions": {
+            "$ref": "#/components/schemas/SEPAInstructions"
+          },
+          "wireInternationalInstructions": {
+            "$ref": "#/components/schemas/EURWireInternationalInstructions"
+          }
+        },
+        "required": [
+          "sepaInstructions",
+          "wireInternationalInstructions"
+        ]
+      },
+      "GetAccountDepositInstructionsDto": {
+        "type": "object",
+        "properties": {
+          "usd": {
+            "$ref": "#/components/schemas/USDInstructions"
+          },
+          "eur": {
+            "$ref": "#/components/schemas/EURInstructions"
+          }
+        }
+      },
+      "GetStableCoinDepositInstructionsDto": {
+        "type": "object",
+        "properties": {
+          "walletAddress": {
+            "type": "string"
+          },
+          "feePercentage": {
+            "type": "string"
+          },
+          "stableCoin": {
+            "type": "string"
+          },
+          "quote": {
+            "type": "object",
+            "properties": {
+              "timestamp": {
+                "required": true,
+                "type": "number"
+              },
+              "unitsPerDollar": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "walletAddress",
+          "feePercentage",
+          "stableCoin",
+          "quote"
+        ]
+      },
+      "GetStableCoinWithdrawalInstructionsDto": {
+        "type": "object",
+        "properties": {
+          "feePercentage": {
+            "type": "string"
+          },
+          "stableCoin": {
+            "type": "string"
+          },
+          "quote": {
+            "type": "object",
+            "properties": {
+              "timestamp": {
+                "required": true,
+                "type": "number"
+              },
+              "unitsPerDollar": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "feePercentage",
+          "stableCoin",
+          "quote"
+        ]
+      },
+      "WalletDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "walletTitle": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "network": {
+            "type": "string"
+          },
+          "creationDate": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "walletTitle",
+          "address",
+          "network",
+          "creationDate"
+        ]
+      },
+      "GetWalletsDto": {
+        "type": "object",
+        "properties": {
+          "wallets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WalletDto"
+            }
+          }
+        },
+        "required": [
+          "wallets"
+        ]
+      },
+      "GetWalletsNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "ACCOUNT_NOT_FOUND",
+            "enum": [
+              "ACCOUNT_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "WithdrawalUSDTransferData": {
+        "type": "object",
+        "properties": {
+          "isInternational": {
+            "type": "boolean"
+          },
+          "swiftCode": {
+            "type": "string"
+          },
+          "accountNumber": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "bankAccountName": {
+            "type": "string"
+          },
+          "routingNumber": {
+            "type": "string"
+          },
+          "bankAddress": {
+            "$ref": "#/components/schemas/BankAddress"
+          },
+          "intermediaryBank": {
+            "$ref": "#/components/schemas/IntermediaryBankData"
+          }
+        },
+        "required": [
+          "isInternational",
+          "swiftCode",
+          "accountNumber",
+          "bankName",
+          "bankAccountName"
+        ]
+      },
+      "WithdrawalEURTransferData": {
+        "type": "object",
+        "properties": {
+          "isInternational": {
+            "type": "boolean"
+          },
+          "iban": {
+            "type": "string"
+          },
+          "beneficiaryFullName": {
+            "type": "string"
+          },
+          "beneficiaryAddress": {
+            "type": "string"
+          },
+          "swiftCode": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "isInternational",
+          "beneficiaryFullName",
+          "beneficiaryAddress"
+        ]
+      },
+      "CreateWithdrawalWithFundTransferMethodInfoRequestDto": {
+        "type": "object",
+        "properties": {
+          "fundTransferMethod": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/WithdrawalUSDTransferData"
+              },
+              {
+                "$ref": "#/components/schemas/WithdrawalEURTransferData"
+              }
+            ]
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 1
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "USD",
+              "EUR"
+            ]
+          },
+          "fundTransferType": {
+            "type": "string",
+            "enum": [
+              "wire",
+              "wire_international",
+              "ach"
+            ]
+          }
+        },
+        "required": [
+          "fundTransferMethod",
+          "amount",
+          "fundTransferType"
+        ]
+      },
+      "WireTransferInstructionsDto": {
+        "type": "object",
+        "properties": {
+          "accountNumber": {
+            "type": "string"
+          },
+          "bankPhone": {
+            "type": "string"
+          },
+          "bankAddress": {
+            "type": "string"
+          },
+          "beneficiaryAddress": {
+            "type": "string"
+          },
+          "creditTo": {
+            "type": "string"
+          },
+          "depositoryBankName": {
+            "type": "string"
+          },
+          "routingNumber": {
+            "type": "string"
+          },
+          "swiftCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "accountNumber",
+          "bankPhone",
+          "bankAddress",
+          "beneficiaryAddress",
+          "creditTo",
+          "depositoryBankName",
+          "routingNumber"
+        ]
+      },
+      "AltCurrencyWireTransferInstructionDto": {
+        "type": "object",
+        "properties": {
+          "accountNumber": {
+            "type": "string"
+          },
+          "bankPhone": {
+            "type": "string"
+          },
+          "bankAddress": {
+            "type": "string"
+          },
+          "beneficiaryAddress": {
+            "type": "string"
+          },
+          "creditTo": {
+            "type": "string"
+          },
+          "depositoryBankName": {
+            "type": "string"
+          },
+          "reference": {
+            "type": "string"
+          },
+          "routingNumber": {
+            "type": "string"
+          },
+          "swiftCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "accountNumber",
+          "bankPhone",
+          "bankAddress",
+          "beneficiaryAddress",
+          "creditTo",
+          "depositoryBankName",
+          "reference",
+          "routingNumber",
+          "notes"
+        ]
+      },
+      "AltCurrencyWireTransferInstructionsDto": {
+        "type": "object",
+        "properties": {
+          "USD": {
+            "$ref": "#/components/schemas/AltCurrencyWireTransferInstructionDto"
+          },
+          "EUR": {
+            "$ref": "#/components/schemas/AltCurrencyWireTransferInstructionDto"
+          }
+        },
+        "required": [
+          "USD",
+          "EUR"
+        ]
+      },
+      "GetAccountWireTransferInstructionsDto": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "string"
+          },
+          "instructionsUs": {
+            "$ref": "#/components/schemas/WireTransferInstructionsDto"
+          },
+          "instructionsInternational": {
+            "$ref": "#/components/schemas/WireTransferInstructionsDto"
+          },
+          "altCurrencyWireInstructions": {
+            "$ref": "#/components/schemas/AltCurrencyWireTransferInstructionsDto"
+          }
+        },
+        "required": [
+          "reference",
+          "instructionsUs",
+          "instructionsInternational",
+          "altCurrencyWireInstructions"
+        ]
+      },
+      "AddressDto": {
+        "type": "object",
+        "properties": {
+          "addressLine": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "addressLine",
+          "city",
+          "state",
+          "postalCode"
+        ]
+      },
+      "GetAccountDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "CREATED",
+              "PENDING",
+              "CLOSED",
+              "FROZEN"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "address": {
+                "required": true,
+                "$ref": "#/components/schemas/AddressDto"
+              },
+              "ownerAddress": {
+                "required": false,
+                "$ref": "#/components/schemas/AddressDto"
+              },
+              "accountHolder": {
+                "required": true,
+                "type": "string"
+              },
+              "accountName": {
+                "required": true,
+                "type": "string"
+              },
+              "accountNumber": {
+                "required": true,
+                "type": "string"
+              },
+              "accountType": {
+                "required": true,
+                "type": "string"
+              },
+              "routingNumber": {
+                "required": true,
+                "type": "string"
+              },
+              "accountOwnerId": {
+                "required": true,
+                "type": "string"
+              },
+              "createdAt": {
+                "required": true,
+                "type": "string"
+              },
+              "investorId": {
+                "required": true,
+                "type": "string"
+              },
+              "defaultCurrency": {
+                "required": false,
+                "enum": [
+                  "USD",
+                  "EUR"
+                ],
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "status",
+          "id",
+          "data"
+        ]
+      },
+      "UserActionResponse": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "ONBOARDING_INCOMPLETED",
+              "KYC_EXPIRED",
+              "KYC_DOC_EXPIRED",
+              "INVESTOR_KYC_BLOCKED",
+              "ACCOUNT_ALREADY_CREATED",
+              "ACCOUNT_PENDING",
+              "ACCOUNT_REQUIRED",
+              "CASH_ACCOUNT_LOCKED_STATE"
+            ]
+          }
+        },
+        "required": [
+          "value"
+        ]
+      },
+      "UserActions": {
+        "type": "object",
+        "properties": {
+          "canUseCA": {
+            "$ref": "#/components/schemas/UserActionResponse"
+          },
+          "canCreateAccount": {
+            "$ref": "#/components/schemas/UserActionResponse"
+          },
+          "canCashDeposit": {
+            "$ref": "#/components/schemas/UserActionResponse"
+          },
+          "canCashWithdrawal": {
+            "$ref": "#/components/schemas/UserActionResponse"
+          }
+        },
+        "required": [
+          "canUseCA",
+          "canCreateAccount",
+          "canCashDeposit",
+          "canCashWithdrawal"
+        ]
+      },
+      "CashBalanceSummary": {
+        "type": "object",
+        "properties": {}
+      },
+      "AddressInfo": {
+        "type": "object",
+        "properties": {
+          "countryCode": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "entrance": {
+            "type": "string"
+          },
+          "houseNumber": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "zip": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "countryCode",
+          "city",
+          "street",
+          "zip"
+        ]
+      },
+      "Investor": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "string"
+          },
+          "mixPanelId": {
+            "type": "string"
+          },
+          "analyticsEnabled": {
+            "type": "boolean"
+          },
+          "email": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "verificationStatus": {
+            "type": "string"
+          },
+          "accountStatus": {
+            "type": "string"
+          },
+          "tfaEnabled": {
+            "type": "boolean"
+          },
+          "investorType": {
+            "type": "string"
+          },
+          "countryCode": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "pendingDeletion": {
+            "type": "boolean"
+          },
+          "deletionDeclineDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "brokerDealerId": {
+            "type": "number"
+          },
+          "accreditationStatus": {
+            "type": "string"
+          },
+          "suitabilityStatus": {
+            "type": "string",
+            "enum": [
+              "none",
+              "processing",
+              "verified",
+              "not-approved"
+            ]
+          },
+          "address": {
+            "$ref": "#/components/schemas/AddressInfo"
+          },
+          "holderName": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "investorId",
+          "mixPanelId",
+          "analyticsEnabled",
+          "email",
+          "fullName",
+          "verificationStatus",
+          "accountStatus",
+          "tfaEnabled",
+          "investorType",
+          "countryCode",
+          "language",
+          "pendingDeletion",
+          "deletionDeclineDate",
+          "brokerDealerId",
+          "accreditationStatus",
+          "suitabilityStatus",
+          "address",
+          "holderName"
+        ]
+      },
+      "GetAccountSummaryDtoV1": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "$ref": "#/components/schemas/GetAccountDto"
+          },
+          "restrictions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ONBOARDING_INCOMPLETED",
+                "KYC_EXPIRED",
+                "KYC_DOC_EXPIRED",
+                "INVESTOR_KYC_BLOCKED",
+                "ACCOUNT_ALREADY_CREATED",
+                "ACCOUNT_PENDING",
+                "ACCOUNT_REQUIRED",
+                "CASH_ACCOUNT_LOCKED_STATE"
+              ]
+            }
+          },
+          "actions": {
+            "$ref": "#/components/schemas/UserActions"
+          },
+          "usedCurrencies": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "USD",
+                "EUR"
+              ]
+            }
+          },
+          "dualBalanceEnabled": {
+            "type": "boolean"
+          },
+          "currencyExchangeEnabled": {
+            "type": "boolean"
+          },
+          "cashBalances": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CashBalanceSummary"
+            }
+          },
+          "investor": {
+            "$ref": "#/components/schemas/Investor"
+          }
+        },
+        "required": [
+          "restrictions",
+          "actions",
+          "usedCurrencies",
+          "dualBalanceEnabled",
+          "currencyExchangeEnabled",
+          "cashBalances"
+        ]
+      },
+      "GetAccountSummaryNotFoundExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "INVESTOR_NOT_FOUND",
+            "enum": [
+              "INVESTOR_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "CashAccountDto": {
+        "type": "object",
+        "properties": {
+          "cashAccountId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "CREATED",
+              "PENDING",
+              "CLOSED",
+              "FROZEN"
+            ]
+          },
+          "investorId": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "cashAccountId",
+          "status",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "GetAccountSummaryDto": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "$ref": "#/components/schemas/CashAccountDto"
+          },
+          "investor": {
+            "$ref": "#/components/schemas/Investor"
+          },
+          "restrictions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ONBOARDING_INCOMPLETED",
+                "KYC_EXPIRED",
+                "KYC_DOC_EXPIRED",
+                "INVESTOR_KYC_BLOCKED",
+                "ACCOUNT_ALREADY_CREATED",
+                "ACCOUNT_PENDING",
+                "ACCOUNT_REQUIRED",
+                "CASH_ACCOUNT_LOCKED_STATE"
+              ]
+            }
+          },
+          "actions": {
+            "$ref": "#/components/schemas/UserActions"
+          },
+          "usedCurrencies": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "USD",
+                "EUR"
+              ]
+            }
+          },
+          "operationalCurrencies": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "USD",
+                "EUR"
+              ]
+            }
+          },
+          "cashBalances": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CashBalanceSummary"
+            }
+          },
+          "dualBalanceEnabled": {
+            "type": "boolean"
+          },
+          "currencyExchangeEnabled": {
+            "type": "boolean"
+          },
+          "defaultCurrency": {
+            "enum": [
+              "USD",
+              "EUR"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "restrictions",
+          "actions",
+          "usedCurrencies",
+          "cashBalances",
+          "dualBalanceEnabled",
+          "currencyExchangeEnabled"
+        ]
+      },
+      "GetConfigResponseDto": {
+        "type": "object",
+        "properties": {
+          "featureFlags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "config": {
+            "type": "object",
+            "properties": {
+              "creditCardFeePercentage": {
+                "required": true,
+                "type": "string"
+              },
+              "exchangeRateFeePercentage": {
+                "required": true,
+                "type": "string"
+              },
+              "exchangeMaxLimit": {
+                "required": true,
+                "type": "string"
+              },
+              "withdrawWireTransferLocalFee": {
+                "required": true,
+                "type": "string"
+              },
+              "withdrawWireTransferInternationalFee": {
+                "required": true,
+                "type": "string"
+              },
+              "eurWithdrawWireTransferDomesticFee": {
+                "required": true,
+                "type": "string"
+              },
+              "eurWithdrawWireTransferInternationalFee": {
+                "required": true,
+                "type": "string"
+              },
+              "withdrawACHFee": {
+                "required": true,
+                "type": "string"
+              },
+              "depositACHFee": {
+                "required": true,
+                "type": "string"
+              },
+              "depositCCFee": {
+                "required": true,
+                "type": "string"
+              },
+              "restrictedJurisdictions": {
+                "required": true,
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "cashAccountLockedStates": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "featureFlags",
+          "config",
+          "cashAccountLockedStates"
+        ]
+      },
+      "GetLastQuoteResponseDto": {
+        "type": "object",
+        "properties": {
+          "quote": {
+            "type": "object",
+            "properties": {
+              "ask": {
+                "required": true,
+                "type": "number"
+              },
+              "bid": {
+                "required": true,
+                "type": "number"
+              },
+              "timestamp": {
+                "required": true,
+                "type": "number"
+              },
+              "symbol": {
+                "required": true,
+                "type": "object"
+              }
+            }
+          },
+          "hash": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "quote",
+          "hash"
+        ]
+      },
+      "ConversionLimitExceededExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "CONVERSION_LIMIT_EXCEEDED",
+            "enum": [
+              "CONVERSION_LIMIT_EXCEEDED"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "FakeQuoteHashBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "FAKE_QUOTE_HASH",
+            "enum": [
+              "FAKE_QUOTE_HASH"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "Quote": {
+        "type": "object",
+        "properties": {
+          "ask": {
+            "type": "number"
+          },
+          "bid": {
+            "type": "number"
+          },
+          "timestamp": {
+            "type": "number"
+          },
+          "symbol": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ask",
+          "bid",
+          "timestamp",
+          "symbol"
+        ]
+      },
+      "CreateExchangeFiatRequestDto": {
+        "type": "object",
+        "properties": {
+          "quote": {
+            "$ref": "#/components/schemas/Quote"
+          },
+          "hash": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string",
+            "example": "USD"
+          },
+          "to": {
+            "type": "string",
+            "example": "EUR"
+          },
+          "amountToConvert": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "quote",
+          "hash",
+          "from",
+          "to",
+          "amountToConvert"
+        ]
+      },
+      "ExchangeFee": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "type": "string",
+            "enum": [
+              "USD",
+              "EUR"
+            ]
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "currency",
+          "value"
+        ]
+      },
+      "CreateExchangeFiatResponseDto": {
+        "type": "object",
+        "properties": {
+          "investorId": {
+            "type": "string"
+          },
+          "transactionId": {
+            "type": "string"
+          },
+          "amountConvertedMinusFee": {
+            "type": "number"
+          },
+          "amountToConvert": {
+            "type": "number"
+          },
+          "conversionRate": {
+            "type": "number"
+          },
+          "exchangeFee": {
+            "$ref": "#/components/schemas/ExchangeFee"
+          },
+          "from": {
+            "type": "string",
+            "enum": [
+              "USD",
+              "EUR"
+            ]
+          },
+          "timestamp": {
+            "type": "number"
+          },
+          "to": {
+            "type": "string",
+            "enum": [
+              "EUR",
+              "USD"
+            ]
+          }
+        },
+        "required": [
+          "investorId",
+          "transactionId",
+          "amountConvertedMinusFee",
+          "amountToConvert",
+          "conversionRate",
+          "exchangeFee",
+          "from",
+          "timestamp",
+          "to"
+        ]
+      },
+      "ExpiredExchangeQuoteBadRequestExceptionDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "EXPIRED_EXCHANGE_QUOTE",
+            "enum": [
+              "EXPIRED_EXCHANGE_QUOTE"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      }
+    }
+  }
+}

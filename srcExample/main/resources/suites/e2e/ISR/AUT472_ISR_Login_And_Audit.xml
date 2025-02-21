@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT472_ISR_Login_And_Audit" verbose="1">
+    <test name="AUT472_ISR_Login_And_Audit">
+        <classes>
+            <class name="io.securitize.tests.controlPanel.AUT472_ISR_Login_And_Audit_Test" />
+        </classes>
+    </test>
+</suite>

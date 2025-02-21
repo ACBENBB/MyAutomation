@@ -1,0 +1,7 @@
+{
+  "pathParams":
+  {
+    "issuerId": "#ISSUER_ID#",
+    "affiliateId": "1"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "skips" : {
+    "entireTest" : true
+  },
+  "pathParams": {
+    "investorId" : "#INVESTOR_ID#"
+  }
+}

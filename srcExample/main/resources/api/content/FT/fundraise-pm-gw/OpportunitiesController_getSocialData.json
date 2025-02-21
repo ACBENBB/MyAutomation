@@ -1,0 +1,5 @@
+{
+  "pathParams" : {
+    "opportunityId" : "#OPPORTUNITY_ID#"
+  }
+}

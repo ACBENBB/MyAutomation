@@ -1,0 +1,2271 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/api/v2/distributions": {
+      "post": {
+        "operationId": "DistributionController_createDistribution",
+        "summary": "Create a distribution",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDistributionPayloadDto"
+              },
+              "examples": {
+                "dividend": {
+                  "value": {
+                    "name": "Dividend Name",
+                    "issuerId": "issuerId",
+                    "issuerSecId": "issuerSecId",
+                    "tokenId": "tokenId",
+                    "snapshotId": 123456,
+                    "distributionType": "dividend",
+                    "distributionModel": "amount-per-token",
+                    "amount": 1,
+                    "withholdTaxes": true
+                  }
+                },
+                "accruedDividend": {
+                  "value": {
+                    "name": "Accrued Dividend Name",
+                    "issuerId": "issuerId",
+                    "issuerSecId": "issuerSecId",
+                    "tokenId": "tokenId",
+                    "distributionType": "accrued-dividend",
+                    "distributionModel": "amount-per-token",
+                    "amount": 1,
+                    "startDate": "2024-02-20T19:37:59.547Z",
+                    "endDate": "2024-02-20T23:59:59.999Z The hour of the endDate will be recorded as 23:59:59 of the same day",
+                    "withholdTaxes": true
+                  }
+                },
+                "redemption": {
+                  "value": {
+                    "name": "Redemption Name",
+                    "issuerId": "issuerId",
+                    "issuerSecId": "issuerSecId",
+                    "tokenId": "tokenId",
+                    "distributionType": "redemption",
+                    "distributionModel": "amount-per-token",
+                    "amount": 1.5,
+                    "withholdTaxes": true,
+                    "startDate": "2024-02-20T19:37:59.547Z",
+                    "endDate": "2024-02-21T19:37:59.547Z",
+                    "limitations": [
+                      {
+                        "type": "redemption-general-percentage",
+                        "value": "100"
+                      }
+                    ]
+                  }
+                },
+                "redemptionTBE": {
+                  "value": {
+                    "name": "Redemption TBE Name",
+                    "issuerId": "issuerId",
+                    "issuerSecId": "issuerSecId",
+                    "tokenId": "tokenId",
+                    "distributionType": "redemption-tbe",
+                    "distributionModel": "amount-per-token",
+                    "amount": 1.5,
+                    "withholdTaxes": true,
+                    "startDate": "2024-02-20T19:37:59.547Z",
+                    "endDate": "2024-02-21T19:37:59.547Z",
+                    "limitations": [
+                      {
+                        "type": "redemption-general-percentage",
+                        "value": "100"
+                      }
+                    ]
+                  }
+                },
+                "redemptionEvergreen": {
+                  "value": {
+                    "name": "Redemption Evergreen Name",
+                    "issuerId": "issuerId",
+                    "issuerSecId": "issuerSecId",
+                    "tokenId": "tokenId",
+                    "distributionType": "redemption-evergreen",
+                    "distributionModel": "amount-per-token",
+                    "amount": 1.5,
+                    "withholdTaxes": false,
+                    "startDate": "2024-02-20T19:37:59.547Z"
+                  }
+                },
+                "redemptionWeb3": {
+                  "value": {
+                    "name": "Redemption WEB3 Name",
+                    "issuerId": "issuerId",
+                    "issuerSecId": "issuerSecId",
+                    "tokenId": "tokenId",
+                    "distributionType": "redemption-evergreen",
+                    "distributionModel": "amount-per-token",
+                    "amount": 1,
+                    "swapContractAddress": "swapContractAddress",
+                    "swapEnabled": true,
+                    "withholdTaxes": false,
+                    "startDate": "2024-02-20T19:37:59.547Z",
+                    "limitations": [
+                      {
+                        "type": "redemption-minimum-participation-amount",
+                        "value": "100000"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DistributionDataResponseDto"
+                }
+              }
+            }
+          },
+          "Exceptions Schema": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SwaggerExceptionSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Distribution"
+        ]
+      },
+      "get": {
+        "operationId": "DistributionController_getDistributionList",
+        "summary": "Get distributions list",
+        "parameters": [
+          {
+            "name": "issuer-id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token-id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "distribution-type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "accrued-dividend",
+                  "dividend",
+                  "redemption",
+                  "redemption-tbe",
+                  "redemption-evergreen",
+                  "interest",
+                  "buy-back",
+                  "rescission",
+                  "other"
+                ]
+              }
+            }
+          },
+          {
+            "name": "order-by",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "created_at",
+              "enum": [
+                "created_at",
+                "amountToDistribute",
+                "status"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "order-direction",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "desc",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "pending",
+                "populated",
+                "processing",
+                "completed",
+                "errored",
+                "waiting-investor-redemptions"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DistributionDataListResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Distribution"
+        ]
+      }
+    },
+    "/api/v2/distributions/{id}": {
+      "put": {
+        "operationId": "DistributionController_editDistribution",
+        "summary": "Edit a distribution by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditDistributionPayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DistributionDataResponseDto"
+                }
+              }
+            }
+          },
+          "Exceptions Schema": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SwaggerExceptionSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Distribution"
+        ]
+      },
+      "get": {
+        "operationId": "DistributionController_getDistribution",
+        "summary": "Get a distribution",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DistributionDataResponseDto"
+                }
+              }
+            }
+          },
+          "Exceptions Schema": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SwaggerExceptionSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Distribution"
+        ]
+      },
+      "delete": {
+        "operationId": "DistributionController_deleteDistribution",
+        "summary": "Delete a distribution",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "Exceptions Schema": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SwaggerExceptionSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Distribution"
+        ]
+      }
+    },
+    "/api/v2/distributions/{id}/investors": {
+      "get": {
+        "operationId": "DistributionController_getInvestors",
+        "summary": "Get investor list by distribution id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order-by",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "payout-method",
+              "enum": [
+                "tokens",
+                "name",
+                "payoutAmount",
+                "payout-method"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "order-direction",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "desc",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DistributionInvestorsResponseDto"
+                }
+              }
+            }
+          },
+          "Exceptions Schema": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SwaggerExceptionSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Distribution"
+        ]
+      }
+    },
+    "/api/v2/distributions/{id}/confirm": {
+      "post": {
+        "operationId": "DistributionController_confirmDistribution",
+        "summary": "Confirm and pay distribution",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DistributionDataResponseDto"
+                }
+              }
+            }
+          },
+          "Exceptions Schema": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SwaggerExceptionSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Distribution"
+        ]
+      }
+    },
+    "/api/v2/distributions/{id}/stop": {
+      "patch": {
+        "operationId": "DistributionController_stopDistribution",
+        "summary": "stop distribution - redemption evergreen",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DistributionDataResponseDto"
+                }
+              }
+            }
+          },
+          "Exceptions Schema": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SwaggerExceptionSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Distribution"
+        ]
+      }
+    },
+    "/api/v2/distributions/issuers/{id}/info": {
+      "get": {
+        "operationId": "DistributionController_getIssuerInfo",
+        "summary": "Return info from issuer",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IssuerInfoResponseDto"
+                }
+              }
+            }
+          },
+          "Exceptions Schema": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SwaggerExceptionSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Distribution"
+        ]
+      }
+    },
+    "/api/v2/distributions/investors/{id}": {
+      "get": {
+        "operationId": "DistributionController_getDistribuionsByInvestorId",
+        "summary": "Get distributions by investor id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "distributionType",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "accrued-dividend",
+                "dividend",
+                "redemption",
+                "redemption-tbe",
+                "redemption-evergreen",
+                "interest",
+                "buy-back",
+                "rescission",
+                "other"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "pending",
+                "populated",
+                "processing",
+                "completed",
+                "errored",
+                "waiting-investor-redemptions"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "order-by",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "created_at",
+              "enum": [
+                "created_at",
+                "amountToDistribute",
+                "status"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "order-direction",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "desc",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "issuerId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DistributionDataListResponseDto"
+                }
+              }
+            }
+          },
+          "Exceptions Schema": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SwaggerExceptionSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Distribution"
+        ]
+      },
+      "patch": {
+        "operationId": "DistributionController_updateInvestorById",
+        "summary": "Update investor by investor id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DistributionInvestorsPatchPayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DistributionInvestorDto"
+                }
+              }
+            }
+          },
+          "Exceptions Schema": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SwaggerExceptionSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Distribution"
+        ]
+      }
+    },
+    "/api/v2/distributions/{distributionId}/investors/{investorId}": {
+      "get": {
+        "operationId": "DistributionController_getInvestorById",
+        "summary": "Get investor dto by distribution and investor id",
+        "parameters": [
+          {
+            "name": "distributionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DistributionInvestorTransactionsDto"
+                }
+              }
+            }
+          },
+          "Exceptions Schema": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SwaggerExceptionSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Distribution"
+        ]
+      }
+    },
+    "/api/v2/investors/{investorId}/history": {
+      "get": {
+        "operationId": "DistributionInvestorController_getDistributionByInvestor",
+        "summary": "Get a distributions history by investor",
+        "parameters": [
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "issuerIds",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "tokenIds",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "payoutAble",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "able",
+                "unable"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "paidStatus",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "paymentPreferenceType",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "payoutMethod",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "distributionStatus",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "distributionType",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "has-confirmation-date",
+            "required": false,
+            "in": "query",
+            "description": "Filter investors with confirmation date",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DistributionInvestorHistoryResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Distribution Investor"
+        ]
+      }
+    },
+    "/api/v2/distributions/distribution-calendar/holidays": {
+      "get": {
+        "operationId": "DistributionCalendarController_getHolidays",
+        "summary": "Return holidays",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DistributionCalendarDataResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Distribution Calendar"
+        ]
+      }
+    },
+    "/api/v2/distributions/{id}/download": {
+      "get": {
+        "operationId": "DistributionCsvController_getDistributionCsv",
+        "summary": "Return distribution csv presigned url",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DistributionDownloadResponseDto"
+                }
+              }
+            }
+          },
+          "Exceptions Schema": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SwaggerExceptionSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Distribution Csv"
+        ]
+      }
+    },
+    "/api/v2/distributions/{id}/upload/confirm": {
+      "post": {
+        "operationId": "DistributionCsvController_validateCsvUpload",
+        "summary": "Confirm and update distribution by csv",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DistributionUploadCsvPayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DistributionDataResponseDto"
+                }
+              }
+            }
+          },
+          "Exceptions Schema": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SwaggerExceptionSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Distribution Csv"
+        ]
+      }
+    },
+    "/api/v2/distributions/{id}/upload": {
+      "get": {
+        "operationId": "DistributionCsvController_getUploadPresignedUrl",
+        "summary": "Return distribution csv upload presigned url",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PresignedPostDto"
+                }
+              }
+            }
+          },
+          "Exceptions Schema": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SwaggerExceptionSchema"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Distribution Csv"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Distributions Api",
+    "description": "<h3>Endpoints for Distributions</h3></br><h4>Exceptions list</h4></br><details>\n  <summary>\n    <span>Exceptions - Distribution</span>\n  </summary>\n  <div>\n    <table>\n      <thead>\n          <tr>\n            <th>\n                <code>httpStatus</code> <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Status\">See here</a>\n            </th>\n            <th>\n              <code>name</code>\n            </th>\n            <th>\n              <code>message</code>\n            </th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr>\n    <td><code>400</code></td>\n    <td><code>DISTRIBUTION_TYPE_ERROR</code></td>\n    <td>Distribution should be $typeRequired type</td>\n  </tr><tr>\n    <td><code>400</code></td>\n    <td><code>REDEMPTION_ALREADY_EXISTS</code></td>\n    <td>Redemption already exists at that date range $startDate - $endDate</td>\n  </tr><tr>\n    <td><code>400</code></td>\n    <td><code>DISTRIBUTION_STATUS_ERROR</code></td>\n    <td>Distribution status should be $statusRequired</td>\n  </tr><tr>\n    <td><code>400</code></td>\n    <td><code>DISTRIBUTION_DELETE_STATUS_ERROR</code></td>\n    <td>Distribution id $distributionId is in $status so shouldn't be closed</td>\n  </tr><tr>\n    <td><code>400</code></td>\n    <td><code>DISTRIBUTION_DONT_SUPPORT_CASH_ACCOUNT</code></td>\n    <td>Distribution don't support Cash Account</td>\n  </tr><tr>\n    <td><code>400</code></td>\n    <td><code>DISTRIBUTION_DELETE_TYPE_ERROR</code></td>\n    <td>Distribution type $requiredType can't be deleted</td>\n  </tr><tr>\n    <td><code>400</code></td>\n    <td><code>DISTRIBUTION_NOT_POPULATED</code></td>\n    <td>Distribution status should be ready to confirm</td>\n  </tr><tr>\n    <td><code>400</code></td>\n    <td><code>EVERGREEN_NOT_WAITING_REDEMPTIONS</code></td>\n    <td>Evergree status should be waiting redemptions</td>\n  </tr><tr>\n    <td><code>400</code></td>\n    <td><code>DISTRIBUTION_CONFIRMED</code></td>\n    <td>Can't edit investors when distribution is $status</td>\n  </tr><tr>\n    <td><code>400</code></td>\n    <td><code>DISTRIBUTION_PROCESSING</code></td>\n    <td>Can't edit investors when distribution is $status</td>\n  </tr><tr>\n    <td><code>400</code></td>\n    <td><code>ISSUER_SEC_ID_REQUIRED</code></td>\n    <td>issuerSecId is required</td>\n  </tr><tr>\n    <td><code>400</code></td>\n    <td><code>ISSUER_REDEMPTION_WALLET_NOT_FOUND</code></td>\n    <td>Issuer doesn't have redemption wallet</td>\n  </tr><tr>\n    <td><code>400</code></td>\n    <td><code>INVESTOR_PAID_STATUS_ERROR</code></td>\n    <td>Investor paid status can not be $status</td>\n  </tr><tr>\n    <td><code>400</code></td>\n    <td><code>INVESTOR_UPDATE_PAYMENT_METHOD_ERROR</code></td>\n    <td>Investor payment method should be changed to cash-account, bank-transfer,check,reinvest,other </td>\n  </tr><tr>\n    <td><code>400</code></td>\n    <td><code>PAYOUT_INVESTOR_STATUS_ERROR</code></td>\n    <td>Investor payout is not pending</td>\n  </tr><tr>\n    <td><code>400</code></td>\n    <td><code>AUTHORIZED_SECURITIES_EXCEEDED</code></td>\n    <td>Authorized securities exceeded</td>\n  </tr><tr>\n    <td><code>404</code></td>\n    <td><code>DISTRIBUTION_NOT_FOUND</code></td>\n    <td>Distribution ($distributionId) not found</td>\n  </tr><tr>\n    <td><code>404</code></td>\n    <td><code>DISTRIBUTION_EMPTY_ERROR</code></td>\n    <td>Distribution is empty</td>\n  </tr><tr>\n    <td><code>404</code></td>\n    <td><code>ISSUER_NOT_FOUND</code></td>\n    <td>Issuer Id ($issuerId) not found</td>\n  </tr><tr>\n    <td><code>404</code></td>\n    <td><code>ISSUER_SEC_ID_ERROR</code></td>\n    <td>Issuer SecuritizeId ($issuerSecId) not have created CashAccount</td>\n  </tr><tr>\n    <td><code>404</code></td>\n    <td><code>INVESTOR_NOT_FOUND</code></td>\n    <td>Investor ($distributionInvestorId) not found</td>\n  </tr><tr>\n    <td><code>404</code></td>\n    <td><code>INVESTOR_SEC_ID_NOT_FOUND</code></td>\n    <td>Investor SecId not found</td>\n  </tr><tr>\n    <td><code>404</code></td>\n    <td><code>INVESTOR_CP_ID_NOT_FOUND</code></td>\n    <td>Investor ControlPanelId not found</td>\n  </tr><tr>\n    <td><code>404</code></td>\n    <td><code>GET_SNAPSHOT_RECORDS_ERROR</code></td>\n    <td>The SnapshotId ($snapshotId) was not found</td>\n  </tr><tr>\n    <td><code>404</code></td>\n    <td><code>GET_SNAPSHOT_ERROR</code></td>\n    <td>The SnapshotId ($snapshotId) was not found</td>\n  </tr><tr>\n    <td><code>404</code></td>\n    <td><code>SNAPSHOT_EMPTY_ERROR</code></td>\n    <td>The SnapshotId ($snapshotId) is empty</td>\n  </tr><tr>\n    <td><code>406</code></td>\n    <td><code>START_DATE_REQUIRED</code></td>\n    <td>Start date is required</td>\n  </tr><tr>\n    <td><code>406</code></td>\n    <td><code>END_DATE_REQUIRED</code></td>\n    <td>End date is required</td>\n  </tr><tr>\n    <td><code>406</code></td>\n    <td><code>END_DATE_MUST_BE_GREATER_THAN_OR_EQUAL_TO_TODAY</code></td>\n    <td>End date should be greater or equal than start date</td>\n  </tr><tr>\n    <td><code>406</code></td>\n    <td><code>START_DATE_MUST_BE_GREATER_THAN_OR_EQUAL_TO_TODAY</code></td>\n    <td>Start date should be greater or equal than today</td>\n  </tr><tr>\n    <td><code>406</code></td>\n    <td><code>DISTRIBUTION_START_DATE_INTEREST_NOT_ABLE_ERROR</code></td>\n    <td>Distribution start date should be later than today and before 3 PM tomorrow, New York time.</td>\n  </tr><tr>\n    <td><code>500</code></td>\n    <td><code>ISSUER_DEPLOYMENT_SERVICE_UNREACHED</code></td>\n    <td>Deployment service is unavailable or has an error. Try again later</td>\n  </tr><tr>\n    <td><code>500</code></td>\n    <td><code>PAYOUT_FREEZE_ERROR</code></td>\n    <td>Issuer have insufficient funds or unable to transfer</td>\n  </tr><tr>\n    <td><code>500</code></td>\n    <td><code>INSUFFICIENT_FUNDS_ERROR</code></td>\n    <td>Issuer have insufficient funds. At least $fundsNeeded more are needed</td>\n  </tr><tr>\n    <td><code>500</code></td>\n    <td><code>NO_USD_BALANCE</code></td>\n    <td>Issuer do not have USD balance funds. $fundsNeeded are needed</td>\n  </tr><tr>\n    <td><code>500</code></td>\n    <td><code>PAYOUT_TRANSFER_ERROR</code></td>\n    <td>Error to transfer payout</td>\n  </tr><tr>\n    <td><code>500</code></td>\n    <td><code>PAYOUT_TRANSFER_ERROR</code></td>\n    <td>Investor payout amount is zero</td>\n  </tr><tr>\n    <td><code>500</code></td>\n    <td><code>GET_TOKEN_ERROR</code></td>\n    <td>Error getting tokens data</td>\n  </tr><tr>\n    <td><code>500</code></td>\n    <td><code>GET_TOKEN_NOT_FOUND_ERROR</code></td>\n    <td>The TokenId ($tokenId) was not found</td>\n  </tr><tr>\n    <td><code>500</code></td>\n    <td><code>TOKENS_TO_ISSUE_ERROR</code></td>\n    <td>Issuer have insufficient tokens or unable to issue</td>\n  </tr><tr>\n    <td><code>500</code></td>\n    <td><code>BULK_ISSUANCE_ERROR</code></td>\n    <td>Error Calling bulk issuance service</td>\n  </tr><tr>\n    <td><code>500</code></td>\n    <td><code>GET_NAV_PRICE_ERROR</code></td>\n    <td>Error getting token nav price for period: $period</td>\n  </tr><tr>\n    <td><code>500</code></td>\n    <td><code>NOT_STOPPABLE</code></td>\n    <td>This distribution $requiredType type can't be stopped</td>\n  </tr>\n      </tbody>\n    </table>\n  </div>\n</details></br><details>\n  <summary>\n    <span>Exceptions - DistributionCsv</span>\n  </summary>\n  <div>\n    <table>\n      <thead>\n          <tr>\n            <th>\n                <code>httpStatus</code> <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Status\">See here</a>\n            </th>\n            <th>\n              <code>name</code>\n            </th>\n            <th>\n              <code>message</code>\n            </th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr>\n    <td><code>400</code></td>\n    <td><code>DISTRIBUTION_START_CSV_VALIDATION_STATUS_ERROR</code></td>\n    <td>Distribution status should be populated</td>\n  </tr><tr>\n    <td><code>400</code></td>\n    <td><code>DISTRIBUTION_START_CSV_VALIDATION_TYPE_ERROR</code></td>\n    <td>Distribution type should be redemption</td>\n  </tr><tr>\n    <td><code>400</code></td>\n    <td><code>EVERGREEN_START_CSV_VALIDATION_STATUS_ERROR</code></td>\n    <td>Distribution status should be waiting redemptions</td>\n  </tr><tr>\n    <td><code>400</code></td>\n    <td><code>DISTRIBUTION_CSV_VALIDATION_EMPTY</code></td>\n    <td>Csv file should not be empty</td>\n  </tr><tr>\n    <td><code>400</code></td>\n    <td><code>DISTRIBUTION_CSV_VALIDATION_CAN_NOT_REMOVE_ALL</code></td>\n    <td>Cannot remove all holders of a distribution.</td>\n  </tr><tr>\n    <td><code>400</code></td>\n    <td><code>AWS_FILE_NOT_FOUND</code></td>\n    <td>Uploaded file was not found</td>\n  </tr><tr>\n    <td><code>404</code></td>\n    <td><code>DISTRIBUTION_NOT_FOUND</code></td>\n    <td>Distribution Id not found</td>\n  </tr><tr>\n    <td><code>404</code></td>\n    <td><code>INVESTOR_CP_ID_NOT_FOUND</code></td>\n    <td>Investor ControlPanelId not found</td>\n  </tr><tr>\n    <td><code>500</code></td>\n    <td><code>DISTRIBUTION_START_CSV_VALIDATION_ERROR</code></td>\n    <td>Internal server error at start csv validation process</td>\n  </tr><tr>\n    <td><code>500</code></td>\n    <td><code>DISTRIBUTION_CSV_VALIDATION_INVALID_TOKENS_NUMBER</code></td>\n    <td>Tokens must be a valid number</td>\n  </tr><tr>\n    <td><code>500</code></td>\n    <td><code>DISTRIBUTION_CSV_VALIDATION_INVALID_CONTROL_PANEL_ID</code></td>\n    <td>Tokens must be a control panel id</td>\n  </tr><tr>\n    <td><code>500</code></td>\n    <td><code>DISTRIBUTION_CSV_VALIDATION_INVALID_TOKENS_AMOUNT</code></td>\n    <td>Sum of give back and redeem tokens must be equal than investor holding tokens</td>\n  </tr><tr>\n    <td><code>500</code></td>\n    <td><code>DISTRIBUTION_CSV_VALIDATION_INVALID_PAYOUT_METHOD</code></td>\n    <td>Payout method is invalid</td>\n  </tr><tr>\n    <td><code>500</code></td>\n    <td><code>DISTRIBUTION_CSV_VALIDATION_INVALID_CP_ID</code></td>\n    <td>Control panel profile ID should be a valid integer</td>\n  </tr><tr>\n    <td><code>500</code></td>\n    <td><code>DISTRIBUTION_CSV_VALIDATION_SAVE_ERROR</code></td>\n    <td>Error at saving distribution updated by csv. Data could be corrupted.</td>\n  </tr><tr>\n    <td><code>500</code></td>\n    <td><code>AWS_UPLOAD_ERROR</code></td>\n    <td>AWS_UPLOAD_ERROR</td>\n  </tr><tr>\n    <td><code>500</code></td>\n    <td><code>AWS_PRESIGNED_GET_ERROR</code></td>\n    <td>AWS_PRESIGNED_GET_ERROR</td>\n  </tr><tr>\n    <td><code>500</code></td>\n    <td><code>CSV_MAKEBUFFER_ERROR</code></td>\n    <td>CSV_MAKEBUFFER_ERROR</td>\n  </tr>\n      </tbody>\n    </table>\n  </div>\n</details>",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "DistributionLimitationDto": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "redemption-general-percentage",
+              "redemption-minimum-participation-amount"
+            ],
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "value"
+        ]
+      },
+      "CreateDistributionPayloadDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "issuerSecId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "snapshotId": {
+            "type": "number"
+          },
+          "distributionType": {
+            "enum": [
+              "accrued-dividend",
+              "dividend",
+              "redemption",
+              "redemption-tbe",
+              "redemption-evergreen",
+              "interest",
+              "buy-back",
+              "rescission",
+              "other"
+            ],
+            "type": "string"
+          },
+          "distributionModel": {
+            "enum": [
+              "total-amount",
+              "amount-per-token"
+            ],
+            "type": "string"
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 1e-8
+          },
+          "withholdTaxes": {
+            "type": "boolean",
+            "default": true
+          },
+          "startDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "endDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DistributionLimitationDto"
+            }
+          },
+          "swapEnabled": {
+            "type": "boolean",
+            "default": false
+          },
+          "swapContractAddress": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "issuerId",
+          "tokenId",
+          "distributionType",
+          "distributionModel",
+          "amount"
+        ]
+      },
+      "DistributionLimitationResponseDto": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "redemption-general-percentage",
+              "redemption-minimum-participation-amount"
+            ]
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "value"
+        ]
+      },
+      "DistributionDataResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "123"
+          },
+          "name": {
+            "type": "string",
+            "example": "Distribution1"
+          },
+          "issuerId": {
+            "type": "string",
+            "example": "issuer1"
+          },
+          "issuerSecId": {
+            "type": "string",
+            "example": "sec1"
+          },
+          "snapshotId": {
+            "type": "number",
+            "example": 1
+          },
+          "issuerName": {
+            "type": "string",
+            "example": "Issuer Name"
+          },
+          "tokenId": {
+            "type": "string",
+            "example": "token1"
+          },
+          "tokenName": {
+            "type": "string",
+            "example": "Token Name"
+          },
+          "tokenIconUrl": {
+            "type": "string",
+            "example": "http://example.com/icon.png"
+          },
+          "tokenTicker": {
+            "type": "string",
+            "example": "TTK"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2022-01-01T00:00:00Z"
+          },
+          "totalItems": {
+            "type": "number",
+            "example": 100
+          },
+          "amount": {
+            "type": "number",
+            "example": 1000,
+            "description": "Amount per token"
+          },
+          "amountToDistribute": {
+            "type": "string",
+            "example": "1000",
+            "description": "Total gross amount with CA payout method"
+          },
+          "totalAmount": {
+            "type": "string",
+            "example": "10000",
+            "description": "Total net amount including all payout methods"
+          },
+          "tokensToBeIssued": {
+            "type": "string",
+            "example": "5000"
+          },
+          "netCashAmountToPay": {
+            "type": "string",
+            "example": "5000",
+            "description": "Total net amount without reinvest payout method"
+          },
+          "grossCashAmountToPay": {
+            "type": "string",
+            "example": "5000",
+            "description": "Total gross amount without reinvest payout method"
+          },
+          "issuedTokens": {
+            "type": "string",
+            "example": "5000"
+          },
+          "type": {
+            "enum": [
+              "accrued-dividend",
+              "dividend",
+              "redemption",
+              "redemption-tbe",
+              "redemption-evergreen",
+              "interest",
+              "buy-back",
+              "rescission",
+              "other"
+            ],
+            "type": "string",
+            "example": "dividend"
+          },
+          "model": {
+            "enum": [
+              "total-amount",
+              "amount-per-token"
+            ],
+            "type": "string",
+            "example": "amount-per-token"
+          },
+          "status": {
+            "enum": [
+              "pending",
+              "populated",
+              "processing",
+              "completed",
+              "errored",
+              "waiting-investor-redemptions"
+            ],
+            "type": "string",
+            "example": "processing"
+          },
+          "payedHolders": {
+            "type": "number",
+            "example": 10
+          },
+          "startDate": {
+            "type": "string",
+            "example": "2022-01-01T00:00:00Z"
+          },
+          "endDate": {
+            "type": "string",
+            "example": "2022-12-31T23:59:59Z"
+          },
+          "confirmationDate": {
+            "type": "string",
+            "example": "2022-01-01T00:00:00Z"
+          },
+          "waitingUpdates": {
+            "type": "boolean",
+            "example": true
+          },
+          "withholdTaxes": {
+            "type": "boolean",
+            "example": true
+          },
+          "tokensToRedeem": {
+            "type": "string",
+            "example": "1000"
+          },
+          "limitationTokens": {
+            "type": "string",
+            "example": "1000"
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DistributionLimitationResponseDto"
+            }
+          },
+          "isStopped": {
+            "type": "boolean",
+            "example": false
+          },
+          "hasCashAccount": {
+            "type": "boolean",
+            "example": true
+          },
+          "redemptionWallet": {
+            "type": "object",
+            "properties": {
+              "address": {
+                "required": true,
+                "type": "string"
+              },
+              "provider": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "swapEnabled": {
+            "type": "boolean",
+            "example": true
+          },
+          "swapContractAddress": {
+            "type": "string",
+            "example": "0x123"
+          },
+          "canConfirm": {
+            "type": "boolean"
+          },
+          "navPrice": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "issuerId",
+          "issuerSecId",
+          "snapshotId",
+          "issuerName",
+          "tokenId",
+          "tokenName",
+          "tokenIconUrl",
+          "tokenTicker",
+          "created_at",
+          "totalItems",
+          "amount",
+          "amountToDistribute",
+          "totalAmount",
+          "tokensToBeIssued",
+          "netCashAmountToPay",
+          "grossCashAmountToPay",
+          "issuedTokens",
+          "type",
+          "model",
+          "status",
+          "payedHolders",
+          "redemptionWallet",
+          "canConfirm"
+        ]
+      },
+      "SwaggerExceptionSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Error code",
+            "example": "NOT_FOUND"
+          },
+          "message": {
+            "type": "string",
+            "description": "Error detail",
+            "example": "The item was not found"
+          },
+          "httpStatus": {
+            "type": "number",
+            "description": "HTTP status code",
+            "example": 404
+          }
+        },
+        "required": [
+          "name",
+          "message",
+          "httpStatus"
+        ]
+      },
+      "EditDistributionPayloadDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "DistributionDataListResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DistributionDataResponseDto"
+            }
+          },
+          "totalItems": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "data",
+          "totalItems"
+        ]
+      },
+      "InvestorTaxFormInfoDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "W-9",
+              "W-8BEN",
+              "W-8BENE",
+              "1042-S",
+              "1099-B",
+              "1099-DIV",
+              "1099-INT",
+              "1099-K",
+              "1099-MISC"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "valid",
+              "invalid",
+              "pending",
+              "expired"
+            ]
+          },
+          "imported": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "status",
+          "imported"
+        ]
+      },
+      "DistributionInvestorDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "tokens": {
+            "type": "string"
+          },
+          "snapshotTokens": {
+            "type": "string"
+          },
+          "withholdingRate": {
+            "type": "string"
+          },
+          "payoutAmount": {
+            "type": "string"
+          },
+          "tax-forms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InvestorTaxFormInfoDto"
+            }
+          },
+          "payout-method": {
+            "enum": [
+              "crypto",
+              "bank-transfer",
+              "treasury",
+              "escrow",
+              "check",
+              "digital-asset",
+              "cash-account",
+              "reinvest",
+              "other"
+            ],
+            "type": "string"
+          },
+          "controlPanelProfileId": {
+            "type": "number"
+          },
+          "securitizeIdProfileId": {
+            "type": "string"
+          },
+          "kycStatus": {
+            "enum": [
+              "none",
+              "processing",
+              "updates-required",
+              "manual-review",
+              "verified",
+              "rejected",
+              "expired"
+            ],
+            "type": "string"
+          },
+          "cashAccountStatus": {
+            "type": "string"
+          },
+          "paidStatus": {
+            "enum": [
+              "complete",
+              "pending",
+              "in-progress",
+              "rejected",
+              "errored"
+            ],
+            "type": "string"
+          },
+          "payoutAble": {
+            "enum": [
+              "able",
+              "unable"
+            ],
+            "type": "string"
+          },
+          "redemptionExpectedTokens": {
+            "type": "string"
+          },
+          "redemptionGiveBackTokens": {
+            "type": "string"
+          },
+          "transactionDate": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "email",
+          "tokens",
+          "snapshotTokens",
+          "withholdingRate",
+          "payoutAmount",
+          "tax-forms",
+          "payout-method",
+          "controlPanelProfileId",
+          "securitizeIdProfileId",
+          "kycStatus",
+          "cashAccountStatus",
+          "paidStatus",
+          "payoutAble",
+          "redemptionExpectedTokens",
+          "redemptionGiveBackTokens"
+        ]
+      },
+      "DistributionInvestorsResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DistributionInvestorDto"
+            }
+          },
+          "totalItems": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "data",
+          "totalItems"
+        ]
+      },
+      "IssuerInfoResponseDto": {
+        "type": "object",
+        "properties": {
+          "issuerId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "issuerSecId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "issuerId",
+          "name",
+          "issuerSecId"
+        ]
+      },
+      "DistributionInvestorsPatchPayloadDto": {
+        "type": "object",
+        "properties": {
+          "payoutMethod": {
+            "enum": [
+              "crypto",
+              "bank-transfer",
+              "treasury",
+              "escrow",
+              "check",
+              "digital-asset",
+              "cash-account",
+              "reinvest",
+              "other"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "payoutMethod"
+        ]
+      },
+      "DistributionTransactionDto": {
+        "type": "object",
+        "properties": {
+          "transactionId": {
+            "type": "number"
+          },
+          "transactionType": {
+            "type": "string",
+            "enum": [
+              "issuance",
+              "reallocation",
+              "transfer-ok",
+              "transfer-rejected",
+              "reclaim",
+              "destroy",
+              "freeze",
+              "unfreeze",
+              "redemption"
+            ]
+          },
+          "transactionDate": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "transactionId",
+          "transactionType",
+          "transactionDate"
+        ]
+      },
+      "DistributionInvestorTransactionsDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "tokens": {
+            "type": "string"
+          },
+          "snapshotTokens": {
+            "type": "string"
+          },
+          "withholdingRate": {
+            "type": "string"
+          },
+          "payoutAmount": {
+            "type": "string"
+          },
+          "tax-forms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InvestorTaxFormInfoDto"
+            }
+          },
+          "payout-method": {
+            "enum": [
+              "crypto",
+              "bank-transfer",
+              "treasury",
+              "escrow",
+              "check",
+              "digital-asset",
+              "cash-account",
+              "reinvest",
+              "other"
+            ],
+            "type": "string"
+          },
+          "controlPanelProfileId": {
+            "type": "number"
+          },
+          "securitizeIdProfileId": {
+            "type": "string"
+          },
+          "kycStatus": {
+            "enum": [
+              "none",
+              "processing",
+              "updates-required",
+              "manual-review",
+              "verified",
+              "rejected",
+              "expired"
+            ],
+            "type": "string"
+          },
+          "cashAccountStatus": {
+            "type": "string"
+          },
+          "paidStatus": {
+            "enum": [
+              "complete",
+              "pending",
+              "in-progress",
+              "rejected",
+              "errored"
+            ],
+            "type": "string"
+          },
+          "payoutAble": {
+            "enum": [
+              "able",
+              "unable"
+            ],
+            "type": "string"
+          },
+          "redemptionExpectedTokens": {
+            "type": "string"
+          },
+          "redemptionGiveBackTokens": {
+            "type": "string"
+          },
+          "transactionDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "transactions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DistributionTransactionDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "email",
+          "tokens",
+          "snapshotTokens",
+          "withholdingRate",
+          "payoutAmount",
+          "tax-forms",
+          "payout-method",
+          "controlPanelProfileId",
+          "securitizeIdProfileId",
+          "kycStatus",
+          "cashAccountStatus",
+          "paidStatus",
+          "payoutAble",
+          "redemptionExpectedTokens",
+          "redemptionGiveBackTokens",
+          "transactions"
+        ]
+      },
+      "DistributionInvestorHistoryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "distributionId": {
+            "type": "string"
+          },
+          "distributionType": {
+            "type": "string",
+            "enum": [
+              "accrued-dividend",
+              "dividend",
+              "redemption",
+              "redemption-tbe",
+              "redemption-evergreen",
+              "interest",
+              "buy-back",
+              "rescission",
+              "other"
+            ]
+          },
+          "tokenName": {
+            "type": "string"
+          },
+          "tokensAmount": {
+            "type": "string"
+          },
+          "payoutAmountWithoutTaxes": {
+            "type": "string"
+          },
+          "taxesAmount": {
+            "type": "string"
+          },
+          "withholdingRate": {
+            "type": "string"
+          },
+          "payoutAmount": {
+            "type": "string"
+          },
+          "paidStatus": {
+            "type": "string",
+            "enum": [
+              "complete",
+              "pending",
+              "in-progress",
+              "rejected",
+              "errored"
+            ]
+          },
+          "payoutAble": {
+            "type": "string",
+            "enum": [
+              "able",
+              "unable"
+            ]
+          },
+          "kycStatus": {
+            "type": "string",
+            "enum": [
+              "none",
+              "processing",
+              "updates-required",
+              "manual-review",
+              "verified",
+              "rejected",
+              "expired"
+            ]
+          },
+          "cashAccountStatus": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "CREATED",
+              "PENDING",
+              "CLOSED",
+              "FROZEN"
+            ]
+          },
+          "paymentPreferenceType": {
+            "type": "string",
+            "enum": [
+              "crypto",
+              "bank-transfer",
+              "treasury",
+              "escrow",
+              "check",
+              "digital-asset",
+              "cash-account",
+              "reinvest",
+              "other"
+            ]
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "confirmationDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "payoutDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "payoutMethod": {
+            "type": "string",
+            "enum": [
+              "crypto",
+              "bank-transfer",
+              "treasury",
+              "escrow",
+              "check",
+              "digital-asset",
+              "cash-account",
+              "reinvest",
+              "other"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "distributionId",
+          "distributionType",
+          "tokenName",
+          "tokensAmount",
+          "payoutAmountWithoutTaxes",
+          "taxesAmount",
+          "withholdingRate",
+          "payoutAmount",
+          "paidStatus",
+          "payoutAble",
+          "kycStatus",
+          "cashAccountStatus",
+          "paymentPreferenceType",
+          "createdAt",
+          "updatedAt",
+          "confirmationDate",
+          "payoutDate",
+          "payoutMethod"
+        ]
+      },
+      "DistributionInvestorHistoryResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DistributionInvestorHistoryDto"
+            }
+          },
+          "totalItems": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "data",
+          "totalItems"
+        ]
+      },
+      "DistributionCalendarDataResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "countryCode": {
+            "type": "string"
+          },
+          "global": {
+            "type": "boolean"
+          },
+          "counties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "deletedAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "date",
+          "countryCode",
+          "global"
+        ]
+      },
+      "DistributionDownloadResponseDto": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      },
+      "DistributionUploadCsvPayloadDto": {
+        "type": "object",
+        "properties": {
+          "fileKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "fileKey"
+        ]
+      },
+      "PresignedPostDto": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "object"
+          },
+          "fileKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url",
+          "fields",
+          "fileKey"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+    "skips": {
+        "entireTest": true,
+        "skipReason": "TEST TEST",
+        "statusCodeCheck": false,
+        "bodySchemaCheck": false,
+        "bodyContentCheck": false
+    },
+    "pathParams":
+    {
+        "guid": "#334234#"
+    },
+    "expectedResponse": {
+        "statusCode": 200
+    }
+}

@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="TA_payouts_api_gw" verbose="10" parallel="methods" thread-count="10">
+    <test name="TA_payouts_api_gw">
+        <packages>
+            <package name="io.securitize.tests.apiTests.cicd.TA.TA_PayoutsApiGw.*" />
+        </packages>
+    </test>
+</suite>

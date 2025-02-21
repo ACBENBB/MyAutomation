@@ -1,0 +1,20 @@
+{
+ "headers": {
+    "authorization": "#SID_AUTHORIZATION#",
+    "cookie": "#SID_COOKIE#"
+  },
+  "body": {
+    "redirectUrl": "#SID_REDIRECT_URL#",
+    "issuerId": "#ISSUER_ID#",
+    "permissions": "#SID_PERMISSIONS#"
+  },
+  "skips": {
+    "bodySchemaCheck": true,
+    "skipReason": "Body schema was skipped due to lack of schema (model instead of schema)"
+  },
+  "expectedResponse": {
+    "statusCode": 200
+  },
+  "rc": {},
+  "sandbox": {}
+}

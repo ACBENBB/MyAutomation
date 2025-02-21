@@ -1,0 +1,7 @@
+<suite name="AUT116_ST_Pier_PartialMatch_CancelOrder" verbose="1">
+    <test name="AUT116_ST_Pier_PartialMatch_CancelOrder">
+        <classes>
+            <class name="io.securitize.tests.blockchain.AUT116_ST_Pier_PartialMatch_CancelOrder" />
+        </classes>
+    </test>
+</suite>

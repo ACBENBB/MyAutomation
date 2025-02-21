@@ -1,0 +1,7 @@
+<suite name="AUT526_CA_Site_Navigation_GoBack_Arrow" verbose="1">
+    <test name="AUT526_CA_Site_Navigation_GoBack_Arrow">
+        <classes>
+            <class name="io.securitize.tests.ca.AUT526_CA_Site_Navigation_GoBack_Arrow" />
+        </classes>
+    </test>
+</suite>

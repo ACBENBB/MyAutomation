@@ -1,0 +1,11 @@
+{
+  "skips": {
+    "entireTest": false
+  },
+  "sandbox": {
+    "pathParams": {
+      "userId": "268172",
+      "documentId": "241980-f"
+    }
+  }
+}

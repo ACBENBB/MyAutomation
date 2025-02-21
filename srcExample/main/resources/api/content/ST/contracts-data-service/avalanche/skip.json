@@ -1,0 +1,42 @@
+[
+  {
+    "rc": [
+      "getHealthCheck",
+      "allowance",
+      "balanceOf",
+      "getActiveComplianceCounters",
+      "getActiveComplianceRules",
+      "getAttribute",
+      "getCountryStatus",
+      "getEvents",
+      "getHolderByWallet",
+      "getHolder",
+      "getInvestorLocked",
+      "getLocks",
+      "getRoleForWallet",
+      "getTokenDescription",
+      "getTransactionInformation",
+      "getTransactions",
+      "totalSupply"
+    ],
+    "sandbox": [
+      "getHealthCheck",
+      "allowance",
+      "balanceOf",
+      "getActiveComplianceCounters",
+      "getActiveComplianceRules",
+      "getAttribute",
+      "getCountryStatus",
+      "getEvents",
+      "getHolderByWallet",
+      "getHolder",
+      "getInvestorLocked",
+      "getLocks",
+      "getRoleForWallet",
+      "getTokenDescription",
+      "getTransactionInformation",
+      "getTransactions",
+      "totalSupply"
+    ]
+  }
+]

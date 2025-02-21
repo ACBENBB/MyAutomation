@@ -1,0 +1,7 @@
+<suite name="AUT175_SID_Adding_Wallet_Via_CP" verbose="1">
+    <test name="AUT175_SID_Adding_Wallet_Via_CP">
+        <classes>
+            <class name="io.securitize.tests.securitizeId.AUT175_SID_Adding_Wallet_Via_ControlPanel" />
+        </classes>
+    </test>
+</suite>

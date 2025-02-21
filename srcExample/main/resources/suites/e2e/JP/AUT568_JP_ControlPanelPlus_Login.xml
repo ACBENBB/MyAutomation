@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT568_JP_ControlPanelPlus_Login" verbose="1">
+    <test name="AUT568_JP_ControlPanelPlus_Login">
+        <classes>
+            <class name="io.securitize.tests.jp.AUT568_JP_ControlPanelPlus_Login" />
+        </classes>
+    </test>
+</suite>

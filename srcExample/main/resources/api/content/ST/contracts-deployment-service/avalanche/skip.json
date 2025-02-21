@@ -1,0 +1,12 @@
+[
+  {
+    "rc": [
+
+    ],
+    "sandbox": [
+      "getInfo",
+      "getDeployerWallet",
+      "getCheckHealth"
+    ]
+  }
+]

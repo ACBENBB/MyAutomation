@@ -1,0 +1,7 @@
+<suite name="AUT501_SID_Redirect_SecuritizeID_KYC_Stepper_To_NIE_Dashboard" verbose="1">
+    <test name="AUT501_SID_Redirect_SecuritizeID_KYC_Stepper_To_NIE_Dashboard">
+        <classes>
+            <class name="io.securitize.tests.securitizeId.AUT501_SID_Redirect_SecuritizeID_KYC_Stepper_To_NIE_Dashboard" />
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,20 @@
+{
+  "pathParams": {
+    "clientId": "#ISSUER_ID#"
+  },
+  "headers": {
+    "authorization": "#SID_ISSUER_SECRET#"
+  },
+  "body": {
+    "code": "#SID_CODE#"
+  },
+  "skips": {
+    "bodySchemaCheck": true,
+    "skipReason": "Body schema was skipped due to lack of schema (model instead of schema)"
+  },
+  "expectedResponse": {
+    "statusCode": 200
+  },
+  "rc": {},
+  "sandbox": {}
+}

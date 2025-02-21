@@ -1,0 +1,10 @@
+{
+  "skips": {
+    "entireTest": false
+  },
+  "sandbox": {
+    "pathParams": {
+      "currentOperatorId": "c7b0592c-0dd7-11ec-a442-02de39af0dc4"
+    }
+  }
+}

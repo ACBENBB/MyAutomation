@@ -1,0 +1,674 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "DEFI Transactions Service API",
+    "description": "",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "UserDto": {
+        "type": "object",
+        "properties": {
+          "securitizeId": {
+            "type": "string",
+            "description": "Issuer identifier",
+            "example": "602d717074041c001ae0fdc8"
+          }
+        },
+        "required": [
+          "securitizeId"
+        ]
+      },
+      "PreparedTransactionDto": {
+        "type": "object",
+        "properties": {
+          "preparedTransaction": {
+            "type": "string",
+            "description": "Prepared transaction hash",
+            "example": "0xf86c258502540be40083035b609482e041e84074fc5f5947d4d27e3c44f824b7a1a187b1a2bc2ec500008078a04a7db627266fa9a4116e3f6b33f5d245db40983234eb356261f36808909d2848a0166fa098a2ce3bda87af6000ed0083e3bf7cc31c6686b670bd85cbc6da2d6e85"
+          }
+        },
+        "required": [
+          "preparedTransaction"
+        ]
+      },
+      "BorrowingDto": {
+        "type": "object",
+        "properties": {
+          "securitizeId": {
+            "type": "string",
+            "description": "Issuer identifier",
+            "example": "602d717074041c001ae0fdc8"
+          },
+          "loanBookAddress": {
+            "type": "string",
+            "description": "Loan book address",
+            "example": "0x0b2e7e0e9492Cc5c5090c50d2Db94c1c5c6accC1"
+          },
+          "borrower": {
+            "type": "string",
+            "description": "Borrower address",
+            "example": "0x40e4DC61fa15C3982b2f1ed0d7e826b7AD2A6d80"
+          },
+          "loanId": {
+            "type": "string",
+            "description": "The loanId",
+            "example": "0xe7b0b95628d268217ec3b6570aeeea63c2fe5225222e9015d22b1e6e0b36c3e9"
+          },
+          "legalContractHash": {
+            "type": "string",
+            "description": "Hash of accepted contract file",
+            "example": "0x6668c29f92a40c4193693ce2078f89a03172e4d7b00dcc02798e9d04ae8b4666"
+          },
+          "amount": {
+            "type": "string",
+            "description": "Amount to be borrowed",
+            "example": "100"
+          }
+        },
+        "required": [
+          "securitizeId",
+          "loanBookAddress",
+          "borrower",
+          "loanId",
+          "legalContractHash",
+          "amount"
+        ]
+      },
+      "MatchRequestBodyDto": {
+        "type": "object",
+        "properties": {
+          "stableCoinAddress": {
+            "type": "string",
+            "description": "Stable coin address selected to buy the DSToken",
+            "example": "0x6d5f628e43E0697Bd3259fA2756a9bE8d992fAcE"
+          },
+          "buyerSecuritizeId": {
+            "type": "string",
+            "description": "Buyer securitizeId",
+            "example": "6352c661f1babb0013a12609"
+          },
+          "sellerAddress": {
+            "type": "string",
+            "description": "Address of the investor who sells DSToken",
+            "example": "0x4baD557BE00259b27B3a31B28F91319EC92A9E45"
+          },
+          "buyerAddress": {
+            "type": "string",
+            "description": "Address of the investor who buys DSToken using stable-coins to pay",
+            "example": "0x53C324c433276E7be64Ea3b05A1cD6d5ba93462B"
+          },
+          "stableCoinAmount": {
+            "type": "string",
+            "description": "Amount of stable coins without decimals",
+            "example": "10000000"
+          },
+          "dsTokenAmount": {
+            "type": "string",
+            "description": "Amount of DSToken without decimals",
+            "example": "150000"
+          },
+          "buyerFee": {
+            "type": "string",
+            "description": "Fee for buyer without decimals",
+            "example": "250000"
+          },
+          "sellerFee": {
+            "type": "string",
+            "description": "Fee for seller without decimals",
+            "example": "200000"
+          }
+        },
+        "required": [
+          "stableCoinAddress",
+          "buyerSecuritizeId",
+          "sellerAddress",
+          "buyerAddress",
+          "stableCoinAmount",
+          "dsTokenAmount",
+          "buyerFee",
+          "sellerFee"
+        ]
+      },
+      "TransactionHashDto": {
+        "type": "object",
+        "properties": {
+          "transactionHash": {
+            "type": "string",
+            "description": "Transaction hash",
+            "example": "0xefa310f8157950d8e80588cee1db5dd50781bc095397ed326d723c42af1a9f13"
+          }
+        },
+        "required": [
+          "transactionHash"
+        ]
+      },
+      "MatchHandlerResponseDto": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "Address of MatchHandler contract",
+            "example": "0x4f2D48edc62A51B13256Bd3E73B6cAE0149c8b10"
+          }
+        },
+        "required": [
+          "address"
+        ]
+      },
+      "EventBodyDto": {
+        "type": "object",
+        "properties": {
+          "tokenId": {
+            "type": "string",
+            "description": "Token ID",
+            "example": "4ffe85ba-cc99-4235-93c1-f3d3b870aaf7"
+          },
+          "matchId": {
+            "type": "string",
+            "description": "Match ID",
+            "example": "4ffe85ba-cc99-4235-93c1-f3d3b870aaf7"
+          },
+          "sellerInvestorId": {
+            "type": "number",
+            "description": "Investor Id of user selling"
+          },
+          "buyerInvestorId": {
+            "type": "number",
+            "description": "Investor Id of user buying"
+          },
+          "tokenAmount": {
+            "type": "string",
+            "description": "Amount of tokens transacted",
+            "example": "150000"
+          }
+        },
+        "required": [
+          "tokenId",
+          "matchId",
+          "sellerInvestorId",
+          "buyerInvestorId",
+          "tokenAmount"
+        ]
+      },
+      "MatchEventResponseDto": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "Address of MatchEvent contract",
+            "example": "0x4f2D48edc62A51B13256Bd3E73B6cAE0149c8b10"
+          }
+        },
+        "required": [
+          "address"
+        ]
+      },
+      "PendingTransactionIdDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Transaction Id saved in web3-ats-match-service",
+            "example": "318e7369-aa30-4d86-a6e0-8411ef7297fc"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    }
+  },
+  "paths": {
+    "/api/v1/partners/{partnerId}/wallets/{walletAddress}/whitelist": {
+      "post": {
+        "operationId": "DefiTransactionsController_whitelist",
+        "parameters": [
+          {
+            "name": "partnerId",
+            "required": true,
+            "in": "path",
+            "description": "Partner identifier",
+            "example": "702d717074041c001ae0fdc9",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "walletAddress",
+            "required": true,
+            "in": "path",
+            "description": "Wallet to be registered",
+            "example": "0x7D088307B0ae7f810eA2AD692c0198Aa38e490f8",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreparedTransactionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DEFI Services"
+        ]
+      }
+    },
+    "/api/v1/partners/{partnerId}/borrow": {
+      "post": {
+        "operationId": "DefiTransactionsController_borrowLoan",
+        "parameters": [
+          {
+            "name": "partnerId",
+            "required": true,
+            "in": "path",
+            "description": "Partner identifier. Token Address",
+            "example": "0x73d42610068FABDfbFe4CB1f1E649eD8328Cca9b",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BorrowingDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreparedTransactionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DEFI Services"
+        ]
+      }
+    },
+    "/api/v1/deployments/{deploymentId}/match-order": {
+      "post": {
+        "operationId": "Web3AtsTransactionsController_matchOrder",
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "description": "Abstraction Layer Deployment ID",
+            "example": "6bee483e-49c4-4b43-aae8-30de6beb3ebd",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MatchRequestBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionHashDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Web3 ATS Services"
+        ]
+      }
+    },
+    "/api/v1/deployments/{deploymentId}/match-handler": {
+      "get": {
+        "operationId": "Web3AtsTransactionsController_getMatchHandlerContract",
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "description": "Abstraction Layer Deployment ID",
+            "example": "6bee483e-49c4-4b43-aae8-30de6beb3ebd",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MatchHandlerResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Web3 ATS Services"
+        ]
+      }
+    },
+    "/api/v1/deployments/{deploymentId}/events": {
+      "post": {
+        "operationId": "Web3AtsTransactionsController_emitEvent",
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "description": "Abstraction Layer Deployment ID",
+            "example": "6bee483e-49c4-4b43-aae8-30de6beb3ebd",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionHashDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Web3 ATS Services"
+        ]
+      }
+    },
+    "/api/v1/deployments/{deploymentId}/events/contract": {
+      "get": {
+        "operationId": "Web3AtsTransactionsController_getEventContract",
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "description": "Abstraction Layer Deployment ID",
+            "example": "6bee483e-49c4-4b43-aae8-30de6beb3ebd",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MatchEventResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Web3 ATS Services"
+        ]
+      }
+    },
+    "/api/v2/deployments/{deploymentId}/match-order": {
+      "post": {
+        "operationId": "Web3AtsTransactionsV2Controller_matchOrderV2",
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "required": true,
+            "in": "path",
+            "description": "Abstraction Layer Deployment ID",
+            "example": "6bee483e-49c4-4b43-aae8-30de6beb3ebd",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MatchRequestBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PendingTransactionIdDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Web3 ATS Services"
+        ]
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health Check"
+        ]
+      }
+    }
+  }
+}

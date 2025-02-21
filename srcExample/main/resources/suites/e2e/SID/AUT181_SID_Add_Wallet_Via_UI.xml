@@ -1,0 +1,7 @@
+<suite name="AUT181_SID_Add_Wallet_Via_UI" verbose="1">
+    <test name="AUT181_SID_Add_Wallet_Via_UI">
+        <classes>
+            <class name="io.securitize.tests.securitizeId.AUT181_SID_Add_Wallet_Via_UI" />
+        </classes>
+    </test>
+</suite>

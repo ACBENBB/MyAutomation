@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT68_SID_SumSub_Updates_Required" verbose="1">
+    <test name="AUT68_SID_SumSub_Updates_Required">
+        <classes>
+            <class name="io.securitize.tests.securitizeId.AUT68_SID_SumSub_Updates_Required" />
+        </classes>
+    </test>
+</suite>

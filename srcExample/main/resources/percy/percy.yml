@@ -1,0 +1,21 @@
+version: 2
+static:
+  baseUrl: /
+  files: "**/*.{html,htm}"
+  ignore: ""
+snapshot:
+  widths:
+    - 375
+    - 1280
+  minHeight: 1024
+  percyCSS: ""
+discovery:
+  allowedHostnames: []
+  networkIdleTimeout: 100
+  disableCache: false
+  authorization:
+    username: "USERNAME"
+    password: "PASSWORD"
+upload:
+  files: "**/*.{png,jpg,jpeg}"
+  ignore: ""

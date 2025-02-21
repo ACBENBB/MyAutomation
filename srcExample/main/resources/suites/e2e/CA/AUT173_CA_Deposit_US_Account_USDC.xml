@@ -1,0 +1,7 @@
+<suite name="AUT173_CA_Deposit_US_Account_USDC" verbose="1">
+    <test name="AUT173_CA_Deposit_US_Account_USDC">
+        <classes>
+            <class name="io.securitize.tests.ca.AUT173_CA_Deposit_US_Account_USDC" />
+        </classes>
+    </test>
+</suite>

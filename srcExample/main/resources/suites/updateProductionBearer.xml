@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="UpdateProductionBearer" verbose="1">
+    <test name="UpdateProductionBearer">
+        <classes>
+            <class name="io.securitize.scripts.AUT236_UpdateCpBearerProduction" />
+        </classes>
+    </test>
+</suite>

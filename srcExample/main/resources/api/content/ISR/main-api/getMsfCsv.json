@@ -1,0 +1,12 @@
+{
+  "pathParams":
+  {
+    "issuerId": "#ISSUER_ID#"
+  },
+  "skips": {
+    "entireTest": false,
+    "statusCodeCheck": false,
+    "bodySchemaCheck": true,
+    "bodyContentCheck": true
+  }
+}

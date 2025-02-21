@@ -1,0 +1,16 @@
+{
+  "pathParams": {
+    "issuerId": "aad37943-4e47-4829-ae1b-a1e5e15e9cd2",
+    "userId": "465206",
+    "legalSignerId": "63d7a09a37a34cd5b5f372ed",
+    "legalSignerDocumentId": "63d7a09a37a34cd5b5f372ef"
+  },
+  "sandbox": {
+    "pathParams": {
+      "issuerId": "b038cd1f-91bc-44f1-ae84-c1051710d698",
+      "userId": "495905",
+      "legalSignerId": "63cec0a2a14d4c3bd263ec4c",
+      "legalSignerDocumentId": "63cec0a2a14d4c3bd263ec4e"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "skips": {
+    "entireTest": false,
+    "skipReason": "",
+    "statusCodeCheck": false,
+    "bodySchemaCheck": true,
+    "bodyContentCheck": true
+  },
+  "pathParams": {
+    "address": "ASB3YILTQJ6K6JHIHDFLMAJFJ6SXO76LIXO35HFV65BYCLVPZNTHHMYRNA"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "skips": {
+    "entireTest": false,
+    "skipReason": "TEST TEST",
+    "statusCodeCheck": false,
+    "bodySchemaCheck": true,
+    "bodyContentCheck": false
+  },
+  "rc": {
+    "pathParams": {
+      "taxFormId": "59dc6ef5-5222-48df-b1b7-488046b56bc0"
+    }
+  },
+  "sandbox": {
+    "pathParams": {
+      "taxFormId": "991fa755-e930-4bcd-8282-a06951e28fa5"
+    }
+  },
+  "expectedResponse": {
+    "statusCode": 200
+  }
+}

@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT675_IOS_TotalTests" verbose="1" parallel="classes" thread-count="1" >
+    <test name="AUT675_IOS_TotalTests">
+        <packages>
+            <package name="io.securitize.tests.ios.*" />
+        </packages>
+    </test>
+</suite>

@@ -1,0 +1,14 @@
+{
+  "skips": {
+    "entireTest": false,
+    "skipReason": "TEST TEST",
+    "statusCodeCheck": false,
+    "bodySchemaCheck": false,
+    "bodyContentCheck": false
+  },
+  "pathParams":
+  {
+    "opportunityId": "#OPPORTUNITY_ID#",
+    "documentId": "100"
+  }
+}

@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT680_FT_SpiceVC_CustomDomain_Login_production" verbose="1">
+    <test name="AUT680_FT_SpiceVC_CustomDomain_Login_production">
+        <classes>
+            <class name="io.securitize.tests.fundraise.AUT680_FT_SpiceVC_CustomDomain_Login_production">
+            </class>
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,12 @@
+{
+  "pathParams":
+  {
+    "issuerId": "#ISSUER_ID#",
+    "affiliateId": "191"
+  },
+  "sandbox": {
+    "pathParams": {
+      "affiliateId": "13"
+    }
+  }
+}

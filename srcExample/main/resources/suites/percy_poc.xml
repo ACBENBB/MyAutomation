@@ -1,0 +1,7 @@
+<suite name="securitize sanity Suite" verbose="1">
+    <test name="Percy POC">
+        <classes>
+            <class name="io.securitize.tests.AUT99_PercyPOC" />
+        </classes>
+    </test>
+</suite>

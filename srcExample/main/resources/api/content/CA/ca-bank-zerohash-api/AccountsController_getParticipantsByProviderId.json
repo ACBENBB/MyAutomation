@@ -1,0 +1,18 @@
+{
+  "rc": {
+    "headers": {
+      "x-api-key": "#CA_BANK_ZEROHASH_X_API_KEY#"
+    },
+    "pathParams": {
+      "providerId": "#CA_PROVIDER_ID#"
+    }
+  },
+  "sandbox": {
+    "headers": {
+      "x-api-key": "#CA_BANK_ZEROHASH_X_API_KEY#"
+    },
+    "pathParams": {
+      "providerId": "#CA_PROVIDER_ID#"
+    }
+  }
+}

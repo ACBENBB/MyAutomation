@@ -1,0 +1,5 @@
+{
+  "pathParams" : {
+    "tokenId" : "#TOKEN_ID#"
+  }
+}

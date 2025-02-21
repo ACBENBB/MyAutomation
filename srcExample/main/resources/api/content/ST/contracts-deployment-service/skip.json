@@ -1,0 +1,6 @@
+[
+  "getCheckHealth",
+  "getDeploymentInfoByTokenAddress",
+  "getDeployments",
+  "getMultisigDeploymentInfo"
+]

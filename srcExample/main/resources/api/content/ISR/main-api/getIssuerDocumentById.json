@@ -1,0 +1,15 @@
+{
+  "skips": {
+    "entireTest": false
+  },
+  "pathParams":
+  {
+    "issuerId": "#ISSUER_ID#",
+    "issuerDocumentId": "100166"
+  },
+  "sandbox": {
+    "pathParams": {
+      "issuerDocumentId": "200299"
+    }
+  }
+}

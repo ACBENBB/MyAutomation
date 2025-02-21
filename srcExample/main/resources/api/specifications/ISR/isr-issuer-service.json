@@ -1,0 +1,2040 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/v1/tokens": {
+      "get": {
+        "operationId": "TokensController_getTokens",
+        "parameters": [
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {}
+            }
+          },
+          {
+            "name": "issuerId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {}
+            }
+          },
+          {
+            "name": "deploymentId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {}
+            }
+          },
+          {
+            "name": "orderDirection",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": null,
+              "enum": [
+                "ASC",
+                "DESC"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderField",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": null,
+              "enum": [
+                "createdAt"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "includes",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "issuer",
+                  "defaultTokenValue"
+                ]
+              }
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "default": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "default": 50,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Tokens By Filters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTokensResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tokens"
+        ]
+      }
+    },
+    "/v1/tokens/{id}": {
+      "get": {
+        "operationId": "TokensController_getById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "includes",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "issuer",
+                  "defaultTokenValue"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Token By Id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityNotFoundException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tokens"
+        ]
+      }
+    },
+    "/v1/historical-token-values": {
+      "get": {
+        "operationId": "HistoricalTokenValuesController_getHistoricalTokenValues",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {}
+            }
+          },
+          {
+            "name": "tokenId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {}
+            }
+          },
+          {
+            "name": "orderDirection",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": null,
+              "enum": [
+                "ASC",
+                "DESC"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderField",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": null,
+              "enum": [
+                "createdAt",
+                "updatedAt",
+                "tokenValue",
+                "tokenValueDate",
+                "operatorName"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "default": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "default": 50,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Historical Token Values By Filters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetHistoricalTokenValuesResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Historical Token Values"
+        ]
+      },
+      "post": {
+        "operationId": "HistoricalTokenValuesController_createHistoricalTokenValue",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateHistoricalTokenValueBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create Historical Token Value",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoricalTokenValue"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateHistoricalTokenValueBadRequestDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Historical Token Values"
+        ]
+      }
+    },
+    "/v1/historical-token-values/{id}": {
+      "get": {
+        "operationId": "HistoricalTokenValuesController_getById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Historical Token Value",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoricalTokenValue"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityNotFoundException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Historical Token Values"
+        ]
+      },
+      "patch": {
+        "operationId": "HistoricalTokenValuesController_updateHistoricalTokenValue",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateHistoricalTokenValueBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update Historical Token Value",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoricalTokenValue"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityNotFoundException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Historical Token Values"
+        ]
+      },
+      "delete": {
+        "operationId": "HistoricalTokenValuesController_deleteHistoricalTokenValue",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteHistoricalTokenValueBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Delete Historical Token Value",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoricalTokenValue"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityNotFoundException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Historical Token Values"
+        ]
+      }
+    },
+    "/v1/issuer-labels": {
+      "post": {
+        "operationId": "LabelsController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLabelsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create label",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateLabelResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateLabelBadRequestDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityNotFoundException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Issuers Label"
+        ]
+      },
+      "get": {
+        "operationId": "LabelsController_findLabelsUniques",
+        "parameters": [
+          {
+            "name": "startsWith",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get unique labels array",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityNotFoundException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Issuers Label"
+        ]
+      }
+    },
+    "/v1/issuer-labels/{label}": {
+      "delete": {
+        "operationId": "LabelsController_remove",
+        "parameters": [
+          {
+            "name": "label",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted label",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteLabelResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Issuers Label"
+        ]
+      }
+    },
+    "/v1/issuers": {
+      "get": {
+        "operationId": "IssuersController_getIssuers",
+        "parameters": [
+          {
+            "name": "dashboardUrl",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderDirection",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": null,
+              "enum": [
+                "ASC",
+                "DESC"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderField",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": null,
+              "enum": [
+                "createdAt",
+                "updatedAt"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "labels",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {}
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "default": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "default": 50,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Issuers By Filters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Issuer"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Issuers"
+        ]
+      }
+    },
+    "/v1/issuers/{issuerId}/labels": {
+      "put": {
+        "operationId": "IssuersController_updateIssuerLabels",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateIssuerLabelsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update issuer labels",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomBadRequestException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityNotFoundException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Issuers"
+        ]
+      },
+      "get": {
+        "operationId": "IssuersController_getIssuerLabels",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get issuer labels",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomBadRequestException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityNotFoundException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Issuers"
+        ]
+      }
+    },
+    "/v1/issuers/{id}": {
+      "get": {
+        "operationId": "IssuersController_getById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "includes",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "tokens",
+                  "labels"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Issuer By Id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Issuer"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityNotFoundException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Issuers"
+        ]
+      }
+    },
+    "/v1/issuer-fundraise-documents": {
+      "post": {
+        "operationId": "FundraiseDocumentsController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFundraiseDocumentRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FundraiseDocument"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityNotFoundException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Issuer Documents"
+        ]
+      },
+      "get": {
+        "operationId": "FundraiseDocumentsController_getIssuerDocuments",
+        "parameters": [
+          {
+            "name": "issuerId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FundraiseDocument"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityNotFoundException"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Issuer Documents"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "ISR Issuer Service",
+    "description": "Service to interact with Issuer Issuers",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "Token": {
+        "type": "object",
+        "properties": {
+          "depositOptions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "wire-transfer-crypto",
+                "cash-account",
+                "ira",
+                "web3"
+              ]
+            }
+          },
+          "id": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "iconUrl": {
+            "type": "string"
+          },
+          "fundraiseEnabled": {
+            "type": "boolean"
+          },
+          "lifecycleEnabled": {
+            "type": "boolean"
+          },
+          "decimals": {
+            "type": "number"
+          },
+          "representDebt": {
+            "type": "boolean"
+          },
+          "debtValue": {
+            "type": "number"
+          },
+          "ethXpub": {
+            "type": "string"
+          },
+          "btcXpub": {
+            "type": "string"
+          },
+          "supportedCurrencies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "deploymentId": {
+            "type": "string"
+          },
+          "walletRegistrarAddress": {
+            "type": "string"
+          },
+          "walletRegistrarPk": {
+            "type": "string"
+          },
+          "tbeOmnibusWalletAddress": {
+            "type": "string"
+          },
+          "redemptionWalletAddress": {
+            "type": "string"
+          },
+          "isin": {
+            "type": "string"
+          },
+          "bankAccountId": {
+            "type": "number"
+          },
+          "showTbeWallet": {
+            "type": "boolean"
+          },
+          "isDripActive": {
+            "type": "boolean"
+          },
+          "evergreen": {
+            "type": "boolean"
+          },
+          "walletRegisterPaymentStrategy": {
+            "type": "string"
+          },
+          "investmentType": {
+            "type": "string"
+          },
+          "cashAccountIdentifier": {
+            "type": "string"
+          },
+          "investmentRegulationType": {
+            "type": "string"
+          },
+          "symbol": {
+            "type": "string"
+          },
+          "saftTokenId": {
+            "type": "string"
+          },
+          "saftForTokenId": {
+            "type": "string"
+          },
+          "issuer": {
+            "$ref": "#/components/schemas/Issuer"
+          }
+        },
+        "required": [
+          "depositOptions",
+          "id",
+          "createdAt",
+          "updatedAt",
+          "name",
+          "issuerId",
+          "iconUrl",
+          "fundraiseEnabled",
+          "lifecycleEnabled",
+          "decimals",
+          "representDebt",
+          "debtValue",
+          "ethXpub",
+          "btcXpub",
+          "supportedCurrencies",
+          "deploymentId",
+          "walletRegistrarAddress",
+          "walletRegistrarPk",
+          "bankAccountId",
+          "showTbeWallet",
+          "isDripActive",
+          "evergreen",
+          "walletRegisterPaymentStrategy",
+          "investmentType",
+          "cashAccountIdentifier",
+          "investmentRegulationType",
+          "symbol",
+          "saftTokenId",
+          "saftForTokenId",
+          "issuer"
+        ]
+      },
+      "Label": {
+        "type": "object",
+        "properties": {
+          "issuerId": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "issuerId",
+          "label"
+        ]
+      },
+      "FundraiseDocument": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "bucket": {
+            "type": "string"
+          },
+          "fileKey": {
+            "type": "string"
+          },
+          "order": {
+            "type": "number"
+          },
+          "size": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string"
+          },
+          "requireKyc": {
+            "type": "boolean"
+          },
+          "requireQualification": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "issuer": {
+            "$ref": "#/components/schemas/Issuer"
+          }
+        },
+        "required": [
+          "id",
+          "issuerId",
+          "name",
+          "bucket",
+          "fileKey",
+          "order",
+          "size",
+          "type",
+          "requireKyc",
+          "requireQualification",
+          "createdAt",
+          "updatedAt",
+          "issuer"
+        ]
+      },
+      "Issuer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "dashboardUrl": {
+            "type": "string"
+          },
+          "permissionServiceSecret": {
+            "type": "string"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "securitizeIdConsumerId": {
+            "type": "string"
+          },
+          "securitizeIdClientToken": {
+            "type": "string"
+          },
+          "isDemo": {
+            "type": "boolean"
+          },
+          "importOrigin": {
+            "enum": [
+              "manual",
+              "pst"
+            ],
+            "type": "string"
+          },
+          "beneficialOwnerName": {
+            "type": "string"
+          },
+          "beneficialOwnerSurname": {
+            "type": "string"
+          },
+          "beneficialOwnerDateOfBirth": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "leiCode": {
+            "type": "string"
+          },
+          "tokens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Token"
+            }
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Label"
+            }
+          },
+          "fundraiseDocuments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FundraiseDocument"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "name",
+          "dashboardUrl",
+          "permissionServiceSecret",
+          "isDeleted",
+          "securitizeIdConsumerId",
+          "securitizeIdClientToken",
+          "isDemo",
+          "importOrigin",
+          "beneficialOwnerName",
+          "beneficialOwnerSurname",
+          "beneficialOwnerDateOfBirth",
+          "tokens",
+          "labels",
+          "fundraiseDocuments"
+        ]
+      },
+      "TokenDto": {
+        "type": "object",
+        "properties": {
+          "depositOptions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "wire-transfer-crypto",
+                "cash-account",
+                "ira",
+                "web3"
+              ]
+            }
+          },
+          "fullIconUrl": {
+            "type": "string"
+          },
+          "defaultTokenValue": {
+            "type": "number"
+          },
+          "id": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "iconUrl": {
+            "type": "string"
+          },
+          "fundraiseEnabled": {
+            "type": "boolean"
+          },
+          "lifecycleEnabled": {
+            "type": "boolean"
+          },
+          "decimals": {
+            "type": "number"
+          },
+          "representDebt": {
+            "type": "boolean"
+          },
+          "debtValue": {
+            "type": "number"
+          },
+          "ethXpub": {
+            "type": "string"
+          },
+          "btcXpub": {
+            "type": "string"
+          },
+          "supportedCurrencies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "deploymentId": {
+            "type": "string"
+          },
+          "walletRegistrarAddress": {
+            "type": "string"
+          },
+          "walletRegistrarPk": {
+            "type": "string"
+          },
+          "tbeOmnibusWalletAddress": {
+            "type": "string"
+          },
+          "redemptionWalletAddress": {
+            "type": "string"
+          },
+          "isin": {
+            "type": "string"
+          },
+          "bankAccountId": {
+            "type": "number"
+          },
+          "showTbeWallet": {
+            "type": "boolean"
+          },
+          "isDripActive": {
+            "type": "boolean"
+          },
+          "evergreen": {
+            "type": "boolean"
+          },
+          "walletRegisterPaymentStrategy": {
+            "type": "string"
+          },
+          "investmentType": {
+            "type": "string"
+          },
+          "cashAccountIdentifier": {
+            "type": "string"
+          },
+          "investmentRegulationType": {
+            "type": "string"
+          },
+          "symbol": {
+            "type": "string"
+          },
+          "saftTokenId": {
+            "type": "string"
+          },
+          "saftForTokenId": {
+            "type": "string"
+          },
+          "issuer": {
+            "$ref": "#/components/schemas/Issuer"
+          }
+        },
+        "required": [
+          "depositOptions",
+          "fullIconUrl",
+          "id",
+          "createdAt",
+          "updatedAt",
+          "name",
+          "issuerId",
+          "iconUrl",
+          "fundraiseEnabled",
+          "lifecycleEnabled",
+          "decimals",
+          "representDebt",
+          "debtValue",
+          "ethXpub",
+          "btcXpub",
+          "supportedCurrencies",
+          "deploymentId",
+          "walletRegistrarAddress",
+          "walletRegistrarPk",
+          "bankAccountId",
+          "showTbeWallet",
+          "isDripActive",
+          "evergreen",
+          "walletRegisterPaymentStrategy",
+          "investmentType",
+          "cashAccountIdentifier",
+          "investmentRegulationType",
+          "symbol",
+          "saftTokenId",
+          "saftForTokenId",
+          "issuer"
+        ]
+      },
+      "GetTokensResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TokenDto"
+            }
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "total": {
+                "required": true,
+                "type": "number"
+              },
+              "offset": {
+                "required": false,
+                "type": "number"
+              },
+              "limit": {
+                "required": false,
+                "type": "number"
+              },
+              "length": {
+                "required": true,
+                "type": "number"
+              }
+            }
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ]
+      },
+      "EntityNotFoundException": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "default": 404
+          },
+          "error": {
+            "type": "string",
+            "default": "NOT_FOUND_ERROR"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "statusCode",
+          "error",
+          "message",
+          "data"
+        ]
+      },
+      "HistoricalTokenValue": {
+        "type": "object",
+        "properties": {
+          "tokenValue": {
+            "type": "string",
+            "example": "999"
+          },
+          "id": {
+            "type": "number"
+          },
+          "issuerId": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "tokenValueDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "operatorId": {
+            "type": "number"
+          },
+          "operatorName": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "deletedAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "tokenValue",
+          "id",
+          "issuerId",
+          "tokenId",
+          "tokenValueDate",
+          "operatorId",
+          "createdAt",
+          "updatedAt",
+          "deletedAt"
+        ]
+      },
+      "GetHistoricalTokenValuesResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HistoricalTokenValue"
+            }
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "total": {
+                "required": true,
+                "type": "number"
+              },
+              "offset": {
+                "required": false,
+                "type": "number"
+              },
+              "limit": {
+                "required": false,
+                "type": "number"
+              },
+              "length": {
+                "required": true,
+                "type": "number"
+              }
+            }
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ]
+      },
+      "HistoricalTokenValueOperator": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "CreateHistoricalTokenValueBodyDto": {
+        "type": "object",
+        "properties": {
+          "tokenValueDate": {
+            "type": "string",
+            "maxLength": 10,
+            "example": "2023-10-22"
+          },
+          "tokenValue": {
+            "type": "string",
+            "minimum": 1,
+            "example": "999"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "operator": {
+            "$ref": "#/components/schemas/HistoricalTokenValueOperator"
+          }
+        },
+        "required": [
+          "tokenValueDate",
+          "tokenValue",
+          "tokenId",
+          "operator"
+        ]
+      },
+      "CreateHistoricalTokenValueBadRequestDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "enum": [
+              "ENTITY_INVALID_ERROR",
+              "ENTITY_DUPLICATED_ERROR"
+            ],
+            "default": "ENTITY_INVALID_ERROR"
+          },
+          "statusCode": {
+            "type": "number",
+            "default": 400,
+            "enum": [
+              100,
+              101,
+              102,
+              103,
+              200,
+              201,
+              202,
+              203,
+              204,
+              205,
+              206,
+              300,
+              301,
+              302,
+              303,
+              304,
+              307,
+              308,
+              400,
+              401,
+              402,
+              403,
+              404,
+              405,
+              406,
+              407,
+              408,
+              409,
+              410,
+              411,
+              412,
+              413,
+              414,
+              415,
+              416,
+              417,
+              418,
+              421,
+              422,
+              424,
+              428,
+              429,
+              500,
+              501,
+              502,
+              503,
+              504,
+              505
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "statusCode",
+          "message",
+          "data"
+        ]
+      },
+      "UpdateHistoricalTokenValueBodyDto": {
+        "type": "object",
+        "properties": {
+          "tokenValue": {
+            "type": "string",
+            "minimum": 1,
+            "example": "999"
+          },
+          "operator": {
+            "$ref": "#/components/schemas/HistoricalTokenValueOperator"
+          }
+        },
+        "required": [
+          "tokenValue",
+          "operator"
+        ]
+      },
+      "DeleteHistoricalTokenValueBodyDto": {
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/HistoricalTokenValueOperator"
+          }
+        },
+        "required": [
+          "operator"
+        ]
+      },
+      "CreateLabelsDto": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 16
+          },
+          "issuerId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "label",
+          "issuerId"
+        ]
+      },
+      "CreateLabelResponseDto": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "label"
+        ]
+      },
+      "CreateLabelBadRequestDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "enum": [
+              "ENTITY_INVALID_ERROR",
+              "ENTITY_DUPLICATED_ERROR"
+            ],
+            "default": "ENTITY_INVALID_ERROR"
+          },
+          "statusCode": {
+            "type": "number",
+            "default": 400,
+            "enum": [
+              100,
+              101,
+              102,
+              103,
+              200,
+              201,
+              202,
+              203,
+              204,
+              205,
+              206,
+              300,
+              301,
+              302,
+              303,
+              304,
+              307,
+              308,
+              400,
+              401,
+              402,
+              403,
+              404,
+              405,
+              406,
+              407,
+              408,
+              409,
+              410,
+              411,
+              412,
+              413,
+              414,
+              415,
+              416,
+              417,
+              418,
+              421,
+              422,
+              424,
+              428,
+              429,
+              500,
+              501,
+              502,
+              503,
+              504,
+              505
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "statusCode",
+          "message",
+          "data"
+        ]
+      },
+      "DeleteLabelResponseDto": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "label"
+        ]
+      },
+      "UpdateIssuerLabelsDto": {
+        "type": "object",
+        "properties": {
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 16,
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "labels"
+        ]
+      },
+      "CustomBadRequestException": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "default": 400
+          },
+          "error": {
+            "type": "string",
+            "default": "Bad Request"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "statusCode",
+          "error",
+          "message"
+        ]
+      },
+      "CreateFundraiseDocumentRequestDto": {
+        "type": "object",
+        "properties": {
+          "issuerId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "bucket": {
+            "type": "string"
+          },
+          "fileKey": {
+            "type": "string"
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "order": {
+            "type": "number"
+          },
+          "size": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string"
+          },
+          "requireKyc": {
+            "type": "boolean"
+          },
+          "requireQualification": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "issuerId",
+          "name",
+          "bucket",
+          "fileKey",
+          "fileName",
+          "order",
+          "size",
+          "type",
+          "requireKyc",
+          "requireQualification"
+        ]
+      }
+    }
+  }
+}

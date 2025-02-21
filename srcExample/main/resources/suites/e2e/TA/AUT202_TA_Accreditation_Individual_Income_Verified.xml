@@ -1,0 +1,7 @@
+<suite name="AUT202_TA_Accreditation_Individual_Income_Verified" verbose="1">
+    <test name="AUT202_TA_Accreditation_Individual_Income_Verified">
+        <classes>
+            <class name="io.securitize.tests.transferAgent.AUT202_TA_Accreditation_Individual_Income_Verified" />
+        </classes>
+    </test>
+</suite>

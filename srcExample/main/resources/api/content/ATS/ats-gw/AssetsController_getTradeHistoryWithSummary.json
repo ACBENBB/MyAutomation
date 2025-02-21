@@ -1,0 +1,14 @@
+{
+  "pathParams": {
+    "deploymentId": "#ATS_DEPLOYMENT_ID#"
+  },
+  "queryParams": {
+    "timeFrame": "quarter"
+  },
+  "headers": {
+    // "authorization": "#SID_AUTHORIZATION#"
+    "cookie": "#SID_COOKIE#"
+  },
+  "rc": {},
+  "sandbox": {}
+}

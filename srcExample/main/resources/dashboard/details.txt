@@ -1,0 +1,90 @@
+================
+General details:
+================
+* The dashboard consists of 2 parts:
+    1) MySQL database where details are written at the end of each test (passed or failed)
+    2) Grafana instance that reads data from MySQL and presents it in a dashboard
+
+* Only tests running from Jenkins should update their status - as to avoid test debugging information to be
+added to the dashboard (We are using testNG listener configuration only used by Jenkins in the pipeline)
+
+* Any failure to write statistics to the DB shouldn't fail any test - it will just output warning or errors
+to the log
+
+* Writing of statistics to the DB can be disabled by setting the mainconfig.properites value of reportStatistics to false
+
+
+===========================
+Database connection details:
+===========================
+In order for the Java code to connect to the DB and add to it test execution details, it needs to following details:
+    dashboardMySqlUrl = jdbc:mysql://[DB_ADDRESS]:[DB_PORT]/[DATABASE_SCHEMA_NAME]
+    dashboardMySqlUsername = [DB_USERNAME]
+    dashboardMySqlPassword = [DB_PASSWORD]
+These should be added to the user.properties file
+
+
+======================================
+Adding data to the dashboard database:
+======================================
+A class named ExecutionListener.java does the writing for us automatically. It collects current test details
+and writes it to the DB. It is automatically executed as a TestNG listener when running from the command line
+as Jenkins runs the tests in the pipeline (pom.xml failSafe plugin is configured to use this listener).
+Such command example:
+    mvn compile failsafe:integration-test failsafe:verify -DsuiteXmlFile=AUT99_Test.xml
+
+If you want to run a test from your IDE and make sure its details are written to the database, you will
+need to add the following annotation to your test class:
+    @Listeners(ExecutionListener.class)
+
+
+=============================================
+To create a local setup for testing purposes:
+=============================================
+1) Run local services. You can use the docker-compose.yml file in this folder. (docker compose up)
+2) You will need to connect to the running mysql instance and build the needed table:
+    - connect to the running mysql container:
+        docker exec -it dashboard_mysql_1 bash
+    - inside the container run the mysql terminal:
+        mysql -u myDbUser -p
+        (The password you need to type is configured in the docker-compose.yml file)
+    - switch to the schema:
+        use myDb;
+        (The schema name you need to type is configured in the docker-compose.yml file)
+    - create the testStatus table - the command can be seen in the build_testStatus_table.sql file in this folder
+
+
+============================================================
+Some sample Grafana SQL commands to build a basic dashboard:
+============================================================
+Basic gauge query:
+	SELECT now() as time, count(*) as cnt from testStatus where executionTime>date_sub(now(), interval 1 day)
+
+Basic pie chart pass/failed:
+	SELECT now() as time, count(*) total, status
+	FROM testStatus
+	WHERE $__timeFilter(executionTime)
+	GROUP BY status
+
+Basic flow chart - showing ups and downs of passed/failed jobs
+	SELECT
+	  $__timeGroupAlias(executionTime,$__interval),
+	  status AS metric,
+	  count(test_id) AS "test_id"
+	FROM testStatus
+	WHERE
+	  $__timeFilter(executionTime)
+	GROUP BY 1,2
+	ORDER BY $__timeGroup(executionTime,$__interval)
+
+Basic bar-chart:
+	SELECT now() as time, count(*) cnt, failureReason
+	FROM testStatus
+	WHERE $__timeFilter(executionTime)
+	GROUP BY failureReason
+
+Average test duration:
+	SELECT concat(testClass,testName) AS TestFullName, AVG(TIMESTAMPDIFF(SECOND,startTime,endTime)) AS AverageExecutionTimeSeconds FROM testStatus GROUP BY concat(testClass,testName);
+
+Last test execution duration
+	SELECT concat(m1.testClass,m1.testName) AS TestFullName, m1.startTime as LastExecutionAt, TIMESTAMPDIFF(SECOND,m1.startTime,m1.endTime) AS LastExecutionDurationSeconds FROM testStatus m1 LEFT JOIN testStatus m2 on (m1.testName = m2.testName and m1.test_id < m2.test_id) WHERE m2.test_id IS NULL;

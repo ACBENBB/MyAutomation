@@ -1,0 +1,3709 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Algorand Service",
+    "description": "The Algorand Service description",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "DetailsDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "DS ALGORAND PROVIDER"
+          },
+          "description": {
+            "type": "string",
+            "example": "DS Provider for Algorand blockchain"
+          },
+          "underlying": {
+            "type": "string",
+            "example": "ALGORAND"
+          },
+          "network": {
+            "type": "string",
+            "example": "Testnet"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.0.0"
+          }
+        },
+        "required": [
+          "name",
+          "description",
+          "underlying",
+          "network",
+          "version"
+        ]
+      },
+      "AddressLinkDto": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "example": "https://testnet.algoexplorer.io/address/EX3L3OW2EOCHDJCUX3XDGDIQQZFVNOSSRVCG4ZK73VLZNZ2EO4ZBT2HE6U"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      },
+      "AddressBalanceDto": {
+        "type": "object",
+        "properties": {
+          "balance": {
+            "type": "number",
+            "example": "100"
+          }
+        },
+        "required": [
+          "balance"
+        ]
+      },
+      "TransactionDto": {
+        "type": "object",
+        "properties": {
+          "transactionData": {
+            "type": "string",
+            "example": "gaZzdHJpbmfaAghmeTVVS1VqUCtQaE9BN0ppd0pCd1hyZEtET3pPOFRyL0ZFMjlTRk5hT1FadFNsSm9TRXc0TW1kbk9YZEpkazAzVG5ocVJXVkJVQzgwWVVwSVdHcFRWazFZTmxjck5Fd3hSMGx1VkhkNWJUUlhaVmxxU25aU1ZtZEtXWE5KVVVkREwwdFNSRWRpU1dwWksycFJiemxPWkhwMFJUUnhaRzR4Um1ZMFEwOWhSV3h2TTJ4S1JEaFNaakZIU3psdmFsVlhiVmgyVTBvM1NHbEJSVnBRTDNsMmExQm1MM3BqYWxsSWFEbHRNVFJaV1ROTlZrNUNORlI2VkhsYVpFMHdaemhZWTFaeGExTjRka2RMVFRCRGFrNUNUMWRHUmpCeVRFRTJZbUk1UTBRNVVXcHFLMVJ2ZWtoV2JWWnlUakpYY1daSE4zTjVOMmxMVDNOaU9YQlFia3h5VUZkek5FdHBRbEpMTlhreFZEZGpOMVJqVEhRd1kySmpNMnBKZUN0c1ZWRXpVRWR5TVdGM1NrdHdOMHN4Y2k5TmRVcGhNRkppV1doRWF6azNjbkI2TkRnMFpVOHpSbloxU1d4alpVZzVka0YxVWtFMWVHTnNSR1J0ZWpjeWVsVjBhVmxuZGxCRGVYTjJlVFZoVDFJdllrTXZVRFZ2TmxOcFQweE1hVFF2VEVwVFRFUnpQUT09"
+          }
+        },
+        "required": [
+          "transactionData"
+        ]
+      },
+      "TransactionExecutedDto": {
+        "type": "object",
+        "properties": {
+          "transactionId": {
+            "type": "string",
+            "example": "CTQVMN7GFWOZ7KAKG6RDJVBYG3EESVPAYPQS2G2GHHEXLVXTLV2A"
+          }
+        },
+        "required": [
+          "transactionId"
+        ]
+      },
+      "TransactionInformationDto": {
+        "type": "object",
+        "properties": {
+          "transactionId": {
+            "type": "string",
+            "example": "CTQVMN7GFWOZ7KAKG6RDJVBYG3EESVPAYPQS2G2GHHEXLVXTLV2A"
+          },
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "finalized": {
+            "type": "boolean",
+            "example": true
+          },
+          "targetAddress": {
+            "type": "string",
+            "example": "ZW3ISEHZUHPO7OZGMKLKIIMKVICOUDRCERI454I3DB2BH52HGLSO67W754"
+          },
+          "signerAddress": {
+            "type": "string",
+            "example": "ADKLGOVODVMDZ26PIEY2WN3SALG4HON2GDJ6BI73NUATSGFDTKNQBB123"
+          },
+          "inputData": {
+            "example": {
+              "data": "data",
+              "method": "transfer",
+              "sender": "ZW3ISEHZUHPO7OZGMKLKIIMKVICOUDRCERI454I3DB2BH52HGLSO67W754",
+              "params": {
+                "from": "ZW3ISEHZUHPO7OZGMKLKIIMKVICOUDRCERI454I3DB2BH52HGLSO67W754",
+                "to": "RQW3OY7H5BQA2SFN6TLQNYPBCZYQHVLGL5BI65DHKUAH4YN7GX2O5KLIOA",
+                "value": "10"
+              }
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TransactionInformationDto"
+              }
+            ]
+          },
+          "resultData": {
+            "type": "object"
+          },
+          "additionalData": {
+            "type": "object"
+          },
+          "block": {
+            "type": "number",
+            "example": 18440483
+          },
+          "transactionTime": {
+            "type": "number",
+            "example": 1641385133
+          }
+        },
+        "required": [
+          "transactionId",
+          "status",
+          "finalized",
+          "targetAddress",
+          "signerAddress",
+          "block",
+          "transactionTime"
+        ]
+      },
+      "TokenDescriptionDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "ExampleToken"
+          },
+          "symbol": {
+            "type": "string",
+            "example": "EXT"
+          },
+          "decimal": {
+            "type": "integer",
+            "example": 4
+          },
+          "totalIssued": {
+            "type": "string",
+            "example": "10000000"
+          },
+          "totalWallets": {
+            "type": "integer",
+            "example": 5
+          },
+          "isPaused": {
+            "type": "boolean",
+            "example": true
+          },
+          "assetId": {
+            "type": "number",
+            "example": true,
+            "description": "assetId in Algorand network"
+          },
+          "roleAsaId": {
+            "type": "number",
+            "example": true,
+            "description": "assetId in Role Asset in Algorand network"
+          }
+        },
+        "required": [
+          "name",
+          "symbol",
+          "decimal",
+          "totalIssued",
+          "totalWallets",
+          "isPaused",
+          "assetId",
+          "roleAsaId"
+        ]
+      },
+      "ValueLockDto": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "example": "100",
+            "default": "0"
+          },
+          "releaseTime": {
+            "type": "integer",
+            "example": 1645531367,
+            "description": "time to release the locked asset as the issuance timestamp"
+          },
+          "reason": {
+            "type": "string",
+            "example": "Locked by KYC"
+          },
+          "reasonCode": {
+            "type": "integer",
+            "example": 51,
+            "default": 0
+          }
+        },
+        "required": [
+          "value",
+          "releaseTime",
+          "reason",
+          "reasonCode"
+        ]
+      },
+      "MintTokenDto": {
+        "type": "object",
+        "properties": {
+          "identity": {
+            "type": "string",
+            "example": "ZW3ISEHZUHPO7OZGMKLKIIMKVICOUDRCERI454I3DB2BH52HGLSO67W754"
+          },
+          "to": {
+            "type": "string",
+            "example": "KM7E7OC7DIXGR7OXWK4GNQ3NQYRQ5TRZIGU6ECHMUAGWQ2OFJZ4BVBMDZU"
+          },
+          "value": {
+            "type": "string",
+            "example": "100"
+          },
+          "issuanceTime": {
+            "type": "number",
+            "example": 1645531367,
+            "description": "time to consider as the issuance timestamp, to be used for compliance purposes"
+          },
+          "reason": {
+            "type": "string",
+            "example": "Mint Token Example"
+          },
+          "lock": {
+            "example": {
+              "value": "100",
+              "releaseTime": 1645531367,
+              "reason": "Locked by compliance rules",
+              "reasonCode": 51
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ValueLockDto"
+              }
+            ]
+          },
+          "dryrun": {
+            "type": "boolean",
+            "description": "Only validate the action without doing it",
+            "default": false
+          },
+          "force": {
+            "type": "boolean",
+            "description": "Run the action without validating it",
+            "default": false
+          },
+          "priority": {
+            "type": "string",
+            "example": "high",
+            "default": "medium",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          }
+        },
+        "required": [
+          "identity",
+          "to",
+          "value",
+          "issuanceTime",
+          "reason"
+        ]
+      },
+      "AdditionalDataDto": {
+        "type": "object",
+        "properties": {
+          "networkType": {
+            "type": "string",
+            "example": "Sandbox",
+            "default": "Mainnet",
+            "enum": [
+              "Mainnet",
+              "Testnet",
+              "Sandbox",
+              "BETANET"
+            ]
+          },
+          "txType": {
+            "type": "string",
+            "example": "atomic_transaction_composer",
+            "default": "atomic_transaction_composer",
+            "enum": [
+              "atomic_transaction_composer",
+              "single_transaction"
+            ]
+          }
+        },
+        "required": [
+          "networkType",
+          "txType"
+        ]
+      },
+      "TransactionDataDto": {
+        "type": "object",
+        "properties": {
+          "transactionData": {
+            "type": "string",
+            "example": "gqNzaWfEQDXz2xeGvSnNNiGl3x7+51db2kDf4TEgD4mWug6V1=",
+            "description": "unsigned transaction"
+          },
+          "additionalData": {
+            "description": "additional data to be used by provider and transaction signer",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AdditionalDataDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "transactionData"
+        ]
+      },
+      "PauseTokenDto": {
+        "type": "object",
+        "properties": {
+          "identity": {
+            "type": "string",
+            "example": "ZW3ISEHZUHPO7OZGMKLKIIMKVICOUDRCERI454I3DB2BH52HGLSO67W754"
+          },
+          "paused": {
+            "type": "boolean",
+            "example": true,
+            "default": true
+          },
+          "priority": {
+            "type": "string",
+            "example": "high",
+            "default": "medium",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          }
+        },
+        "required": [
+          "identity",
+          "paused"
+        ]
+      },
+      "TransferBodyDto": {
+        "type": "object",
+        "properties": {
+          "identity": {
+            "type": "string",
+            "example": "ZW3ISEHZUHPO7OZGMKLKIIMKVICOUDRCERI454I3DB2BH52HGLSO67W754",
+            "description": "Sender address"
+          },
+          "to": {
+            "type": "string",
+            "example": "KM7E7OC7DIXGR7OXWK4GNQ3NQYRQ5TRZIGU6ECHMUAGWQ2OFJZ4BVBMDZU"
+          },
+          "value": {
+            "type": "string",
+            "example": "100"
+          },
+          "reason": {
+            "type": "string",
+            "example": "Burn/Transfer Token Example"
+          },
+          "dryrun": {
+            "type": "boolean",
+            "description": "Only validate the action without doing it",
+            "default": false
+          },
+          "force": {
+            "type": "boolean",
+            "description": "Run the action without validating it",
+            "default": false
+          },
+          "priority": {
+            "type": "string",
+            "example": "high",
+            "default": "medium",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          }
+        },
+        "required": [
+          "identity",
+          "to",
+          "value",
+          "reason"
+        ]
+      },
+      "ApproveBodyDto": {
+        "type": "object",
+        "properties": {
+          "identity": {
+            "type": "string",
+            "example": "ZW3ISEHZUHPO7OZGMKLKIIMKVICOUDRCERI454I3DB2BH52HGLSO67W754",
+            "description": "Sender address"
+          },
+          "spender": {
+            "type": "string",
+            "example": "KM7E7OC7DIXGR7OXWK4GNQ3NQYRQ5TRZIGU6ECHMUAGWQ2OFJZ4BVBMDZU"
+          },
+          "value": {
+            "type": "string",
+            "example": "100"
+          },
+          "priority": {
+            "type": "string",
+            "example": "high",
+            "default": "medium",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          }
+        },
+        "required": [
+          "identity",
+          "spender",
+          "value"
+        ]
+      },
+      "ComplianceRulesDto": {
+        "type": "object",
+        "properties": {
+          "totalInvestorsLimit": {
+            "type": "number",
+            "example": 1
+          },
+          "minUSTokens": {
+            "type": "string",
+            "example": "10"
+          },
+          "minEUTokens": {
+            "type": "string",
+            "example": "10"
+          },
+          "usInvestorsLimit": {
+            "type": "number",
+            "example": 0
+          },
+          "usAccreditedInvestorsLimit": {
+            "type": "number",
+            "example": 0
+          },
+          "nonAccreditedInvestorsLimit": {
+            "type": "number",
+            "example": 0
+          },
+          "euRetailInvestorsLimit": {
+            "type": "number",
+            "example": 0
+          },
+          "jpInvestorsLimit": {
+            "type": "number",
+            "example": 0
+          },
+          "maxUSInvestorsPercentage": {
+            "type": "number",
+            "example": 0
+          },
+          "blockFlowbackEndTime": {
+            "type": "number",
+            "example": 0
+          },
+          "nonUSLockPeriod": {
+            "type": "number",
+            "example": 0
+          },
+          "minimumTotalInvestors": {
+            "type": "number",
+            "example": 0
+          },
+          "minimumHoldingsPerInvestor": {
+            "type": "string",
+            "example": "1200"
+          },
+          "maximumHoldingsPerInvestor": {
+            "type": "string",
+            "example": "22000"
+          },
+          "usLockPeriod": {
+            "type": "number",
+            "example": 0
+          },
+          "authorizedSecurities": {
+            "type": "string",
+            "example": "2200000000"
+          },
+          "forceFullTransfer": {
+            "type": "boolean",
+            "example": true
+          },
+          "forceAccredited": {
+            "type": "boolean",
+            "example": true
+          },
+          "forceAccreditedUS": {
+            "type": "boolean",
+            "example": true
+          },
+          "worldWideForceFullTransfer": {
+            "type": "boolean",
+            "example": true
+          }
+        },
+        "required": [
+          "totalInvestorsLimit",
+          "minUSTokens",
+          "minEUTokens",
+          "usInvestorsLimit",
+          "usAccreditedInvestorsLimit",
+          "nonAccreditedInvestorsLimit",
+          "euRetailInvestorsLimit",
+          "jpInvestorsLimit",
+          "maxUSInvestorsPercentage",
+          "blockFlowbackEndTime",
+          "nonUSLockPeriod",
+          "minimumTotalInvestors",
+          "minimumHoldingsPerInvestor",
+          "maximumHoldingsPerInvestor",
+          "usLockPeriod",
+          "authorizedSecurities",
+          "forceFullTransfer",
+          "forceAccredited",
+          "forceAccreditedUS",
+          "worldWideForceFullTransfer"
+        ]
+      },
+      "ComplianceRulesBodyDto": {
+        "type": "object",
+        "properties": {
+          "identity": {
+            "type": "string",
+            "example": "ZW3ISEHZUHPO7OZGMKLKIIMKVICOUDRCERI454I3DB2BH52HGLSO67W754",
+            "description": "Sender address"
+          },
+          "complianceRules": {
+            "$ref": "#/components/schemas/ComplianceRulesDto"
+          },
+          "priority": {
+            "type": "string",
+            "description": "Priority (not used in Algorand)",
+            "example": "medium"
+          }
+        },
+        "required": [
+          "identity",
+          "complianceRules",
+          "priority"
+        ]
+      },
+      "ComplianceCountersDto": {
+        "type": "object",
+        "properties": {
+          "euRetailInvestorsCounts": {
+            "example": [
+              {
+                "countryCode": "US",
+                "count": 10
+              }
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "usInvestorsCount": {
+            "type": "number",
+            "example": 1
+          },
+          "totalInvestorsCount": {
+            "type": "number",
+            "example": 1
+          },
+          "accreditedInvestorsCount": {
+            "type": "number",
+            "example": 1
+          },
+          "usAccreditedInvestorsCount": {
+            "type": "number",
+            "example": 1
+          },
+          "jpInvestorsCount": {
+            "type": "number",
+            "example": 1
+          }
+        },
+        "required": [
+          "euRetailInvestorsCounts",
+          "usInvestorsCount",
+          "totalInvestorsCount",
+          "accreditedInvestorsCount",
+          "usAccreditedInvestorsCount",
+          "jpInvestorsCount"
+        ]
+      },
+      "SetCountryJurisdictionBodyDto": {
+        "type": "object",
+        "properties": {
+          "identity": {
+            "type": "string",
+            "example": "ZW3ISEHZUHPO7OZGMKLKIIMKVICOUDRCERI454I3DB2BH52HGLSO67W754",
+            "description": "Sender address"
+          },
+          "complianceStatus": {
+            "type": "string",
+            "enum": [
+              "none",
+              "us",
+              "eu",
+              "forbidden"
+            ]
+          },
+          "priority": {
+            "type": "string",
+            "description": "Priority (not used in Algorand)",
+            "example": "medium"
+          }
+        },
+        "required": [
+          "identity",
+          "complianceStatus",
+          "priority"
+        ]
+      },
+      "BulkBurnMintTokenBodyDto": {
+        "type": "object",
+        "properties": {
+          "identity": {
+            "type": "string",
+            "example": "ZW3ISEHZUHPO7OZGMKLKIIMKVICOUDRCERI454I3DB2BH52HGLSO67W754"
+          },
+          "totalAmount": {
+            "type": "string",
+            "example": "100"
+          },
+          "issuanceTime": {
+            "type": "number",
+            "example": 1645531367,
+            "description": "time to consider as the issuance timestamp, to be used for compliance purposes"
+          },
+          "dryrun": {
+            "type": "boolean",
+            "description": "Only validate the action without doing it",
+            "default": false
+          },
+          "force": {
+            "type": "boolean",
+            "description": "Run the action without validating it",
+            "default": false
+          }
+        },
+        "required": [
+          "identity",
+          "totalAmount",
+          "issuanceTime"
+        ]
+      },
+      "BulkTransferTokenBodyDto": {
+        "type": "object",
+        "properties": {
+          "identity": {
+            "type": "string",
+            "example": "ZW3ISEHZUHPO7OZGMKLKIIMKVICOUDRCERI454I3DB2BH52HGLSO67W754"
+          },
+          "dryrun": {
+            "type": "boolean",
+            "description": "Only validate the action without doing it",
+            "default": false
+          },
+          "force": {
+            "type": "boolean",
+            "description": "Run the action without validating it",
+            "default": false
+          },
+          "transferList": {
+            "example": [
+              {
+                "value": "100",
+                "toWallet": "Y7DTZHSVUSPZNZ4N5ODX3NPO3SSGE37WCWIHGA7OFDMUCEU3DIVHYHNF2U"
+              },
+              {
+                "value": "200",
+                "toWallet": "2R7JLGB4SVELV4AQSBNSQSW3HEMEHAWW4E57OEKVC3FHX4HYC5KEFGKHUM"
+              }
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "identity",
+          "transferList"
+        ]
+      },
+      "OmnibusTbeAddressDto": {
+        "type": "object",
+        "properties": {
+          "OmnibusWalletAddress": {
+            "type": "string",
+            "example": "CLAGH4Y7ZH6PKKOQRUP7PV3RZA65ZAVZENCKDHBIBPAOIGI4SM64ZP2I7U"
+          }
+        },
+        "required": [
+          "OmnibusWalletAddress"
+        ]
+      },
+      "InvestorCounterDeltaDto": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number",
+            "example": -2
+          },
+          "accredited": {
+            "type": "number",
+            "example": 1
+          },
+          "usAccredited": {
+            "type": "number",
+            "example": 1
+          },
+          "usTotal": {
+            "type": "number",
+            "example": 1
+          },
+          "jpTotal": {
+            "type": "number",
+            "example": 0
+          },
+          "euRetail": {
+            "example": [
+              {
+                "countryCode": "ES",
+                "count": -3
+              }
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "total",
+          "accredited",
+          "usAccredited",
+          "usTotal",
+          "jpTotal",
+          "euRetail"
+        ]
+      },
+      "InternalTransferTbeBodyDto": {
+        "type": "object",
+        "properties": {
+          "identity": {
+            "type": "string",
+            "example": "ZW3ISEHZUHPO7OZGMKLKIIMKVICOUDRCERI454I3DB2BH52HGLSO67W754"
+          },
+          "dryrun": {
+            "type": "boolean",
+            "description": "Only validate the action without doing it",
+            "default": false
+          },
+          "force": {
+            "type": "boolean",
+            "description": "Run the action without validating it",
+            "default": false
+          },
+          "externalId": {
+            "type": "string",
+            "example": "2719e23814e244ea80d1246edd4c2c9c"
+          }
+        },
+        "required": [
+          "identity"
+        ]
+      },
+      "HolderAttributeDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "kyc",
+            "enum": [
+              "kyc",
+              "accredited",
+              "qualified",
+              "professional"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "example": "pending",
+            "enum": [
+              "pending",
+              "approved",
+              "rejected"
+            ]
+          },
+          "expiry": {
+            "type": "integer",
+            "example": 1645531367,
+            "description": "time to release the locked asset as the issuance timestamp"
+          },
+          "proofHash": {
+            "type": "string",
+            "example": "Proof Hash"
+          }
+        },
+        "required": [
+          "name",
+          "status"
+        ]
+      },
+      "HolderDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "BlockchainId also know as InvestorId",
+            "example": "4d186321c1a7f0f354b297e8914ab240"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country code",
+            "example": "US"
+          },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HolderAttributeDto"
+            }
+          },
+          "wallets": {
+            "example": [
+              "KM7E7OC7DIXGR7OXWK4GNQ3NQYRQ5TRZIGU6ECHMUAGWQ2OFJZ4BVBMDZU"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "country"
+        ]
+      },
+      "CreateHolderDto": {
+        "type": "object",
+        "properties": {
+          "identity": {
+            "type": "string",
+            "description": "Wallet who send the transaction",
+            "example": "KGBFTCXNFW5FWGJXTWRYDECCEX2H5IOS555Y7MCIHS4TCGYHZG36HPUTEA"
+          },
+          "holder": {
+            "$ref": "#/components/schemas/HolderDto"
+          },
+          "value": {
+            "type": "string",
+            "description": "Amount of token to be issued",
+            "example": "150"
+          },
+          "issuanceTime": {
+            "type": "integer",
+            "description": "Issuance Time",
+            "example": 1645531367,
+            "default": 0
+          },
+          "reason": {
+            "type": "string",
+            "description": "Issuance reason",
+            "example": "150"
+          },
+          "lock": {
+            "$ref": "#/components/schemas/ValueLockDto"
+          },
+          "investorPays": {
+            "type": "boolean",
+            "default": false
+          },
+          "priority": {
+            "type": "string",
+            "example": "high",
+            "default": "medium",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          }
+        },
+        "required": [
+          "identity",
+          "holder"
+        ]
+      },
+      "UpdateHolderDto": {
+        "type": "object",
+        "properties": {
+          "identity": {
+            "type": "string",
+            "description": "Wallet who send the transaction",
+            "example": "KGBFTCXNFW5FWGJXTWRYDECCEX2H5IOS555Y7MCIHS4TCGYHZG36HPUTEA"
+          },
+          "onlyAddWallets": {
+            "type": "string",
+            "description": "True to add a new wallet",
+            "example": false,
+            "default": false
+          },
+          "holder": {
+            "$ref": "#/components/schemas/HolderDto"
+          },
+          "priority": {
+            "type": "string",
+            "example": "high",
+            "default": "medium",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          }
+        },
+        "required": [
+          "identity",
+          "holder"
+        ]
+      },
+      "DeleteHolderDto": {
+        "type": "object",
+        "properties": {
+          "identity": {
+            "type": "string",
+            "description": "Wallet who send the transaction",
+            "example": "KGBFTCXNFW5FWGJXTWRYDECCEX2H5IOS555Y7MCIHS4TCGYHZG36HPUTEA"
+          },
+          "priority": {
+            "type": "string",
+            "example": "high",
+            "default": "medium",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          }
+        },
+        "required": [
+          "identity"
+        ]
+      },
+      "AddWalletDto": {
+        "type": "object",
+        "properties": {
+          "identity": {
+            "type": "string",
+            "description": "Wallet who send the transaction",
+            "example": "KGBFTCXNFW5FWGJXTWRYDECCEX2H5IOS555Y7MCIHS4TCGYHZG36HPUTEA"
+          },
+          "holderId": {
+            "type": "string",
+            "description": "The ID of the investor",
+            "example": "698d51a19d8a121ce581499d7b701668"
+          },
+          "wallet": {
+            "type": "string",
+            "description": "The wallet to be added to investorId",
+            "example": "OSUBN7JU3MGO6IIIS35WAPXGTN4GNQYBEMWNVNCC5JJSOLSB3HHNNP5VII"
+          },
+          "priority": {
+            "type": "string",
+            "example": "high",
+            "default": "medium",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          }
+        },
+        "required": [
+          "identity",
+          "holderId",
+          "wallet"
+        ]
+      },
+      "RemoveWalletDto": {
+        "type": "object",
+        "properties": {
+          "identity": {
+            "type": "string",
+            "description": "Wallet who send the transaction",
+            "example": "KGBFTCXNFW5FWGJXTWRYDECCEX2H5IOS555Y7MCIHS4TCGYHZG36HPUTEA"
+          },
+          "priority": {
+            "type": "string",
+            "example": "high",
+            "default": "medium",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          }
+        },
+        "required": [
+          "identity"
+        ]
+      },
+      "UpdateHolderAttributeDto": {
+        "type": "object",
+        "properties": {
+          "identity": {
+            "type": "string",
+            "description": "Wallet who send the transaction",
+            "example": "KGBFTCXNFW5FWGJXTWRYDECCEX2H5IOS555Y7MCIHS4TCGYHZG36HPUTEA"
+          },
+          "attribute": {
+            "$ref": "#/components/schemas/HolderAttributeDto"
+          },
+          "priority": {
+            "type": "string",
+            "example": "high",
+            "default": "medium",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          }
+        },
+        "required": [
+          "identity",
+          "attribute"
+        ]
+      },
+      "EventDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "HPI3HYCUK52POVWEXXLMWOXQXGK2BMLMOEWWQVY35B5Q7ZO4BJTQ"
+          },
+          "transactionId": {
+            "type": "string",
+            "example": "FDL2Y5IH5VW3YNS7AAQ7KA7MOQL7TORQA55KGHFGVOBHOY3TCKCQ"
+          },
+          "blockNumber": {
+            "type": "number",
+            "example": 13728743
+          },
+          "eventType": {
+            "type": "string",
+            "example": "Issue"
+          },
+          "parameters": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "id",
+          "transactionId",
+          "blockNumber",
+          "eventType",
+          "parameters"
+        ]
+      },
+      "EventsDto": {
+        "type": "object",
+        "properties": {
+          "fromBlock": {
+            "type": "number",
+            "example": 1002
+          },
+          "toBlock": {
+            "type": "number",
+            "example": 10022
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventDto"
+            }
+          }
+        },
+        "required": [
+          "fromBlock",
+          "toBlock",
+          "events"
+        ]
+      },
+      "RoleDto": {
+        "type": "object",
+        "properties": {
+          "identity": {
+            "type": "string",
+            "example": "ZW3ISEHZUHPO7OZGMKLKIIMKVICOUDRCERI454I3DB2BH52HGLSO67W754"
+          },
+          "role": {
+            "type": "string",
+            "example": "issuer",
+            "default": "none",
+            "enum": [
+              "issuer",
+              "exchange",
+              "master",
+              "none"
+            ]
+          }
+        },
+        "required": [
+          "identity",
+          "role"
+        ]
+      },
+      "AddLockBodyDto": {
+        "type": "object",
+        "properties": {
+          "identity": {
+            "type": "string",
+            "example": "ZW3ISEHZUHPO7OZGMKLKIIMKVICOUDRCERI454I3DB2BH52HGLSO67W754"
+          },
+          "priority": {
+            "type": "string",
+            "example": "high",
+            "default": "medium",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "lock": {
+            "example": {
+              "value": "100",
+              "releaseTime": 1645531367,
+              "reason": "Locked by compliance rules",
+              "reasonCode": 51
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ValueLockDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "identity"
+        ]
+      },
+      "AddInvestorLockBodyDto": {
+        "type": "object",
+        "properties": {
+          "identity": {
+            "type": "string",
+            "example": "ZW3ISEHZUHPO7OZGMKLKIIMKVICOUDRCERI454I3DB2BH52HGLSO67W754"
+          },
+          "priority": {
+            "type": "string",
+            "example": "high",
+            "default": "medium",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "locked": {
+            "example": true,
+            "default": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ValueLockDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "identity",
+          "locked"
+        ]
+      },
+      "BaseBodyDto": {
+        "type": "object",
+        "properties": {
+          "identity": {
+            "type": "string",
+            "example": "ZW3ISEHZUHPO7OZGMKLKIIMKVICOUDRCERI454I3DB2BH52HGLSO67W754"
+          },
+          "priority": {
+            "type": "string",
+            "example": "high",
+            "default": "medium",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          }
+        },
+        "required": [
+          "identity"
+        ]
+      },
+      "InvestorLockedDto": {
+        "type": "object",
+        "properties": {
+          "locked": {
+            "type": "boolean",
+            "example": true,
+            "description": "True if investor is locked"
+          }
+        },
+        "required": [
+          "locked"
+        ]
+      }
+    }
+  },
+  "paths": {
+    "/v1/health-check": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "health"
+        ]
+      }
+    },
+    "/v1/details": {
+      "get": {
+        "operationId": "providerDetails",
+        "summary": "get details about the provider",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DetailsDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "provider"
+        ]
+      }
+    },
+    "/v1/address/{address}/check": {
+      "get": {
+        "operationId": "ProviderController_isAddress",
+        "summary": "checks if the given address is a valid address",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": "QQRQFACS4DUQGUPJWFRE5WH4SL2QRDKQYFBGN3QKJUYX772DFI33L2KNAI",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "provider"
+        ]
+      }
+    },
+    "/v1/explorer/{address}/link": {
+      "get": {
+        "operationId": "ProviderController_getAddressLink",
+        "summary": "Gets the address link for the corresponding network in relevant blockchain explorer",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": "QQRQFACS4DUQGUPJWFRE5WH4SL2QRDKQYFBGN3QKJUYX772DFI33L2KNAI",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddressLinkDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "provider"
+        ]
+      }
+    },
+    "/v1/addresses/{address}/balance": {
+      "get": {
+        "operationId": "ProviderController_getAddressBalance",
+        "summary": "Gets the balance of a specific address",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": "QQRQFACS4DUQGUPJWFRE5WH4SL2QRDKQYFBGN3QKJUYX772DFI33L2KNAI",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddressBalanceDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "provider"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/latest_block_number": {
+      "get": {
+        "operationId": "ProviderController_getLatestBlockNumber",
+        "summary": "returns the latest block number of a blockchain for a specified token contract",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": "QQRQFACS4DUQGUPJWFRE5WH4SL2QRDKQYFBGN3QKJUYX772DFI33L2KNAI",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddressBalanceDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "provider"
+        ]
+      }
+    },
+    "/v1/transactions": {
+      "post": {
+        "operationId": "executeTransaction",
+        "summary": "Executes a signed transaction",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionExecutedDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "transaction"
+        ]
+      }
+    },
+    "/v1/transactions/{id}/cancel": {
+      "post": {
+        "operationId": "cancelTransaction",
+        "summary": "Cancels non-mined transaction",
+        "description": "Returns a transaction to be signed which if succeeds will cancel non-mined transaction",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "example": "CTQVMN7GFWOZ7KAKG6RDJVBYG3EESVPAYPQS2G2GHHEXLVXTLV2A",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionExecutedDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "transaction"
+        ]
+      }
+    },
+    "/v1/transactions/{id}/speedup": {
+      "post": {
+        "operationId": "speedupTransaction",
+        "summary": "SpeedUp a non-mined transaction",
+        "description": "Returns a transaction to be signed with higher chances of being success",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "example": "CTQVMN7GFWOZ7KAKG6RDJVBYG3EESVPAYPQS2G2GHHEXLVXTLV2A",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionExecutedDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "transaction"
+        ]
+      }
+    },
+    "/v1/transactions/{id}": {
+      "get": {
+        "operationId": "getTransactionInformation",
+        "summary": "Gets transaction information",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "example": "CTQVMN7GFWOZ7KAKG6RDJVBYG3EESVPAYPQS2G2GHHEXLVXTLV2A",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionInformationDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "transaction"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/transactions": {
+      "get": {
+        "operationId": "getTransactions",
+        "summary": "Gets transactions list information filtered by token address (applicationId)",
+        "description": "Returns list of transactions by address filtered by status and block range",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "fromBlock",
+            "required": false,
+            "in": "query",
+            "example": 10,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "toBlock",
+            "required": false,
+            "in": "query",
+            "example": 10000,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "success",
+                "failure"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TransactionInformationDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "transaction"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/tokens": {
+      "get": {
+        "operationId": "totalSupply",
+        "summary": "Get the total supply of tokens",
+        "description": "Get the total number of minted tokens in all wallets",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "token"
+        ]
+      },
+      "post": {
+        "operationId": "mint",
+        "summary": "Mint new tokens",
+        "description": "Mint tokens to an specific account (previous investor optin required)",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MintTokenDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDataDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "token"
+        ]
+      },
+      "delete": {
+        "operationId": "burn",
+        "summary": "Destroy tokens",
+        "description": "Destroy tokens",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransferBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDataDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "token"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/tokens/{account}/enabled": {
+      "get": {
+        "operationId": "enabled",
+        "summary": "Check if address opted in",
+        "description": "Check if the address has opted in to receive that asset",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "account",
+            "required": true,
+            "in": "path",
+            "example": "EFIVEY4DLDGLPX7K5SWOC6BUWPJN36VJMM2HQBVPP7BNK56N4PKAOCZCLM",
+            "description": "Wallet to check if opted-in",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "token"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/details": {
+      "get": {
+        "operationId": "getTokenDescription",
+        "summary": "Get token description",
+        "description": "Get basic token description",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenDescriptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "token"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/tokens/{holder}": {
+      "get": {
+        "operationId": "balanceOf",
+        "summary": "Get the balance of tokens at a particular wallet address",
+        "description": "Get the balance of tokens at a particular wallet address",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "holder",
+            "required": true,
+            "in": "path",
+            "example": "EFIVEY4DLDGLPX7K5SWOC6BUWPJN36VJMM2HQBVPP7BNK56N4PKAOCZCLM",
+            "description": "Wallet of investor to get balance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "token"
+        ]
+      },
+      "put": {
+        "operationId": "transfer",
+        "summary": "Transfer tokens from holder to another address",
+        "description": "Transfer tokens from holder to another address",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "holder",
+            "required": true,
+            "in": "path",
+            "example": "EFIVEY4DLDGLPX7K5SWOC6BUWPJN36VJMM2HQBVPP7BNK56N4PKAOCZCLM",
+            "description": "Wallet of investor to get balance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransferBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDataDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "token"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/pause": {
+      "post": {
+        "operationId": "setTokenPauseState",
+        "summary": "Set whether the token is paused. A paused token disables all transfers",
+        "description": "Set whether the token is paused. A paused token disables all transfers",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PauseTokenDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDataDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "token"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/tokens/{holder}/allowance": {
+      "post": {
+        "operationId": "approve",
+        "summary": "Approve a third address to move tokens from the caller address",
+        "description": "Approve a third address to move tokens from the caller address",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "holder",
+            "required": true,
+            "in": "path",
+            "example": "EFIVEY4DLDGLPX7K5SWOC6BUWPJN36VJMM2HQBVPP7BNK56N4PKAOCZCLM",
+            "description": "Wallet of investor to get balance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApproveBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDataDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "token"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/tokens/{holder}/allowance/{spender}": {
+      "get": {
+        "operationId": "allowance",
+        "summary": "Check allowance of transfer by an owner to a spender, for the calling wallet",
+        "description": "Check allowance of transfer by an owner to a spender, for the calling",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "holder",
+            "required": true,
+            "in": "path",
+            "example": "EFIVEY4DLDGLPX7K5SWOC6BUWPJN36VJMM2HQBVPP7BNK56N4PKAOCZCLM",
+            "description": "Holder wallet",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "spender",
+            "required": true,
+            "in": "path",
+            "example": "OSUBN7JU3MGO6IIIS35WAPXGTN4GNQYBEMWNVNCC5JJSOLSB3HHNNP5VII",
+            "description": "Wallet allowance to be checked",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "token"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/tokens/{holder}/seize": {
+      "put": {
+        "operationId": "seize",
+        "summary": "Seize tokens from holder",
+        "description": "Forcefully Transfer tokens from holder to another address by the issuer",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "holder",
+            "required": true,
+            "in": "path",
+            "example": "EFIVEY4DLDGLPX7K5SWOC6BUWPJN36VJMM2HQBVPP7BNK56N4PKAOCZCLM",
+            "description": "Wallet of investor to get balance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransferBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDataDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "token"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/holders/{holderId}/balance": {
+      "get": {
+        "operationId": "investorBalance",
+        "summary": "Get the entire balance of tokens for an investor",
+        "description": "Get the entire balance of tokens for an investor. Currently one wallet per investor",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "holderId",
+            "required": true,
+            "in": "path",
+            "example": "b1e462d8fa76384b7b7a0bf8456bd544",
+            "description": "ID of holder. Also known as blockchain-id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "token"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/compliance_rules": {
+      "get": {
+        "operationId": "getActiveComplianceRules",
+        "summary": "Gets the current compliance rules",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComplianceRulesDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "compliance"
+        ]
+      },
+      "post": {
+        "operationId": "setActiveComplianceRules",
+        "summary": "Sets (updates) the current compliance rules",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComplianceRulesBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDataDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "compliance"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/compliance_counters": {
+      "get": {
+        "operationId": "getActiveComplianceCounters",
+        "summary": "Gets the current compliance registry counters",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComplianceCountersDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "compliance"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/countries/{isocode}": {
+      "get": {
+        "operationId": "getCountryStatus",
+        "summary": "Gets the compliance status of a specific country code",
+        "description": "Gets the compliance status of a specific country code using ISO-3166",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "isocode",
+            "required": true,
+            "in": "path",
+            "example": "AR",
+            "description": "ISO country code",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "eu",
+                    "us",
+                    "forbidden",
+                    "none"
+                  ],
+                  "default": "none"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "compliance"
+        ]
+      },
+      "post": {
+        "operationId": "setCountryStatus",
+        "summary": "Sets the compliance status of a specific country code",
+        "description": "Sets the compliance status of a specific country code ISO-3166",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "isocode",
+            "required": true,
+            "in": "path",
+            "example": "AR",
+            "description": "ISO country code",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetCountryJurisdictionBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDataDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "compliance"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/omnibus/tokens": {
+      "post": {
+        "operationId": "bulkTBEIssuance",
+        "summary": "Bulk issuance to TBE Omnibus",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkBurnMintTokenBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDataDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "omnibus"
+        ]
+      },
+      "delete": {
+        "operationId": "bulkTBEBurn",
+        "summary": "Bulk token burn",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkBurnMintTokenBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDataDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "omnibus"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/omnibus/tokens/transfer": {
+      "post": {
+        "operationId": "bulkTBETransfer",
+        "summary": "Bulk transfer from TBE to personal wallets (Withdrawal)",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkTransferTokenBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDataDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "omnibus"
+        ]
+      }
+    },
+    "/v1/token_contracts/omnibus/tbe-address": {
+      "get": {
+        "operationId": "getTBEOmnibusAddress",
+        "summary": "Gets the omnibus address",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OmnibusTbeAddressDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "omnibus"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/omnibus/tokens/counters": {
+      "post": {
+        "operationId": "adjustTBECounters",
+        "summary": "Adjusts TBE counters by the provided deltas",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvestorCounterDeltaDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDataDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "omnibus"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/omnibus/tokens/internal_tbe_transfer": {
+      "post": {
+        "operationId": "internalTBETransfer",
+        "summary": "Internal transfer TBE - Adjust TBE counters",
+        "description": "Adjusts TBE counters by the provided deltas to support internal transfers and emits TBE transfer event",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InternalTransferTbeBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDataDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "omnibus"
+        ]
+      }
+    },
+    "/v1/token_contracts/holders/repository": {
+      "post": {
+        "operationId": "updateHoldersRepository",
+        "summary": "Updates Holder Repository - DEV ENDPOINT",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Number of updated holders",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "registry"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/holders": {
+      "post": {
+        "operationId": "createHolder",
+        "summary": "Creates a new token holder",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateHolderDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDataDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "registry"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/holders/{holderId}": {
+      "put": {
+        "operationId": "updateHolder",
+        "summary": "Updates a holder",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 128,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "holderId",
+            "required": true,
+            "in": "path",
+            "example": "fe01ce2a7fbac8fafaed7c982a04e229",
+            "description": "HolderId to find",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateHolderDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDataDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "registry"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteHolder",
+        "summary": "Deletes a token holder",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 128,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "holderId",
+            "required": true,
+            "in": "path",
+            "example": "fe01ce2a7fbac8fafaed7c982a04e229",
+            "description": "HolderId to find",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteHolderDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDataDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "registry"
+        ]
+      },
+      "get": {
+        "operationId": "getHolder",
+        "summary": "Gets a token holder by holder",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 128,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "holderId",
+            "required": true,
+            "in": "path",
+            "example": "fe01ce2a7fbac8fafaed7c982a04e229",
+            "description": "HolderId to find",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HolderDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "registry"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/wallets/{walletId}": {
+      "get": {
+        "operationId": "getHolderByWallet",
+        "summary": "Gets a token holder by wallet id",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 128,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "walletId",
+            "required": true,
+            "in": "path",
+            "example": "CTQVMN7GFWOZ7KAKG6RDJVBYG3EESVPAYPQS2G2GHHEXLVXTLV2A",
+            "description": "Wallet to find",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HolderDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "registry"
+        ]
+      },
+      "delete": {
+        "operationId": "removeWallet",
+        "summary": "Removes a wallet from registration",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 128,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "walletId",
+            "required": true,
+            "in": "path",
+            "example": "CTQVMN7GFWOZ7KAKG6RDJVBYG3EESVPAYPQS2G2GHHEXLVXTLV2A",
+            "description": "Wallet to find",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemoveWalletDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDataDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "registry"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/wallets": {
+      "post": {
+        "operationId": "addWallet",
+        "summary": "Registers a wallet with a holder",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddWalletDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDataDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "registry"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/holders/{holderId}/attribute/{attributeName}": {
+      "get": {
+        "operationId": "getAttribute",
+        "summary": "Gets the value of a specific attribute of a holder",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 128,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "holderId",
+            "required": true,
+            "in": "path",
+            "example": "fe01ce2a7fbac8fafaed7c982a04e229",
+            "description": "HolderId to find",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attributeName",
+            "required": true,
+            "in": "path",
+            "example": "accredited",
+            "schema": {
+              "default": "accredited",
+              "enum": [
+                "kyc",
+                "accredited",
+                "qualified",
+                "professional"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HolderAttributeDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "registry"
+        ]
+      },
+      "post": {
+        "operationId": "updateAttribute",
+        "summary": "Adds or Updates the value of a specific attribute of a holder",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 128,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "holderId",
+            "required": true,
+            "in": "path",
+            "example": "fe01ce2a7fbac8fafaed7c982a04e229",
+            "description": "HolderId to find",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attributeName",
+            "required": true,
+            "in": "path",
+            "example": "accredited",
+            "schema": {
+              "default": "accredited",
+              "enum": [
+                "kyc",
+                "accredited",
+                "qualified",
+                "professional"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateHolderAttributeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDataDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "registry"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteAttribute",
+        "summary": "Deletes the value of a specific attribute of a holder",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 128,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "holderId",
+            "required": true,
+            "in": "path",
+            "example": "fe01ce2a7fbac8fafaed7c982a04e229",
+            "description": "HolderId to find",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attributeName",
+            "required": true,
+            "in": "path",
+            "example": "accredited",
+            "schema": {
+              "default": "accredited",
+              "enum": [
+                "kyc",
+                "accredited",
+                "qualified",
+                "professional"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteHolderDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDataDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "registry"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/events": {
+      "get": {
+        "operationId": "getEvents",
+        "summary": "Gets a list of events from a deployment",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 10,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fromBlock",
+            "required": false,
+            "in": "query",
+            "example": 10,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "toBlock",
+            "required": false,
+            "in": "query",
+            "example": 10000,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventsDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "event"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/role/{walletId}": {
+      "post": {
+        "operationId": "setRoleForWallet",
+        "summary": "Set the role of a wallet",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 128,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "walletId",
+            "required": true,
+            "in": "path",
+            "example": "CTQVMN7GFWOZ7KAKG6RDJVBYG3EESVPAYPQS2G2GHHEXLVXTLV2A",
+            "description": "Wallet to get/set the role",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDataDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "roles"
+        ]
+      },
+      "get": {
+        "operationId": "getRoleForWallet",
+        "summary": "Get the role of a wallet",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 128,
+            "description": "Token Address (applicationId)",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "walletId",
+            "required": true,
+            "in": "path",
+            "example": "CTQVMN7GFWOZ7KAKG6RDJVBYG3EESVPAYPQS2G2GHHEXLVXTLV2A",
+            "description": "Wallet to get/set the role",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "roles"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/locks/{holderId}": {
+      "post": {
+        "operationId": "addLock",
+        "summary": "Creates a value-lock for a holder",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "holderId",
+            "required": true,
+            "in": "path",
+            "example": "b1e462d8fa76384b7b7a0bf8456bd544",
+            "description": "ID of holder. Also known as blockchain-id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddLockBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDataDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "locks"
+        ]
+      },
+      "get": {
+        "operationId": "getLocks",
+        "summary": "Gets a list of value-locks associated with a holder",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "holderId",
+            "required": true,
+            "in": "path",
+            "example": "b1e462d8fa76384b7b7a0bf8456bd544",
+            "description": "ID of holder. Also known as blockchain-id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ValueLockDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "locks"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/locks/{holderId}/investor_lock": {
+      "post": {
+        "operationId": "addInvestorLock",
+        "summary": "Creates an investor lock for a holder",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "holderId",
+            "required": true,
+            "in": "path",
+            "example": "b1e462d8fa76384b7b7a0bf8456bd544",
+            "description": "ID of holder. Also known as blockchain-id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddInvestorLockBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDataDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "locks"
+        ]
+      },
+      "get": {
+        "operationId": "getInvestorLocked",
+        "summary": "Gets a list of value-locks associated with a holder",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "holderId",
+            "required": true,
+            "in": "path",
+            "example": "b1e462d8fa76384b7b7a0bf8456bd544",
+            "description": "ID of holder. Also known as blockchain-id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvestorLockedDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "locks"
+        ]
+      }
+    },
+    "/v1/token_contracts/{address}/locks/{holderId}/{lockIndex}": {
+      "delete": {
+        "operationId": "removeLock",
+        "summary": "Creates a value-lock for a holder",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "example": 81366727,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "holderId",
+            "required": true,
+            "in": "path",
+            "example": "b1e462d8fa76384b7b7a0bf8456bd544",
+            "description": "ID of holder. Also known as blockchain-id",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lockIndex",
+            "required": true,
+            "in": "path",
+            "example": 15,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BaseBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDataDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "locks"
+        ]
+      }
+    }
+  }
+}

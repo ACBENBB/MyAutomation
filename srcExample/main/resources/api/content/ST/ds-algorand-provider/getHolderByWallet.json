@@ -1,0 +1,13 @@
+{
+  "skips": {
+    "entireTest": false,
+    "skipReason": "",
+    "statusCodeCheck": false,
+    "bodySchemaCheck": true,
+    "bodyContentCheck": true
+  },
+  "pathParams": {
+    "address": "103033228",
+    "walletId": "3AHHPYRK4DVMYYXMWTSFJVE363RP3IVBYQV6SC3QXXWZH2TLLWGYLZE5BU"
+  }
+}

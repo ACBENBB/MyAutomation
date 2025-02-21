@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT520_ATS_Order_Cancel_And_Reject_Status" verbose="1">
+    <test name="AUT520_ATS_Order_Cancel_And_Reject_Status">
+        <classes>
+            <class name="io.securitize.tests.ats.AUT520_ATS_Order_Cancel_And_Reject_Status" />
+        </classes>
+    </test>
+</suite>

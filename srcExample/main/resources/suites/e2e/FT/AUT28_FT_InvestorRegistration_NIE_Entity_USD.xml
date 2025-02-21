@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT28_FT_InvestorRegistration_NIE_Entity_USD" verbose="1">
+    <test name="AUT28_FT_InvestorRegistration_NIE_Entity_USD">
+        <classes>
+            <class name="io.securitize.tests.fundraise.AUT28_FT_InvestorRegistration_NIE_Entity_USD">
+            </class>
+        </classes>
+    </test>
+</suite>

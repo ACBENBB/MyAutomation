@@ -1,0 +1,12 @@
+{
+  "pathParams" : {
+    "issuerId" : "#ISSUER_ID#",
+    "opportunityId" : "#OPPORTUNITY_ID#"
+  },
+  "sandbox" : {
+    "pathParams" : {
+      "issuerId" : "1a0beb09-25fa-4729-af71-64c8ee96fa5a",
+      "opportunityId" : "280"
+    }
+  }
+}

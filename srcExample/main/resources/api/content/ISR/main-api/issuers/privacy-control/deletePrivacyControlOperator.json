@@ -1,0 +1,9 @@
+{
+  "pathParams": {
+    "issuerId": "#ISSUER_ID#",
+    "operatorId": "#OPERATOR_ID#"
+  },
+  "expectedResponse": {
+    "statusCode": 200
+  }
+}

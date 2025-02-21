@@ -1,0 +1,13 @@
+[
+// total tests skipped: rc - 1; sandbox - 1; production - 3
+// tests skipped all on envs: 1 ("disableTfabyInvestorIdOptimistic")
+// test skipped on production only: 2 -(see elaboration in production section)
+
+  {
+    "rc": [],
+    "sandbox": [],
+    "production": [
+    "//getLegalSignersDocumentSpecific"  // this operationId is common for 2 tests
+    ]
+  }
+]

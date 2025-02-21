@@ -1,0 +1,17 @@
+[
+    {
+      "rc": [
+      ],
+      "sandbox": [
+        "getAllMultiSigWallets",
+        "getComplianceCounters",
+        "getCompliance",
+        "getDeployment",
+        "getIssuerDeploymentBasicInfo",
+        "getIssuerDeploymentInfo",
+        "getPermissions",
+        "getTransactions",
+        "getWalletBalance"
+     ]
+   }
+ ]

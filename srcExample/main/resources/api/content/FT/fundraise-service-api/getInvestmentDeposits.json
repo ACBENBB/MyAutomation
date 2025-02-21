@@ -1,0 +1,9 @@
+{
+  "pathParams" : {
+    "issuerId" : "#ISSUER_ID#",
+    "opportunityId" : "#OPPORTUNITY_ID#"
+  },
+  "queryParams" : {
+    "investorId" : "#INVESTOR_ID#"
+  }
+}

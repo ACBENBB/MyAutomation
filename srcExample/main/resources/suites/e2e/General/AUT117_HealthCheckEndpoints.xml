@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT117_HealthCheck" verbose="1">
+    <test name="AUT117_HealthCheck">
+        <classes>
+            <class name="io.securitize.tests.apiTests.AUT117_HealthCheckEndpoints" />
+        </classes>
+    </test>
+</suite>

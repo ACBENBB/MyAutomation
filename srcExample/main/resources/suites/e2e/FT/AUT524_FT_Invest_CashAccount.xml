@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT524_FT_Invest_CashAccount" verbose="1">
+    <test name="AUT524_FT_Invest_CashAccount">
+        <classes>
+            <class name="io.securitize.tests.fundraise.AUT524_FT_Invest_CashAccount"/>
+        </classes>
+    </test>
+</suite>

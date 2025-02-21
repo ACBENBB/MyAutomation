@@ -1,0 +1,13 @@
+{
+  "rc": {
+    "queryParams": {
+      "identifier": "57bb0de6-9d2f-4045-8e0a-6512f34a9c46"
+    }
+  },
+  "sandbox": {
+    "queryParams": {
+      "identifier": "041c66d6-5350-4a42-ae5e-e989c42cba6b"
+    }
+  },
+  "production": {}
+}

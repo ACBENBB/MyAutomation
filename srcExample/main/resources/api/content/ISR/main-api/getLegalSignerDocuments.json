@@ -1,0 +1,16 @@
+{
+  "pathParams": {
+    "legalSignerId": "63d7a09a37a34cd5b5f372ed",
+    "investorId": "63d7a05237a34cd5b5f36e30"
+  },
+  "sandbox": {
+    "pathParams": {
+      "legalSignerId": "63cec0a2a14d4c3bd263ec4c",
+      "investorId": "63cec07ba14d4c3bd263e9cd"
+    },
+    "skips": {
+      "bodySchemaCheck": true,
+      "bodyContentCheck": true
+    }
+  }
+}

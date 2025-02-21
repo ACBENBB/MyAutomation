@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT609_Unlock_Tokens_Wallet" verbose="1">
+    <test name="AUT609_Unlock_Tokens_Wallet">
+        <classes>
+            <class name="io.securitize.tests.controlPanel.AUT609_ISR_Unlock_Tokens_Wallet" />
+        </classes>
+    </test>
+</suite>

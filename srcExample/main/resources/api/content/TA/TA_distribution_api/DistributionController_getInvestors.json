@@ -1,0 +1,15 @@
+{
+  "skips": {
+    "entireTest": false,
+    "skipReason": "TEST TEST",
+    "statusCodeCheck": false,
+    "bodySchemaCheck": true,
+    "bodyContentCheck": false
+  },
+  "pathParams": {
+    "id": "d1984d47-5108-49e3-bee1-ae455022d767"
+  },
+  "expectedResponse": {
+    "statusCode": 200
+  }
+}

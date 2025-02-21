@@ -1,0 +1,13 @@
+{
+  "queryParams": {
+    "search": "api sid",
+    "countries": [
+      "AR",
+      "US"
+    ],
+    "verificationStatus": "verified"
+  },
+  "rc": {},
+  "sandbox": {},
+  "production": {}
+}

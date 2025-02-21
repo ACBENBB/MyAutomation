@@ -1,0 +1,8 @@
+{
+  "skips": {
+    "entireTest": false
+  },
+    "pathParams": {
+      "agreementName": "usa_terms"
+    }
+}

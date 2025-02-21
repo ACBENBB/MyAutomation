@@ -1,0 +1,679 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/rpc": {
+      "post": {
+        "operationId": "Web3Controller_handleJSONRPCRequest",
+        "summary": "Handle JSON-RPC request",
+        "parameters": [
+          {
+            "name": "provider",
+            "required": true,
+            "in": "query",
+            "description": "Provider name",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Web3RequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Web3ResponseDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Web3ResponseWithErrorDto"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "web3"
+        ]
+      }
+    },
+    "/providers/{name}": {
+      "get": {
+        "operationId": "ProviderController_getProvider",
+        "summary": "Get provider by name",
+        "parameters": [
+          {
+            "name": "name",
+            "required": true,
+            "in": "path",
+            "description": "Provider name",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProviderResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "providers"
+        ]
+      }
+    },
+    "/providers": {
+      "get": {
+        "operationId": "ProviderController_getProviders",
+        "summary": "Get providers",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProviderResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "providers"
+        ]
+      },
+      "post": {
+        "operationId": "ProviderController_createProvider",
+        "summary": "Create provider",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProviderRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProviderResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "providers"
+        ]
+      }
+    },
+    "/providers/{name}/credentials": {
+      "patch": {
+        "operationId": "ProviderController_updateProviderCredentials",
+        "summary": "Update provider credentials",
+        "parameters": [
+          {
+            "name": "name",
+            "required": true,
+            "in": "path",
+            "description": "Provider name",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProviderCredentialsRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "providers"
+        ]
+      }
+    },
+    "/providers/{name}/rpc-url": {
+      "patch": {
+        "operationId": "ProviderController_updateProviderRpcUrl",
+        "summary": "Update provider RPC URL",
+        "parameters": [
+          {
+            "name": "name",
+            "required": true,
+            "in": "path",
+            "description": "Provider name",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProviderRpcUrlRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "providers"
+        ]
+      }
+    },
+    "/contracts": {
+      "get": {
+        "operationId": "ContractRegistrationController_getAllProviderContracts",
+        "summary": "Get all contracts for a provider",
+        "parameters": [
+          {
+            "name": "provider",
+            "required": true,
+            "in": "query",
+            "description": "Provider name",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContractResponseDTO"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "contracts"
+        ]
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "health"
+        ]
+      }
+    },
+    "/health/{providerName}": {
+      "get": {
+        "operationId": "HealthController_checkProvider",
+        "parameters": [
+          {
+            "name": "providerName",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "health"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Web3 Proxy API",
+    "description": "",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "Web3ResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "object",
+            "description": "JSON-RPC request ID",
+            "example": 1
+          },
+          "jsonrpc": {
+            "type": "string",
+            "description": "JSON-RPC response result",
+            "example": "2.0"
+          },
+          "result": {
+            "type": "object",
+            "description": "JSON-RPC result",
+            "example": "0x0234c8a3397aab58"
+          }
+        },
+        "required": [
+          "id",
+          "jsonrpc"
+        ]
+      },
+      "Web3ResponseWithErrorDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "object",
+            "description": "JSON-RPC request ID",
+            "example": 1
+          },
+          "jsonrpc": {
+            "type": "string",
+            "description": "JSON-RPC response result",
+            "example": "2.0"
+          },
+          "error": {
+            "type": "object",
+            "description": "JSON-RPC error",
+            "example": {
+              "code": -32601,
+              "message": "Method not found"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "jsonrpc"
+        ]
+      },
+      "Web3RequestDto": {
+        "type": "object",
+        "properties": {
+          "jsonrpc": {
+            "type": "string",
+            "description": "JSON-RPC version",
+            "example": "2.0"
+          },
+          "id": {
+            "type": "object",
+            "description": "JSON-RPC request ID",
+            "example": 1
+          },
+          "method": {
+            "type": "string",
+            "description": "JSON-RPC method",
+            "example": "eth_getBalance"
+          },
+          "params": {
+            "description": "JSON-RPC params",
+            "example": [
+              "0x1234567890123456789012345678901234567890",
+              "latest"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "jsonrpc",
+          "id",
+          "method",
+          "params"
+        ]
+      },
+      "ProviderResponseDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Provider name"
+          },
+          "rpcUrl": {
+            "type": "string",
+            "description": "Provider RPC URL"
+          },
+          "providerType": {
+            "type": "string",
+            "description": "Provider type"
+          },
+          "chainId": {
+            "type": "number",
+            "description": "Provider chain ID"
+          },
+          "loginUrl": {
+            "type": "string",
+            "description": "Provider login URL"
+          },
+          "isSecure": {
+            "type": "boolean",
+            "description": "Provider is secure"
+          }
+        },
+        "required": [
+          "name",
+          "rpcUrl",
+          "providerType",
+          "chainId",
+          "loginUrl",
+          "isSecure"
+        ]
+      },
+      "ProviderRequestDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Provider name"
+          },
+          "rpcUrl": {
+            "type": "string",
+            "description": "Provider RPC URL"
+          },
+          "chainId": {
+            "type": "number",
+            "description": "Provider chain ID"
+          },
+          "providerType": {
+            "type": "string",
+            "description": "Provider type",
+            "enum": [
+              "standard",
+              "quorum"
+            ],
+            "example": "standard"
+          },
+          "authorizationType": {
+            "type": "string",
+            "description": "Authorization type",
+            "enum": [
+              "bearer",
+              "basic"
+            ],
+            "example": "basic"
+          },
+          "loginUrl": {
+            "type": "string",
+            "description": "Provider login URL"
+          },
+          "username": {
+            "type": "string",
+            "description": "Provider username"
+          },
+          "password": {
+            "type": "string",
+            "description": "Provider password"
+          },
+          "isSecure": {
+            "type": "boolean",
+            "description": "Provider is secure"
+          }
+        },
+        "required": [
+          "name",
+          "rpcUrl",
+          "chainId",
+          "providerType",
+          "authorizationType",
+          "loginUrl",
+          "username",
+          "password",
+          "isSecure"
+        ]
+      },
+      "UpdateProviderCredentialsRequestDto": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "Provider username"
+          },
+          "password": {
+            "type": "string",
+            "description": "Provider password"
+          }
+        },
+        "required": [
+          "username",
+          "password"
+        ]
+      },
+      "UpdateProviderRpcUrlRequestDto": {
+        "type": "object",
+        "properties": {
+          "rpcUrl": {
+            "type": "string",
+            "description": "Provider RPC URL"
+          }
+        },
+        "required": [
+          "rpcUrl"
+        ]
+      },
+      "ContractResponseDTO": {
+        "type": "object",
+        "properties": {
+          "deploymentId": {
+            "type": "string",
+            "description": "Deployment Id"
+          },
+          "contracts": {
+            "description": "Contract entity",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "deploymentId",
+          "contracts"
+        ]
+      }
+    }
+  }
+}

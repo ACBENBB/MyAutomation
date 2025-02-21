@@ -1,0 +1,7 @@
+<suite name="AUT537_CA_Withdrawal_US_Account_ACH" verbose="1">
+    <test name="AUT537_CA_Withdrawal_US_Account_ACH">
+        <classes>
+            <class name="io.securitize.tests.ca.AUT537_CA_Withdrawal_US_Account_ACH" />
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,10 @@
+[
+  {
+    "rc": [
+      "getHealthCheck"
+    ],
+    "sandbox": [
+      "getHealthCheck"
+    ]
+  }
+]

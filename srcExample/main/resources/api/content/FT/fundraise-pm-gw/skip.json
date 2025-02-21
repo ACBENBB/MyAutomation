@@ -1,0 +1,23 @@
+[
+
+  {
+    "rc": [
+      "ConnectOpportunitiesController_getOpportunity",
+      "ConnectCashAccountController_getPermissions",
+      "ConnectOpportunitiesController_getOpportunities",
+      "ConnectOpportunitiesController_getQualificationQuestions",
+      "OpportunitiesController_getSocialData",
+      "ConnectSettingsController_getAccreditationSettings"
+    ],
+    "sandbox": [
+      "ConnectCashAccountController_getPermissions",
+      "ConnectOpportunitiesController_getOpportunities",
+      "OpportunitiesController_getOpportunity",
+      "ConnectOpportunitiesController_getOpportunity",
+      "ConnectOpportunitiesController_getQualificationQuestions",
+      "OpportunitiesController_getQualificationQuestions",
+      "OpportunitiesController_getSocialData",
+      "ConnectSettingsController_getAccreditationSettings"
+    ]
+  }
+]

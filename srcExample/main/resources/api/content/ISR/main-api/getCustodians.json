@@ -1,0 +1,8 @@
+{
+  "sandbox": {
+    "skips": {
+      "bodySchemaCheck": true,
+      "bodyContentCheck": true
+    }
+  }
+}

@@ -1,0 +1,5 @@
+    @Test()
+    public void #TEST_METHOD_NAME#(ITestContext context) {
+        testGetRequest(#ENDPOINT#, "#RESPONSE_SCHEMA#", context);
+    }
+

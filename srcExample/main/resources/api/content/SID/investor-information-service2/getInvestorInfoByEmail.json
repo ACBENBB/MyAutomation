@@ -1,0 +1,8 @@
+{
+  "queryParams": {
+    "email": "#SID_INVESTOR_EMAIL#"
+  },
+  "rc": {},
+  "sandbox": {},
+  "production": {}
+}

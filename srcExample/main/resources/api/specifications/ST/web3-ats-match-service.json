@@ -1,0 +1,587 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health Check"
+        ]
+      }
+    },
+    "/api/v1/token-contracts/{tokenAddress}/match-order": {
+      "post": {
+        "operationId": "MatchOrderController_matchOrder",
+        "summary": "",
+        "description": "It call the Web3 Match contracts to perform the matching process and sends transaction to blockchain",
+        "parameters": [
+          {
+            "name": "tokenAddress",
+            "required": true,
+            "in": "path",
+            "description": "DSToken Address",
+            "example": "0x73d42610068FABDfbFe4CB1f1E649eD8328Cca9b",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MatchRequestBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MatchResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/api/v1/match-handler": {
+      "get": {
+        "operationId": "MatchOrderController_getMatchContractAddress",
+        "summary": "",
+        "description": "Returns the address of the MatchHandler contract. It is the spender of ERC20.approve() transaction",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MatchHandlerResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/api/v1/events/contract": {
+      "get": {
+        "operationId": "BlockchainEventsController_getBlockchainEventsContractAddress",
+        "summary": "",
+        "description": "Returns the address of Events contract.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BlockchainEventResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Blockchain Events"
+        ]
+      }
+    },
+    "/api/v1/events": {
+      "post": {
+        "operationId": "BlockchainEventsController_blockchainEventSave",
+        "summary": "",
+        "description": "It calls the Web3 Event contracts to emit a match event",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventSaveBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventContractResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Blockchain Events"
+        ]
+      }
+    },
+    "/api/v1/self-transfer": {
+      "post": {
+        "operationId": "HelperController_signSelfTransfer",
+        "summary": "Helper endpoint: Prepare, sign and send a self-transfer cryptocurrencies transaction to fix nonce",
+        "description": "Helper endpoint: Prepare, sign and send a self-transfer cryptocurrencies transaction to fix nonce",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SelfTransferBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SelfTransferResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Helper Endpoints"
+        ]
+      }
+    },
+    "/api/v2/token-contracts/{tokenAddress}/match-order": {
+      "post": {
+        "operationId": "MatchOrderV2Controller_matchOrder",
+        "summary": "",
+        "description": "Creates a pending transaction to match orders and returns the pending transaction id",
+        "parameters": [
+          {
+            "name": "tokenAddress",
+            "required": true,
+            "in": "path",
+            "description": "DSToken Address",
+            "example": "0x73d42610068FABDfbFe4CB1f1E649eD8328Cca9b",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MatchRequestBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MatchV2ResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Web3 Match Services - API",
+    "description": "API that calls smart contracts to perform matches at blockchain level",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "MatchRequestBodyDto": {
+        "type": "object",
+        "properties": {
+          "externalId": {
+            "type": "string",
+            "description": "Optional External Client ID",
+            "example": "94f80073-8c66-4537-b393-eaf5351f3c8f"
+          },
+          "issuerId": {
+            "type": "string",
+            "description": "Issuer ID",
+            "example": "3e28c31f-5956-4c7e-8f6b-5f82bead8db5"
+          },
+          "tokenId": {
+            "type": "string",
+            "description": "Token ID",
+            "example": "4ffe85ba-cc99-4235-93c1-f3d3b870aaf7"
+          },
+          "stableCoinAddress": {
+            "type": "string",
+            "description": "Stable coin address selected to buy the DSToken",
+            "example": "0x6d5f628e43E0697Bd3259fA2756a9bE8d992fAcE"
+          },
+          "buyerSecuritizeId": {
+            "type": "string",
+            "description": "Buyer securitizeId",
+            "example": "6352c661f1babb0013a12609"
+          },
+          "sellerAddress": {
+            "type": "string",
+            "description": "Address of the investor who sells DSToken",
+            "example": "0x4baD557BE00259b27B3a31B28F91319EC92A9E45"
+          },
+          "buyerAddress": {
+            "type": "string",
+            "description": "Address of the investor who buys DSToken using stable-coins to pay",
+            "example": "0x53C324c433276E7be64Ea3b05A1cD6d5ba93462B"
+          },
+          "stableCoinAmount": {
+            "type": "string",
+            "description": "Amount of stable coins without decimals",
+            "example": "10000000"
+          },
+          "dsTokenAmount": {
+            "type": "string",
+            "description": "Amount of DSToken without decimals",
+            "example": "150000"
+          },
+          "buyerFee": {
+            "type": "string",
+            "description": "Fee for buyer without decimals",
+            "example": "250000"
+          },
+          "sellerFee": {
+            "type": "string",
+            "description": "Fee for seller without decimals",
+            "example": "200000"
+          }
+        },
+        "required": [
+          "issuerId",
+          "tokenId",
+          "stableCoinAddress",
+          "buyerSecuritizeId",
+          "sellerAddress",
+          "buyerAddress",
+          "stableCoinAmount",
+          "dsTokenAmount",
+          "buyerFee",
+          "sellerFee"
+        ]
+      },
+      "MatchResponseDto": {
+        "type": "object",
+        "properties": {
+          "transactionHash": {
+            "type": "string",
+            "description": "transactionHash of transaction in blockahin. It is also known as transactionProviderId at abstraction-layer level",
+            "example": "0x57b14c7cf306a9330993e56328474e4090ebe91624bf749e6c7c46c3d33398b9"
+          }
+        },
+        "required": [
+          "transactionHash"
+        ]
+      },
+      "MatchHandlerResponseDto": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "Address of MatchHandler contract",
+            "example": "0x4f2D48edc62A51B13256Bd3E73B6cAE0149c8b10"
+          }
+        },
+        "required": [
+          "address"
+        ]
+      },
+      "BlockchainEventResponseDto": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "Address of MatchEvent contract",
+            "example": "0x4f2D48edc62A51B13256Bd3E73B6cAE0149c8b10"
+          }
+        },
+        "required": [
+          "address"
+        ]
+      },
+      "EventSaveBodyDto": {
+        "type": "object",
+        "properties": {
+          "tokenId": {
+            "type": "string",
+            "description": "Token ID",
+            "example": "4ffe85ba-cc99-4235-93c1-f3d3b870aaf7"
+          },
+          "matchId": {
+            "type": "string",
+            "description": "Match ID",
+            "example": "4ffe85ba-cc99-4235-93c1-f3d3b870aaf7"
+          },
+          "sellerInvestorId": {
+            "type": "number",
+            "description": "BlockChainID of user selling"
+          },
+          "buyerInvestorId": {
+            "type": "number",
+            "description": "BlockChainID of user buying"
+          },
+          "tokenAmount": {
+            "type": "string",
+            "description": "Amount of tokens transacted",
+            "example": "150000"
+          }
+        },
+        "required": [
+          "tokenId",
+          "matchId",
+          "sellerInvestorId",
+          "buyerInvestorId",
+          "tokenAmount"
+        ]
+      },
+      "EventContractResponse": {
+        "type": "object",
+        "properties": {
+          "transactionHash": {
+            "type": "string",
+            "description": "transactionHash of transaction in blockahin. It is also known as transactionProviderId at abstraction-layer level",
+            "example": "0x57b14c7cf306a9330993e56328474e4090ebe91624bf749e6c7c46c3d33398b9"
+          }
+        },
+        "required": [
+          "transactionHash"
+        ]
+      },
+      "SelfTransferBodyDto": {
+        "type": "object",
+        "properties": {
+          "operatorWalletType": {
+            "type": "string",
+            "description": "Wallet we need to fix nonce hell",
+            "enum": [
+              "ATS_MATCH_WALLET",
+              "BLOCKCHAIN_EVENTS_WALLET",
+              "ATS_MATCH_WALLET_V2"
+            ],
+            "default": "ATS_MATCH_WALLET_V2"
+          }
+        },
+        "required": [
+          "operatorWalletType"
+        ]
+      },
+      "SelfTransferResponseDto": {
+        "type": "object",
+        "properties": {
+          "transactionHash": {
+            "type": "string",
+            "description": "transactionHash of transaction in blokchain",
+            "example": "0x57b14c7cf306a9330993e56328474e4090ebe91624bf749e6c7c46c3d33398b9"
+          }
+        },
+        "required": [
+          "transactionHash"
+        ]
+      },
+      "MatchV2ResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The Match Order Transaction ID",
+            "example": "318e7369-aa30-4d86-a6e0-8411ef7297fc"
+          },
+          "externalId": {
+            "type": "string",
+            "description": "External Client ID",
+            "example": "94f80073-8c66-4537-b393-eaf5351f3c8f"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AUT308_ISR_TotalTests_API" verbose="1" parallel="classes" thread-count="10" configfailurepolicy="continue">
+    <test name="AUT308_ISR_TotalTests_API">
+        <packages>
+            <package name="io.securitize.tests.apiTests.cicd.ISR.*" />
+        </packages>
+    </test>
+</suite>

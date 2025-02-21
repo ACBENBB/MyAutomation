@@ -1,0 +1,15 @@
+{
+  "pathParams": {
+    "clientId": "#ISSUER_ID#",
+    "documentId": "#SID_DOCUMENT_ID#"
+  },
+  "headers": {
+    "access-token": "#SID_ACCESS_TOKEN#"
+  },
+  "skips": {
+    "bodySchemaCheck": true,
+    "skipReason": "Body schema was skipped due to lack of schema (model instead of schema)"
+  },
+  "rc": {},
+  "sandbox": {}
+}
